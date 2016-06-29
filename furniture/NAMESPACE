@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+
+importFrom("stats", "binomial", "chisq.test", "confint", "glm",
+           "oneway.test", "sd", "t.test")
+importFrom("car", "leveneTest")

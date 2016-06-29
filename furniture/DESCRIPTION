@@ -1,0 +1,19 @@
+Package: furniture
+Type: Package
+Title: Table1 and TableX for Social Scientists
+Version: 0.1.0
+Date: 2016-06-28
+Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
+ 	         person("Emily", "Brignone", role="aut"))
+Author: Tyson Barrett [aut, cre],
+ Emily Brignone [aut]
+Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
+Description: Creates tables for academic articles. table1() produces the common 
+ Table 1 in research articles with descriptive statistics. tableX() creates a 
+ summary table of "lm" or "glm" objects for model summaries. For use in 
+ "#rstats for Social Scientists".
+Depends: car
+Suggests: MASS, dplyr
+Encoding: UTF-8
+License: GPL-2
+
