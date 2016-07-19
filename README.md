@@ -6,6 +6,8 @@ The furniture R package contains functions to help create summary tables for aca
 3. `frames()` -- produces average marginal effects
 4. `tp()` -- performs a two-part model for zero inflated count data
 5. `tp2frames()` -- takes a tp object and gives the combined average marginal effects
+6. `mirror()` -- reverse codes a variable
+7. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing)
 
 Overall, the package should be useful for social scientists working on quantitative research.
 
