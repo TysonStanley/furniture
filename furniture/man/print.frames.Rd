@@ -1,6 +1,6 @@
 \name{print.frames}
 \alias{print.frames}
-
+\alias{print}
 \title{
 Print Method for the Frames Object
 }
@@ -8,16 +8,14 @@ Print Method for the Frames Object
 The print method for the frames object. By default, only the Average Marginal Effects are shown in the output from the frames object.
 }
 \usage{
-print.frames(x, ...)
+print(x, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 the "frames" object
 }
   \item{\dots}{
 other arguments that can be applied to the print function
-}
 }
 }
 \value{

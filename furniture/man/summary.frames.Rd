@@ -1,5 +1,6 @@
 \name{summary.frames}
 \alias{summary.frames}
+\alias{summary}
 \title{
 Summary Method for Frames Objects
 }
@@ -7,7 +8,7 @@ Summary Method for Frames Objects
 The summary method for objects produced via \code{frames()}. 
 }
 \usage{
-summary.frames(object, ...)
+summary(object, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

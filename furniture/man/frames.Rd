@@ -1,6 +1,6 @@
 \name{frames}
 \alias{frames}
-\alias{AME}
+\alias{ames}
 \title{Average Marginal Effects for Generalized Linear Models}
 \description{
 Produces the average marginal effects for generalized linear models with links of "probit", "logit", "log", and "identity". Useful to produce the marginal effects of variables in the outcome's original metric (e.g., dollars, counts, etc.). The function can take a model already run (as a "glm" object) or can run the model with the formula and family.

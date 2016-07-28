@@ -1,5 +1,6 @@
 \name{summary.tp}
 \alias{summary.tp}
+\alias{summary}
 \title{
 Summary Method for tp Objects
 }
@@ -7,7 +8,7 @@ Summary Method for tp Objects
 The summary method for objects produced via the \code{tp()} function. Prints the model summaries and the combined average marginal effects.
 }
 \usage{
-summary.tp(object, ...)
+summary(object, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

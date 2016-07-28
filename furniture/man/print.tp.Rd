@@ -1,5 +1,6 @@
 \name{print.tp}
 \alias{print.tp}
+\alias{print}
 \title{
 Print Method for Two Part Models
 }
@@ -7,7 +8,7 @@ Print Method for Two Part Models
 The print method for two part model objects of class "tp". 
 }
 \usage{
-print.tp(x, ...)
+print(x, ...)
 }
 \arguments{
   \item{x}{

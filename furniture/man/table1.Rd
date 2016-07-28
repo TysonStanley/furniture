@@ -1,6 +1,5 @@
 \name{table1}
 \alias{table1}
-\alias{summarization}
 \title{Table 1 for Social Scientists}
 \description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report.}
 
