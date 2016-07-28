@@ -89,12 +89,11 @@ tp2frames = function(model, bootsize=1000, ci=.95){
     boot.Margs = lapply(boot.coefs, function(x) pdfed(x))
     ## Average Marginal Effects
     d = list()
-    boots = data.frame("bootMarg"=rep(0, length(coef(m))))
     for (i in 1:length(boot.Margs)){
       bootMarg = boot.Margs[[i]] * lapply(boot.coefs, coef)[[i]]
       d[[i]] = data.frame(bootMarg)
-      boots = cbind(boots, d[[i]])
     }
+    boots = do.call("cbind", d)
     if (p == "Binary"){
       marg1 = boots
     } else {

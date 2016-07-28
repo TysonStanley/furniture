@@ -233,8 +233,8 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
       } else if (test & format.output=="stars"){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                         paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
-                                      ifelse(tests[[j]]$p.value < 0.01,  "**", 
-                                             ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
+                               ifelse(tests[[j]]$p.value < 0.01,  "**", 
+                               ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
         tabX = data.frame(tabX, "")
         names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "")
         tabW = rbind(n3, tabX)

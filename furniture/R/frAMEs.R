@@ -54,12 +54,11 @@ frames = function(model=NULL, formula=NULL, family=NULL, data=NULL, bootsize=100
   boot.Margs = lapply(boot.coefs, function(x) pdfed(x))
   ## Average Marginal Effects
   d = list()
-  boots = data.frame("bootMarg"=rep(0, length(coef(model))))
   for (i in 1:length(boot.Margs)){
     bootMarg = boot.Margs[[i]] * lapply(boot.coefs, coef)[[i]]
     d[[i]] = data.frame(bootMarg)
-    boots = cbind(boots, d[[i]])
   }
+  boots = do.call("cbind", d)
   low = apply(boots, 1, FUN=function(x) quantile(x, 1-ci, na.rm=TRUE))
   hi  = apply(boots, 1, FUN=function(x) quantile(x, ci, na.rm=TRUE))
   final = data.frame("AME"=aveMarg, 
