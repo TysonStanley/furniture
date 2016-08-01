@@ -1,9 +1,10 @@
 # furniture
-The furniture R package contains functions to help create summary tables for academic publication. It currently contains seven main functions:
+
+The furniture R package contains functions to help create summary tables for academic publication as well as a few data cleaning, modeling, and model summary techniques (e.g., obtaining average marginal effects from GLM models). It currently contains seven main functions:
 
 1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well.
 2. `tableX()` -- gives model summaries of several "lm" and "glm" models simultaneously
-3. `frames()` -- produces average marginal effects
+3. `frames()` -- produces average marginal effects of glm models
 4. `tp()` -- performs a two-part model for zero inflated count data
 5. `tp2frames()` -- takes a tp object and gives the combined average marginal effects
 6. `mirror()` -- reverse codes a variable
