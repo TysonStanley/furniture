@@ -12,4 +12,11 @@ The furniture R package contains functions to help create summary tables for aca
 
 Overall, the package should be useful for social scientists working on quantitative research.
 
-More information to come...
+## Table 1
+
+`table1()` is designed to produce a table of descriptive statistics often found in the first table of an academic article in the health, behavioral and social sciences. It has options of producing counts and means by a stratifying variable, testing for bivatiate effects of the variable by the stratifying variable as well as some cosmetic options for producing the table.
+
+More to come...
+
+
+
