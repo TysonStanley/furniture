@@ -1,4 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-
-import("stats")
-importFrom("car", "leveneTest")
