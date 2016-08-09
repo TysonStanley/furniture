@@ -14,7 +14,7 @@ washer(x, ..., value = NULL)
  the variable to have values adjusted
 }
   \item{\dots}{
- the values in the variable that are to be replaced by either NA's or the value set by the user
+ the values in the variable that are to be replaced by either NA's or the value set by the user. Can be a function to specify values to change (e.g., \code{is.nan()}, \code{is.na()}). 
 }
   \item{value}{
  (optional) if specified, the values in \code{...} will be replaced by this value (must be a single value)
