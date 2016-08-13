@@ -3,14 +3,14 @@
 table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
                   test=FALSE, test.type="default", rounding=3, 
                   var.names=NULL, format.output="full", NAkeep = FALSE,
-                  m_label = "Missing")
-  
-{
+                  m_label = "Missing") {
   
   if (NAkeep)
     NAkeep = "always"
   else
     NAkeep = "no"
+  
+  data = as.data.frame(data)
   
   # === # No Split # === #
   
