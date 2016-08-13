@@ -1,5 +1,4 @@
 
-
 table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
                   test=FALSE, test.type="default", rounding=3, 
                   var.names=NULL, format.output="full", NAkeep = FALSE,
@@ -69,8 +68,9 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     final$` ` = as.character(final$` `)
     final$` `[is.na(final$` `)] = m_label
     final = rbind(N, final)
+    class(final) = c("table1_df", "data.frame")
     
-    return(list("Table1"=final))
+    return(final)
     
     
     
@@ -276,12 +276,23 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     
     
     # === # FINAL OUTPUT # === #
+    
+    class(final) = c("table1_df", "data.frame")
+    
     if (format.output == "stars"){
-      noted = paste("Note: p<.05 = *, p<.01 = **, p<.001 ***")
-      return(list("Table1"=final, "Note"=noted))
+      cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
+      return(final)
     }
     else
-      return(list("Table1"=final))
+      return(final)
   }
 }
+
+print.table_df <- function(x, ...){
+  cat("---\n\n")
+  cat("Table 1: Descriptive Statistics\n\n")
+  print(x, row.names = FALSE, ...)
+  cat("---\n\n")
+}
+
 

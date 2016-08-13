@@ -32,6 +32,9 @@ A list of class "tp" is returned:
 \item{Binary }{ the binary portion of the model (distribution of "binomial" with specified link) with all of the data }
 \item{Count  }{ the count portion of the model (specified distribution and link) fit to only the data where y > 0}
 }
+\note{
+\code{tp} objects have two specialized methods -- \code{print} and \code{summary}.
+}
 \references{
 http://www.stata-journal.com/article.html?article=st0368
 }

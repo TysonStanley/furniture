@@ -48,7 +48,9 @@ http://www.stata-journal.com/sjpdf.html?articlenum=st0086
 Tyson S. Barrett
 }
 \note{
-The \code{frames()} function is still in early development. The results will be similar to Stata's margin command but the exact values and confidence intervals will likely be somewhat different.
+The \code{frames()} function is still in early development. The results will be similar to Stata's margin command but the exact values and confidence intervals will likely be somewhat different. 
+
+This function has two specialized methods -- \code{print} and \code{summary}.
 }
 
 \seealso{

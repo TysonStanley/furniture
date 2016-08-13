@@ -42,18 +42,14 @@ table1(data, vars, splitby = NULL, splitby_labels = NULL, test = FALSE, test.typ
       when \code{NAkeep = TRUE} this provides a label for the missing values in the table
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-A list is returned with potentially two items:
-  \item{Table1 }{A data.frame object with the means/frequencies and standard deviations/percentages.}
-  \item{Note }{A simple string vector indicating what the stars in the output signify (only available when \code{format.output = "stars"})}
+A table with the number of observations, means/frequencies and standard deviations/percentages.The object is a \code{table1_df} class object with a print method that prints without row numbering and a few other minor adjustments.}
 }
 
 \author{Tyson Barrett and Emily Brignone}
 \note{
-When using \code{dplyr} and other piping packages, the function works best when the data object is a \code{data.frame}. If it is not, use \code{data = as.data.frame(data)} before using this function.
+This function can be used at the end of a pipe via \code{\%>\%} in \code{dplyr} or \code{magrittr}.
 }
 
 \seealso{
@@ -61,7 +57,6 @@ When using \code{dplyr} and other piping packages, the function works best when 
 }
 
 \examples{
-  
 ## Data from MASS package ##
 library(MASS)
 data("birthwt")
