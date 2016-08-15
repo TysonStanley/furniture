@@ -288,8 +288,8 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
   }
 }
 
-print.table1_df <- function(x, row.names = FALSE, ...){
-  print.data.frame(x, row.names, ...)
+print.table1_df <- function(x, ...){
+  print.data.frame(x, row.names = FALSE, ...)
 }
 
 
