@@ -288,7 +288,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
   }
 }
 
-print.table_df <- function(x, ...){
+print.table1_df <- function(x, ...){
   cat("---\n\n")
   cat("Table 1: Descriptive Statistics\n\n")
   print(x, row.names = FALSE, ...)
