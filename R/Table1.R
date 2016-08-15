@@ -71,7 +71,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     final_l = list(final)
     class(final_l) = c("table1", "list")
     
-    return(final)
+    return(final_l)
     
 
     # === # Stratify by Split # === #
