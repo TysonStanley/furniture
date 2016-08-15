@@ -68,12 +68,12 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     final$` ` = as.character(final$` `)
     final$` `[is.na(final$` `)] = m_label
     final = rbind(N, final)
-    class(final) = c("table1_df", "data.frame")
+    final_l = list(final)
+    class(final_l) = c("table1", "list")
     
     return(final)
     
-    
-    
+
     # === # Stratify by Split # === #
     
   } else if (!is.null(splitby)){
@@ -276,8 +276,9 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     
     
     # === # FINAL OUTPUT # === #
+    
     final_l = list(final)
-    class(final_l) = c("table1_df", "data.frame")
+    class(final_l) = c("table1", "list")
     
     if (format.output == "stars"){
       cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
@@ -288,7 +289,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
   }
 }
 
-print.table1_df <- function(x, ...){
+print.table1 <- function(x, ...){
   print(x[[1]], ..., row.names = FALSE)
 }
 
