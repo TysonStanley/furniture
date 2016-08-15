@@ -276,20 +276,19 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     
     
     # === # FINAL OUTPUT # === #
-    
-    class(final) = c("table1_df", "data.frame")
+    final_l = list(final)
+    class(final_l) = c("table1_df", "data.frame")
     
     if (format.output == "stars"){
       cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
-      return(final)
+      return(final_l)
     }
     else
-      return(final)
+      return(final_l)
   }
 }
 
 print.table1_df <- function(x, ...){
-  print.data.frame(x, row.names = FALSE, ...)
+  print(x[[1]], ..., row.names = FALSE)
 }
-
 
