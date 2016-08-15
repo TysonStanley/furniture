@@ -1,6 +1,5 @@
 \name{frames}
 \alias{frames}
-\alias{ames}
 \title{Average Marginal Effects for Generalized Linear Models}
 \description{
 Produces the average marginal effects for generalized linear models with links of "probit", "logit", "log", and "identity". Useful to produce the marginal effects of variables in the outcome's original metric (e.g., dollars, counts, etc.). The function can take a model already run (as a "glm" object) or can run the model with the formula and family.
@@ -51,12 +50,13 @@ Tyson S. Barrett
 The \code{frames()} function is still in early development. The results will be similar to Stata's margin command but the exact values and confidence intervals will likely be somewhat different. 
 
 This function has two specialized methods -- \code{print} and \code{summary}.
+
+Note: Average marginal effects for interactions may not be correctly computed. This is an area of future development.
 }
 
 \seealso{
 \code{\link{tp2frames}}
 }
-\warning{Average marginal effects for interactions may not be correctly computed. This is an area of future development.}
 
 \examples{
 
@@ -76,10 +76,8 @@ lgt = frames(lgtglm, bootsize = 100)
 lin = frames(myglm, bootsize = 100)
 }
 
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ average }% use one of  RShowDoc("KEYWORDS")
-\keyword{ marginal }% __ONLY ONE__ keyword per line
+\keyword{ average }
+\keyword{ marginal }
 \keyword{ effects }
 \keyword{ glm }
 \keyword{ non-linear }

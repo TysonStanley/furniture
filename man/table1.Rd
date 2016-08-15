@@ -44,7 +44,7 @@ table1(data, vars, splitby = NULL, splitby_labels = NULL, test = FALSE, test.typ
 }
 
 \value{
-A table with the number of observations, means/frequencies and standard deviations/percentages.The object is a \code{table1_df} class object with a print method that prints without row numbering and a few other minor adjustments.}
+A table with the number of observations, means/frequencies and standard deviations/percentages.The object is a \code{table1_df} class object with a print method that prints without row numbering and a few other minor adjustments.
 }
 
 \author{Tyson Barrett and Emily Brignone}
