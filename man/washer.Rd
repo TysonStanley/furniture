@@ -7,7 +7,7 @@ Washer of Missing Data
 Washes the data by replacing values with either NA's or other values set by the user. Useful for replacing values such as 777's or 999's that represent missing values in survey research.
 }
 \usage{
-washer(x, ..., value = NULL)
+washer(x, ..., value = NA)
 }
 \arguments{
   \item{x}{
