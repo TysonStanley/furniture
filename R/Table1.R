@@ -1,8 +1,6 @@
 
-table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
-                  test=FALSE, test.type="default", rounding=3, 
-                  var.names=NULL, format.output="full", NAkeep = FALSE,
-                  m_label = "Missing") {
+table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", 
+                  rounding=3, var.names=NULL, format.output="full", NAkeep = FALSE, m_label = "Missing"){
   
   if (NAkeep)
     NAkeep = "always"
@@ -10,11 +8,11 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     NAkeep = "no"
   
   data = as.data.frame(data)
+  d = data[, vars]
   
   # === # No Split # === #
   
   if (is.null(splitby)){
-    d = as.data.frame(data[, vars])
     
     # Naming of variables
     if (!is.null(var.names)){
@@ -77,7 +75,6 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL,
     # === # Stratify by Split # === #
     
   } else if (!is.null(splitby)){
-    d = as.data.frame(data[, vars])
     
     # Naming of variables
     if (!is.null(var.names)){
