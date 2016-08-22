@@ -3,3 +3,6 @@ r:
   - oldrel
   - release
   - devel
+notifications:
+  slack:
+    on_success: change
