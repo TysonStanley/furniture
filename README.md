@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
+
 # furniture
 
 The furniture R package contains functions to help create summary tables for academic publication as well as a few data cleaning, modeling, and model summary techniques (e.g., obtaining average marginal effects from GLM models). It currently contains seven main functions:
