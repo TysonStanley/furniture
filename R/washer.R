@@ -3,14 +3,15 @@ washer = function(x, ..., value=NA){
   if (is.factor(x)){
     x = as.character(x)
   }
-  if (is.function(list(...)[[1]])){
-    .f = function(x) list(...)[[1]]
-    x[list(...)[[1]](x)] = value
-  } else {
-    for (i in c(...)){
-      x[x == i] = value
+  for (i in seq_along(c(...))){
+    if (is.function(c(...)[[i]])){
+      x[c(...)[[i]](x)] = value
+    } else {
+      j = c(...)[i]
+      x[x == j] = value
     }
   }
   return(x)
 }
+
 
