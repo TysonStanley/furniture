@@ -40,6 +40,7 @@ x = 1:20
 washer(x, 9, 10)
 washer(x, 9, 10, value=0)
 washer(x, 1, 2, 3, 4, 5)
+washer(x, !is.na, value=0)
 
 }
 

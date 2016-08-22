@@ -8,7 +8,7 @@ The \code{mirror()} function takes a variable, a lower bound for the recode and 
 \usage{
 mirror(data, variable, lower, upper, replace = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{data}{
  data.frame object where the variable is taken from

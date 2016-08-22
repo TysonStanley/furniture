@@ -5,9 +5,9 @@
 The summary method for objects produced via \code{frames()}. 
 }
 \usage{
-summary(object, ...)
+summary.frames(object, ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{object}{
 the "frames" object
@@ -44,9 +44,9 @@ log = frames(logglm, bootsize = 100)
 lgt = frames(lgtglm, bootsize = 100)
 lin = frames(myglm,bootsize = 100)
 
-summary(log)
-summary(lgt)
-summary(lin)
+summary.frames(log)
+summary.frames(lgt)
+summary.frames(lin)
 }
 
 \keyword{ average }

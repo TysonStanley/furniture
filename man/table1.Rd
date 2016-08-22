@@ -1,10 +1,13 @@
 \name{table1}
 \alias{table1}
-\title{Table 1 for Social Scientists}
+\title{Table 1 for Health, Behavioral, and Social Scientists}
 \description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report.}
 
 \usage{
-table1(data, vars, splitby = NULL, splitby_labels = NULL, test = FALSE, test.type = "default", rounding = 3, var.names = NULL, format.output = "full", NAkeep = FALSE, m_label = "Missing")
+table1(data, vars, splitby = NULL, splitby_labels = NULL, 
+       test = FALSE, test.type = "default", rounding = 3, 
+       var.names = NULL, format.output = "full", 
+       NAkeep = FALSE, m_label = "Missing")
 }
 
 \arguments{

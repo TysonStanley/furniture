@@ -44,18 +44,25 @@ Tyson S. Barrett
 \code{\link{tp2frames}}
 }
 \examples{
+
 library(MASS)
 library(dplyr)
 data(bacteria)
+
+## Getting lengths for sampling
+len1 = length(bacteria[bacteria$y=="y", 1])
+len2 = length(bacteria[,1])
+
+## Arbitrarily changing data to fit a two-part model
 d = transmute(bacteria,
-           outcome = ifelse(y == "y", sample(1:100, replace=TRUE, size = length(bacteria[bacteria$y=="y",1])), 0),
-           gender  = as.factor(sample(c("Male", "Female"), replace=TRUE, size = length(bacteria[,1]))),
-           age     = as.numeric(sample(1:18, replace=TRUE, size = length(bacteria[,1]))),
-           race    = as.factor(sample(c("White", "Black", "Other"), replace=TRUE, size = length(bacteria[,1]))),
-           weight  = as.numeric(sample(30:90, replace=TRUE, size = length(bacteria[,1]))))
+  outcome = ifelse(y == "y", sample(1:100, replace=TRUE, size = len1), 0),
+  gender  = as.factor(sample(c("Male", "Female"), replace=TRUE, size = len2)),
+  age     = as.numeric(sample(1:18, replace=TRUE, size = length(bacteria[,1]))),
+  race    = as.factor(sample(c("White", "Black", "Other"), replace=TRUE, size = len2)),
+  weight  = as.numeric(sample(30:90, replace=TRUE, size = len2)))
   
 btp = tp(outcome ~ gender + age + race + weight, data=d)
-summary(btp)
+summary.tp(btp)
 }
 
 \keyword{ two-part }
