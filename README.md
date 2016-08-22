@@ -2,7 +2,7 @@
 
 # furniture
 
-The furniture R package contains functions to help create summary tables for academic publication as well as a few data cleaning, modeling, and model summary techniques (e.g., obtaining average marginal effects from GLM models). It currently contains seven main functions:
+The furniture R package contains functions to help with data cleaning/tidying (e.g., washer, mirror), exploratory data analysis (e.g., table1, tableX), and modeling (e.g., tp, frames). It currently contains seven main functions:
 
 1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well.
 2. `tableX()` -- gives model summaries of several "lm" and "glm" models simultaneously
@@ -12,13 +12,20 @@ The furniture R package contains functions to help create summary tables for aca
 6. `mirror()` -- reverse codes a variable
 7. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing)
 
-Overall, the package should be useful for social scientists working on quantitative research.
+In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
-## Table 1
+# Installation
 
-`table1()` is designed to produce a table of descriptive statistics often found in the first table of an academic article in the health, behavioral and social sciences. It has options of producing counts and means by a stratifying variable, testing for bivatiate effects of the variable by the stratifying variable as well as some cosmetic options for producing the table.
+Currently, the package is under the submission process at CRAN. Therefore, the latest available package version can be installed in R via:
 
-More to come...
+```rstudio
+library(devtools)
+install_github("tysonstanley/furniture")
+```
+
+# Using furniture
+
+The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as `library(dplyr)`, `library(tidyr)`, and `library(ggplot2)` with `library(furniture)` to accomplish this.
 
 
 
