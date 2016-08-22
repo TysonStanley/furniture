@@ -6,3 +6,9 @@ r:
 notifications:
   slack:
     on_success: change
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'

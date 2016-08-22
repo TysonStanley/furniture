@@ -13,9 +13,9 @@ Description: Social Science functions: creates tables for academic articles,
  table1() produces the common Table 1 in research articles with descriptive 
  statistics. tableX() creates a summary table of "lm" or "glm" objects for 
  model summaries. tp() runs two part models. frames() produces average marginal
- effects. For use in “#Rstats for Social Sciences”.
+ effects.
 Depends: car
-Suggests: MASS, dplyr
+Suggests: MASS, dplyr, testthat
 Encoding: UTF-8
 License: GPL-2
 
