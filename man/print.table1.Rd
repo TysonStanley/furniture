@@ -5,7 +5,7 @@
 The print method objects of class "table1" (from the \code{table1()} function). 
 }
 \usage{
-print.table1(x, ...)
+\method{print}{table1}{(x, ...)}
 }
 \arguments{
   \item{x}{

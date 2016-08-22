@@ -7,7 +7,7 @@ Summary Method for tp Objects
 The summary method for objects produced via the \code{tp()} function. Prints the model summaries and the combined average marginal effects.
 }
 \usage{
-summary.tp(object, ...)
+\method{summary}{tp}{(object, ...)}
 }
 
 \arguments{
