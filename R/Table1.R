@@ -10,14 +10,14 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     NAkeep = "no"
   
   data = as.data.frame(data)
-  d = data[, vars]
+  d = as.data.frame(data[, vars])
   
   # Naming of variables
   if (!is.null(var.names)){
     stopifnot(length(var.names)==length(names(d)))
     names(d) = var.names
   } else {
-    names(d) = names(data[, vars]) 
+    names(d) = vars
   }
   
   if (is.null(splitby)){
@@ -237,4 +237,6 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
 print.table1 <- function(x, ...){
   print(x[[1]], ..., row.names = FALSE)
 }
+
+
 
