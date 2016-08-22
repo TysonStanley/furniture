@@ -5,7 +5,7 @@
 The print method for two part model objects of class "tp". 
 }
 \usage{
-\method{print}{tp}{(x, ...)}
+\method{print}{tp}(x, ...)
 }
 \arguments{
   \item{x}{

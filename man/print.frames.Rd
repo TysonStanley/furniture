@@ -5,7 +5,7 @@
 The print method for the frames object. By default, only the Average Marginal Effects are shown in the output from the frames object.
 }
 \usage{
-\method{print}{frames}{(x, ...)}
+\method{print}{frames}(x, ...)
 }
 \arguments{
   \item{x}{

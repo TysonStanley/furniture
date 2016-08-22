@@ -5,7 +5,7 @@
 The summary method for objects produced via \code{frames()}. 
 }
 \usage{
-\method{summary}{frames}{(object, ...)}
+\method{summary}{frames}(object, ...)
 }
 
 \arguments{
