@@ -99,9 +99,9 @@ table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
        format.output = "stars")
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ table1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ descriptives }% __ONLY ONE__ keyword per line
+
+
+\keyword{ table1 }
+\keyword{ descriptives }
 \keyword{ summarize }
 \keyword{ formatted }

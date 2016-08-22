@@ -1,9 +1,6 @@
 \name{print.frames}
 \alias{print.frames}
-\alias{print}
-\title{
-Print Method for the Frames Object
-}
+\title{Print Method for the Frames Object}
 \description{
 The print method for the frames object. By default, only the Average Marginal Effects are shown in the output from the frames object.
 }
@@ -30,5 +27,5 @@ Tyson S. Barrett
 \code{\link{frames}}, \code{\link{tp2frames}}, \code{\link{summary.frames}}
 }
 
-\keyword{ print }% use one of  RShowDoc("KEYWORDS")
-\keyword{ frames }% __ONLY ONE__ keyword per line
+\keyword{ print }
+\keyword{ frames }

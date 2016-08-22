@@ -1,6 +1,5 @@
 \name{summary.tp}
 \alias{summary.tp}
-\alias{summary}
 \title{
 Summary Method for tp Objects
 }

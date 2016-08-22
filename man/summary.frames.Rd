@@ -1,9 +1,6 @@
 \name{summary.frames}
 \alias{summary.frames}
-\alias{summary}
-\title{
-Summary Method for Frames Objects
-}
+\title{Summary Method for Frames Objects}
 \description{
 The summary method for objects produced via \code{frames()}. 
 }
@@ -52,9 +49,7 @@ summary(lgt)
 summary(lin)
 }
 
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ average }% use one of  RShowDoc("KEYWORDS")
-\keyword{ marginal }% __ONLY ONE__ keyword per line
-\keyword{ effects }% use one of  RShowDoc("KEYWORDS")
-\keyword{ summary }% __ONLY ONE__ keyword per line
+\keyword{ average }
+\keyword{ marginal }
+\keyword{ effects }
+\keyword{ summary }

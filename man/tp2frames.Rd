@@ -61,8 +61,8 @@ btp = tp(outcome ~ gender + age + race + weight, data=d)
 summary(btp)
 }
 
-\keyword{ average }% use one of  RShowDoc("KEYWORDS")
-\keyword{ marginal }% __ONLY ONE__ keyword per line
+\keyword{ average }
+\keyword{ marginal }
 \keyword{ effects }
 \keyword{ glm }
 \keyword{ non-linear }

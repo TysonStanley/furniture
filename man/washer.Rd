@@ -1,8 +1,6 @@
 \name{washer}
 \alias{washer}
-\title{
-Washer of Missing Data
-}
+\title{Washer of Missing Data}
 \description{
 Washes the data by replacing values with either NA's or other values set by the user. Useful for replacing values such as 777's or 999's that represent missing values in survey research.
 }
@@ -44,7 +42,7 @@ washer(x, 9, 10, value=0)
 washer(x, 1, 2, 3, 4, 5)
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ missing }% use one of  RShowDoc("KEYWORDS")
-\keyword{ fix }% __ONLY ONE__ keyword per line
+
+
+\keyword{ missing }
+\keyword{ fix }

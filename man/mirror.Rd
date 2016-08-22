@@ -49,5 +49,5 @@ mirror(d, "Var", 0, 4)
 
 }
 
-\keyword{ reverse }% use one of  RShowDoc("KEYWORDS")
-\keyword{ code }% __ONLY ONE__ keyword per line
+\keyword{ reverse }
+\keyword{ code }

@@ -1,7 +1,5 @@
 \name{tp}
 \alias{tp}
-\alias{two-part}
-\alias{hurdle}
 \title{Two-Part Generalized Linear Models}
 \description{
 Produces a two-part model (sometimes refered to as a "Hurdle Model"). The function is built just like regular \code{glm()} but needs additional specification of what link function to use for the binary part and the family and link to use for the count/OLS part. This procedure is very useful for outcome data that have a large number of zero's (more than would be expected via most distributions). Therefore, it is assumed that two mechanisms are at play: 1) that affects whether an individual has any of the outcome vs. none, and 2) for those that do have some of the outcome, that affects how much. It is often useful for cost and utilization analyses.
@@ -60,6 +58,6 @@ btp = tp(outcome ~ gender + age + race + weight, data=d)
 summary(btp)
 }
 
-\keyword{ two-part }% use one of  RShowDoc("KEYWORDS")
-\keyword{ hurdle }% __ONLY ONE__ keyword per line
+\keyword{ two-part }
+\keyword{ hurdle }
 \keyword{ glm }

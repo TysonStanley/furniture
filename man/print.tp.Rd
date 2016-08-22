@@ -1,9 +1,6 @@
 \name{print.tp}
 \alias{print.tp}
-\alias{print}
-\title{
-Print Method for Two Part Models
-}
+\title{Print Method for Two Part Models}
 \description{
 The print method for two part model objects of class "tp". 
 }
@@ -31,6 +28,6 @@ Tyson S. Barrett
 \code{\link{tp}}, \code{\link{summary.tp}}
 }
 
-\keyword{ print }% use one of  RShowDoc("KEYWORDS")
-\keyword{ tp }% __ONLY ONE__ keyword per line
+\keyword{ print }
+\keyword{ tp }
 \keyword{ two-part }
