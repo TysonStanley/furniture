@@ -1,6 +1,6 @@
 Package: furniture
 Type: Package
-Title: Table1 and TableX for Social Scientists
+Title: Furniture for Health, Behavioral, and Social Scientists
 Version: 0.4.0
 Date: 2016-07-18
 Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
