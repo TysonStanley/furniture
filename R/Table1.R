@@ -1,5 +1,5 @@
 
-table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", 
+table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
                   rounding=3, var.names=NULL, format.output="full", NAkeep = FALSE, m_label = "Missing"){
   
   # == # Checks and Data # == #
@@ -226,17 +226,20 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   final_l = list(final)
   class(final_l) = c("table1", "list")
   
-  if (format.output == "stars"){
-    cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
-    return(final_l)
+  if (piping){
+    print(final_l)
+    invisible(data)
+  } else {
+    if (format.output == "stars"){
+      cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
+      return(final_l)
+    }
+    else
+      return(final_l)
   }
-  else
-    return(final_l)
 }
 
 print.table1 <- function(x, ...){
   print(x[[1]], ..., row.names = FALSE)
 }
-
-
 

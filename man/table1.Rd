@@ -1,12 +1,12 @@
 \name{table1}
 \alias{table1}
 \title{Table 1 for Health, Behavioral, and Social Scientists}
-\description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report.}
+\description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report. Can be used within the piping framework [see \code{library(magrittr)}].}
 
 \usage{
 table1(data, vars, splitby = NULL, splitby_labels = NULL, 
-       test = FALSE, test.type = "default", rounding = 3, 
-       var.names = NULL, format.output = "full", 
+       test = FALSE, test.type = "default", piping = FALSE, 
+       rounding = 3, var.names = NULL, format.output = "full", 
        NAkeep = FALSE, m_label = "Missing")
 }
 
@@ -28,6 +28,9 @@ table1(data, vars, splitby = NULL, splitby_labels = NULL,
 }
   \item{test.type}{
        has two options: "default" performs the default tests of significance only; "or" gives unadjusted odds ratios as well based on logistic regression
+}
+  \item{piping}{
+       if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe. if \code{FALSE} it returns the table1 object only.
 }
   \item{rounding}{
       the number of digits after the decimal; default is 3
