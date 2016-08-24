@@ -47,9 +47,9 @@ frames = function(model, bootsize=100, ci=.95){
   boots = do.call("cbind", d)
   low = apply(boots, 1, FUN=function(x) quantile(x, 1-ci, na.rm=TRUE))
   hi  = apply(boots, 1, FUN=function(x) quantile(x, ci, na.rm=TRUE))
-  final = data.frame("AME"=aveMarg, 
-                     "Lower"=low, 
-                     "Upper"=hi)
+  final = data.frame("AME"   = aveMarg, 
+                     "Lower" = low, 
+                     "Upper" = hi)
   ame = list("AME"   = final,
              "Model" = summary(model),
              "Variables" = row.names(final),
