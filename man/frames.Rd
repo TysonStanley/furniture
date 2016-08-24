@@ -5,24 +5,14 @@
 Produces the average marginal effects for generalized linear models with links of "probit", "logit", "log", and "identity". Useful to produce the marginal effects of variables in the outcome's original metric (e.g., dollars, counts, etc.). The function can take a model already run (as a "glm" object) or can run the model with the formula and family.
 }
 \usage{
-frames(model = NULL, formula = NULL, family = NULL, 
-       data = NULL, bootsize = 1000, ci = 0.95)
+frames(model, bootsize = 100, ci = 0.95)
 }
 \arguments{
   \item{model}{
-     (optional if \code{formula}, \code{family}, and \code{data} are not NULL) the model object (i.e., "glm")
-}
-  \item{formula}{
-     (optional if \code{model} is not NULL) the formula for the GLM modeling procedure
-}
-  \item{family}{
-     (optional if \code{model} is not NULL) the distribution and link of the GLM modeling procedure
-}
-  \item{data}{
-     (optional if \code{model} is not NULL) the data that the formula will be applied to in the modeling procedure
+     the model object (i.e., "glm")
 }
   \item{bootsize}{
-     (default = 1,000) the number of bootstrap samples used for the confidence intervals
+     (default = 100) the number of bootstrap samples used for the confidence intervals
 }
   \item{ci}{
      (default = 0.95) the confidence level for the confidence intervals

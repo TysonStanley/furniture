@@ -6,7 +6,7 @@
 Produces the average marginal effects for two-part models (sometimes refered to as "Hurdle Models"). Part 1 is a binomial GLM of "probit" or "logit" links. Part 2 is often a count model (e.g., poisson or gamma) with a "log" or "identity" link.  It combines the marginal effects from both models. Useful to produce the marginal effects of variables in the outcome's original metric (e.g., dollars, counts, etc.). 
 }
 \usage{
-tp2frames(model, bootsize = 1000, ci = 0.95)
+tp2frames(model, bootsize = 100, ci = 0.95)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,7 @@ tp2frames(model, bootsize = 1000, ci = 0.95)
 the model object of class "tp"
 }
   \item{bootsize}{
-     (default = 1,000) the number of bootstrap samples used for the confidence intervals
+     (default = 100) the number of bootstrap samples used for the confidence intervals
 }
   \item{ci}{
      (default = 0.95) the confidence level for the confidence intervals
