@@ -41,7 +41,7 @@ summary.tp = function(object, ...){
 }
 
 
-tp2frames = function(model, bootsize=1000, ci=.95){
+tp2frames = function(model, bootsize=100, ci=.95){
   
   stopifnot(class(model)[[1]]=="tp")
   aveMarg = list()
@@ -100,7 +100,7 @@ tp2frames = function(model, bootsize=1000, ci=.95){
       marg2 = boots
     }
   }
-  boots = marg1 + marg2
+  boots = marg1 * marg2
   low = apply(boots, 1, FUN=function(x) quantile(x, 1-ci, na.rm=TRUE))
   hi  = apply(boots, 1, FUN=function(x) quantile(x, ci, na.rm=TRUE))
   final = data.frame("AME"=aveMarg$Binary + aveMarg$Count, 
