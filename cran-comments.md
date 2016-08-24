@@ -6,11 +6,8 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-There were 2 NOTEs (none in Mac/Ubuntu and 2 in Windows) both dealing with the run-time of tp2frames function:
+There was 1 NOTE (none in Mac/Ubuntu and 1 in Windows):
 
-* checking examples ... running examples for arch 'i386' ... [34s] NOTE
-    - Examples with CPU or elapsed time > 10s: user 25.96; system 0.07; elapsed 26.02
-* checking examples ... running examples for arch 'x64' ... [46s] NOTE
-    - Examples with CPU or elapsed time > 10s: user 34.95; system 0.03; elapsed 34.99
+* checking CRAN incoming feasibility ... NOTE Maintainer: 'Tyson Barrett <t.barrett@aggiemail.usu.edu>'
 
-Given this is a bootstrapping function that deals with two models simulateneously, it is expected to run more slowly.
+This is certainly not an issue, rather an automatically produced NOTE when using Win-Builder.
