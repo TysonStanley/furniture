@@ -62,7 +62,7 @@ d = transmute(bacteria,
   race    = as.factor(sample(c("White", "Black", "Other"), replace=TRUE, size = len2)),
   weight  = as.numeric(sample(30:90, replace=TRUE, size = len2)))
   
-btp = tp(outcome ~ gender + age + race + weight, data=d)
+btp = tp(outcome ~ gender + age + weight, data=d)
 
 tp2frames(btp)
 }
