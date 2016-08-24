@@ -1,5 +1,5 @@
 
-frames = function(model=NULL, formula=NULL, family=NULL, data=NULL, bootsize=100, ci=.95){
+frames = function(model, bootsize=100, ci=.95){
   
   ## Initial Model and Data
   data   = model$data
