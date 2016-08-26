@@ -26,7 +26,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     data$splitby = data[, splitby]
   }
   
-  d$split = as.factor(data$splitby)
+  d$split = droplevels(as.factor(data$splitby))
   if (!is.null(splitby_labels))
     levels(d$split) = splitby_labels
   
