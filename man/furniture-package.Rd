@@ -9,12 +9,12 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{furniture}
 \packageIndices{furniture}
-The furniture package provides two functions, both used to create tables for academic reporting. \code{table1()} creates a descriptive statistics table in a format that is ready to export. \code{tableX()} summarizes linear model output.
+The furniture package provides several functions that are useful for exploratory data analysis, data cleaning, and reporting for the health, behavioral and social sciences.
 }
 \author{
-\packageAuthor{furniture}
+\packageAuthor{Tyson S. Barrett, Emily Brignone}
 
-Maintainer: \packageMaintainer{furniture}
+Maintainer: \packageMaintainer{Tyson S. Barrett}
 }
 
 \keyword{ tables }
@@ -61,7 +61,7 @@ fit1 = lm(bwt ~ age + race, data=birthwt)
 fit2 = lm(bwt ~ age + race + ht + ui + smoke + ptl, data=birthwt)
 fit3 = lm(bwt ~ age + race + ht + ui + smoke + ptl + ftv, data=birthwt)
 
-models = list(fit1, fit2, fit3)
-tableX(models=models, model.names = c("1", "2", "3"))
+
+tableX(fit1, fit2, fit3, model.names = c("1", "2", "3"))
 
 }
