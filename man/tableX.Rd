@@ -49,8 +49,7 @@ fit2 = lm(bwt ~ age + race + ht + ui + smoke + ptl, data=birthwt)
 fit3 = lm(bwt ~ age + race + ht + ui + smoke + ptl + ftv, data=birthwt)
 
 ## TableX ##
-models = list(fit1, fit2, fit3)
-tableX(models=models, model.names = c("1", "2", "3"))
+tableX(fit1, fit2, fit3, model.names = c("1", "2", "3"))
 
 ## Modeling Logistic Regression ##
 log1 = glm(low ~ age + race, data=birthwt, family="binomial")
@@ -58,8 +57,7 @@ log2 = glm(low ~ age + race + ht + ui + smoke + ptl, data=birthwt, family="binom
 log3 = glm(low ~ age + race + ht + ui + smoke + ptl + ftv, data=birthwt, family="binomial")
 
 ## TableX ##
-models = list(log1, log2, log3)
-tableX(models=models, model.names = c("1", "2", "3"), type="exp")
+tableX(log1, log2, log3, model.names = c("1", "2", "3"), type="exp")
 
 }
 

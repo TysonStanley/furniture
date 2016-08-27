@@ -61,7 +61,6 @@ fit1 = lm(bwt ~ age + race, data=birthwt)
 fit2 = lm(bwt ~ age + race + ht + ui + smoke + ptl, data=birthwt)
 fit3 = lm(bwt ~ age + race + ht + ui + smoke + ptl + ftv, data=birthwt)
 
-
 tableX(fit1, fit2, fit3, model.names = c("1", "2", "3"))
 
 }
