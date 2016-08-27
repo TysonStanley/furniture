@@ -12,9 +12,9 @@ The DESCRIPTION file:
 The furniture package provides several functions that are useful for exploratory data analysis, data cleaning, and reporting for the health, behavioral and social sciences.
 }
 \author{
-\packageAuthor{Tyson S. Barrett, Emily Brignone}
+\packageAuthor{furniture}
 
-Maintainer: \packageMaintainer{Tyson S. Barrett}
+Maintainer: \packageMaintainer{furniture}
 }
 
 \keyword{ tables }
