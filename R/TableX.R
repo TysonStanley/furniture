@@ -7,7 +7,7 @@ tableX = function(..., model.names, type="default", level=.95){
                    "\n","Types Supported: default (reports estimates and standard errors) 
                    and exp (reports exponentiated estimates and confidence intervals.")))
   for (i in c(...)){
-    if (class(i) == "lm" | class(i) == "glm")
+    if (class(i)[[1]] == "lm" | class(i)[[1]] == "glm")
       stop(cat(paste("The models must be 'lm' or 'glm' objects. If there is another modeling type 
                    let me know you want it @ t.barrett@aggiemail.usu.edu.")))
   }
