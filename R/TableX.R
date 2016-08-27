@@ -1,32 +1,28 @@
 
-tableX = function(models, model.names, type="default", level=.95){
-  # Title: Table X 
-  # Author: Tyson Barrett
-  # Purpose: to report important statistics from many linear models in a succint, well-formatted table
-  # Arguments: 
-  #   1. models is a list of "lm" or "glm" objects
-  #   2. model.names is a vector of names for the models (must match length(models))
-  #   3. type has two options: "default" which prints the estimates and standard errors
-  #                            "exp" which prints the exponentiated estimates and the exponentiated CI's
-  #   4. level is the CI level if type == "exp"
-  
+tableX = function(..., model.names, type="default", level=.95){
+
   ## Error Management ##
   if (type!="default" & type!="exp") 
     stop(cat(paste("The", type, "method is not supported. Yet. Let me know you want it @ t.barrett@aggiemail.usu.edu.",
                    "\n","Types Supported: default (reports estimates and standard errors) 
                    and exp (reports exponentiated estimates and confidence intervals.")))
-  if (!all(sapply(models, class) == "lm" | sapply(models, class) == "glm")) 
-    stop(cat(paste("The models must be 'lm' or 'glm' objects. If there is another modeling type 
+  for (i in c(...)){
+    if (class(i) == "lm" | class(i) == "glm")
+      stop(cat(paste("The models must be 'lm' or 'glm' objects. If there is another modeling type 
                    let me know you want it @ t.barrett@aggiemail.usu.edu.")))
+  }
+  if (is.null(model.names)) 
+    stop(cat(paste("Need model.names argument. Can be any string (no illegal characters).")))
   
   ## Initial Model Summaries ##
+  models = list(...)
   m = m2 = rows = pval = se = obs = N = list()
-  for (i in seq_along(models)){
-    summed    = summary(models[[i]])$coefficients
-    m[[i]]    = data.frame("Est" = summed[,1])
-    se[[i]]   = data.frame("SE"       = summed[,2])
-    pval[[i]] = data.frame("PValue"   = summed[,4]) 
-    obs[[i]]  = data.frame("Est" = sum(!is.na(models[[i]]$fitted.values)))
+  for (i in 1:length(models)){
+    summed      = summary(models[[i]])$coefficients
+    m[[i]]      = data.frame("Est"      = summed[,1])
+    se[[i]]     = data.frame("SE"       = summed[,2])
+    pval[[i]]   = data.frame("PValue"   = summed[,4]) 
+    obs[[i]]    = data.frame("Est" = sum(!is.na(models[[i]]$fitted.values)))
   }
   
   ## Specific Types
@@ -34,13 +30,13 @@ tableX = function(models, model.names, type="default", level=.95){
     for (i in seq_along(m)){
       m2[[i]] =
         data.frame(
-          "Est"   = round(m[[i]], 2), 
+          "Est"   = round(m[[i]], 3), 
           "SE"    = round(se[[i]], 2),
           "Sig"   = paste(ifelse(pval[[i]] < .001, "***",
-                                 ifelse(pval[[i]] < .01, "**",
-                                        ifelse(pval[[i]] < .05, "*", "")))),
+                          ifelse(pval[[i]] < .01, "**",
+                          ifelse(pval[[i]] < .05, "*", "")))),
           "names" = rownames(m[[i]]))
-      N[[i]] = data.frame("Est"=obs[[i]], "SE"=NA, "Sig"=NA, "names" = "N")
+      N[[i]] = data.frame("Est"=round(obs[[i]]), "SE"=NA, "Sig"=NA, "names" = "N")
       m2[[i]] = rbind(N[[i]], m2[[i]])
     }
   }
@@ -60,13 +56,24 @@ tableX = function(models, model.names, type="default", level=.95){
   }
   
   ## Formatting of Table ##
-  options(warn=-1)
-  # Reduce repeats the function provided over all the elements of m2
+  if (type == "default"){
+    for (j in 1:length(m2)){
+      names(m2[[j]]) = c(model.names[[j]], paste0("SE", j), paste0("Sig", j), "names")
+    }
+  } else {
+    for (j in 1:length(m2)){
+      names(m2[[j]]) = c(model.names[[j]], paste0("Lower", j), paste0("Upper", j), "names")
+    }
+  }
   merged = Reduce(function(...) merge(..., by="names", all=TRUE), m2)
-  names(merged) = c("Variables", rep(model.names, each=3))
-  merged[,c(seq(3, length.out=length(model.names), by=3))] <- sapply(merged[,c(seq(3, length.out=length(model.names), by=3))], as.character)
-  merged[is.na(merged)] <- ""
+  names(merged)[1] = c("Variables")
+  merged[,2:dim(merged)[2]] = sapply(merged[,2:dim(merged)[2]], as.character)
+  merged = furniture::washer(merged, is.na, value="")
   Note = paste("Sig Levels: *** < 0.001, ** < 0.01, * < 0.05")
-  return(list("Table"=merged,"Note"=Note))
+  
+  if (type == "default")
+    return(list("Table"=merged,"Note"=Note))
+  else
+    return(list("Table1"=merged))
 }
 

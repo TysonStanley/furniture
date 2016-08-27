@@ -6,11 +6,11 @@
 Provides a summary of n > 1 linear models in a well-formatted table, ready for export into a social science academic article or report.
 }
 \usage{
-tableX(models, model.names, type = "default", level = 0.95)
+tableX(..., model.names, type = "default", level = 0.95)
 }
 \arguments{
-  \item{models}{
-      a list of the model objects; can be "lm" or "glm" objects
+  \item{\dots}{
+      the model objects; can be "lm" or "glm" objects
 }
   \item{model.names}{
       a vector of character strings that will name each model

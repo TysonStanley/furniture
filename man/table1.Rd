@@ -27,7 +27,7 @@ table1(data, vars, splitby = NULL, splitby_labels = NULL,
       logical; if set to \code{TRUE} then bivariate tests of significance are performed; requires \code{levels(splitby)>1}; automatically performs the correct test based on variable types and number of levels
 }
   \item{test.type}{
-       has two options: "default" performs the default tests of significance only; "or" gives unadjusted odds ratios as well based on logistic regression
+       has two options: "default" performs the default tests of significance only; "or" gives unadjusted odds ratios as well based on logistic regression and currently should only be used when the splitting variable has only 2 levels.
 }
   \item{piping}{
        if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe. if \code{FALSE} it returns the table1 object only.
@@ -54,9 +54,6 @@ A table with the number of observations, means/frequencies and standard deviatio
 }
 
 \author{Tyson Barrett and Emily Brignone}
-\note{
-This function can be used at the end of a pipe via \code{\%>\%} in \code{dplyr} or \code{magrittr}.
-}
 
 \seealso{
 \code{\link{tableX}}

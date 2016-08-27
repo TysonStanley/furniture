@@ -12,7 +12,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   data = as.data.frame(data)
   d = as.data.frame(data[, vars])
   
-  # Naming of variables
+  ### Naming of variables
   if (!is.null(var.names)){
     stopifnot(length(var.names)==length(names(d)))
     names(d) = var.names
@@ -20,13 +20,18 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     names(d) = vars
   }
   
+  ### Splitby Variable
   if (is.null(splitby)){
     data$splitby = 1
   } else {
     data$splitby = data[, splitby]
   }
-  
   d$split = droplevels(as.factor(data$splitby))
+  if (test & length(levels(data$splitby))>1)
+    test = TRUE
+  else
+    test = FALSE
+  
   if (!is.null(splitby_labels))
     levels(d$split) = splitby_labels
   
