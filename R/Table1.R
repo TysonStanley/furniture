@@ -24,14 +24,15 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   if (is.null(splitby)){
     data$splitby = 1
   } else {
-    data$splitby = data[, splitby]
+    data$splitby = as.factor(data[, splitby])
   }
-  d$split = droplevels(as.factor(data$splitby))
-  if (test & length(levels(data$splitby))>1)
+  d$split = droplevels(data$splitby)
+  if (test & length(levels(data$splitby))>1){
     test = TRUE
-  else
+  } else {
     test = FALSE
-  
+  }
+
   if (!is.null(splitby_labels))
     levels(d$split) = splitby_labels
   
