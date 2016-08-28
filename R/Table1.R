@@ -22,7 +22,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   
   ### Splitby Variable
   if (is.null(splitby)){
-    data$splitby = 1
+    data$splitby = as.factor(1)
   } else {
     data$splitby = as.factor(data[, splitby])
   }
