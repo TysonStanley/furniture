@@ -237,7 +237,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     invisible(data)
   } else {
     if (format.output == "stars"){
-      cat("Note: p<.05 = *, p<.01 = **, p<.001 ***")
+      cat("Note: p<.05 = *, p<.01 = **, p<.001 ***\n\n")
       return(final_l)
     }
     else
@@ -247,5 +247,6 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
 
 print.table1 <- function(x, ...){
   print(x[[1]], ..., row.names = FALSE)
+  cat("\n")
 }
 
