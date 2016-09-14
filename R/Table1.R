@@ -1,38 +1,39 @@
 
-table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
-                  rounding=3, var.names=NULL, format.output="full", NAkeep = FALSE, m_label = "Missing"){
+table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
+                  rounding=3, var.names=NULL, format.output="full", output.type="text", NAkeep = FALSE, m_label = "Missing",
+                  booktabs = TRUE, caption=NULL, align=NULL){
   
   # == # Checks and Data # == #
   
-  if (NAkeep)
-    NAkeep = "always"
-  else
+  if (NAkeep){ 
+    NAkeep = "always" 
+  } else {
     NAkeep = "no"
+  }
   
-  data = as.data.frame(data)
-  d = as.data.frame(data[, vars])
-  
+  data = table1_(.data, dots_capture(...))
+  d = as.data.frame(data)
   ### Naming of variables
   if (!is.null(var.names)){
     stopifnot(length(var.names)==length(names(d)))
     names(d) = var.names
-  } else {
-    names(d) = vars
   }
   
   ### Splitby Variable
   if (is.null(splitby)){
-    data$splitby = as.factor(1)
+    splitby_ = as.factor(1)
+    d$split = droplevels(splitby_)
   } else {
-    data$splitby = as.factor(data[, splitby])
+    splitby_ = table1_(.data, splitby)
+    d$split = droplevels(unlist(splitby_))
   }
-  d$split = droplevels(data$splitby)
-  if (test & length(levels(data$splitby))>1){
+  
+  if (test & length(levels(d$split))>1){
     test = TRUE
   } else {
     test = FALSE
   }
-
+  
   if (!is.null(splitby_labels))
     levels(d$split) = splitby_labels
   
@@ -86,7 +87,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     
     if (format.output=="full")
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
-    else if (format.output=="pvalue" | format.output=="stars")
+    else if (format.output=="pvalues" | format.output=="stars")
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
   } else {
     tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
@@ -159,7 +160,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
-    } else if (test & format.output=="pvalue"){
+    } else if (test & format.output=="pvalues"){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                         paste(round(tests[[j]]$p.value,3)))
@@ -183,7 +184,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
                              ifelse(tests[[j]]$p.value < 0.01,  "**", 
                              ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
       tabX = data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "")
+      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
@@ -201,11 +202,12 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
     N = data.frame("Observations", N, "", "")
     names(N) = c(" ", levels(d$split), "Test", "P-Value")
   } else if ((format.output=="pvalues" | format.output=="stars") & test){
-    N = data.frame("Observations", N, "") 
-    if (format.output=="pvalues")
+    N = data.frame("Observations", N, " ") 
+    if (format.output=="pvalues"){
       names(N) = c(" ", levels(d$split), "P-Value")
-    else 
-      names(N) = c(" ", levels(d$split), "")
+    } else {
+      names(N) = c(" ", levels(d$split), " ")
+    }
   } else {
     N = data.frame("Observations", N)
     names(N) = c(" ", levels(d$split))
@@ -222,7 +224,7 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   final$` ` = as.character(final$` `)
   final$` `[is.na(final$` `)] = m_label
   
-  
+
   # === # FINAL OUTPUT # === #
   
   if (length(levels(d$split)) == 1){
@@ -232,21 +234,57 @@ table1 = function(data, vars, splitby=NULL, splitby_labels = NULL, test=FALSE, t
   final_l = list(final)
   class(final_l) = c("table1", "list")
   
-  if (piping){
-    print(final_l)
-    invisible(data)
-  } else {
-    if (format.output == "stars"){
-      cat("Note: p<.05 = *, p<.01 = **, p<.001 ***\n\n")
+  if (output.type == "text"){  ## regular text output
+    if (piping){
+      print(final_l)
+      invisible(data)
+    } else {
       return(final_l)
-    }
-    else
-      return(final_l)
+    } 
+  } else if (output.type == "latex"){ ## latex compatible output from kable
+    l_final = latex_table1_(final_l)
+    if (piping){
+      print(l_final)
+      invisible(data)
+    } else {
+      return(l_final)
+    } 
   }
 }
 
+
+latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
+  stopifnot(class(tab)[1] == "table1")
+  knitr::kable(tab, format = "latex", 
+               booktabs = booktabs,
+               caption = caption, 
+               row.names = FALSE,
+               align = align)
+}
+
 print.table1 <- function(x, ...){
+  cat("\n|============================================== \n")
   print(x[[1]], ..., row.names = FALSE)
-  cat("\n")
+  cat("|============================================== \n")
+}
+
+table1_ <- function(d_, vars){
+  d1 = named = NULL
+  if (is.list(vars)){
+    for (i in seq_along(vars)){
+      named   <- paste(vars[[i]])
+      d1[[i]] <- f_eval(vars[[i]], d_)
+      names(d1)[i] <- named[[2]]
+    }
+    d1 <- as.data.frame(d1)
+    
+  } else if (is_formula(vars)){
+    named   <- paste(vars)
+    d1      <- f_eval(vars, d_)
+    d1 <- as.list(d1)
+    names(d1) <- named[[2]]
+  }
+  
+  return(d1)
 }
 

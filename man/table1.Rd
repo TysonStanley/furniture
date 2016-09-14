@@ -4,21 +4,22 @@
 \description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report. Can be used within the piping framework [see \code{library(magrittr)}].}
 
 \usage{
-table1(data, vars, splitby = NULL, splitby_labels = NULL, 
+table1(data, ..., splitby = NULL, splitby_labels = NULL, 
        test = FALSE, test.type = "default", piping = FALSE, 
        rounding = 3, var.names = NULL, format.output = "full", 
-       NAkeep = FALSE, m_label = "Missing")
+       NAkeep = FALSE, m_label = "Missing",
+       booktabs = TRUE, caption=NULL, align=NULL)
 }
 
 \arguments{
   \item{data}{
       the data.frame that is to be summarized
 }
-  \item{vars}{
-      a vector of variables to be summarized; can be the indices or the column names
+  \item{\dots}{
+      variables in the data set that are to be summarized; unquoted
 }
   \item{splitby}{
-      the categorical variable to stratify by; requires \code{levels(splitby)>0}
+      the categorical variable to stratify by in formula form (e.g., \code{~gender}); requires \code{levels(splitby)>0}
 }
   \item{splitby_labels}{
       allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
@@ -41,22 +42,34 @@ table1(data, vars, splitby = NULL, splitby_labels = NULL,
   \item{format.output}{
       has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; 3) "stars" provides the table with stars indicating significance
 }
+  \item{output.type}{
+      default is "text"; the other option is "latex" which uses the \code{kable} function in \code{knitr}
+}
   \item{NAkeep}{
       when set to \code{TRUE} it also shows how many missing values are in the data by variable
 }
   \item{m_label}{
       when \code{NAkeep = TRUE} this provides a label for the missing values in the table
 }
+  \item{booktabs}{
+      when \code{output.type = "latex"}; option is passed to \code{knitr::kable}; default is \code{TRUE}
+}
+  \item{captions}{
+      when \code{output.type = "latex"} option is passed to \code{knitr::kable}; default is \code{NULL}
+}
+  \item{align}{
+      when \code{output.type = "latex"} option is passed to \code{knitr::kable}; default is \code{NULL}
+}
 }
 
 \value{
-A table with the number of observations, means/frequencies and standard deviations/percentages.The object is a \code{table1_df} class object with a print method that prints without row numbering and a few other minor adjustments.
+A table with the number of observations, means/frequencies and standard deviations/percentages.The object is a \code{table1} class object with a print method that prints without row numbering and a few other minor adjustments. Can be printed in LaTex form.
 }
 
 \author{Tyson Barrett and Emily Brignone}
 
 \seealso{
-\code{\link{tableX}}
+\code{\link{print.table1}}
 }
 
 \examples{
@@ -74,32 +87,23 @@ b = mutate(.data=birthwt,
 levels(b$race) = c("white", "black", "other")
 
 ## Table1 examples
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
+table1(b, age, race, smoke, ptl, ht, ui, ftv,
        NAkeep=TRUE)
 
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
+table1(b, age, race, smoke, ptl, ht, ui, ftv,
+       splitby=~low,
        NAkeep=TRUE)
 
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
+table1(b, age, race, smoke, ptl, ht, ui, ftv,
+       splitby=~low,
        test=TRUE)
 
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
+table1(b, age, race, smoke, ptl, ht, ui, ftv,
+       splitby=~low,
        test=TRUE,
        var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),
        splitby_labels = c("Regular Birthweight", "Low Birthweight"))
-
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
-       test=TRUE,
-       var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
-                     "Uterine Irratibility", "Physician Visits"),
-       splitby_labels = c("Regular Birthweight", "Low Birthweight"),
-       test.type = "or",
-       format.output = "stars")
 
 }
 

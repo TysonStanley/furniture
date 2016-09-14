@@ -37,7 +37,7 @@ b = mutate(.data=birthwt,
            ui    = as.factor(ui))
 levels(b$race) = c("white", "black", "other")
 
-## Table1 examples##
+## Table1 examples ##
 
 table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
        splitby="low",
@@ -46,8 +46,8 @@ table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
                      "Uterine Irratibility", "Physician Visits"),
        splitby_labels = c("Regular Birthweight", "Low Birthweight"))
 
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
+table1(b, age, race, smoke, ptl, ht, ui, ftv,
+       splitby=~low,
        test=TRUE,
        var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),
@@ -55,12 +55,5 @@ table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
        test.type = "or",
        format.output = "stars")
 
-## TableX examples ##
-
-fit1 = lm(bwt ~ age + race, data=birthwt)
-fit2 = lm(bwt ~ age + race + ht + ui + smoke + ptl, data=birthwt)
-fit3 = lm(bwt ~ age + race + ht + ui + smoke + ptl + ftv, data=birthwt)
-
-tableX(fit1, fit2, fit3, model.names = c("1", "2", "3"))
 
 }

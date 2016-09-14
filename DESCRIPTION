@@ -1,8 +1,8 @@
 Package: furniture
 Type: Package
 Title: Furniture for Health, Behavioral, and Social Scientists
-Version: 0.4.0
-Date: 2016-07-18
+Version: 1.0.0
+Date: 2016-09-15
 Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
  	         person("Emily", "Brignone", role="aut"))
 Author: Tyson Barrett [aut, cre],
@@ -11,10 +11,9 @@ Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
 Description: Social Science functions: creates tables for academic articles,
  runs two-part models, and produces marginal effects for GLM and Two-Part Models. 
  table1() produces the common Table 1 in research articles with descriptive 
- statistics. tableX() creates a summary table of "lm" or "glm" objects for 
- model summaries. tp() runs two part models. frames() produces average marginal
+ statistics. tp() runs two part models. frames() produces average marginal
  effects.
-Depends: car
+Depends: car, lazyeval
 Suggests: MASS, dplyr, testthat
 Encoding: UTF-8
 License: GPL-2
