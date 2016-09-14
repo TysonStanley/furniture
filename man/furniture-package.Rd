@@ -37,14 +37,7 @@ b = mutate(.data=birthwt,
            ui    = as.factor(ui))
 levels(b$race) = c("white", "black", "other")
 
-## Table1 examples ##
-
-table1(b, c("age", "race", "smoke", "ptl", "ht", "ui", "ftv"),
-       splitby="low",
-       test=TRUE,
-       var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
-                     "Uterine Irratibility", "Physician Visits"),
-       splitby_labels = c("Regular Birthweight", "Low Birthweight"))
+## Table1 example ##
 
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        splitby=~low,
