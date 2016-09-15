@@ -263,7 +263,7 @@ latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
 }
 
 print.table1 <- function(x, ...){
-  x2 = as.data.frame(x)
+  x2 = as.data.frame(x[[1]])
   summed = list()
   for (i in seq_along(x2)){
     summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
