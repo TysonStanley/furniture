@@ -4,10 +4,9 @@
 \description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report. Can be used within the piping framework [see \code{library(magrittr)}].}
 
 \usage{
-table1(data, ..., splitby = NULL, splitby_labels = NULL, 
-       test = FALSE, test.type = "default", piping = FALSE, 
-       rounding = 3, var.names = NULL, format.output = "full", 
-       NAkeep = FALSE, m_label = "Missing",
+table1(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", 
+       piping = FALSE, rounding=3, var.names=NULL, format.output="full", 
+       output.type="text", NAkeep = FALSE, m_label = "Missing",
        booktabs = TRUE, caption=NULL, align=NULL)
 }
 

@@ -14,6 +14,7 @@ table1_(d_, vars)
   \item{vars}{
       formula or list of formulas containing the variables in the data set that are to be summarized
 }
+}
 
 \author{Tyson Barrett and Emily Brignone}
 
