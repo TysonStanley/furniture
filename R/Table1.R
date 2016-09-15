@@ -263,10 +263,10 @@ latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
 }
 
 print.table1 <- function(x, ...){
-  x2 = data.frame(x)
+  x2 = as.data.frame(x)
   summed = list()
   for (i in seq_along(x2)){
-    summed[[i]] = max(nchar(x2[,i], type="width"))
+    summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
   }
   w = sum(unlist(summed))
   cat("\n|==")
