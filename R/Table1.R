@@ -248,14 +248,14 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     } 
   } else if (output.type == "latex"){ ## latex compatible output from kable
     if (piping){
-      knitr::kable(tab, format="latex",
+      knitr::kable(final, format="latex",
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
       invisible(.data)
     } else {
-      knitr::kable(tab, format="latex",
+      knitr::kable(final, format="latex",
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
