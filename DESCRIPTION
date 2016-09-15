@@ -13,7 +13,7 @@ Description: Social Science functions: creates tables for academic articles,
  table1() produces the common Table 1 in research articles with descriptive 
  statistics. tp() runs two part models. frames() produces average marginal
  effects.
-Depends: car, lazyeval, knitr
+Depends: knitr, lazyeval, car
 Suggests: MASS, dplyr, testthat
 Encoding: UTF-8
 License: GPL-2

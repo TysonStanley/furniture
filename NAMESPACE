@@ -1,8 +1,8 @@
 exportPattern("^[[:alpha:]]+")
 
+import("lazyeval")
 import("stats")
 importFrom("car", "leveneTest")
-import("lazyeval")
 importFrom("knitr", "kable")
 
 S3method(print, table1)
