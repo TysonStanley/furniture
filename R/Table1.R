@@ -25,7 +25,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     d$split = droplevels(splitby_)
   } else {
     splitby_ = table1_(.data, splitby)
-    d$split = droplevels(unlist(splitby_))
+    d$split = droplevels(as.factor(unlist(splitby_)))
   }
   
   if (test & length(levels(d$split))>1){
