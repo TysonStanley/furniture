@@ -255,7 +255,11 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
                    row.names = FALSE)
       invisible(.data)
     } else {
-      latex_table1_(final)
+      knitr::kable(tab, format="latex",
+                   booktabs = booktabs,
+                   caption = caption,
+                   align = align,
+                   row.names = FALSE)
     } 
   }
 }
