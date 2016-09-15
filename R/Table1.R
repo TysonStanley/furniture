@@ -248,7 +248,11 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     } 
   } else if (output.type == "latex"){ ## latex compatible output from kable
     if (piping){
-      latex_table1_(final)
+      knitr::kable(tab, format="latex",
+                   booktabs = booktabs,
+                   caption = caption,
+                   align = align,
+                   row.names = FALSE)
       invisible(.data)
     } else {
       latex_table1_(final)
@@ -256,17 +260,6 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
   }
 }
 
-
-latex_table1_ <- function(tab, booktabs = TRUE, align=align, caption=caption){
-  if(class(tab)[1] == "table1"){
-    tab = as.data.frame(tab)
-  }
-  knitr::kable(tab, format="latex",
-               booktabs = booktabs,
-               caption = caption,
-               align = align,
-               row.names = FALSE)
-}
 
 print.table1 <- function(x, ...){
   x2 = as.data.frame(x[[1]])
