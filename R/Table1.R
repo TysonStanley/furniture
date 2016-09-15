@@ -97,7 +97,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
       if (output.type == "latex"){
-        tabX = data.frame(paste("-    ", names(table(d[,j], useNA=NAkeep))))
+        tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
       } else {
         tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
       }
