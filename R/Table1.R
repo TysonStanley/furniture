@@ -260,12 +260,11 @@ latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
   if(class(tab)[1] == "table1"){
     tab = as.data.frame(tab)
   }
-  options(xtable.comment = FALSE)
-  xt = xtable::xtable(tab,
-                      booktabs = booktabs,
-                      caption = caption,
-                      align = align)
-  print(xt, include.row.names=FALSE)
+  knitr::kable(tab,
+               booktabs = booktabs,
+               caption = caption,
+               align = align,
+               row.names = FALSE)
 }
 
 print.table1 <- function(x, ...){
