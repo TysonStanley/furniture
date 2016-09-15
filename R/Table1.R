@@ -13,6 +13,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
   
   data = table1_(.data, dots_capture(...))
   d = as.data.frame(data)
+  
   ### Naming of variables
   if (!is.null(var.names)){
     stopifnot(length(var.names)==length(names(d)))
@@ -256,7 +257,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
 }
 
 
-latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
+latex_table1_ <- function(tab, booktabs = TRUE, align=align, caption=caption){
   if(class(tab)[1] == "table1"){
     tab = as.data.frame(tab)
   }
