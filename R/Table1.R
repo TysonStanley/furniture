@@ -95,7 +95,11 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
   
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
-      tabX = data.frame(names(table(d[,j], useNA=NAkeep)))
+      if (output.type == "latex"){
+        tabX = data.frame(paste(".   ", names(table(d[,j], useNA=NAkeep))))
+      } else {
+        tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
+      }
     } else if (is.numeric(d[,j])){
       tabX = data.frame(paste(" "))
     }
@@ -232,9 +236,9 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
   }
   
   final_l = list(final)
-  class(final_l) = c("table1", "list")
   
   if (output.type == "text"){  ## regular text output
+    class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
       invisible(data)
@@ -242,24 +246,26 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
       return(final_l)
     } 
   } else if (output.type == "latex"){ ## latex compatible output from kable
-    l_final = latex_table1_(final_l)
     if (piping){
-      print(l_final)
-      invisible(data)
+      latex_table1_(final)
+      invisible(.data)
     } else {
-      return(l_final)
+      latex_table1_(final)
     } 
   }
 }
 
 
 latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
-  stopifnot(class(tab)[1] == "table1")
-  knitr::kable(tab, format = "latex", 
-               booktabs = booktabs,
-               caption = caption, 
-               row.names = FALSE,
-               align = align)
+  if(class(tab)[1] == "table1"){
+    tab = as.data.frame(tab)
+  }
+  options(xtable.comment = FALSE)
+  xt = xtable::xtable(tab,
+                      booktabs = booktabs,
+                      caption = caption,
+                      align = align)
+  print(xt, include.row.names=FALSE)
 }
 
 print.table1 <- function(x, ...){
@@ -274,7 +280,7 @@ print.table1 <- function(x, ...){
     cat("=")
   }
   cat("===\n") 
-  print(x[[1]], ..., row.names = FALSE)
+  print(x[[1]], ..., row.names = FALSE, right = FALSE)
   cat("\n|==")
   for (i in 1:w){
     cat("=")
