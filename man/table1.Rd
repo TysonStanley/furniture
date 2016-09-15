@@ -11,7 +11,7 @@ table1(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="d
 }
 
 \arguments{
-  \item{data}{
+  \item{.data}{
       the data.frame that is to be summarized
 }
   \item{\dots}{
@@ -53,7 +53,7 @@ table1(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="d
   \item{booktabs}{
       when \code{output.type = "latex"}; option is passed to \code{knitr::kable}; default is \code{TRUE}
 }
-  \item{captions}{
+  \item{caption}{
       when \code{output.type = "latex"} option is passed to \code{knitr::kable}; default is \code{NULL}
 }
   \item{align}{
