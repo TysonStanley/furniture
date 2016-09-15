@@ -260,7 +260,7 @@ latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
   if(class(tab)[1] == "table1"){
     tab = as.data.frame(tab)
   }
-  knitr::kable(tab,
+  knitr::kable(tab, type="latex"
                booktabs = booktabs,
                caption = caption,
                align = align,
