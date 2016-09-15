@@ -147,16 +147,16 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                         paste("Chi Square:", round(tests[[j]]$statistic,2)), 
-                        paste(round(tests[[j]]$p.value,3)))
+                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
       } else if (is.numeric(d[,j])){
         if (length(levels(d$split))>2){
           n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                           paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(round(tests[[j]]$p.value[1],3)))
+                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
         } else {
           n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                           paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(round(tests[[j]]$p.value,3)))
+                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
         }
       }
       tabX = data.frame(tabX, "", "")
@@ -167,14 +167,14 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     } else if (test & format.output=="pvalues"){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
-                        paste(round(tests[[j]]$p.value,3)))
+                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
       } else if (is.numeric(d[,j])){
         if (length(levels(d$split))>2){
           n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(round(tests[[j]]$p.value[1],3)))
+                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
         } else {
           n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(round(tests[[j]]$p.value,3)))
+                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
         }
       }
       tabX = data.frame(tabX, "")
