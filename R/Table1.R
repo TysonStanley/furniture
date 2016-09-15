@@ -263,9 +263,23 @@ latex_table1_ <- function(tab, booktabs = TRUE, align=NULL, caption=NULL){
 }
 
 print.table1 <- function(x, ...){
-  cat("\n|============================================== \n")
+  x2 = data.frame(x)
+  summed = list()
+  for (i in seq_along(x2)){
+    summed[[i]] = max(nchar(x2[,i], type="width"))
+  }
+  w = sum(unlist(summed))
+  cat("\n|==")
+  for (i in 1:w){
+    cat("=")
+  }
+  cat("===\n") 
   print(x[[1]], ..., row.names = FALSE)
-  cat("|============================================== \n")
+  cat("\n|==")
+  for (i in 1:w){
+    cat("=")
+  }
+  cat("===\n") 
 }
 
 table1_ <- function(d_, vars){
