@@ -287,21 +287,33 @@ print.table1 <- function(x, ...){
 
 table1_ <- function(d_, vars){
   d1 = named = NULL
+  
+  ## for dots_capture
   if (is.list(vars)){
     for (i in seq_along(vars)){
       named   <- paste(vars[[i]])
       d1[[i]] <- f_eval(vars[[i]], d_)
-      names(d1)[i] <- named[[2]]
+      
+      ## if is an index
+      if (is.numeric(d1[[i]])){
+        d2 <- d_[, d1[[i]]]
+        
+      ## if it is named vars
+      } else {
+        names(d1)[i] <- named[[2]]
+        d2 <- as.data.frame(d1)
+      }
     }
-    d1 <- as.data.frame(d1)
     
+  ## for single vars
   } else if (is_formula(vars)){
     named   <- paste(vars)
     d1      <- f_eval(vars, d_)
-    d1 <- as.list(d1)
-    names(d1) <- named[[2]]
-  }
+    d2 <- as.list(d1)
+    names(d2) <- named[[2]]
+  } 
   
-  return(d1)
+  return(d2)
 }
+
 
