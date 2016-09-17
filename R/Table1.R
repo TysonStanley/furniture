@@ -1,5 +1,5 @@
 
-table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
+table1 = function(.data, ..., splitby=NULL, splitby_labels=NULL, test=FALSE, test.type="default", piping = FALSE,
                   rounding=3, var.names=NULL, format.output="full", output.type="text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
   
@@ -292,25 +292,25 @@ print.table1 <- function(x, ...){
 
 
 table1_ <- function(d_, vars){
-  d1 = named = NULL
-  
+  named = d1 = d_nam = list()
   ## for dots_capture
   if (is.list(vars)){
     for (i in seq_along(vars)){
-      named   <- paste(vars[[i]])
       d1[[i]] <- f_eval(vars[[i]], d_)
       
-      
       ## if is an index (built on assumption that lengths will differ)
-      if (length(d1[[i]]) != length(d_[[1]]) & is.numeric(d1[[i]])){
-        d2 <- d_[, d1[[i]]]
-        
-      ## if it is named vars
+      if (length(d1[[i]]) != length(d_[[1]])){
+        cols    <- d1[[i]]
+        d1[[i]] <- data.frame(d_[, cols])
+        named[[i]] <- paste(names(d1[[i]]))
+        ## if it is named vars
       } else {
-        names(d1)[i] <- named[[2]]
-        d2 <- as.data.frame(d1)
+        named[[i]] <- paste(vars[[i]])[[2]]
       }
     }
+    d2 = do.call("cbind", d1)
+    d2 = data.frame(d2)
+    names(d2) = unlist(named)
     
   ## for single vars
   } else if (is_formula(vars)){

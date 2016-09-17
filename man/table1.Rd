@@ -4,7 +4,7 @@
 \description{ Produces a descriptive table, stratified by an optional categorical variable, providing means/frequencies and standard deviations/percentages. It is well-formatted for easy transition to academic article or report. Can be used within the piping framework [see \code{library(magrittr)}].}
 
 \usage{
-table1(.data, ..., splitby=NULL, splitby_labels = NULL, 
+table1(.data, ..., splitby=NULL, splitby_labels=NULL, 
        test=FALSE, test.type="default", 
        piping = FALSE, rounding=3, var.names=NULL, 
        format.output="full", output.type="text", 
@@ -17,7 +17,7 @@ table1(.data, ..., splitby=NULL, splitby_labels = NULL,
       the data.frame that is to be summarized
 }
   \item{\dots}{
-      variables in the data set that are to be summarized; unquoted names or index
+      variables in the data set that are to be summarized; unquoted names separated by commas (e.g. \code{age, gender, race}) or indices. If indices, it needs to be a single vector (e.g. \code{c(1:5, 8, 9:20)} instead of \code{1:5, 8, 9:20}). As it is, it can handle both indices and unquoted names simultaneously.
 }
   \item{splitby}{
       the categorical variable to stratify by in formula form (e.g., \code{~gender}); requires \code{levels(splitby)>0}
