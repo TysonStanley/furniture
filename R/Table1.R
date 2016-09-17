@@ -1,5 +1,5 @@
 
-table1 = function(.data, ..., splitby=NULL, splitby_labels=NULL, test=FALSE, test.type="default", piping = FALSE,
+table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
                   rounding=3, var.names=NULL, format.output="full", output.type="text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
   
@@ -191,8 +191,8 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels=NULL, test=FALSE, tes
     } else if (test & format.output=="stars"){
       n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                       paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
-                             ifelse(tests[[j]]$p.value < 0.01,  "**", 
-                             ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
+                                    ifelse(tests[[j]]$p.value < 0.01,  "**", 
+                                           ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
       tabX = data.frame(tabX, "")
       names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
       tabW = rbind(n3, tabX)
@@ -234,7 +234,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels=NULL, test=FALSE, tes
   final$` ` = as.character(final$` `)
   final$` `[is.na(final$` `)] = m_label
   
-
+  
   # === # FINAL OUTPUT # === #
   
   if (length(levels(d$split)) == 1){
@@ -292,29 +292,27 @@ print.table1 <- function(x, ...){
 
 
 table1_ <- function(d_, vars){
-  named = d1 = d_nam = list()
-  d2 = matrix(nrow=dim(d_)[1], ncol=1)
+  d1 = named = NULL
   
   ## for dots_capture
   if (is.list(vars)){
     for (i in seq_along(vars)){
+      named   <- paste(vars[[i]])
       d1[[i]] <- f_eval(vars[[i]], d_)
       
+      
       ## if is an index (built on assumption that lengths will differ)
-      if (length(d1[[i]]) != length(d_[[1]])){
-        cols    <- d1[[i]]
-        d1[[i]] <- data.frame(d_[, cols])
-        named[[i]] <- names(d_)[cols]
+      if (length(d1[[i]]) != length(d_[[1]]) & is.numeric(d1[[i]])){
+        d2 <- d_[, d1[[i]]]
+        
         ## if it is named vars
       } else {
-        named[[i]] <- paste(vars[[i]])[[2]]
+        names(d1)[i] <- named[[2]]
+        d2 <- as.data.frame(d1)
       }
-      d2 = cbind(d2, d1[[i]])
     }
-    d2 = d2[,-1]
-    names(d2) = unlist(named)
     
-  ## for single vars
+    ## for single vars
   } else if (is_formula(vars)){
     named   <- paste(vars)
     d1      <- f_eval(vars, d_)
@@ -324,5 +322,4 @@ table1_ <- function(d_, vars){
   
   return(d2)
 }
-
 
