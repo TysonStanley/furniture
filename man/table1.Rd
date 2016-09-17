@@ -17,7 +17,7 @@ table1(.data, ..., splitby=NULL, splitby_labels=NULL,
       the data.frame that is to be summarized
 }
   \item{\dots}{
-      variables in the data set that are to be summarized; unquoted names separated by commas (e.g. \code{age, gender, race}) or indices. If indices, it needs to be a single vector (e.g. \code{c(1:5, 8, 9:20)} instead of \code{1:5, 8, 9:20}). As it is, it can handle both indices and unquoted names simultaneously.
+      variables in the data set that are to be summarized; unquoted names separated by commas (e.g. \code{age, gender, race}) or indices. If indices, it needs to be a single vector (e.g. \code{c(1:5, 8, 9:20)} instead of \code{1:5, 8, 9:20}). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
 }
   \item{splitby}{
       the categorical variable to stratify by in formula form (e.g., \code{~gender}); requires \code{levels(splitby)>0}

@@ -277,13 +277,13 @@ print.table1 <- function(x, ...){
     summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
   }
   w = sum(unlist(summed))
-  cat("\n|==")
+  cat("\n|===")
   for (i in 1:w){
     cat("=")
   }
   cat("===\n") 
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("\n|==")
+  cat("|===")
   for (i in 1:w){
     cat("=")
   }
