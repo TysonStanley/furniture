@@ -45,6 +45,11 @@ table1 = function(.data, ..., index=FALSE, splitby=NULL, splitby_labels = NULL, 
   tab = tab2 = tests = tests2 = nams = list()
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] = names(d)[i]
+    # If character
+    if (is.character(d[,i])){
+      d[,i] = as.factor(d[,i])
+    }
+    
     # If Factor
     if (is.factor(d[,i])){
       tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
