@@ -1,5 +1,5 @@
 
-table1 = function(.data, ..., index=FALSE, splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
+table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
                   rounding=3, var.names=NULL, format.output="full", output.type="text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
   
@@ -11,7 +11,7 @@ table1 = function(.data, ..., index=FALSE, splitby=NULL, splitby_labels = NULL, 
     NAkeep = "no"
   }
   
-  data = table1_(.data, dots_capture(...), indexed = index)
+  data = table1_(.data, dots_capture(...))
   d = as.data.frame(data)
   
   ### Naming of variables
@@ -25,7 +25,7 @@ table1 = function(.data, ..., index=FALSE, splitby=NULL, splitby_labels = NULL, 
     splitby_ = as.factor(1)
     d$split = droplevels(splitby_)
   } else {
-    splitby_ = table1_(.data, splitby, indexed = FALSE)
+    splitby_ = table1_(.data, splitby)
     d$split = droplevels(as.factor(unlist(splitby_)))
   }
   
@@ -291,7 +291,7 @@ print.table1 <- function(x, ...){
 }
 
 
-table1_ <- function(d_, vars, indexed=index){
+table1_ <- function(d_, vars){
   d1 = named = NULL
   
   ## for dots_capture
@@ -301,8 +301,8 @@ table1_ <- function(d_, vars, indexed=index){
       d1[[i]] <- f_eval(vars[[i]], d_)
       
       
-      ## if is an index
-      if (indexed){
+      ## if is an index (built on assumption that lengths will differ)
+      if (length(d1[[i]]) != length(d_[[1]]) & is.numeric(d1[[i]])){
         d2 <- d_[, d1[[i]]]
         
       ## if it is named vars
