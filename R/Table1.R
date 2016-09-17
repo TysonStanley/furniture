@@ -293,6 +293,8 @@ print.table1 <- function(x, ...){
 
 table1_ <- function(d_, vars){
   named = d1 = d_nam = list()
+  d2 = matrix(nrow=dim(d_)[1], ncol=1)
+  
   ## for dots_capture
   if (is.list(vars)){
     for (i in seq_along(vars)){
@@ -302,14 +304,14 @@ table1_ <- function(d_, vars){
       if (length(d1[[i]]) != length(d_[[1]])){
         cols    <- d1[[i]]
         d1[[i]] <- data.frame(d_[, cols])
-        named[[i]] <- paste(names(d1[[i]]))
+        named[[i]] <- names(d_)[cols]
         ## if it is named vars
       } else {
         named[[i]] <- paste(vars[[i]])[[2]]
       }
+      d2 = cbind(d2, d1[[i]])
     }
-    d2 = do.call("cbind", d1)
-    d2 = data.frame(d2)
+    d2 = d2[,-1]
     names(d2) = unlist(named)
     
   ## for single vars
