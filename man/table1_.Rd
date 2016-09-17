@@ -4,7 +4,7 @@
 \description{ Allows Non-standard evaluation of Table 1}
 
 \usage{
-table1_(d_, vars, index=index)
+table1_(d_, vars, indexed=index)
 }
 
 \arguments{
@@ -14,7 +14,7 @@ table1_(d_, vars, index=index)
   \item{vars}{
       formula or list of formulas containing the variables in the data set that are to be summarized
 }
-  \item{index}{
+  \item{indexed}{
       to know whether the vars are an index
 }
 }
