@@ -25,9 +25,9 @@ tp = function(formula, data, bin.link = "logit", count.family = poisson(link = "
 
 
 print.tp = function(x, ...){
-  cat("---\nBinary Portion of Two-Part Hurdle Model\n\n")
+  cat("---\nBinary Portion of Two-Part Model\n\n")
   print(summary.glm(x$Binary)$coef, ...)
-  cat("\n---\nCount Portion of Two-Part Hurdle Model\n\n")
+  cat("\n---\nCount Portion of Two-Part Model\n\n")
   print(summary.glm(x$Count)$coef, ...)
   cat("---\nModel 1: binomial with", x$Binary$family[[2]], "link",
       "\nModel 2:", x$Count$family[[1]], "with", x$Count$family[[2]], "link \n")

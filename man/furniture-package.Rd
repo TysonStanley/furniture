@@ -40,7 +40,7 @@ levels(b$race) = c("white", "black", "other")
 ## Table1 example ##
 
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
-       splitby=~low,
+       splitby=~factor(low),
        test=TRUE,
        var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),

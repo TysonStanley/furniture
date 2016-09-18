@@ -91,14 +91,16 @@ levels(b$race) = c("white", "black", "other")
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        NAkeep=TRUE)
 
+## can adjust variable in the function -- low changed to factor
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
-       splitby=~low,
+       splitby=~factor(low),
        NAkeep=TRUE)
-
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
-       splitby=~low,
+       splitby=~factor(low),
        test=TRUE)
 
+## or can adjust before hand
+b$low = as.factor(b$low)
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        splitby=~low,
        test=TRUE,
