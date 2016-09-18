@@ -4,7 +4,7 @@
 \description{ Allows Non-standard evaluation of Table 1}
 
 \usage{
-table1_(d_, vars)
+table1_(d_, vars, split=FALSE)
 }
 
 \arguments{
@@ -13,6 +13,9 @@ table1_(d_, vars)
 }
   \item{vars}{
       formula or list of formulas containing the variables in the data set that are to be summarized
+}
+  \item{split}{
+      logical; is it the splitby variable?
 }
 }
 

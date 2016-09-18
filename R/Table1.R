@@ -25,8 +25,8 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     splitby_ = as.factor(1)
     d$split = droplevels(splitby_)
   } else {
-    splitby_ = table1_(.data, splitby)
-    d$split = droplevels(as.factor(unlist(splitby_)))
+    splitby_ = table1_(.data, splitby, split=TRUE)
+    d$split = droplevels(as.factor(splitby_[[1]]))
   }
   
   if (test & length(levels(d$split))>1){
@@ -291,7 +291,7 @@ print.table1 <- function(x, ...){
 }
 
 
-table1_ <- function(d_, vars){
+table1_ <- function(d_, vars, split=FALSE){
   d1 = named = NULL
   
   ## for dots_capture
@@ -299,7 +299,6 @@ table1_ <- function(d_, vars){
     for (i in seq_along(vars)){
       named   <- paste(vars[[i]])
       d1[[i]] <- f_eval(vars[[i]], d_)
-      
       
       ## if is an index (built on assumption that lengths will differ)
       if (length(d1[[i]]) != length(d_[[1]]) & is.numeric(d1[[i]])){
@@ -313,13 +312,22 @@ table1_ <- function(d_, vars){
     }
     
     ## for single vars
-  } else if (is_formula(vars)){
+  } else if (split){
     named   <- paste(vars)
     d1      <- f_eval(vars, d_)
-    d2 <- as.list(d1)
+    if (!is.factor(d1))
+      stop("'splitby' must be a formula of a factor variable (e.g. ~var1")
+    d2 <- as.data.frame(d1)
     names(d2) <- named[[2]]
   } 
   
+  ## Error catching 
+  if (dim(d_)[1] != length(d2[[1]])){
+    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names or a single vector of indices or that splitby variable is stated as a formula (e.g. ~var1)",
+         call.=FALSE)
+  }
+  
   return(d2)
 }
+
 
