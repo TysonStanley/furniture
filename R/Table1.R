@@ -15,9 +15,9 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   d = as.data.frame(data)
   
   ### Naming of variables
-  if (!is.null(var.names)){
-    stopifnot(length(var.names)==length(names(d)))
-    names(d) = var.names
+  if (!is.null(var_names)){
+    stopifnot(length(var_names)==length(names(d)))
+    names(d) = var_names
   }
   
   ### Splitby Variable
@@ -56,7 +56,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
       tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
-      if (test & test.type=="or")
+      if (test & test_type=="or")
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
       # If Numeric
     } else if (is.numeric(d[,i]) | is.integer(d[,i])){
@@ -75,7 +75,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
         tests[[i]] = t.test(d[,i] ~ d$split)        
       } 
       
-      if (test & test.type=="or"){
+      if (test & test_type=="or"){
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
       }
     } else {
@@ -86,14 +86,14 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   # == # Formatting Table # == # 
   if (test){
-    if (test.type=="or"){
+    if (test_type=="or"){
       OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
       names(OR) = c(" ", "OR", "Lower", "Upper")
     }
     
-    if (format.output=="full")
+    if (format_output=="full")
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
-    else if (format.output=="pvalues" | format.output=="stars")
+    else if (format_output=="pvalues" | format_output=="stars")
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
   } else {
     tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
@@ -101,7 +101,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
-      if (output.type == "latex"){
+      if (output_type == "latex"){
         tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
       } else {
         tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
@@ -122,7 +122,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     
     # == # Optional Odds Ratio Table # == #
     
-    if (test & test.type == "or" & NAkeep == "no"){
+    if (test & test_type == "or" & NAkeep == "no"){
       cis = exp(confint(tests2[[j]]))
       or  = exp(tests2[[j]]$coef)
       if (is.numeric(d[,j])){
@@ -149,7 +149,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     
     ## If test == TRUE, tests of comparisons by split ##
     
-    if (test & format.output=="full"){
+    if (test & format_output=="full"){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                         paste("Chi Square:", round(tests[[j]]$statistic,2)), 
@@ -170,7 +170,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
-    } else if (test & format.output=="pvalues"){
+    } else if (test & format_output=="pvalues"){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                         paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
@@ -188,7 +188,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
-    } else if (test & format.output=="stars"){
+    } else if (test & format_output=="stars"){
       n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                       paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
                                     ifelse(tests[[j]]$p.value < 0.01,  "**", 
@@ -208,12 +208,12 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   # == # Observations # == #
   
-  if (format.output=="full" & test){
+  if (format_output=="full" & test){
     N = data.frame("Observations", N, "", "")
     names(N) = c(" ", levels(d$split), "Test", "P-Value")
-  } else if ((format.output=="pvalues" | format.output=="stars") & test){
+  } else if ((format_output=="pvalues" | format_output=="stars") & test){
     N = data.frame("Observations", N, " ") 
-    if (format.output=="pvalues"){
+    if (format_output=="pvalues"){
       names(N) = c(" ", levels(d$split), "P-Value")
     } else {
       names(N) = c(" ", levels(d$split), " ")
@@ -243,7 +243,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   final_l = list(final)
   
-  if (output.type == "text"){  ## regular text output
+  if (output_type == "text"){  ## regular text output
     class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
@@ -251,7 +251,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     } else {
       return(final_l)
     } 
-  } else if (output.type == "latex"){ ## latex compatible output from kable
+  } else if (output_type == "latex"){ ## latex compatible output from kable
     if (piping){
       knitr::kable(final, format="latex",
                    booktabs = booktabs,
