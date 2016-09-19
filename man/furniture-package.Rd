@@ -45,7 +45,7 @@ table1(b, age, race, smoke, ptl, ht, ui, ftv,
        var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),
        splitby_labels = c("Regular Birthweight", "Low Birthweight"),
-       format.output = "stars")
+       format_output = "stars")
 
 
 }
