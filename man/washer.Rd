@@ -1,6 +1,6 @@
 \name{washer}
 \alias{washer}
-\title{Washer of Missing Data}
+\title{Wash Your Data}
 \description{
 Washes the data by replacing values with either NA's or other values set by the user. Useful for replacing values such as 777's or 999's that represent missing values in survey research.
 }
@@ -29,10 +29,6 @@ Returns the variable with the values adjusted
 Tyson S. Barrett
 }
 
-
-\seealso{
-\code{\link{mirror}}
-}
 \examples{
 
 x = c(1:20, NA, NaN)
