@@ -87,6 +87,9 @@ b = mutate(.data=birthwt,
            ui    = as.factor(ui))
 levels(b$race) = c("white", "black", "other")
 
+## Load the library
+library(furniture)
+
 ## Table1 examples
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        NAkeep=TRUE)
