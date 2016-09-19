@@ -53,6 +53,9 @@
 #'        
 #'
 #' @export
+#' @import stats
+#' @import LazyEval
+#' @importFrom knitr kable
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
                   rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
@@ -360,6 +363,8 @@ print.table1 <- function(x, ...){
 #' @return A data.frame
 #'
 #' @export
+#' @import stats
+#' @import LazyEval
 table1_ <- function(d_, vars, split=FALSE){
   d1 = named = NULL
   
