@@ -1,4 +1,58 @@
-
+#' Table 1 for Health, Behavioral, and Social Scientists
+#' 
+#' Produces a descriptive table, stratified by an optional categorical variable, 
+#' providing means/frequencies and standard deviations/percentages. 
+#' It is well-formatted for easy transition to academic article or report. 
+#' Can be used within the piping framework [see library(magrittr)].
+#' 
+#' @param .data the data.frame that is to be summarized
+#' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
+#' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}); not too surprisingly, it requires that the number of levels be > 0
+#' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
+#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
+#' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
+#' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
+#' @param rounding the number of digits after the decimal; default is 3
+#' @param var_names custom variable names to be printed in the table
+#' @param format_output has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
+#' @param output_type default is "text"; the other option is "latex" which uses the \code{kable()} function in \code{knitr}
+#' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
+#' @param m_label when \code{NAkeep = TRUE} this provides a label for the missing values in the table
+#' @param booktabs when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
+#' @param caption when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
+#' @param align when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
+#' 
+#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+#'
+#' @examples 
+#' ## Data from MASS package ##
+#' library(MASS)
+#' data("birthwt")
+#' library(dplyr)
+#' b = mutate(.data=birthwt,
+#'            smoke = as.factor(smoke),
+#'            race  = as.factor(race),
+#'            ht    = as.factor(ht),
+#'            ui    = as.factor(ui))
+#' levels(b$race) = c("white", "black", "other")
+#' 
+#' library(furniture)
+#' 
+#' table1(b, age, race, smoke, ptl, ht, ui, ftv, NAkeep=TRUE)
+#' table1(b, age, race, smoke, ptl, ht, ui, ftv,
+#'        splitby=~factor(low),
+#'        NAkeep=TRUE)
+#'        
+#' b$low = as.factor(b$low)
+#' table1(b, age, race, smoke, ptl, ht, ui, ftv,
+#'        splitby=~low,
+#'        test=TRUE,
+#'        var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
+#'                      "Uterine Irratibility", "Physician Visits"),
+#'        splitby_labels = c("Regular Birthweight", "Low Birthweight"))
+#'        
+#'
+#' @export
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
                   rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
@@ -270,6 +324,8 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
 }
 citation("furniture")
 
+
+#' @export
 print.table1 <- function(x, ...){
   x2 = as.data.frame(x[[1]])
   summed = list()
@@ -290,7 +346,20 @@ print.table1 <- function(x, ...){
   cat("=====\n") 
 }
 
-
+#' Table 1 for Health, Behavioral, and Social Scientists
+#' 
+#' Produces a descriptive table, stratified by an optional categorical variable, 
+#' providing means/frequencies and standard deviations/percentages. 
+#' It is well-formatted for easy transition to academic article or report. 
+#' Can be used within the piping framework [see library(magrittr)].
+#' 
+#' @param d_ the data.frame
+#' @param vars uses dots_capture() to capture the ...
+#' @param split for internal use in table1()
+#' 
+#' @return A data.frame
+#'
+#' @export
 table1_ <- function(d_, vars, split=FALSE){
   d1 = named = NULL
   
