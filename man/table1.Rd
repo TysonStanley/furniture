@@ -28,7 +28,7 @@ table1(.data, ..., splitby=NULL, splitby_labels=NULL,
   \item{test}{
       logical; if set to \code{TRUE} then bivariate tests of significance are performed; requires \code{levels(splitby)>1}; automatically performs the correct test based on variable types and number of levels
 }
-  \item{test.type}{
+  \item{test_type}{
        has two options: "default" performs the default tests of significance only; "or" gives unadjusted odds ratios as well based on logistic regression and currently should only be used when the splitting variable has only 2 levels.
 }
   \item{piping}{
@@ -37,13 +37,13 @@ table1(.data, ..., splitby=NULL, splitby_labels=NULL,
   \item{rounding}{
       the number of digits after the decimal; default is 3
 }
-  \item{var.names}{
+  \item{var_names}{
       custom variable names to be printed in the table
 }
-  \item{format.output}{
+  \item{format_output}{
       has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; 3) "stars" provides the table with stars indicating significance
 }
-  \item{output.type}{
+  \item{output_type}{
       default is "text"; the other option is "latex" which uses the \code{kable} function in \code{knitr}
 }
   \item{NAkeep}{
@@ -104,7 +104,7 @@ b$low = as.factor(b$low)
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        splitby=~low,
        test=TRUE,
-       var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
+       var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),
        splitby_labels = c("Regular Birthweight", "Low Birthweight"))
 

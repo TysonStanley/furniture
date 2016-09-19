@@ -42,10 +42,9 @@ levels(b$race) = c("white", "black", "other")
 table1(b, age, race, smoke, ptl, ht, ui, ftv,
        splitby=~factor(low),
        test=TRUE,
-       var.names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
+       var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
                      "Uterine Irratibility", "Physician Visits"),
        splitby_labels = c("Regular Birthweight", "Low Birthweight"),
-       test.type = "or",
        format.output = "stars")
 
 
