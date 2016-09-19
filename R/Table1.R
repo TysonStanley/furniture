@@ -54,7 +54,7 @@
 #'
 #' @export
 #' @import stats
-#' @import LazyEval
+#' @import lazyeval
 #' @importFrom knitr kable
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
                   rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
@@ -364,7 +364,7 @@ print.table1 <- function(x, ...){
 #'
 #' @export
 #' @import stats
-#' @import LazyEval
+#' @import lazyeval
 table1_ <- function(d_, vars, split=FALSE){
   d1 = named = NULL
   
