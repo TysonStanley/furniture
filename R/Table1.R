@@ -1,6 +1,6 @@
 
-table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, test.type="default", piping = FALSE,
-                  rounding=3, var.names=NULL, format.output="full", output.type="text", NAkeep = FALSE, m_label = "Missing",
+table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
+                  rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
   
   # == # Checks and Data # == #
@@ -268,7 +268,7 @@ table1 = function(.data, ..., splitby=NULL, splitby_labels = NULL, test=FALSE, t
     } 
   }
 }
-
+citation("furniture")
 
 print.table1 <- function(x, ...){
   x2 = as.data.frame(x[[1]])
@@ -277,17 +277,17 @@ print.table1 <- function(x, ...){
     summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
   }
   w = sum(unlist(summed))
-  cat("\n|===")
+  cat("\n|=====")
   for (i in 1:w){
     cat("=")
   }
-  cat("===\n") 
+  cat("=====\n") 
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("|===")
+  cat("|=====")
   for (i in 1:w){
     cat("=")
   }
-  cat("===\n") 
+  cat("=====\n") 
 }
 
 
@@ -316,18 +316,17 @@ table1_ <- function(d_, vars, split=FALSE){
     named   <- paste(vars)
     d1      <- f_eval(vars, d_)
     if (!is.factor(d1))
-      stop("'splitby' must be a formula of a factor variable (e.g. ~var1")
+      stop("'splitby' must be a formula of a factor variable (e.g. splitby = ~var1")
     d2 <- as.data.frame(d1)
     names(d2) <- named[[2]]
   } 
   
   ## Error catching 
   if (dim(d_)[1] != length(d2[[1]])){
-    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names or a single vector of indices or that splitby variable is stated as a formula (e.g. ~var1)",
+    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names [e.g. gender, age] or a single vector of indices [e.g. c(3:5, 6)] or that splitby variable is stated as a formula [e.g. splitby = ~var1]",
          call.=FALSE)
   }
   
   return(d2)
 }
-
 

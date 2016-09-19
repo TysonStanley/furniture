@@ -9,7 +9,7 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{furniture}
 \packageIndices{furniture}
-The furniture package provides several functions that are useful for exploratory data analysis, data cleaning, and reporting for the health, behavioral and social sciences.
+The furniture package provides functions that are useful for exploratory data analysis, data cleaning, and reporting for the health, behavioral and social sciences.
 }
 \author{
 \packageAuthor{furniture}

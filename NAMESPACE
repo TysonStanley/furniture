@@ -6,7 +6,3 @@ importFrom("car", "leveneTest")
 importFrom("knitr", "kable")
 
 S3method(print, table1)
-S3method(print, tp)
-S3method(print, frames)
-S3method(summary, tp)
-S3method(summary, frames)

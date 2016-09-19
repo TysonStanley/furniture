@@ -5,9 +5,9 @@
 
 \usage{
 table1(.data, ..., splitby=NULL, splitby_labels=NULL, 
-       test=FALSE, test.type="default", 
-       piping = FALSE, rounding=3, var.names=NULL, 
-       format.output="full", output.type="text", 
+       test=FALSE, test_type="default", 
+       piping = FALSE, rounding=3, var_names=NULL, 
+       format_output="pvalues", output_type="text", 
        NAkeep = FALSE, m_label = "Missing",
        booktabs = TRUE, caption=NULL, align=NULL)
 }
