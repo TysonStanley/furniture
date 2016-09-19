@@ -28,6 +28,9 @@ Maintainer: \packageMaintainer{furniture}
 library(MASS)
 data("birthwt")
 
+## Load the Package
+library(furniture)
+
 ## Using dplyr ##
 library(dplyr)
 b = mutate(.data=birthwt,
