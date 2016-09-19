@@ -8,11 +8,11 @@ Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett
 Author: Tyson Barrett [aut, cre],
  Emily Brignone [aut]
 Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
-Description: Social Science functions: creates tables for academic articles,
- runs two-part models, and produces marginal effects for GLM and Two-Part Models. 
- table1() produces the common Table 1 in research articles with descriptive 
- statistics. tp() runs two part models. frames() produces average marginal
- effects.
+Description: Package contains two functions (i.e., two pieces of furniture):
+ table1() which produces a well-formatted table of descriptives common in research
+ articles; and washer() which is helpful in cleaning up your data. Should be 
+ useful for quantitative research in applied fields 
+ (e.g., health, behavioral, and social sciences).
 Depends: knitr, lazyeval, car
 Suggests: MASS, dplyr, testthat
 Encoding: UTF-8
