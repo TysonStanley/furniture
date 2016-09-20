@@ -56,6 +56,7 @@
 #' @import stats
 #' @import lazyeval
 #' @importFrom knitr kable
+#' @importFrom car leveneTest
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
                   rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
