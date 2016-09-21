@@ -14,12 +14,19 @@ In conjunction with many other tidy tools, the package should be useful for heal
 
 # Installation
 
-Currently, the package is under the submission process at CRAN. Therefore, the latest available package version can be installed in R via:
+The latest stable build of the package can be downloaded from CRAN via:
 
-```rstudio
+```r
+install.packages("furniture")
+```
+
+or you can download the developmental version via:
+
+```r
 library(devtools)
 install_github("tysonstanley/furniture")
 ```
+
 
 # Using furniture
 
