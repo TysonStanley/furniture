@@ -27,6 +27,9 @@
 #' @examples
 #' \dontrun{
 #' 
+#' library(magrittr)
+#' library(furniture)
+#' 
 #' ## Table 1
 #' data %>%
 #'   table1(var1, var2, var3, 
