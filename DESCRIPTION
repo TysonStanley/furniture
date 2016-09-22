@@ -1,8 +1,8 @@
 Package: furniture
 Type: Package
 Title: Furniture for Health, Behavioral, and Social Scientists
-Version: 1.0.1
-Date: 2016-09-15
+Version: 1.1.0
+Date: 2016-09-22
 Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
  	         person("Emily", "Brignone", role="aut"))
 Author: Tyson Barrett [aut, cre],
@@ -12,7 +12,8 @@ Description: Package contains two functions (i.e., two pieces of furniture):
     table1() which produces a well-formatted table of descriptives common in
     research articles; and washer() which is helpful in cleaning up your data.
     Should be useful for quantitative research in applied fields (e.g., health,
-    behavioral, and social sciences).
+    behavioral, and social sciences). It also contains simple operators to 
+    help with data cleaning along with washer().
 Depends:
     knitr,
     lazyeval,
