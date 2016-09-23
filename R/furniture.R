@@ -27,7 +27,6 @@
 #' @examples
 #' \dontrun{
 #' 
-#' library(magrittr)
 #' library(furniture)
 #' 
 #' ## Table 1

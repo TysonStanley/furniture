@@ -22,8 +22,7 @@ y = rnorm(10)
 z = c("Yes", "No", "Yes", "No", "No", "Yes", "No", "No", "Yes", "No")
 data = data.frame(b, x, y, z)
 
-data \%$\%
-  x \%xt\% b
+data$x \%xt\% data$b
 
 }
 

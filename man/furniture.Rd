@@ -31,6 +31,8 @@ an academic, peer reviewed journal manuscript.
 \examples{
 \dontrun{
 
+library(furniture)
+
 ## Table 1
 data \%>\%
   table1(var1, var2, var3, 
