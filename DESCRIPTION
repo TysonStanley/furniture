@@ -20,7 +20,7 @@ Depends:
     car
 Suggests:
     MASS,
-    dplyr
+    dplyr,
     rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
