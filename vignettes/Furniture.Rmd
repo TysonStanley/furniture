@@ -1,0 +1,89 @@
+---
+title: "Furniture"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Furniture}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(furniture)
+```
+
+## Using `furniture`
+
+We will first make a ficticious data set:
+```{r data}
+df <- data.frame(a = rnorm(100, 1.5, 2), 
+                 b = seq(1, 100, 1), 
+                 c = c(rep("control", 40), rep("Other", 7), rep("treatment", 50), rep("None", 3)),
+                 d = c(sample(1:1000, 90, replace=TRUE), rep(-99, 10)))
+```
+
+There are two functions that we'll demonstrate here:
+
+1. `washer`
+2. `table1`
+
+## Washer
+
+`washer` is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.
+```{r washer}
+library(dplyr)
+library(lazyeval)
+
+df <- df %>%
+  mutate(d = washer(d, -99),  ## changes the placeholder -99 to NA
+         c = washer(c, "Other", "None", value = "control")) ## changes "Other" and "None" to "Control"
+```
+
+
+## Table1
+
+Now that the data is "washed" we can start exploring and reporting.
+```{r table1}
+table1(df, a, b, factor(c), d)
+```
+
+The variables must be numeric or factor. Since we use a special type of function found in `library(lazyeval)` we can change the variables in the function (e.g., `factor(c)`). This can be extended to making a whole new variable in the function as well.
+
+```{r table1.2}
+table1(df, a, b, d, ifelse(a > 1, 1, 0))
+```
+
+This is just the beginning though. Two powerful things the function can do are shown below:
+
+```{r table1.3}
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE)
+```
+
+The `splitby = ~factor(c)` stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using `test=TRUE`. 
+
+Finally, you can polish it quite a bit using a few other options. For example, you can do the following:
+```{r table1.4}
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE,
+       var_names = c("A", "B", "D", "New Var"),
+       splitby_labels = c("Control", "Treatment"))
+```
+
+This can also be outputted as a latex table:
+```{r table1.4}
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE,
+       var_names = c("A", "B", "D", "New Var"),
+       splitby_labels = c("Control", "Treatment"),
+       output_type = "latex")
+```
+
+## Conclusion
+
+Both `table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+

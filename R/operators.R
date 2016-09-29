@@ -35,7 +35,7 @@
   .l1 = list()
   for (i in seq_along(.y)){
     if (grepl(">|<", .y[[i]])){
-      .e = parse(text = paste(".x", parse(text =deparse(.y[[i]]))))
+      .e = parse(text = paste(".x", parse(text = deparse(.y[[i]]))))
       .l1[[i]] = eval(.e)
     } else {
       .l1[[i]] = .x %in% .y[[i]]

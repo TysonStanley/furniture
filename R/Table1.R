@@ -105,7 +105,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     nams[[i]] = names(d)[i]
     # If character
     if (is.character(d[,i])){
-      d[,i] = as.factor(d[,i])
+      d[,i] = factor(d[,i])
     }
     
     # If Factor
@@ -326,7 +326,6 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     } 
   }
 }
-citation("furniture")
 
 
 #' @export
