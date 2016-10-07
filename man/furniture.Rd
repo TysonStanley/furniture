@@ -15,8 +15,6 @@ two main tools (along with two operators):
         as table 1 in academic journals,
   \item \code{washer} provides a simple way to clean up data where there are placeholder
         values, and
-  \item \code{\%on\%} is an operator that takes a variable on the left hand side (lhs) and compares it 
-        to one or more values on the right hand side (rhs)
   \item \code{\%xt\%} is an operator that takes two factor variables and creates a cross tabulation and
         tests for significance via a chi-square test.
 }
@@ -42,9 +40,6 @@ data \%>\%
 ## Washer
 x = washer(x, 7, 8, 9)
 x = washer(x, is.na, value=0)
-
-## Comparisons Operator
-x2 = ifelse(x \%on\% c(4, 10, 15, "<0"), 1, 0)
 
 ## Crosstabs Operator
 f1 \%xt\% f2
