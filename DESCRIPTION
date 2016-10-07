@@ -21,7 +21,8 @@ Depends:
 Suggests:
     MASS,
     dplyr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-2
