@@ -5,7 +5,7 @@
 
 # furniture
 
-The furniture R package contains functions to help with data cleaning/tidying (e.g., washer, mirror), exploratory data analysis and reporting (e.g., table1). It currently contains two main functions:
+The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains two main functions:
 
 1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well.
 2. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing)
