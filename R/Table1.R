@@ -85,7 +85,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     d$split  = droplevels(splitby_)
   } else {
     splitby_ = lazyeval::f_eval(splitby, .data)
-    d$split  = droplevels(as.factor(splitby_[[1]]))
+    d$split  = droplevels(as.factor(splitby_))
   }
   
   if (test & length(levels(d$split))>1){
