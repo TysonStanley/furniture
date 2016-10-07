@@ -1,7 +1,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](http://cranlogs.r-pkg.org/badges/grand-total/furniture)
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tysonstanley/furniture/master.svg)](https://codecov.io/github/tysonstanley/furniture?branch=master)
+[![Codecov branch](https://img.shields.io/codecov/c/github/codecov/tysonstanley/master.svg?maxAge=2592000)](https://codecov.io/github/tysonstanley/furniture?branch=master)
 
 # furniture
 
