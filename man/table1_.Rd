@@ -2,24 +2,21 @@
 % Please edit documentation in R/Table1.R
 \name{table1_}
 \alias{table1_}
-\title{Table 1 for Health, Behavioral, and Social Scientists}
+\title{Internal Table 1 Function}
 \usage{
-table1_(d_, vars, split = FALSE)
+table1_(..., d_, .cl = NULL)
 }
 \arguments{
+\item{...}{the variables}
+
 \item{d_}{the data.frame}
 
-\item{vars}{uses dots_capture() to capture the ...}
-
-\item{split}{for internal use in table1()}
+\item{.cl}{the original functon call}
 }
 \value{
 A data.frame
 }
 \description{
-Produces a descriptive table, stratified by an optional categorical variable, 
-providing means/frequencies and standard deviations/percentages. 
-It is well-formatted for easy transition to academic article or report. 
-Can be used within the piping framework [see library(magrittr)].
+For internal use in table1().
 }
 

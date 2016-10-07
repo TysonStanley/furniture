@@ -30,7 +30,7 @@ table1(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE,
 
 \item{format_output}{has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance}
 
-\item{output_type}{default is "text"; the other option is "latex" which uses the \code{kable()} function in \code{knitr}}
+\item{output_type}{default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc)}
 
 \item{NAkeep}{when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
 
