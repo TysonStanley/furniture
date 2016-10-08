@@ -13,5 +13,6 @@ test_that("table1 produces table1", {
   expect_s3_class(table1(df, x, y, z, factor(a)), "table1")
   expect_error(table1(df, b))
   expect_s3_class(table1(df, a, x, y, splitby=~factor(z)), "table1")
+  expect_s3_class(table1(df, a, x, y, splitby=~factor(z), test=TRUE), "table1")
 })
 
