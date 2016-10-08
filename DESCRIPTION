@@ -15,9 +15,10 @@ Description: Package contains two functions (i.e., two pieces of furniture):
     behavioral, and social sciences). It also contains a simple operator to 
     help with data exploration.
 Depends:
-    knitr,
-    lazyeval,
     car
+Imports:
+    lazyeval,
+    knitr
 Suggests:
     MASS,
     dplyr,
