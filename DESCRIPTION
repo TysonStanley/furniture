@@ -14,11 +14,11 @@ Description: Package contains two main functions (i.e., two pieces of furniture)
     Should be useful for quantitative research in applied fields (e.g., health,
     behavioral, and social sciences). It also contains a simple operator to 
     help with data exploration.
-Depends:
-    car
 Imports:
+    car,
     knitr
 Suggests:
+    MASS,
     dplyr,
     rmarkdown,
     testthat
