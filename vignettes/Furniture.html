@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2016-10-07" />
+<meta name="date" content="2016-10-11" />
 
 <title>Furniture</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Furniture</h1>
-<h4 class="date"><em>2016-10-07</em></h4>
+<h4 class="date"><em>2016-10-11</em></h4>
 
 
 
@@ -100,9 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lazyeval)
-
-df &lt;-<span class="st"> </span>df %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">d =</span> <span class="kw">washer</span>(d, -<span class="dv">99</span>),  ## changes the placeholder -99 to NA
          <span class="dt">c =</span> <span class="kw">washer</span>(c, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;None&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;control&quot;</span>)) ## changes &quot;Other&quot; and &quot;None&quot; to &quot;Control&quot;</code></pre></div>
 </div>
@@ -115,47 +113,47 @@ df &lt;-<span class="st"> </span>df %&gt;%
 ##               Mean/Count (SD/%)
 ##  Observations 100              
 ##  a                             
-##               1.48 (1.99)      
+##               1.55 (1.77)      
 ##  b                             
 ##               50.5 (29.01)     
-##  factor.c.                     
+##  factor(c)                     
 ##     control   50 (50%)         
 ##     treatment 50 (50%)         
 ##  d                             
-##               497.77 (305.35)  
+##               519.16 (283.32)  
 ## |=====================================</code></pre>
-<p>The variables must be numeric or factor. Since we use a special type of function found in <code>library(lazyeval)</code> we can change the variables in the function (e.g., <code>factor(c)</code>). This can be extended to making a whole new variable in the function as well.</p>
+<p>The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., <code>factor(c)</code>). This can be extended to making a whole new variable in the function as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table1</span>(df, a, b, d, <span class="kw">ifelse</span>(a &gt;<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</code></pre></div>
 <pre><code>## 
 ## |============================================
 ##                      Mean/Count (SD/%)
 ##  Observations        100              
 ##  a                                    
-##                      1.48 (1.99)      
+##                      1.55 (1.77)      
 ##  b                                    
 ##                      50.5 (29.01)     
 ##  d                                    
-##                      497.77 (305.35)  
-##  ifelse.a...1..1..0.                  
-##                      0.66 (0.48)      
+##                      519.16 (283.32)  
+##  ifelse(a &gt; 1, 1, 0)                  
+##                      0.63 (0.48)      
 ## |============================================</code></pre>
 <p>This is just the beginning though. Two powerful things the function can do are shown below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table1</span>(df, a, b, d, <span class="kw">ifelse</span>(a &gt;<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
        <span class="dt">splitby=</span>~<span class="kw">factor</span>(c), 
        <span class="dt">test=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## |===============================================================
-##                      control        treatment       P-Value
-##  Observations        50             50                     
-##  a                                                  0.002  
-##                      2.07 (1.89)    0.88 (1.92)            
-##  b                                                  &lt;.001  
-##                      28.5 (22.37)   72.5 (14.58)           
-##  d                                                  0.384  
-##                      470.85 (313.7) 527.19 (296.82)        
-##  ifelse.a...1..1..0.                                0.093  
-##                      0.74 (0.44)    0.58 (0.5)             
-## |===============================================================</code></pre>
+## |================================================================
+##                      control         treatment       P-Value
+##  Observations        50              50                     
+##  a                                                   0.336  
+##                      1.72 (1.63)     1.38 (1.9)             
+##  b                                                   &lt;.001  
+##                      28.5 (22.37)    72.5 (14.58)           
+##  d                                                   0.88   
+##                      523.49 (298.54) 514.42 (269.15)        
+##  ifelse(a &gt; 1, 1, 0)                                 0.15   
+##                      0.7 (0.46)      0.56 (0.5)             
+## |================================================================</code></pre>
 <p>The <code>splitby = ~factor(c)</code> stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using <code>test=TRUE</code>.</p>
 <p>Finally, you can polish it quite a bit using a few other options. For example, you can do the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table1</span>(df, a, b, d, <span class="kw">ifelse</span>(a &gt;<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
@@ -164,18 +162,18 @@ df &lt;-<span class="st"> </span>df %&gt;%
        <span class="dt">var_names =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;New Var&quot;</span>),
        <span class="dt">splitby_labels =</span> <span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
 <pre><code>## 
-## |========================================================
-##               Control        Treatment       P-Value
-##  Observations 50             50                     
-##  A                                           0.002  
-##               2.07 (1.89)    0.88 (1.92)            
-##  B                                           &lt;.001  
-##               28.5 (22.37)   72.5 (14.58)           
-##  D                                           0.384  
-##               470.85 (313.7) 527.19 (296.82)        
-##  New Var                                     0.093  
-##               0.74 (0.44)    0.58 (0.5)             
-## |========================================================</code></pre>
+## |=========================================================
+##               Control         Treatment       P-Value
+##  Observations 50              50                     
+##  A                                            0.336  
+##               1.72 (1.63)     1.38 (1.9)             
+##  B                                            &lt;.001  
+##               28.5 (22.37)    72.5 (14.58)           
+##  D                                            0.88   
+##               523.49 (298.54) 514.42 (269.15)        
+##  New Var                                      0.15   
+##               0.7 (0.46)      0.56 (0.5)             
+## |=========================================================</code></pre>
 <p>This can also be outputted as a latex table:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table1</span>(df, a, b, d, <span class="kw">ifelse</span>(a &gt;<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
        <span class="dt">splitby=</span>~<span class="kw">factor</span>(c), 

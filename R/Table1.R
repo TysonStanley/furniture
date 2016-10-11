@@ -305,7 +305,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
-      invisible(data)
+      invisible(.data)
     } else {
       return(final_l)
     } 

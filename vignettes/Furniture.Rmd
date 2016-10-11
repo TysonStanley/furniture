@@ -33,7 +33,6 @@ There are two functions that we'll demonstrate here:
 `washer` is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.
 ```{r washer}
 library(dplyr)
-library(lazyeval)
 
 df <- df %>%
   mutate(d = washer(d, -99),  ## changes the placeholder -99 to NA
@@ -48,7 +47,7 @@ Now that the data is "washed" we can start exploring and reporting.
 table1(df, a, b, factor(c), d)
 ```
 
-The variables must be numeric or factor. Since we use a special type of function found in `library(lazyeval)` we can change the variables in the function (e.g., `factor(c)`). This can be extended to making a whole new variable in the function as well.
+The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., `factor(c)`). This can be extended to making a whole new variable in the function as well.
 
 ```{r table1.2}
 table1(df, a, b, d, ifelse(a > 1, 1, 0))
