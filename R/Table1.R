@@ -78,12 +78,12 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     names(d) = var_names
   }
   
-  ### Splitby Variable
+  ### Splitby Variable (adds the variable to d as "split")
   if (is.null(splitby)){
     splitby_ = as.factor(1)
     d$split  = droplevels(splitby_)
   } else {
-    splitby_ = eval(parse(text = paste(splitby)[[2]]), .data)
+    splitby_ = eval(parse(text = paste(splitby)[[length(paste(splitby))]]), .data)
     d$split  = droplevels(as.factor(splitby_))
   }
   
