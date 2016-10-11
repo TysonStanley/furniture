@@ -1,4 +1,4 @@
-# Updated Release (CRAN 1.1.0)
+# Updated Release to CRAN: Package version 1.1.0
 
 We are excited to announce that we are updating our `furniture` package on CRAN from 1.0.1 to 1.1.0. We included a new operator (`%xt%`) for simple cross tabulations that includes a chi-square test and included data from NHANES 2005-2010. Although these are nice, the major updates were to `table1`. These included:
 
