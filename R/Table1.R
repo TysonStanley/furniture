@@ -54,7 +54,6 @@
 #'
 #' @export
 #' @import stats
-#' @importFrom lazyeval f_eval
 #' @importFrom knitr kable
 #' @importFrom car leveneTest
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
@@ -84,7 +83,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     splitby_ = as.factor(1)
     d$split  = droplevels(splitby_)
   } else {
-    splitby_ = lazyeval::f_eval(splitby, .data)
+    splitby_ = eval(parse(text = paste(splitby)[[2]]), .data)
     d$split  = droplevels(as.factor(splitby_))
   }
   
