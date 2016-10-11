@@ -19,10 +19,10 @@ Depends:
 Imports:
     knitr
 Suggests:
-    MASS,
     dplyr,
     rmarkdown,
     testthat
+LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-2

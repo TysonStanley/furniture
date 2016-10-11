@@ -1,4 +1,4 @@
-#' Table 1 for Health, Behavioral, and Social Scientists
+#' Table 1 for Simple and Stratified Descriptive Statistics
 #' 
 #' Produces a descriptive table, stratified by an optional categorical variable, 
 #' providing means/frequencies and standard deviations/percentages. 

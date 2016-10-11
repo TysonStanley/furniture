@@ -2,7 +2,7 @@
 % Please edit documentation in R/Table1.R
 \name{table1}
 \alias{table1}
-\title{Table 1 for Health, Behavioral, and Social Scientists}
+\title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE,
   test_type = "default", piping = FALSE, rounding = 3, var_names = NULL,
