@@ -36,11 +36,11 @@ table1(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE,
 
 \item{m_label}{when \code{NAkeep = TRUE} this provides a label for the missing values in the table}
 
-\item{booktabs}{when \code{output_type = "latex"}; option is passed to \code{knitr::kable}}
+\item{booktabs}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
-\item{caption}{when \code{output_type = "latex"}; option is passed to \code{knitr::kable}}
+\item{caption}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
-\item{align}{when \code{output_type = "latex"}; option is passed to \code{knitr::kable}}
+\item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.

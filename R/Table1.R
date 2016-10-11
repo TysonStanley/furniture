@@ -18,9 +18,9 @@
 #' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc)
 #' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
 #' @param m_label when \code{NAkeep = TRUE} this provides a label for the missing values in the table
-#' @param booktabs when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
-#' @param caption when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
-#' @param align when \code{output_type = "latex"}; option is passed to \code{knitr::kable}
+#' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' 
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
