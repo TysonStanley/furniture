@@ -21,7 +21,8 @@ Imports:
 Suggests:
     dplyr,
     rmarkdown,
-    testthat
+    testthat,
+    MASS
 LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8
