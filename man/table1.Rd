@@ -52,32 +52,37 @@ It is well-formatted for easy transition to academic article or report.
 Can be used within the piping framework [see library(magrittr)].
 }
 \examples{
-## Data from MASS package ##
-library(MASS)
-data("birthwt")
-library(dplyr)
-b = mutate(.data=birthwt,
-           smoke = as.factor(smoke),
-           race  = as.factor(race),
-           ht    = as.factor(ht),
-           ui    = as.factor(ui))
-levels(b$race) = c("white", "black", "other")
-
+## Ficticious Data ##
 library(furniture)
+library(dplyr)
 
-table1(b, age, race, smoke, ptl, ht, ui, ftv, NAkeep=TRUE)
-table1(b, age, race, smoke, ptl, ht, ui, ftv,
-       splitby=~factor(low),
-       NAkeep=TRUE)
-       
-b$low = as.factor(b$low)
-table1(b, age, race, smoke, ptl, ht, ui, ftv,
-       splitby=~low,
-       test=TRUE,
-       var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
-                     "Uterine Irratibility", "Physician Visits"),
-       splitby_labels = c("Regular Birthweight", "Low Birthweight"))
-       
+x  <- runif(1000)
+y  <- rnorm(1000)
+z  <- factor(sample(c(0,1), 1000, replace=TRUE))
+a  <- factor(sample(c(1,2), 1000, replace=TRUE))
+df <- data.frame(x, y, z, a)
+
+## Simple
+table1(df, x, y, z, a)
+
+## Stratified
+## both below are the same
+table1(df, x, y, z,
+       splitby = ~ a)
+table1(df, x, y, z,
+       splitby = "a")
+
+## With Piping
+df \%>\%
+  table1(x, y, z, 
+         splitby = ~a, 
+         piping = TRUE) \%>\%
+  summarise(count = n())
+
+## Adjust variables within function
+table1(df, ifelse(x > 0, 1, 0), z,
+       var_names = c("Dich X", "Z"))
+         
 
 }
 

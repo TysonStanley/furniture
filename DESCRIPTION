@@ -17,10 +17,8 @@ Description: Package contains two main functions (i.e., two pieces of furniture)
 Depends:
     R (>= 2.10)
 Imports:
-    car,
     knitr
 Suggests:
-    MASS,
     dplyr,
     rmarkdown,
     testthat

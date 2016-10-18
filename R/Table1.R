@@ -25,37 +25,41 @@
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
 #' @examples 
-#' ## Data from MASS package ##
-#' library(MASS)
-#' data("birthwt")
-#' library(dplyr)
-#' b = mutate(.data=birthwt,
-#'            smoke = as.factor(smoke),
-#'            race  = as.factor(race),
-#'            ht    = as.factor(ht),
-#'            ui    = as.factor(ui))
-#' levels(b$race) = c("white", "black", "other")
-#' 
+#' ## Ficticious Data ##
 #' library(furniture)
+#' library(dplyr)
 #' 
-#' table1(b, age, race, smoke, ptl, ht, ui, ftv, NAkeep=TRUE)
-#' table1(b, age, race, smoke, ptl, ht, ui, ftv,
-#'        splitby=~factor(low),
-#'        NAkeep=TRUE)
-#'        
-#' b$low = as.factor(b$low)
-#' table1(b, age, race, smoke, ptl, ht, ui, ftv,
-#'        splitby=~low,
-#'        test=TRUE,
-#'        var_names = c("Age", "Race", "Smoking Status", "Previous Premature Labors", "Hypertension",
-#'                      "Uterine Irratibility", "Physician Visits"),
-#'        splitby_labels = c("Regular Birthweight", "Low Birthweight"))
-#'        
+#' x  <- runif(1000)
+#' y  <- rnorm(1000)
+#' z  <- factor(sample(c(0,1), 1000, replace=TRUE))
+#' a  <- factor(sample(c(1,2), 1000, replace=TRUE))
+#' df <- data.frame(x, y, z, a)
+#' 
+#' ## Simple
+#' table1(df, x, y, z, a)
+#' 
+#' ## Stratified
+#' ## both below are the same
+#' table1(df, x, y, z,
+#'        splitby = ~ a)
+#' table1(df, x, y, z,
+#'        splitby = "a")
+#' 
+#' ## With Piping
+#' df %>%
+#'   table1(x, y, z, 
+#'          splitby = ~a, 
+#'          piping = TRUE) %>%
+#'   summarise(count = n())
+#' 
+#' ## Adjust variables within function
+#' table1(df, ifelse(x > 0, 1, 0), z,
+#'        var_names = c("Dich X", "Z"))
+#'          
 #'
 #' @export
 #' @import stats
 #' @importFrom knitr kable
-#' @importFrom car leveneTest
 table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
                   rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", NAkeep = FALSE, m_label = "Missing",
                   booktabs = TRUE, caption=NULL, align=NULL){
@@ -87,6 +91,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     d$split  = droplevels(as.factor(splitby_))
   }
   
+  ## Test = TRUE and the splitting variable needs to have more than one level
   if (test & length(levels(d$split))>1){
     test = TRUE
   } else {
@@ -103,12 +108,12 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   tab = tab2 = tests = tests2 = nams = list()
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] = names(d)[i]
-    # If character
+    ## If character
     if (is.character(d[,i])){
       d[,i] = factor(d[,i])
     }
     
-    # If Factor
+    ## If Factor
     if (is.factor(d[,i])){
       tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
       tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
@@ -116,17 +121,21 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
         tests[[i]] = chisq.test(d$split, d[,i])
       if (test & test_type=="or")
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
-      # If Numeric
+    ## If Numeric
     } else if (is.numeric(d[,i]) | is.integer(d[,i])){
       tab[[i]] = round(tapply(d[,i], d$split, mean, na.rm=TRUE), rounding)
       tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
       if (length(levels(d$split))>2 & test){
-        lt = car::leveneTest(y=d[,i], group=d$split)$`Pr(>F)`[1]
+        ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
+        comp   = complete.cases(d[,i], d$split)
+        resids = resid(lm(d[comp,i] ~ d$split[comp]))^2
+        r2     = summary(lm(resids ~ nhanes$gender[comp]))$r.squared
+        lt     = dchisq(length(resids)*r2, df = length(levels(d$split)))
         if (lt<0.05){
-          # Performs an approximate method of Welch (1951)
+          ## Performs an approximate method of Welch (1951)
           tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=FALSE)
         } else {
-          # Performs a simple one-way ANOVA
+          ## Performs a simple one-way ANOVA
           tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=TRUE)
         }
       } else if (test){
@@ -137,7 +146,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
       }
     } else {
-      paste("Variables need to be either factor or numeric.")
+      stop("Variables need to be either factor, character or numeric.", .call=FALSE)
     }
   }
   
