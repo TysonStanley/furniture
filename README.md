@@ -1,6 +1,11 @@
+
+### CRAN Version
+
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](http://cranlogs.r-pkg.org/badges/grand-total/furniture)
+
+### Developmental Version
 
 [![GitHub version](https://badge.fury.io/gh/tysonstanley%2Ffurniture.svg)](https://badge.fury.io/gh/tysonstanley%2Ffurniture)
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
