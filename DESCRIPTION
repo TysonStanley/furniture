@@ -12,8 +12,7 @@ Description: Package contains two main functions (i.e., two pieces of furniture)
     table1() which produces a well-formatted table of descriptives common in
     research articles; and washer() which is helpful in cleaning up your data.
     Should be useful for quantitative research in applied fields (e.g., health,
-    behavioral, and social sciences). There is also a condensed version of 
-    table1 called table1c(). It also contains a simple operator to 
+    behavioral, and social sciences). It also contains a simple operator to 
     help with data exploration.
 Depends:
     R (>= 2.10)
