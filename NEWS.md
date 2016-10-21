@@ -1,6 +1,6 @@
 # Updated Release to CRAN: Package version 1.2.0
 
-We are excited to announce that we are updating our `furniture` package on CRAN from 1.0.1 to 1.2.0. We included a new condensed version of table 1 (`table1c`) that produces table 1 in a more succinct manner and an operator (`%xt%`) for simple cross tabulations that includes a chi-square test and included data from NHANES 2005-2010. Although these are nice, much of the major updating were to `table1` and the package dependencies. These included:
+We are excited to announce that we are updating our `furniture` package on CRAN from 1.0.1 to 1.2.0. We included a new operator (`%xt%`) for simple cross tabulations that includes a chi-square test and some data from NHANES 2005-2010. Although these are nice, much of the major updating were to `table1` and the package dependencies. These included:
 
 1. Bug fixes (the function got confused if there was an object in the global environment that had the same name as a variable in the data frame you were analyzing)
 2. Fewer dependencies (this will allow the package to be more stable across platforms with different package versions loaded without having to worry about packrat)
@@ -12,4 +12,3 @@ This version can be downloaded via:
 ```r 
 install.packages("furniture")
 ```
-
