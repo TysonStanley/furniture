@@ -2,6 +2,7 @@
 
 S3method(print,table1)
 export("%xt%")
+export(simple_table1)
 export(table1)
 export(table1_)
 export(washer)

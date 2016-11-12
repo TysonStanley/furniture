@@ -1,6 +1,7 @@
-#' Table 1 for Simple and Stratified Descriptive Statistics
+#' Simple Table 1 for Simple and Stratified Descriptive Statistics
 #' 
-#' Produces a descriptive table, stratified by an optional categorical variable, 
+#' Produces a simple version of Table 1:
+#' a descriptive table, stratified by an optional categorical variable, 
 #' providing means/frequencies and standard deviations/percentages. 
 #' It is well-formatted for easy transition to academic article or report. 
 #' Can be used within the piping framework [see library(magrittr)].
@@ -10,7 +11,6 @@
 #' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}); not too surprisingly, it requires that the number of levels be > 0
 #' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
-#' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
 #' @param rounding the number of digits after the decimal; default is 3
 #' @param var_names custom variable names to be printed in the table
@@ -37,34 +37,27 @@
 #' df <- data.frame(x, y, z, a)
 #' 
 #' ## Simple
-#' table1(df, x, y, z, a)
+#' simple_table1(df, x, y, z, a)
 #' 
 #' ## Stratified
 #' ## both below are the same
-#' table1(df, x, y, z,
-#'        splitby = ~ a)
-#' table1(df, x, y, z,
-#'        splitby = "a")
-#' 
-#' ## With Piping
-#' df %>%
-#'   table1(x, y, z, 
-#'          splitby = ~a, 
-#'          piping = TRUE) %>%
-#'   summarise(count = n())
+#' simple_table1(df, x, y, z,
+#'               splitby = ~ a)
+#' simple_table1(df, x, y, z,
+#'               splitby = "a")
 #' 
 #' ## Adjust variables within function
-#' table1(df, ifelse(x > 0, 1, 0), z,
-#'        var_names = c("Dich X", "Z"))
+#' simple_table1(df, ifelse(x > 0, 1, 0), z,
+#'               var_names = c("Dich X", "Z"))
 #'          
 #'
 #' @export
 #' @import stats
 #' @importFrom knitr kable
-table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
-                  rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", format_number = FALSE,
-                  NAkeep = FALSE, m_label = "Missing",
-                  booktabs = TRUE, caption=NULL, align=NULL){
+simple_table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, piping = FALSE,
+                         rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", format_number = FALSE,
+                         NAkeep = FALSE, m_label = "Missing",
+                         booktabs = TRUE, caption=NULL, align=NULL){
   
   # == # Checks and Data # == #
   .call = match.call()
@@ -80,6 +73,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   } else {
     f1 = ""
   }
+  
   
   data = table1_(..., d_=.data, .cl=.call)
   d = as.data.frame(data)
@@ -127,9 +121,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
       tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
-      if (test & test_type=="or")
-        tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
-    ## If Numeric
+      ## If Numeric
     } else if (is.numeric(d[,i]) | is.integer(d[,i])){
       tab[[i]] = round(tapply(d[,i], d$split, mean, na.rm=TRUE), rounding)
       tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
@@ -150,9 +142,6 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
         tests[[i]] = t.test(d[,i] ~ d$split)        
       } 
       
-      if (test & test_type=="or"){
-        tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
-      }
     } else {
       stop("Variables need to be either factor, character or numeric.", .call=FALSE)
     }
@@ -161,11 +150,6 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   # == # Formatting Table # == # 
   if (test){
-    if (test_type=="or"){
-      OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
-      names(OR) = c(" ", "OR", "Lower", "Upper")
-    }
-    
     if (format_output=="full")
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
     else if (format_output=="pvalues" | format_output=="stars")
@@ -187,41 +171,12 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     for (i in 1:length(levels(d$split))){
       if (is.factor(d[,j])){
         tabX = data.frame(tabX, 
-                          paste0(formatC(tab[[j]][[i]], big.mark = f1), " (", 
-                                 formatC(tab2[[j]][[i]]*100, digits = 2, format = "f"), "%)"))
+                          paste0(formatC(tab2[[j]][[i]]*100, digits = 1, format = "f"), "%"))
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, 
-                          paste0(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f"), " (", 
-                                 formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f"), ")"))
+                          paste0(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f"), 
+                                 " (", formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f"), ")"))
       }
-    }
-    
-    
-    # == # Optional Odds Ratio Table # == #
-    
-    if (test & test_type == "or" & NAkeep == "no"){
-      cis = exp(confint(tests2[[j]]))
-      or  = exp(tests2[[j]]$coef)
-      if (is.numeric(d[,j])){
-        n4  = data.frame("", 
-                         round(or[-1],2),
-                         round(cis[-1,1],2),
-                         round(cis[-1,2],2))
-      } else if (is.factor(d[,j])){
-        n4  = data.frame("", 
-                         c(1, round(or[-1],2)),
-                         c(1, round(cis[-1,1],2)),
-                         c(1, round(cis[-1,2],2)))
-      }
-      tabQ = data.frame("", "", "", "")
-      tabQ[] = sapply(tabQ, as.character)
-      names(n4) = names(tabQ) = c(" ", "OR", "Lower", "Upper")
-      n5 = rbind(tabQ, n4)
-      OR = rbind(OR, n5)
-      rem2 = ifelse(is.na(OR[,1]), FALSE, TRUE)
-      OR = OR[rem2,]
-    } else {
-      OR = NULL
     }
     
     ## If test == TRUE, tests of comparisons by split ##
@@ -315,7 +270,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   # === # FINAL OUTPUT # === #
   
   if (length(levels(d$split)) == 1){
-    names(final)[2] = "Mean/Count (SD/%)"
+    names(final)[2] = "Mean/% (SD)"
   }
   
   final_l = list(final)
@@ -347,64 +302,4 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
 }
 
 
-#' @export
-print.table1 <- function(x, ...){
-  x2 = as.data.frame(x[[1]])
-  summed = list()
-  for (i in seq_along(x2)){
-    summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
-  }
-  w = sum(unlist(summed))
-  cat("\n|=====")
-  for (i in 1:w){
-    cat("=")
-  }
-  cat("=====\n") 
-  print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("|=====")
-  for (i in 1:w){
-    cat("=")
-  }
-  cat("=====\n") 
-}
-
-#' Internal Table 1 Function
-#' 
-#' For internal use in table1().
-#' 
-#' @param ... the variables
-#' @param d_ the data.frame
-#' @param .cl the original functon call
-#' 
-#' @return A data.frame
-#'
-#' @export
-#' @import stats
-table1_ <- function(..., d_, .cl=NULL){
-  df1 = df2 = NULL
-  vars = eval(substitute(alist(...)))
-  
-  ## for dots_capture
-  for (i in seq_along(vars)){
-    df1[[i]] <- eval(vars[[i]], d_)
-    
-    ## if is an index (built on assumption that lengths will differ)
-    if (length(df1[[i]]) != length(d_[[1]]) & is.numeric(df1[[i]])){
-      df2 <- d_[, df1[[i]]]
-    }
-  }
-  
-  if (is.null(df2)){
-    df2 <- as.data.frame(df1)
-    names(df2) = paste(.cl)[3:(length(vars)+2)]
-  }
-
-  ## Error catching 
-  if (dim(d_)[1] != length(df2[[1]])){
-    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names [e.g. gender, age] or a single vector of indices [e.g. c(3:5, 6)] or that splitby variable is stated as a formula [e.g. splitby = ~var1]",
-         call.=FALSE)
-  }
-  
-  return(df2)
-}
 
