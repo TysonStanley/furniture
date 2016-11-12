@@ -58,9 +58,9 @@ test_that("simple_table1 produces table1", {
                                   piping = TRUE), 
                     simple_table1(df, a, x, y, splitby="z", output_type = "markdown",
                                   piping = TRUE))
-  ## Test type == or
+  ## Format Number
   expect_s3_class(simple_table1(df, z, x, y, splitby=~a, 
-                                test=TRUE, test_type = "or"), "table1")
+                                test=TRUE, format_number = TRUE), "table1")
   ## Taking a character var as the splitby
   expect_s3_class(simple_table1(df, z, x, y, splitby=~as.character(a), 
                                 test=TRUE), "table1")
