@@ -171,7 +171,7 @@ simple_table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test
     for (i in 1:length(levels(d$split))){
       if (is.factor(d[,j])){
         tabX = data.frame(tabX, 
-                          paste0(formatC(tab2[[j]][[i]]*100, digits = 1, format = "f"), "%"))
+                          paste0(suppressWarnings(formatC(tab2[[j]][[i]]*100, digits = 1, format = "f")), "%"))
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, 
                           paste0(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f"), 
