@@ -258,11 +258,6 @@ simple_table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
-  if (!is.null(OR)){
-    OR = rbind(tabQ, OR)
-    final = cbind(final, OR)
-    names(final)[4] = " "
-  }
   final$` ` = as.character(final$` `)
   final$` `[is.na(final$` `)] = m_label
   
