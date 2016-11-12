@@ -239,6 +239,7 @@ simple_table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test
   }
   
   # == # Observations # == #
+  N = supressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
   
   if (format_output=="full" & test){
     N = data.frame("Observations", N, "", "")

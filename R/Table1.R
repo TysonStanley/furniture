@@ -285,6 +285,8 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
   
   # == # Observations # == #
   
+  N = supressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
+  
   if (format_output=="full" & test){
     N = data.frame("Observations", N, "", "")
     names(N) = c(" ", levels(d$split), "Test", "P-Value")
