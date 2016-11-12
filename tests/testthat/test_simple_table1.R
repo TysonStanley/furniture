@@ -39,7 +39,7 @@ test_that("simple_table1 produces table1", {
   ## Error of quotes
   expect_error(simple_table1(df, "a", splitby=~z))
   ## Different splitby produce same
-  expect_equivalent(simple_table1(df, a, x, y, splitby=~z), table1(df, a, x, y, splitby="z"))
+  expect_equivalent(simple_table1(df, a, x, y, splitby=~z), simple_table1(df, a, x, y, splitby="z"))
   ## Variable names
   expect_s3_class(simple_table1(df, z, x, y, splitby=~a, 
                                test=TRUE, 
