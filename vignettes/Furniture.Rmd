@@ -72,8 +72,18 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby_labels = c("Control", "Treatment"))
 ```
 
-This can also be outputted as a latex table:
+You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):
 ```{r table1.5}
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE,
+       var_names = c("A", "B", "D", "New Var"),
+       splitby_labels = c("Control", "Treatment"),
+       format_number = TRUE)
+```
+
+This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table:
+```{r table1.6}
 table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
@@ -82,7 +92,19 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        output_type = "latex")
 ```
 
+## Simple Table 1
+
+Last item to show you: `simple_table1()`. This instead of reporting counts and percentages for categorical variables, it reports only percentages. I have more plans for this function but for now, that is the main benefit over `table1()`.
+
+```{r simple_table1.1}
+simple_table1(df, a, b, d, ifelse(a > 1, 1, 0),
+              splitby=~factor(c), 
+              test=TRUE,
+              var_names = c("A", "B", "D", "New Var"),
+              splitby_labels = c("Control", "Treatment"))
+```
+
 ## Conclusion
 
-Both `table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+The three functions: `table1`, `simple_table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
 
