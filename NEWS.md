@@ -1,3 +1,15 @@
+# Version 1.2.1
+
+A fatal error was found when using `table1` with a splitby factor with more than 2 levels. This has been fixed in version 1.2.1. There were also two notable inclusions:
+
+1. In `table1` you can now format the numbers in the output with a comma for large numbers (e.g., 20,000 vs. 20000).
+2. A version of `table1` known as `simple_table1` that reports the percentages of factors instead of counts and percentages.
+
+None of these changes will break programs already in place using this package.
+
+Thanks.
+
+
 # Version 1.2.0
 
 We are excited to announce that we are updating our `furniture` package from 1.0.1 to 1.2.0. We included a new operator (`%xt%`) for simple cross tabulations that includes a chi-square test and some data from NHANES 2005-2010. Although these additions are nice, most of the updates were to `table1`. These included:
