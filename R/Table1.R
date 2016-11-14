@@ -8,6 +8,7 @@
 #' @param .data the data.frame that is to be summarized
 #' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
 #' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}); not too surprisingly, it requires that the number of levels be > 0
+#' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
@@ -61,10 +62,24 @@
 #' @export
 #' @import stats
 #' @importFrom knitr kable
-table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE, test_type = "default", piping = FALSE,
-                  rounding = 3, var_names = NULL, format_output = "pvalues", output_type = "text", format_number = FALSE,
-                  NAkeep = FALSE, m_label = "Missing",
-                  booktabs = TRUE, caption=NULL, align=NULL){
+table1 = function(.data, 
+                  ..., 
+                  splitby = NULL, 
+                  row_wise = FALSE, 
+                  splitby_labels = NULL, 
+                  test = FALSE, 
+                  test_type = "default", 
+                  piping = FALSE,
+                  rounding = 3, 
+                  var_names = NULL, 
+                  format_output = "pvalues", 
+                  output_type = "text", 
+                  format_number = FALSE,
+                  NAkeep = FALSE, 
+                  m_label = "Missing",
+                  booktabs = TRUE, 
+                  caption=NULL, 
+                  align=NULL){
   
   # == # Checks and Data # == #
   .call = match.call()
@@ -124,7 +139,11 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
     ## If Factor
     if (is.factor(d[,i])){
       tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
-      tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
+      if (!row_wise){
+        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
+      } else if (row_wise){
+        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(d[,i], useNA=NAkeep)), rounding))
+      }
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
       if (test & test_type=="or")

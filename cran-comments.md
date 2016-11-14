@@ -12,6 +12,7 @@ Currently, there are no downstream dependencies relating to this package.
 ------
 
 ## Reason for Quick Resubmission
-* A fatal error in version 1.2.0 was found and is fixed in version 1.2.1
+* A fatal error in version 1.2.0 was found and is fixed in version 1.2.2.
+* The testing file now accounts for 95% of the package and should catch errors like this in the future.
 
 Thank you!
