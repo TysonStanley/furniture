@@ -15,7 +15,7 @@ test_that("simple_table1 produces table1", {
   ## Simple
   expect_s3_class(simple_table1(df, x, y, z, factor(a)), "table1")
   ## b not in df
-  expect_error(simple_table1(df, b))
+  expect_error(simple_table1(df, d))
   ## Testing splitby
   expect_s3_class(simple_table1(df, a, x, y, splitby=~factor(z)), "table1")
   ## Testing test
