@@ -12,7 +12,10 @@ Currently, there are no downstream dependencies relating to this package.
 ------
 
 ## Reason for Quick Resubmission
-* A fatal error in version 1.2.0 was found and is fixed in version 1.2.2.
+
+I apologize for the quick resubmission. A fatal error with the main function (table1) was found. 
+
+* The fatal error in version 1.2.0 is fixed in version 1.2.2.
 * The testing files now account for 95% of the package and should catch errors like this in the future.
 
 Thank you!

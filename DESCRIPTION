@@ -19,7 +19,7 @@ Depends:
 Imports:
     knitr
 Suggests:
-    dplyr,
+    tidyverse,
     rmarkdown,
     testthat,
     MASS
