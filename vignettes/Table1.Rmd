@@ -18,7 +18,7 @@ library(furniture)
 This vignette demonstrates the main function of the `furniture` package--`table1`. The main parts of the package are below:
 
 ```{r structure, eval=FALSE}
-table1(.data, ..., splitby, test, output_type, format_output, format_number, NAkeep, piping)
+table1(.data, ..., splitby, row_wise, test, output_type, format_output, format_number, NAkeep, piping, splitby_labels, var_names)
 ```
 
 It contains several useful features for summarizing your data:
@@ -31,13 +31,164 @@ It contains several useful features for summarizing your data:
 6. It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see `knitr::kable`).
 7. Numbers can be formatted nicely.
 
-## 
+To illustrate, we'll walk through the main arguments with an example on some ficticious data.
+
+## Example
 
 ```{r data}
+set.seed(84332)
 ## Create Ficticious Data containing several types of variables
-df <- data.frame(a = rnorm(1000),
-                 b = runif(1000),
-                 c = factor(sample(c(1,2,3,4), 1000, replace=TRUE)),
-                 d = factor(sample(c(0,1), 1000, replace=TRUE)),
-                 e = trunc(rnorm(1000, 20, 5)))
+df <- data.frame(a = rnorm(10000),
+                 b = runif(10000) + rnorm(10000),
+                 c = factor(sample(c(1,2,3,4), 10000, replace=TRUE)),
+                 d = factor(sample(c(0,1), 10000, replace=TRUE)),
+                 e = trunc(rnorm(10000, 20, 5)))
 ```
+
+We will use `df` to show these main features of `table1`.
+
+### The ...
+
+For `table1`, the ellipses (the `...`), are the variables to be summarized that are found in your data. Here, we have a - e in `df`.
+```{r simple}
+table1(df, 
+       a, b, c, d, e)
+```
+
+### Splitby
+
+To get means/count and SD's/percentages by a stratifying variable, simply use the `splitby` argument. The splitby can be a quoted variable (e.g., `"df"`) or can be a one-sided formula as shown below (e.g., `~d`).
+
+```{r splitby}
+table1(df,
+       a, b, c,
+       splitby = ~d)
+```
+
+### Row Wise
+
+You can get percentages by rows instead of by columns (i.e., groups) by using the `row_wise = TRUE` option.
+
+```{r rowwise}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       row_wise = TRUE)
+```
+
+### Test
+
+It is easy to test for bivariate relationships, as in common in many Table 1's, using `test = TRUE`.
+
+```{r test}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       test = TRUE)
+```
+By default, only the p-values are shown but other options exist such as stars or including the test statistics with the p-values using the `format_output` argument.
+
+
+### Output Type
+
+Several output types exist for the table (all of the `knitr::kable` options) including `html` as shown below. Others include:
+
+1. "latex"
+2. "markdown"
+3. "pandoc"
+
+```{r html}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       output_type = "html")
+```
+
+### Format Number
+
+For some papers you may want to format the numbers by inserting a comma in as a placeholder in big numbers (e.g., 30,000 vs. 30000). You can do this by using `format_number = TRUE`.
+
+```{r formatnumber}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       format_number = TRUE)
+```
+
+### NA Keep
+
+In order to explore the missingness in the factor variables, using `NAkeep = TRUE` does the counts and percentages of the missing values as well.
+
+```{r nakeep}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       NAkeep = TRUE)
+```
+Here we do not have any missingness but it shows up as zeros to show that there are none there.
+
+
+### Piping
+
+Finally, to make it easier to implement in the tidyverse of packages, a piping option is available. This option invisibly returns the data frame that was given to the table 1 function and prints the table in console.
+
+```{r tidyverse, fig.width=5}
+library(tidyverse)
+
+df %>%
+  table1(a, b, c,
+         splitby = ~d,
+         test = TRUE,
+         piping = TRUE) %>%
+  ggplot(aes(x = b, y = a, group = d)) +
+    geom_point(aes(color = d), alpha =.25) +
+    scale_color_manual(values = c("dodgerblue3", "chartreuse4"), name = "Group")
+```
+
+
+### Splitby Labels and Var Names
+
+The `splitby_labels` argument gives you the opportunity to name the levels of the splitby factor and the `var_names` argument lets you rename the variables.
+
+```{r}
+table1(df,
+       a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       splitby_labels = c("No", "Yes"),
+       var_names = c("A", "B", "C"))
+```
+
+This is particularly useful when you adjust a variable within the function:
+
+```{r}
+table1(df,
+       factor(ifelse(a > 1, 1, 0)), b, c,
+       splitby = ~d,
+       test = TRUE,
+       splitby_labels = c("No", "Yes"),
+       var_names = c("A", "B", "C"))
+```
+
+Here we changed `a` to a factor within the function. In order for the name to look better, we can use the `var_names` argument, otherwise it would be named something like `factor.ifelse.a...`.
+
+
+## Final Note
+
+As a final note, the `"table1"` object can be coerced to a `data.frame` very easily:
+```{r dataframe}
+tab1 = table1(df,
+              a, b, c,
+              splitby = ~d,
+              test = TRUE)
+data.frame(tab1)
+```
+
+
+
+## Conclusions
+
+`table1` can be a valuable addition to the tools that are being utilized to analyze biobehavioral and social data. Let me know if you find any bugs or if you have suggestions on development. 
