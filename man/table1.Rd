@@ -4,8 +4,9 @@
 \alias{table1}
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
-table1(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE,
-  test_type = "default", piping = FALSE, rounding = 3, var_names = NULL,
+table1(.data, ..., splitby = NULL, row_wise = FALSE,
+  splitby_labels = NULL, test = FALSE, test_type = "default",
+  piping = FALSE, rounding = 3, var_names = NULL,
   format_output = "pvalues", output_type = "text", format_number = FALSE,
   NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
   align = NULL)
@@ -16,6 +17,8 @@ table1(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALSE,
 \item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.}
 
 \item{splitby}{the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}); not too surprisingly, it requires that the number of levels be > 0}
+
+\item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
 \item{splitby_labels}{allows for custom labels of the splitby levels; must match the number of levels of the splitby variable}
 
