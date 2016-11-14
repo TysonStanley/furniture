@@ -1,9 +1,12 @@
-# Version 1.2.1
+# Version 1.2.2
 
-A fatal error was found when using `table1` with a splitby factor with more than 2 levels. This has been fixed in version 1.2.1. There were also two notable inclusions:
+A fatal error was found when using `table1` with a splitby factor with more than 2 levels. This has been fixed in version 1.2.2.
+
+There were also two notable inclusions:
 
 1. In `table1` you can now format the numbers in the output with a comma for large numbers (e.g., 20,000 vs. 20000).
-2. A version of `table1` known as `simple_table1` that reports the percentages of factors instead of counts and percentages.
+2. In `table1` you can also calculate percentages of factor variables across rows instead of within groups.
+3. A version of `table1` known as `simple_table1` that reports the percentages of factors instead of counts and percentages.
 
 None of these changes will break programs already in place using this package.
 

@@ -13,7 +13,7 @@
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
-#' @param rounding the number of digits after the decimal; default is 3
+#' @param rounding the number of digits after the decimal for means and SD's; default is 2
 #' @param var_names custom variable names to be printed in the table
 #' @param format_output has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
 #' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc)
@@ -70,7 +70,7 @@ table1 = function(.data,
                   test = FALSE, 
                   test_type = "default", 
                   piping = FALSE,
-                  rounding = 3, 
+                  rounding = 2, 
                   var_names = NULL, 
                   format_output = "pvalues", 
                   output_type = "text", 
@@ -140,9 +140,9 @@ table1 = function(.data,
     if (is.factor(d[,i])){
       tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
       if (!row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), rounding))
+        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), 1))
       } else if (row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(d[,i], useNA=NAkeep)), rounding))
+        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep), 1))
       }
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
