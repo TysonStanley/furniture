@@ -137,7 +137,7 @@ table1 = function(.data, ..., splitby = NULL, splitby_labels = NULL, test = FALS
         ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
         comp   = complete.cases(d[,i], d$split)
         resids = resid(lm(d[comp,i] ~ d$split[comp]))^2
-        r2     = summary(lm(resids ~ nhanes$gender[comp]))$r.squared
+        r2     = summary(lm(resids ~ d$gender[comp]))$r.squared
         lt     = dchisq(length(resids)*r2, df = length(levels(d$split)))
         if (lt<0.05){
           ## Performs an approximate method of Welch (1951)

@@ -6,15 +6,16 @@ test_that("table1 produces table1", {
   y  <- rnorm(1000)
   z  <- factor(sample(c(0,1), 1000, replace=TRUE))
   a  <- factor(sample(c(1,2), 1000, replace=TRUE))
-  df <- data.frame(x, y, z, a)
+  b  <- factor(sample(c(1,2,3,4), 1000, replace=TRUE))
+  df <- data.frame(x, y, z, a, b)
   
   x <- rep(0, times=7)
-  b <- rep(0, times=7)
+  d <- rep(0, times=7)
   
   ## Simple
   expect_s3_class(table1(df, x, y, z, factor(a)), "table1")
   ## b not in df
-  expect_error(table1(df, b))
+  expect_error(table1(df, d))
   ## Testing splitby
   expect_s3_class(table1(df, a, x, y, splitby=~factor(z)), "table1")
   ## Testing test
@@ -69,6 +70,10 @@ test_that("table1 produces table1", {
                          test=TRUE), "table1")
   ## Index
   expect_s3_class(table1(df, c(1:3), splitby=~a, 
+                         test=TRUE, 
+                         NAkeep = TRUE), "table1")
+  ## Four Level Splitby
+  expect_s3_class(table1(df, c(1:3), splitby=~b, 
                          test=TRUE, 
                          NAkeep = TRUE), "table1")
 })
