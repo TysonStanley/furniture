@@ -60,7 +60,7 @@ Can be used within the piping framework [see library(magrittr)].
 \examples{
 ## Ficticious Data ##
 library(furniture)
-library(dplyr)
+library(tidyverse)
 
 x  <- runif(1000)
 y  <- rnorm(1000)
