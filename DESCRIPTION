@@ -2,7 +2,7 @@ Package: furniture
 Type: Package
 Title: Furniture for Health, Behavioral, and Social Scientists
 Version: 1.2.2
-Date: 2016-10-11
+Date: 2016-11-14
 Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
  	         person("Emily", "Brignone", role="aut"))
 Author: Tyson Barrett [aut, cre],
