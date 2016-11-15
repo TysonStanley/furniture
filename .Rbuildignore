@@ -1,4 +1,5 @@
 .travis.yml
 README.md
+NEWS.md
 cran-comments.md
 .gitignore
