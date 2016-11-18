@@ -7,11 +7,10 @@
 
 ### Developmental Version
 
-[![GitHub version](https://badge.fury.io/gh/tysonstanley%2Ffurniture.svg)](https://badge.fury.io/gh/tysonstanley%2Ffurniture)
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
-# furniture
+# furniture: 1.2.3
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains two main functions:
 
@@ -27,8 +26,7 @@ The latest stable build of the package can be downloaded from CRAN via:
 ```r
 install.packages("furniture")
 ```
-
-or you can download the developmental version via:
+However, currently the CRAN version has a small bug with the percentages. Please use the developmental version until the CRAN version is updated past 1.2.2. You can download the developmental version via:
 
 ```r
 library(devtools)
