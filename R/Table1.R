@@ -207,7 +207,7 @@ table1 = function(.data,
       if (is.factor(d[,j])){
         tabX = data.frame(tabX, 
                           paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                 suppressWarnings(round(tab2[[j]][[i]]*100, 1)), "%)"))
+                                 suppressWarnings(round(tab2[[j]][[i]]*100, 3)), "%)"))
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, 
                           paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
