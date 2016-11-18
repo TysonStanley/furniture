@@ -133,9 +133,9 @@ simple_table1 = function(.data,
     if (is.factor(d[,i])){
       tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
       if (!row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)), 1))
+        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
       } else if (row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) round(table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep), 1))
+        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
       }
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
@@ -189,7 +189,7 @@ simple_table1 = function(.data,
     for (i in 1:length(levels(d$split))){
       if (is.factor(d[,j])){
         tabX = data.frame(tabX, 
-                          paste0(suppressWarnings(round(tab2[[j]][[i]]*100, 3)), "%"))
+                          paste0(round(tab2[[j]][[i]]*100, 3), "%"))
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, 
                           paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), 
