@@ -1,3 +1,8 @@
+# Version 1.2.3
+
+A bug that rounded the percentages to the nearest tenth place was found and fixed for both `table1` and `simple_table1`.
+
+
 # Version 1.2.2
 
 An error was found when using `table1` with a splitby factor with more than 2 levels. This has been fixed in version 1.2.2.
