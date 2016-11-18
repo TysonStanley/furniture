@@ -189,7 +189,7 @@ simple_table1 = function(.data,
     for (i in 1:length(levels(d$split))){
       if (is.factor(d[,j])){
         tabX = data.frame(tabX, 
-                          paste0(suppressWarnings(formatC(tab2[[j]][[i]]*100, digits = 1, format = "f")), "%"))
+                          paste0(suppressWarnings(round(tab2[[j]][[i]]*100, 1)), "%"))
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, 
                           paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), 
