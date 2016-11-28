@@ -388,7 +388,9 @@ print.table1 <- function(x, ...){
   for (i in 1:dim(x2)[2]){
     max_col_width[[i]] = max(sapply(x2[[i]], nchar, type="width"))
   }
-  tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 1
+  tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
+    dim(x2)[2] - 1
+  ## Print
   cat("\n|")
   for (i in 1:tot_width){
     cat("=")
