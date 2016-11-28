@@ -322,7 +322,7 @@ table1 = function(.data,
   }
   
   ## Add formatted lines below header
-  if (type == "text2"){
+  if (output_type == "text2"){
     N = rbind(N, N)
     for (i in seq_along(N)){
       N[1,i] = rep("-", length(names(N)[i]))
