@@ -16,7 +16,7 @@
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
 #' @param var_names custom variable names to be printed in the table
 #' @param format_output has three options: 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
-#' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc)
+#' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
 #' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
 #' @param m_label when \code{NAkeep = TRUE} this provides a label for the missing values in the table
@@ -195,7 +195,7 @@ table1 = function(.data,
   
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
-      if (output_type != "text"){
+      if (!grepl("text", output_type)){
         tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
       } else {
         tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
@@ -321,6 +321,14 @@ table1 = function(.data,
     names(N) = c(" ", levels(d$split))
   }
   
+  ## Add formatted lines below header
+  if (type == "text2"){
+    N = rbind(N, N)
+    for (i in seq_along(N)){
+      N[1,i] = rep("-", length(names(N)[i]))
+    }
+  }
+  
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
@@ -341,7 +349,7 @@ table1 = function(.data,
   
   final_l = list(final)
   
-  if (output_type == "text"){  ## regular text output
+  if (grepl("text", output_type)){  ## regular text output
     class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
@@ -370,23 +378,25 @@ table1 = function(.data,
 
 #' @export
 print.table1 <- function(x, ...){
+  ## Extract data set
   x2 = as.data.frame(x[[1]])
-  summed = list()
-  for (i in seq_along(x2)){
-    summed[[i]] = max(nchar(as.character(x2[,i]), type="width"))
+  ## Get width of table for lines
+  summed = max_col_width = list()
+  for (i in 1:dim(x2)[2]){
+    max_col_width[[i]] = max(apply(df1, 1, function(x) max(nchar(x[[i]], type="width"))))
   }
-  w = sum(unlist(summed))
-  cat("\n|=====")
-  for (i in 1:w){
+  tot_width = sum(ifelse(unlist(stuff) > nchar(names(x2)), unlist(stuff), nchar(names(x2)))) + 1
+  cat("\n|")
+  for (i in 1:tot_width){
     cat("=")
   }
-  cat("=====\n") 
+  cat("\n") 
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("|=====")
-  for (i in 1:w){
+  cat("\n|")
+  for (i in 1:tot_width){
     cat("=")
   }
-  cat("=====\n") 
+  cat("\n")
 }
 
 #' Internal Table 1 Function
