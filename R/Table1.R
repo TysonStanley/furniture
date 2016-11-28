@@ -328,7 +328,7 @@ table1 = function(.data,
   if (output_type == "text2"){
     N = rbind(N, N)
     for (i in seq_along(N)){
-      N[1,i] = rep("-", nchar(names(N)[i]))
+      N[1,i] = paste0(rep("-", times = nchar(names(N)[i])), collapse = "")
     }
   }
   
