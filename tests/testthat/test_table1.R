@@ -81,5 +81,13 @@ test_that("table1 produces table1", {
                           row_wise = TRUE,
                           test=TRUE, 
                           NAkeep = TRUE), "table1")
+  ## Text2 output
+  expect_s3_class(table1(df, c(1:3), splitby=~b, 
+                         row_wise = TRUE,
+                         test=TRUE, 
+                         output_type = "text2"), "table1")
+  expect_s3_class(table1(df, c(1:3), splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text2"), "table1")
 })
 
