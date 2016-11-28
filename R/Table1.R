@@ -386,7 +386,7 @@ print.table1 <- function(x, ...){
   ## Get width of table for lines
   summed = max_col_width = list()
   for (i in 1:dim(x2)[2]){
-    max_col_width[[i]] = max(apply(x2, 1, function(x) max(nchar(x[[i]], type="width"))))
+    max_col_width[[i]] = max(apply(x2[i, ], 1, function(.x) nchar(.x[[i]], type="width")))
   }
   tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 1
   cat("\n|")
@@ -395,7 +395,7 @@ print.table1 <- function(x, ...){
   }
   cat("|\n") 
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("\n|")
+  cat("|")
   for (i in 1:tot_width){
     cat("=")
   }
