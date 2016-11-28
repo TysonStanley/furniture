@@ -321,6 +321,9 @@ table1 = function(.data,
     names(N) = c(" ", levels(d$split))
   }
   
+  ## Adjusting type of N
+  N[] = sapply(N, as.character)
+  
   ## Add formatted lines below header
   if (output_type == "text2"){
     N = rbind(N, N)
