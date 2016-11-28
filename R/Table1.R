@@ -382,7 +382,7 @@ table1 = function(.data,
 #' @export
 print.table1 <- function(x, ...){
   ## Extract data set
-  x2 = as.data.frame(x[[1]])
+  x2 = as.data.frame(x)
   ## Get width of table for lines
   summed = max_col_width = list()
   for (i in 1:dim(x2)[2]){
