@@ -328,7 +328,7 @@ table1 = function(.data,
   if (output_type == "text2"){
     N = rbind(N, N)
     for (i in seq_along(N)){
-      N[1,i] = rep("-", length(names(N)[i]))
+      N[1,i] = rep("-", nchar(names(N)[i]))
     }
   }
   
@@ -393,13 +393,13 @@ print.table1 <- function(x, ...){
   for (i in 1:tot_width){
     cat("=")
   }
-  cat("\n") 
+  cat("|\n") 
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
   cat("\n|")
   for (i in 1:tot_width){
     cat("=")
   }
-  cat("\n")
+  cat("|\n")
 }
 
 #' Internal Table 1 Function
