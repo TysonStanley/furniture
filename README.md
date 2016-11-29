@@ -5,16 +5,16 @@
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](http://cranlogs.r-pkg.org/badges/grand-total/furniture)
 
-### Developmental Version (1.2.4)
+### Developmental Version (1.3.0)
 
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
-# furniture: 1.2.4
+# furniture: 1.3.0
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains two main functions:
 
-1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well.
+1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Note that a version of this function, `missing1`, can do missing data analysis in a nice table as well.
 2. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing)
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
