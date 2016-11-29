@@ -14,7 +14,7 @@ test_that("missing1 produces correct table", {
   d <- rep(0, times=7)
   
   ## No miss_var
-  expect_error(missing1(df, x, y, z, a), "table1")
+  expect_error(missing1(df, x, y, z, a))
   ## b not in df
   expect_error(missing1(df, d))
   ## Testing miss_var
