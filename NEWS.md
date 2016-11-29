@@ -1,3 +1,17 @@
+# Version 1.3.0
+
+Two notable changes:
+
+1. A new function--`missing1`--has been added to the package. It produces a table much like `table1` but analyzes a variable with missingness.
+2. `table1` (and its related functons such as `simple_table1` and `missing1`) now has better formatting and has an additional option `output_type = "text2"`
+which provides lines to separate the header from the rest of the table.
+
+Also, a bug fix:
+
+1. `table1` was rounding the percentages at the ten's place instead of the tenth's place. It now is fixed.
+
+Thanks!
+
 # Version 1.2.3
 
 A bug that rounded the percentages to the nearest tenth place was found and fixed for both `table1` and `simple_table1`.

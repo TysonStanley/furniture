@@ -1,16 +1,15 @@
-#' Table 1 for Simple and Stratified Descriptive Statistics
+#' Table 1 for Exploring Missing Data
 #' 
-#' Produces a descriptive table, stratified by an optional categorical variable, 
-#' providing means/frequencies and standard deviations/percentages. 
-#' It is well-formatted for easy transition to academic article or report. 
-#' Can be used within the piping framework [see library(magrittr)].
+#' Produces a descriptive table, just like table1, stratified by whether the observation has missing
+#' values on a specified variable. It provides means/frequencies and standard deviations/percentages.
+#' Unlike table1, default is test = TRUE. Most other attributes are just like table1.
 #' 
-#' @param .data the data.frame that is to be summarized
-#' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
-#' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0
-#' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
-#' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
-#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
+#' @param .data the data.frame that is to be analyzed
+#' @param ... variables in the data set that are to be compared; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
+#' @param miss_var the variable with missing values to be analyzed in formula form (e.g., \code{miss_var = ~gender}) or in quotes (e.g., \code{miss_var = "gender"}); not too surprisingly, it requires that the number missing values > 0.
+#' @param row_wise how to calculate percentages for factor variables when \code{miss_var != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
+#' @param miss_var_labels allows for custom labels of the miss_var levels; must match the number of levels of the miss_var variable
+#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
@@ -32,42 +31,28 @@
 #' library(tidyverse)
 #' 
 #' x  <- runif(1000)
+#' x  <- sample(c(x, NA), 1000, replace=TRUE)
 #' y  <- rnorm(1000)
-#' z  <- factor(sample(c(0,1), 1000, replace=TRUE))
-#' a  <- factor(sample(c(1,2), 1000, replace=TRUE))
+#' z  <- factor(sample(c(0,1,NA), 1000, replace=TRUE))
+#' a  <- factor(sample(c(1,2,NA), 1000, replace=TRUE))
 #' df <- data.frame(x, y, z, a)
 #' 
-#' ## Simple
-#' table1(df, x, y, z, a)
+#' ## Analyzing Missingness in variable a
+#' missing1(df, x, y, z, 
+#'          miss_var = ~a)
+#' missing1(df, x, y, z,
+#'          miss_var = "a")
 #' 
-#' ## Stratified
-#' ## both below are the same
-#' table1(df, x, y, z,
-#'        splitby = ~ a)
-#' table1(df, x, y, z,
-#'        splitby = "a")
-#' 
-#' ## With Piping
-#' df %>%
-#'   table1(x, y, z, 
-#'          splitby = ~a, 
-#'          piping = TRUE) %>%
-#'   summarise(count = n())
-#' 
-#' ## Adjust variables within function
-#' table1(df, ifelse(x > 0, 1, 0), z,
-#'        var_names = c("Dich X", "Z"))
-#'          
 #'
 #' @export
 #' @import stats
 #' @importFrom knitr kable
-table1 = function(.data, 
+missing1 = function(.data, 
                   ..., 
-                  splitby = NULL, 
+                  miss_var, 
                   row_wise = FALSE, 
-                  splitby_labels = NULL, 
-                  test = FALSE, 
+                  miss_var_labels = NULL, 
+                  test = TRUE, 
                   test_type = "default", 
                   piping = FALSE,
                   rounding = 2, 
@@ -105,13 +90,13 @@ table1 = function(.data,
     names(d) = var_names
   }
   
-  ### Splitby Variable (adds the variable to d as "split")
-  if (is.null(splitby)){
-    splitby_ = as.factor(1)
-    d$split  = droplevels(splitby_)
+  ### miss_var (adds the variable to d as "split")
+  if (is.null(miss_var)){
+    stop("Need miss_var to be in quoted form or in formula form.")
   } else {
-    splitby_ = eval(parse(text = paste(splitby)[[length(paste(splitby))]]), .data)
-    d$split  = droplevels(as.factor(splitby_))
+    splitby_ = eval(parse(text = paste(miss_var)[[length(paste(miss_var))]]), .data)
+    missby_  = ifelse(is.na(splitby_), 1, 0)
+    d$split  = droplevels(factor(missby_, labels = c("Not Missing", "Missing")))
   }
   
   ## Test = TRUE and the splitting variable needs to have more than one level
@@ -121,9 +106,13 @@ table1 = function(.data,
     test = FALSE
   }
   
-  if (!is.null(splitby_labels))
-    levels(d$split) = splitby_labels
+  if (!is.null(miss_var_labels))
+    levels(d$split) = miss_var_labels
+ 
+  ## The name of the variable
+  missingvariable_ = paste(.call[["miss_var"]])[length(paste(.call[["miss_var"]]))]
   
+  ## Number of observations by group
   N = t(tapply(d[,1], d$split, length))
   
   # == # Summarizing Data # == # 
@@ -343,7 +332,7 @@ table1 = function(.data,
   final$` ` = as.character(final$` `)
   final$` `[is.na(final$` `)] = m_label
   
-  
+  cat("Variable analyzed: ", missingvariable_)
   # === # FINAL OUTPUT # === #
   
   if (length(levels(d$split)) == 1){
@@ -376,72 +365,5 @@ table1 = function(.data,
                    row.names = FALSE)
     }
   }
-}
-
-
-#' @export
-print.table1 <- function(x, ...){
-  ## Extract data set
-  x2 = as.data.frame(x)
-  x2[] = sapply(x2, as.character)
-  ## Get width of table for lines
-  max_col_width = list()
-  for (i in 1:dim(x2)[2]){
-    max_col_width[[i]] = max(sapply(x2[[i]], nchar, type="width"))
-  }
-  tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
-    dim(x2)[2] - 1
-  ## Print
-  cat("\n|")
-  for (i in 1:tot_width){
-    cat("=")
-  }
-  cat("|\n") 
-  print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  cat("|")
-  for (i in 1:tot_width){
-    cat("=")
-  }
-  cat("|\n")
-}
-
-#' Internal Table 1 Function
-#' 
-#' For internal use in table1().
-#' 
-#' @param ... the variables
-#' @param d_ the data.frame
-#' @param .cl the original functon call
-#' 
-#' @return A data.frame
-#'
-#' @export
-#' @import stats
-table1_ <- function(..., d_, .cl=NULL){
-  df1 = df2 = NULL
-  vars = eval(substitute(alist(...)))
-  
-  ## for dots_capture
-  for (i in seq_along(vars)){
-    df1[[i]] <- eval(vars[[i]], d_)
-    
-    ## if is an index (built on assumption that lengths will differ)
-    if (length(df1[[i]]) != length(d_[[1]]) & is.numeric(df1[[i]])){
-      df2 <- d_[, df1[[i]]]
-    }
-  }
-  
-  if (is.null(df2)){
-    df2 <- as.data.frame(df1)
-    names(df2) = paste(.cl)[3:(length(vars)+2)]
-  }
-
-  ## Error catching 
-  if (dim(d_)[1] != length(df2[[1]])){
-    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names [e.g. gender, age] or a single vector of indices [e.g. c(3:5, 6)] or that splitby variable is stated as a formula [e.g. splitby = ~var1]",
-         call.=FALSE)
-  }
-  
-  return(df2)
 }
 
