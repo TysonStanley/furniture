@@ -38,9 +38,9 @@
 #' df <- data.frame(x, y, z, a)
 #' 
 #' ## Analyzing Missingness in variable a
-#' missing1(df, x, y, z, 
+#' tableM(df, x, y, z, 
 #'          miss_var = ~a)
-#' missing1(df, x, y, z,
+#' tableM(df, x, y, z,
 #'          miss_var = "a")
 #' 
 #'
