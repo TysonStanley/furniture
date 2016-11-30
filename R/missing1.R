@@ -47,7 +47,7 @@
 #' @export
 #' @import stats
 #' @importFrom knitr kable
-missing1 = function(.data, 
+tableM = function(.data, 
                   ..., 
                   miss_var, 
                   row_wise = FALSE, 
