@@ -105,13 +105,12 @@ table1 = function(.data,
       data = .data
     } else {
       s_var = paste(splitby)[length(paste(splitby))]
-      data = .data[, -s_var]
+      data  = subset(.data, -s_var)
     }
   } else {
     data = table1_(..., d_=.data, .cl=.call)
     d = as.data.frame(data)
   }
-  
   
   ### Naming of variables
   if (!is.null(var_names)){
