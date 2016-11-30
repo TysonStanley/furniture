@@ -12,6 +12,7 @@
 #' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
+#' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
 #' @param var_names custom variable names to be printed in the table
@@ -69,6 +70,7 @@ table1 = function(.data,
                   splitby_labels = NULL, 
                   test = FALSE, 
                   test_type = "default", 
+                  simple = FALSE,
                   piping = FALSE,
                   rounding = 2, 
                   var_names = NULL, 
@@ -203,17 +205,35 @@ table1 = function(.data,
     } else if (is.numeric(d[,j])){
       tabX = data.frame(paste(" "))
     }
-    for (i in 1:length(levels(d$split))){
-      if (is.factor(d[,j])){
-        tabX = data.frame(tabX, 
-                          paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                 round(tab2[[j]][[i]]*100, 1), "%)"))
-      } else if (is.numeric(d[,j])){
-        tabX = data.frame(tabX, 
-                          paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                 suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+    
+    ## Counts and Percentages or Just Percentages
+    if (simple){
+      for (i in 1:length(levels(d$split))){
+        if (is.factor(d[,j])){
+          tabX = data.frame(tabX, 
+                            paste0(round(tab2[[j]][[i]]*100, 1), "%"))
+        } else if (is.numeric(d[,j])){
+          tabX = data.frame(tabX, 
+                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), 
+                                   " (", suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+        }
       }
+    } else if (!simple){
+      for (i in 1:length(levels(d$split))){
+        if (is.factor(d[,j])){
+          tabX = data.frame(tabX, 
+                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                                   round(tab2[[j]][[i]]*100, 1), "%)"))
+        } else if (is.numeric(d[,j])){
+          tabX = data.frame(tabX, 
+                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                   suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+        }
+      }
+    } else {
+        stop("simple needs to be logical")
     }
+
     
     
     # == # Optional Odds Ratio Table # == #

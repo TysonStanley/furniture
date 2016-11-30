@@ -89,5 +89,10 @@ test_that("table1 produces table1", {
   expect_s3_class(table1(df, c(1:3), splitby=~b, 
                          test=TRUE, 
                          output_type = "text2"), "table1")
+  ## Simple Format
+  expect_s3_class(table1(df, c(1:3), splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text2",
+                         simple = TRUE), "table1")
 })
 
