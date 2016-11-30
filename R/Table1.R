@@ -7,6 +7,7 @@
 #' 
 #' @param .data the data.frame that is to be summarized
 #' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
+#' @param all logical; if set to \code{TRUE} all variables in the dataset are used. If there is a stratifying variable then that is the only variable excluded.
 #' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
@@ -65,6 +66,7 @@
 #' @importFrom knitr kable
 table1 = function(.data, 
                   ..., 
+                  all = FALSE,
                   splitby = NULL, 
                   row_wise = FALSE, 
                   splitby_labels = NULL, 
@@ -98,8 +100,17 @@ table1 = function(.data,
     f1 = ""
   }
   
-  data = table1_(..., d_=.data, .cl=.call)
-  d = as.data.frame(data)
+  if (all){
+    if (is.null(splitby)){
+      data = .data
+    } else {
+      data = .data[[-paste(splitby)[length(paste(splitby))]]]
+    }
+  } else {
+    data = table1_(..., d_=.data, .cl=.call)
+    d = as.data.frame(data)
+  }
+  
   
   ### Naming of variables
   if (!is.null(var_names)){

@@ -1,10 +1,10 @@
 # Version 1.3.0
 
-Two notable changes:
+Three notable changes:
 
-1. A new function--`missing1`--has been added to the package. It produces a table much like `table1` but analyzes a variable with missingness.
-2. `table1` (and its related functons such as `simple_table1` and `missing1`) now has better formatting and has an additional option `output_type = "text2"`
-which provides lines to separate the header from the rest of the table.
+1. A new function--`tableM`--has been added to the package. It produces a table much like `table1` but analyzes a variable with missingness.
+2. `table1` (and its related functons such as `simple_table1` and `tableM`) now has better formatting and has an additional option `output_type = "text2"` which provides lines to separate the header from the rest of the table.
+3. `table1` can give percentages based on the row using `row_wise = TRUE`. The default is giving percentages by column.
 
 Also, a bug fix:
 
