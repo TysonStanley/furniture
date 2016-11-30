@@ -104,7 +104,8 @@ table1 = function(.data,
     if (is.null(splitby)){
       data = .data
     } else {
-      data = .data[[-paste(splitby)[length(paste(splitby))]]]
+      s_var = paste(splitby)[length(paste(splitby))]
+      data = .data[, -s_var]
     }
   } else {
     data = table1_(..., d_=.data, .cl=.call)
