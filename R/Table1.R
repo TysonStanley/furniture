@@ -110,8 +110,9 @@ table1 = function(.data,
     }
   } else {
     data = table1_(..., d_=.data, .cl=.call)
-    d = as.data.frame(data)
   }
+  
+  d = as.data.frame(data)
   
   ### Naming of variables
   if (!is.null(var_names)){
