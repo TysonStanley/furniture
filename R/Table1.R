@@ -105,7 +105,8 @@ table1 = function(.data,
       data = .data
     } else {
       s_var = paste(splitby)[length(paste(splitby))]
-      data  = subset(.data, -s_var)
+      names(.data)
+      data  = .data[!names(.data) %in% s_var]
     }
   } else {
     data = table1_(..., d_=.data, .cl=.call)
