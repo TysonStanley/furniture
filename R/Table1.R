@@ -100,6 +100,7 @@ table1 = function(.data,
     f1 = ""
   }
   
+  ## All Variables or Selected Variables
   if (all){
     if (is.null(splitby)){
       data = .data
@@ -108,6 +109,8 @@ table1 = function(.data,
       names(.data)
       data  = .data[!names(.data) %in% s_var]
     }
+    
+    ## Internal table1_ function
   } else {
     data = table1_(..., d_=.data, .cl=.call)
   }
@@ -188,7 +191,7 @@ table1 = function(.data,
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
       }
     } else {
-      stop("Variables need to be either factor, character or numeric.", .call=FALSE)
+      stop("Variables need to be either factor, character or numeric.")
     }
   }
   
