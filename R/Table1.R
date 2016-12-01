@@ -58,7 +58,7 @@
 #' 
 #' ## Adjust variables within function
 #' table1(df, ifelse(x > 0, 1, 0), z,
-#'        var_names = c("Dich X", "Z"))
+#'        var_names = c("X2", "Z"))
 #'          
 #'
 #' @export
@@ -203,9 +203,9 @@ table1 = function(.data,
       names(OR) = c(" ", "OR", "Lower", "Upper")
     }
     
-    if (format_output=="full")
+    if (grepl("f|F", format_output))
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
-    else if (format_output=="pvalues" | format_output=="stars")
+    else if (grepl("p|P", format_output) | grepl("s|S", format_output))
       tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
   } else {
     tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
@@ -281,7 +281,7 @@ table1 = function(.data,
     
     ## If test == TRUE, tests of comparisons by split ##
     
-    if (test & format_output=="full"){
+    if (test & grepl("f|F", format_output)){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                         paste("Chi Square:", round(tests[[j]]$statistic,2)), 
@@ -302,7 +302,7 @@ table1 = function(.data,
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
-    } else if (test & format_output=="pvalues"){
+    } else if (test & grepl("p|P", format_output)){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                         paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
@@ -320,7 +320,7 @@ table1 = function(.data,
       tabW = rbind(n3, tabX)
       tabZ = rbind(tabZ, tabW)
       
-    } else if (test & format_output=="stars"){
+    } else if (test & grepl("s|S", format_output)){
       n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
                       paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
                              ifelse(tests[[j]]$p.value < 0.01,  "**", 
@@ -342,12 +342,12 @@ table1 = function(.data,
   
   N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
   
-  if (format_output=="full" & test){
+  if (grepl("f|F", format_output) & test){
     N = data.frame("Observations", N, "", "")
     names(N) = c(" ", levels(d$split), "Test", "P-Value")
-  } else if ((format_output=="pvalues" | format_output=="stars") & test){
+  } else if ((grepl("p|P", format_output) | grepl("s|S", format_output)) & test){
     N = data.frame("Observations", N, " ") 
-    if (format_output=="pvalues"){
+    if (grepl("p|P", format_output)){
       names(N) = c(" ", levels(d$split), "P-Value")
     } else {
       names(N) = c(" ", levels(d$split), " ")
