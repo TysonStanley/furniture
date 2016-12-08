@@ -416,7 +416,7 @@ table1 = function(.data,
   
   if (!is.null(export)){
     dir.create("table1")
-    write.csv(final, file = paste0("/table1/", export, ".csv"))
+    write.csv(final, file = paste0("table1/", export, ".csv"))
   }
   
   if (grepl("text", output_type)){  ## regular text output
