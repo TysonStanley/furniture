@@ -178,9 +178,9 @@ table1 = function(.data,
         tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
       } else if (nams[[i]] %in% medians){
         tab[[i]] = round(tapply(d[,i], d$split, median, na.rm=TRUE), rounding)
-        tab2[[i]] = tapply(d[,i], d$split, function(x) paste0("[", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[2], rounding), 
+        tab2[[i]] = tapply(d[,i], d$split, function(x) paste0("[", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[2], 1), 
                                                                                             big.mark = f1, digits = 2, format = "f")),
-                                                              ", ", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[4], rounding), 
+                                                              ", ", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[4], 1), 
                                                                                              big.mark = f1, digits = 2, format = "f")),
                                                               "]"))
       }
