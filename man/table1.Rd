@@ -9,7 +9,7 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
   simple = FALSE, piping = FALSE, rounding = 2, var_names = NULL,
   format_output = "pvalues", output_type = "text", format_number = FALSE,
   NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
-  align = NULL)
+  align = NULL, export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -51,6 +51,10 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{caption}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
 \item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
+
+\item{export}{character; when given, it exports the table to a CSV file to the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
+
+\item{medians}{a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.

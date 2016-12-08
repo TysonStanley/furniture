@@ -11,6 +11,7 @@
 #' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
+#' @param medians a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
 #' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
@@ -25,6 +26,7 @@
 #' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param export character; when given, it exports the table to a CSV file to the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
 #' 
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
@@ -83,7 +85,8 @@ table1 = function(.data,
                   m_label = "Missing",
                   booktabs = TRUE, 
                   caption=NULL, 
-                  align=NULL){
+                  align=NULL,
+                  export=NULL){
   
   # == # Checks and Data # == #
   .call = match.call()
@@ -144,8 +147,8 @@ table1 = function(.data,
   
   N = t(tapply(d[,1], d$split, length))
   
-  # == # Summarizing Data # == # 
   
+  # == # Summarizing Data # == # 
   tab = tab2 = tests = tests2 = nams = list()
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] = names(d)[i]
@@ -168,8 +171,21 @@ table1 = function(.data,
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
     ## If Numeric
     } else if (is.numeric(d[,i]) | is.integer(d[,i])){
-      tab[[i]] = round(tapply(d[,i], d$split, mean, na.rm=TRUE), rounding)
-      tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
+      ## Means
+      if (!nams[[i]] %in% medians){
+        tab[[i]] = round(tapply(d[,i], d$split, mean, na.rm=TRUE), rounding)
+        tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
+      } else if (nams[[i]] %in% medians){
+        tab[[i]] = round(tapply(d[,i], d$split, median, na.rm=TRUE), rounding)
+        tab2[[i]] = tapply(d[,i], d$split, function(x) paste0("[", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[2], rounding), 
+                                                                                            big.mark = f1, digits = 2, format = "f")),
+                                                              ", ", suppressWarnings(formatC(round(quantile(x, na.rm=TRUE)[4], rounding), 
+                                                                                             big.mark = f1, digits = 2, format = "f")),
+                                                              "]"))
+      }
+      if (any(N < 20)){
+        warning("Tests are less robust to non-normality if N in any group is less than 20")
+      }
       if (length(levels(d$split))>2 & test){
         ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
         comp   = complete.cases(d[,i], d$split)
@@ -190,11 +206,12 @@ table1 = function(.data,
       if (test & test_type=="or"){
         tests2[[i]] = glm(d$split ~ d[, i], family=binomial(link="logit"))
       }
+    
     } else {
       stop("Variables need to be either factor, character or numeric.")
     }
   }
-  
+  # ========================== #
   
   # == # Formatting Table # == # 
   if (test){
@@ -241,9 +258,15 @@ table1 = function(.data,
                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
                                    round(tab2[[j]][[i]]*100, 1), "%)"))
         } else if (is.numeric(d[,j])){
-          tabX = data.frame(tabX, 
-                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                   suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+          if (!nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                     suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+          } else if (nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                     tab2[[j]][[i]]))
+          }
         }
       }
     } else {
@@ -387,6 +410,10 @@ table1 = function(.data,
   }
   
   final_l = list(final)
+  
+  if (!is.null(export)){
+    write.csv(final, file = paste0(export, ".csv"))
+  }
   
   if (grepl("text", output_type)){  ## regular text output
     class(final_l) = c("table1", "list")
