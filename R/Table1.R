@@ -26,7 +26,7 @@
 #' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
-#' @param export character; when given, it exports the table to a CSV file to the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
+#' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
 #' 
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
@@ -415,7 +415,8 @@ table1 = function(.data,
   final_l = list(final)
   
   if (!is.null(export)){
-    write.csv(final, file = paste0(export, ".csv"))
+    dir.create(paste(getwd(), "/table1/"))
+    write.csv(final, file = paste0("/table1/", export, ".csv"))
   }
   
   if (grepl("text", output_type)){  ## regular text output

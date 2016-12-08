@@ -115,5 +115,12 @@ test_that("table1 produces table1", {
                          output_type = "text2",
                          simple = FALSE,
                          medians = c("a", "c")), "table1")
+  ## Export
+  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         test=FALSE, 
+                         output_type = "text2",
+                         simple = FALSE,
+                         export = "test_tab",
+                         medians = c("a", "c")), "table1")
 })
 

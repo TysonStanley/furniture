@@ -54,7 +54,7 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 
 \item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
-\item{export}{character; when given, it exports the table to a CSV file to the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
+\item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
