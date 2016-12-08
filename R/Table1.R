@@ -464,7 +464,7 @@ table1 = function(.data,
           tabX = data.frame(n3)
           names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
           tabZ = rbind(tabZ, tabX)
-        } else {
+        } else if (length(levels(d[,j])) > 2){
           tabX = data.frame(tabX, "")
           names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
           tabW = rbind(n3, tabX)
