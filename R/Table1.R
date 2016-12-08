@@ -415,8 +415,10 @@ table1 = function(.data,
   final_l = list(final)
   
   if (!is.null(export)){
-    dir.create("table1")
-    write.csv(final, file = paste0("table1/", export, ".csv"))
+    if (!dir.exists("Table1")){
+      dir.create("Table1")
+    }
+    write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
   }
   
   if (grepl("text", output_type)){  ## regular text output
