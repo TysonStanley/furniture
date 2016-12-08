@@ -415,7 +415,7 @@ table1 = function(.data,
   final_l = list(final)
   
   if (!is.null(export)){
-    dir.create(paste(getwd(), "/table1/"))
+    dir.create("table1")
     write.csv(final, file = paste0("/table1/", export, ".csv"))
   }
   
