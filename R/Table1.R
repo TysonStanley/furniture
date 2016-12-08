@@ -458,7 +458,7 @@ table1 = function(.data,
           }
         } else if (is.numeric(d[,j])){
           if (length(levels(d$split))>2){
-            n3 = data.frame(names(d)[j], tabX, nrow=1), 
+            n3 = data.frame(names(d)[j], tabX, 
                             paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
           } else {
             n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 

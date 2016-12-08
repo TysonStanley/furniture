@@ -6,10 +6,11 @@
 \usage{
 table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
   splitby_labels = NULL, medians = NULL, test = FALSE,
-  test_type = "default", simple = FALSE, piping = FALSE, rounding = 2,
-  var_names = NULL, format_output = "pvalues", output_type = "text",
-  format_number = FALSE, NAkeep = FALSE, m_label = "Missing",
-  booktabs = TRUE, caption = NULL, align = NULL, export = NULL)
+  test_type = "default", simple = FALSE, condense = FALSE,
+  piping = FALSE, rounding = 2, var_names = NULL,
+  format_output = "pvalues", output_type = "text", format_number = FALSE,
+  NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
+  align = NULL, export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -31,6 +32,8 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{test_type}{has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)}
 
 \item{simple}{logical; if set to \code{TRUE} then only percentages are shown for categorical variables.}
+
+\item{condense}{logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category}
 
 \item{piping}{if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.}
 
