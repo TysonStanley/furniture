@@ -221,8 +221,8 @@ table1 = function(.data,
   ##############################
   # == # Formatting Table # == # 
   ##############################
-  ## == Not Condensed == ##
-  if (!condensed){
+  ## == Not Condense == ##
+  if (!condense){
     if (test){
       if (test_type=="or"){
         OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
@@ -371,10 +371,10 @@ table1 = function(.data,
         tabZ = rbind(tabZ, tabW)
       }
     }
-  ## == Finished Not Condensed == ##
+  ## == Finished Not Condense == ##
     
-  ## == Condensed == ##
-  } else if (condensed){
+  ## == Condense == ##
+  } else if (condense){
     message("Currently being developed fully.")
     
     if (test){
@@ -481,7 +481,7 @@ table1 = function(.data,
       }
     }
   }
-  # === Finished Condensed === #
+  # === Finished Condense === #
   
   
   
