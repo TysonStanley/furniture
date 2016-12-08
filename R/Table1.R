@@ -475,11 +475,11 @@ table1 = function(.data,
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
         if (length(levels(d[,j])) == 2){
           tabX = data.frame(n3)
-          names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
+          names(tabZ) = names(tabX) = c(" ", levels(d$split))
           tabZ = rbind(tabZ, tabX)
         } else {
           tabX = data.frame(tabX, "")
-          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
+          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
           tabW = rbind(n3, tabX)
           tabZ = rbind(tabZ, tabW)
         }
