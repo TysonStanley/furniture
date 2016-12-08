@@ -378,11 +378,6 @@ table1 = function(.data,
     message("Currently being developed fully.")
     
     if (test){
-      if (test_type=="or"){
-        OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
-        names(OR) = c(" ", "OR", "Lower", "Upper")
-      }
-      
       if (grepl("p|P", format_output) | grepl("s|S", format_output))
         tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
     } else {
@@ -447,7 +442,7 @@ table1 = function(.data,
       }
 
       ## If test == TRUE, tests of comparisons by split ##
-      if (test & grepl("p|P", format_output)){
+      if (test){
         if (is.factor(d[,j])){
           if (length(levels(d[,j])) == 2){
             n3 = data.frame(tabX, 
@@ -476,8 +471,18 @@ table1 = function(.data,
           tabZ = rbind(tabZ, tabW)
         }
         
-      } else {
-        stop("Only the pvalues format option can be used with condensed.")
+      } else if (!test){
+        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
+        if (length(levels(d[,j])) == 2){
+          tabX = data.frame(n3)
+          names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
+          tabZ = rbind(tabZ, tabX)
+        } else {
+          tabX = data.frame(tabX, "")
+          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
+          tabW = rbind(n3, tabX)
+          tabZ = rbind(tabZ, tabW)
+        }
       }
     }
   }
