@@ -230,11 +230,11 @@ table1 = function(.data,
       }
       
       if (grepl("f|F", format_output))
-        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
+        tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3))
       else if (grepl("p|P", format_output) | grepl("s|S", format_output))
-        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
+        tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
     } else {
-      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
+      tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
     }
     
     for (j in 1:length(tab)){
@@ -375,13 +375,13 @@ table1 = function(.data,
     
   ## == Condense == ##
   } else if (condense){
-    message("Currently being developed fully.")
+    message("condense = TRUE currently being developed fully.")
     
     if (test){
       if (grepl("p|P", format_output) | grepl("s|S", format_output))
-        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
+        tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
     } else {
-      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
+      tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
     }
     
     for (j in 1:length(tab)){
@@ -447,42 +447,32 @@ table1 = function(.data,
           if (length(levels(d[,j])) == 2){
             n3 = data.frame(tabX, 
                             paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+            tabX = n3
           } else {
             n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
                             paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+            names(n3) = names(tabX)
+            tabX = rbind(n3, tabX)
           }
         } else if (is.numeric(d[,j])){
           if (length(levels(d$split))>2){
-            n3 = data.frame(names(d)[j], tabX, 
+            n3 = data.frame(tabX, 
                             paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
+            tabX = n3
           } else {
-            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+            n3 = data.frame(tabX, 
                             paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+            tabX = n3
           }
         }
-        if (length(levels(d[,j])) == 2){
-          tabX = data.frame(n3)
-          names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
-          tabZ = rbind(tabZ, tabX)
-        } else if (length(levels(d[,j])) > 2){
-          tabX = data.frame(tabX, "")
-          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
-          tabW = rbind(n3, tabX)
-          tabZ = rbind(tabZ, tabW)
-        }
-        
+        names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
+        tabZ = rbind(tabZ, tabX)
+      
       } else if (!test){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
-        if (length(levels(d[,j])) == 2){
-          tabX = data.frame(n3)
-          names(tabZ) = names(tabX) = c(" ", levels(d$split))
-          tabZ = rbind(tabZ, tabX)
-        } else {
-          tabX = data.frame(tabX, "")
-          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
-          tabW = rbind(n3, tabX)
-          tabZ = rbind(tabZ, tabW)
-        }
+        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
+        tabW = rbind(n3, tabX)
+        tabZ = rbind(tabZ, tabW)
       }
     }
   }
