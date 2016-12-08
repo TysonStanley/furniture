@@ -15,6 +15,7 @@
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
 #' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
+#' @param condense logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
 #' @param var_names custom variable names to be printed in the table
@@ -76,6 +77,7 @@ table1 = function(.data,
                   test = FALSE, 
                   test_type = "default", 
                   simple = FALSE,
+                  condense = FALSE,
                   piping = FALSE,
                   rounding = 2, 
                   var_names = NULL, 
@@ -148,8 +150,9 @@ table1 = function(.data,
   
   N = t(tapply(d[,1], d$split, length))
   
-  
-  # == # Summarizing Data # == # 
+  ##############################
+  # == # Summarizing Data # == #
+  ##############################
   tab = tab2 = tests = tests2 = nams = list()
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] = names(d)[i]
@@ -212,161 +215,277 @@ table1 = function(.data,
       stop("Variables need to be either factor, character or numeric.")
     }
   }
-  # ========================== #
+  # === Finished Summarizing === #
   
+  
+  ##############################
   # == # Formatting Table # == # 
-  if (test){
-    if (test_type=="or"){
-      OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
-      names(OR) = c(" ", "OR", "Lower", "Upper")
-    }
-    
-    if (grepl("f|F", format_output))
-      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
-    else if (grepl("p|P", format_output) | grepl("s|S", format_output))
-      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
-  } else {
-    tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
-  }
-  
-  for (j in 1:length(tab)){
-    if (is.factor(d[,j])){
-      if (!grepl("text", output_type)){
-        tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
-      } else {
-        tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
+  ##############################
+  ## == Not Condensed == ##
+  if (!condensed){
+    if (test){
+      if (test_type=="or"){
+        OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
+        names(OR) = c(" ", "OR", "Lower", "Upper")
       }
-    } else if (is.numeric(d[,j])){
-      tabX = data.frame(paste(" "))
+      
+      if (grepl("f|F", format_output))
+        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+3))
+      else if (grepl("p|P", format_output) | grepl("s|S", format_output))
+        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
+    } else {
+      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
     }
     
-    ## Counts and Percentages or Just Percentages
-    if (simple){
-      for (i in 1:length(levels(d$split))){
-        if (is.factor(d[,j])){
-          tabX = data.frame(tabX, 
-                            paste0(round(tab2[[j]][[i]]*100, 1), "%"))
-        } else if (is.numeric(d[,j])){
-          if (!nams[[j]] %in% medians){
-            tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                     suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
-          } else if (nams[[j]] %in% medians){
-            tabX = data.frame(tabX, 
-                              paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
-                                     tab2[[j]][[i]]))
-          }        
+    for (j in 1:length(tab)){
+      if (is.factor(d[,j])){
+        if (!grepl("text", output_type)){
+          tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
+        } else {
+          tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
         }
+      } else if (is.numeric(d[,j])){
+        tabX = data.frame(paste(" "))
       }
-    } else if (!simple){
-      for (i in 1:length(levels(d$split))){
-        if (is.factor(d[,j])){
-          tabX = data.frame(tabX, 
-                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                   round(tab2[[j]][[i]]*100, 1), "%)"))
-        } else if (is.numeric(d[,j])){
-          if (!nams[[j]] %in% medians){
+      
+      ## Counts and Percentages or Just Percentages
+      if (simple){
+        for (i in 1:length(levels(d$split))){
+          if (is.factor(d[,j])){
             tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                     suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
-          } else if (nams[[j]] %in% medians){
-            tabX = data.frame(tabX, 
-                              paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
-                                     tab2[[j]][[i]]))
+                              paste0(round(tab2[[j]][[i]]*100, 1), "%"))
+          } else if (is.numeric(d[,j])){
+            if (!nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+            } else if (nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                       tab2[[j]][[i]]))
+            }        
           }
         }
-      }
-    } else {
-        stop("simple needs to be logical")
-    }
-    # ========================== #
-    
-    
-    # == # Optional Odds Ratio Table # == #
-    if (test & test_type == "or" & NAkeep == "no"){
-      cis = exp(confint(tests2[[j]]))
-      or  = exp(tests2[[j]]$coef)
-      if (is.numeric(d[,j])){
-        n4  = data.frame("", 
-                         round(or[-1],2),
-                         round(cis[-1,1],2),
-                         round(cis[-1,2],2))
-      } else if (is.factor(d[,j])){
-        n4  = data.frame("", 
-                         c(1, round(or[-1],2)),
-                         c(1, round(cis[-1,1],2)),
-                         c(1, round(cis[-1,2],2)))
-      }
-      tabQ = data.frame("", "", "", "")
-      tabQ[] = sapply(tabQ, as.character)
-      names(n4) = names(tabQ) = c(" ", "OR", "Lower", "Upper")
-      n5 = rbind(tabQ, n4)
-      OR = rbind(OR, n5)
-      rem2 = ifelse(is.na(OR[,1]), FALSE, TRUE)
-      OR = OR[rem2,]
-    } else {
-      OR = NULL
-    }
-    
-    ## If test == TRUE, tests of comparisons by split ##
-    if (test & grepl("f|F", format_output)){
-      if (is.factor(d[,j])){
-        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                        paste("Chi Square:", round(tests[[j]]$statistic,2)), 
-                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
-        } else {
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+      } else if (!simple){
+        for (i in 1:length(levels(d$split))){
+          if (is.factor(d[,j])){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                                     round(tab2[[j]][[i]]*100, 1), "%)"))
+          } else if (is.numeric(d[,j])){
+            if (!nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+            } else if (nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                       tab2[[j]][[i]]))
+            }
+          }
         }
+      } else {
+          stop("simple needs to be logical")
       }
-      tabX = data.frame(tabX, "", "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "Test", "P-Value")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
+
+      ## Optional Odds Ratio Table
+      if (test & test_type == "or" & NAkeep == "no"){
+        cis = exp(confint(tests2[[j]]))
+        or  = exp(tests2[[j]]$coef)
+        if (is.numeric(d[,j])){
+          n4  = data.frame("", 
+                           round(or[-1],2),
+                           round(cis[-1,1],2),
+                           round(cis[-1,2],2))
+        } else if (is.factor(d[,j])){
+          n4  = data.frame("", 
+                           c(1, round(or[-1],2)),
+                           c(1, round(cis[-1,1],2)),
+                           c(1, round(cis[-1,2],2)))
+        }
+        tabQ = data.frame("", "", "", "")
+        tabQ[] = sapply(tabQ, as.character)
+        names(n4) = names(tabQ) = c(" ", "OR", "Lower", "Upper")
+        n5 = rbind(tabQ, n4)
+        OR = rbind(OR, n5)
+        rem2 = ifelse(is.na(OR[,1]), FALSE, TRUE)
+        OR = OR[rem2,]
+      } else {
+        OR = NULL
+      }
       
-    } else if (test & grepl("p|P", format_output)){
-      if (is.factor(d[,j])){
+      ## If test == TRUE, tests of comparisons by split ##
+      if (test & grepl("f|F", format_output)){
+        if (is.factor(d[,j])){
+          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                          paste("Chi Square:", round(tests[[j]]$statistic,2)), 
+                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+        } else if (is.numeric(d[,j])){
+          if (length(levels(d$split))>2){
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
+                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
+          } else {
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
+                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+          }
+        }
+        tabX = data.frame(tabX, "", "")
+        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "Test", "P-Value")
+        tabW = rbind(n3, tabX)
+        tabZ = rbind(tabZ, tabW)
+        
+      } else if (test & grepl("p|P", format_output)){
+        if (is.factor(d[,j])){
+          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
+                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+        } else if (is.numeric(d[,j])){
+          if (length(levels(d$split))>2){
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
+          } else {
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+          }
+        }
+        tabX = data.frame(tabX, "")
+        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
+        tabW = rbind(n3, tabX)
+        tabZ = rbind(tabZ, tabW)
+        
+      } else if (test & grepl("s|S", format_output)){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
-                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
-        } else {
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-        }
+                        paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
+                               ifelse(tests[[j]]$p.value < 0.01,  "**", 
+                               ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
+        tabX = data.frame(tabX, "")
+        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
+        tabW = rbind(n3, tabX)
+        tabZ = rbind(tabZ, tabW)
+        
+      } else {
+        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
+        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
+        tabW = rbind(n3, tabX)
+        tabZ = rbind(tabZ, tabW)
       }
-      tabX = data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
+    }
+  ## == Finished Not Condensed == ##
+    
+  ## == Condensed == ##
+  } else if (condensed){
+    message("Currently being developed fully.")
+    
+    if (test){
+      if (test_type=="or"){
+        OR = data.frame(matrix(nrow=length(levels(d[,i]))+1, ncol=4))
+        names(OR) = c(" ", "OR", "Lower", "Upper")
+      }
       
-    } else if (test & grepl("s|S", format_output)){
-      n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
-                      paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
-                             ifelse(tests[[j]]$p.value < 0.01,  "**", 
-                             ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
-      tabX = data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
-      
+      if (grepl("p|P", format_output) | grepl("s|S", format_output))
+        tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+2))
     } else {
-      n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
+      tabZ = data.frame(matrix(nrow=length(levels(d[,i])), ncol=length(levels(d$split))+1))
+    }
+    
+    for (j in 1:length(tab)){
+      if (is.factor(d[,j])){
+        if (length(levels(d[,j])) == 2){
+          if (!grepl("text", output_type)){
+            tabX = data.frame(paste(names(table(d[,j])[2])))
+          } else {
+            tabX = data.frame(paste(names(table(d[,j])[2])))
+          }
+        } else if (length(levels(d[,j])) > 2){
+          if (!grepl("text", output_type)){
+            tabX = data.frame(paste("--  ", names(table(d[,j]))))
+          } else {
+            tabX = data.frame(paste("  ", names(table(d[,j]))))
+          }
+        }
+      } else if (is.numeric(d[,j])){
+        tabX = data.frame(paste(" "))
+      }
+      
+      ## Counts and Percentages or Just Percentages
+      if (simple){
+        for (i in 1:length(levels(d$split))){
+          if (is.factor(d[,j])){
+            tabX = data.frame(tabX, 
+                              paste0(round(tab2[[j]][[i]]*100, 1), "%"))
+          } else if (is.numeric(d[,j])){
+            if (!nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+            } else if (nams[[j]] %in% medians){
+              tabX = data.frame(tabX, 
+                                paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                      tab2[[j]][[i]]))
+            }        
+          }
+        }
+      } else if (!simple){
+        for (i in 1:length(levels(d$split))){
+          if (is.factor(d[,j])){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                                     round(tab2[[j]][[i]]*100, 1), "%)"))
+          } else if (is.numeric(d[,j])){
+            if (!nams[[j]] %in% medians){
+              tabX = data.frame(paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+            } else if (nams[[j]] %in% medians){
+              tabX = data.frame(paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                      tab2[[j]][[i]]))
+            }
+          }
+        }
+      } else {
+        stop("simple needs to be TRUE or FALSE")
+      }
+
+      ## If test == TRUE, tests of comparisons by split ##
+      if (test & grepl("p|P", format_output)){
+        if (is.factor(d[,j])){
+          if (length(levels(d[,j])) == 2){
+            n3 = data.frame(tabX, 
+                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+          } else {
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+          }
+        } else if (is.numeric(d[,j])){
+          if (length(levels(d$split))>2){
+            n3 = data.frame(names(d)[j], tabX, nrow=1), 
+                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
+          } else {
+            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+          }
+        }
+        if (length(levels(d[,j])) == 2){
+          tabX = data.frame(n3)
+          names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
+          tabZ = rbind(tabZ, tabX)
+        } else {
+          tabX = data.frame(tabX, "")
+          names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
+          tabW = rbind(n3, tabX)
+          tabZ = rbind(tabZ, tabW)
+        }
+        
+      } else {
+        stop("Only the pvalues format option can be used with condensed.")
+      }
     }
   }
+  # === Finished Condensed === #
   
-  # == # Observations # == #
+  
+  
+  # === # Observations # === #
   N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
   
   if (grepl("f|F", format_output) & test){
@@ -406,8 +525,9 @@ table1 = function(.data,
   final$` ` = as.character(final$` `)
   final$` `[is.na(final$` `)] = m_label
   
-  
+  ############################
   # === # FINAL OUTPUT # === #
+  ############################
   if (length(levels(d$split)) == 1){
     names(final)[2] = "Mean/Count (SD/%)"
   }
