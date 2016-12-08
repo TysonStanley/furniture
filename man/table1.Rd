@@ -5,11 +5,11 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
-  splitby_labels = NULL, test = FALSE, test_type = "default",
-  simple = FALSE, piping = FALSE, rounding = 2, var_names = NULL,
-  format_output = "pvalues", output_type = "text", format_number = FALSE,
-  NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
-  align = NULL, export = NULL)
+  splitby_labels = NULL, medians = NULL, test = FALSE,
+  test_type = "default", simple = FALSE, piping = FALSE, rounding = 2,
+  var_names = NULL, format_output = "pvalues", output_type = "text",
+  format_number = FALSE, NAkeep = FALSE, m_label = "Missing",
+  booktabs = TRUE, caption = NULL, align = NULL, export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -23,6 +23,8 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
 \item{splitby_labels}{allows for custom labels of the splitby levels; must match the number of levels of the splitby variable}
+
+\item{medians}{a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced}
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
 
@@ -53,8 +55,6 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
 \item{export}{character; when given, it exports the table to a CSV file to the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
-
-\item{medians}{a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.

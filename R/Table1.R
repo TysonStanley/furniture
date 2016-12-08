@@ -247,9 +247,15 @@ table1 = function(.data,
           tabX = data.frame(tabX, 
                             paste0(round(tab2[[j]][[i]]*100, 1), "%"))
         } else if (is.numeric(d[,j])){
-          tabX = data.frame(tabX, 
-                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), 
-                                   " (", suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+          if (!nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                     suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+          } else if (nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                     tab2[[j]][[i]]))
+          }        
         }
       }
     } else if (!simple){
@@ -265,7 +271,7 @@ table1 = function(.data,
                                      suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
           } else if (nams[[j]] %in% medians){
             tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                              paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
                                      tab2[[j]][[i]]))
           }
         }
@@ -273,11 +279,10 @@ table1 = function(.data,
     } else {
         stop("simple needs to be logical")
     }
-
+    # ========================== #
     
     
     # == # Optional Odds Ratio Table # == #
-    
     if (test & test_type == "or" & NAkeep == "no"){
       cis = exp(confint(tests2[[j]]))
       or  = exp(tests2[[j]]$coef)
@@ -304,7 +309,6 @@ table1 = function(.data,
     }
     
     ## If test == TRUE, tests of comparisons by split ##
-    
     if (test & grepl("f|F", format_output)){
       if (is.factor(d[,j])){
         n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
@@ -363,7 +367,6 @@ table1 = function(.data,
   }
   
   # == # Observations # == #
-  
   N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
   
   if (grepl("f|F", format_output) & test){
@@ -405,7 +408,6 @@ table1 = function(.data,
   
   
   # === # FINAL OUTPUT # === #
-  
   if (length(levels(d$split)) == 1){
     names(final)[2] = "Mean/Count (SD/%)"
   }
