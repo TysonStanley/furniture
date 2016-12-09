@@ -55,7 +55,7 @@ test_that("tableM produces correct table", {
                          test=TRUE, 
                          NAkeep = TRUE), "table1")
   ## Piping
-  expect_equal(tableM(df, a, x, y, missing_var=~z, piping=TRUE), df)
+  expect_equivalent(tableM(df, a, x, missing_var=~z, piping = TRUE), df)
   expect_equivalent(tableM(df, a, x, missing_var=~z, 
                            piping = TRUE), 
                     tableM(df, a, x, y, missing_var="z", output_type = "markdown",

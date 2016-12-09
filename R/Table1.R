@@ -748,9 +748,10 @@ tableM = function(.data,
                   align=NULL,
                   export=NULL){
   
-  .data$splitby2 = eval(parse(text = paste(missing_var)[[length(paste(missing_var))]]), .data)
+  .d = .data
+  .d$splitby2 = eval(parse(text = paste(missing_var)[[length(paste(missing_var))]]), .data)
   
-  tabM = table1(.data = .data, 
+  tabM = table1(.data = .d, 
          ..., 
          all = all,
          splitby = ~factor(is.na(splitby2)), 
@@ -761,7 +762,6 @@ tableM = function(.data,
          test_type = test_type, 
          simple = simple,
          condense = condense,
-         piping = piping,
          rounding = rounding, 
          var_names = var_names, 
          format_output = format_output, 
@@ -774,7 +774,12 @@ tableM = function(.data,
          align=align,
          export=export)
   
-  return(tabM)
+  if (piping){
+    print(tabM)
+    invisible(.data)
+  } else {
+    return(tabM)
+  }
 }
 
 
