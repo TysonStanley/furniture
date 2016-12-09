@@ -650,3 +650,130 @@ table1_ <- function(..., d_, .cl=NULL){
   
   return(df2)
 }
+
+
+
+
+#' Table 1 for Missing Data Analysis
+#' 
+#' Produces a descriptive table, stratified a variable with missing values, 
+#' providing means/frequencies and standard deviations/percentages. 
+#' It is well-formatted for easy transition to academic article or report. 
+#' Can be used within the piping framework [see library(magrittr)].
+#' 
+#' @param .data the data.frame that is to be summarized
+#' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
+#' @param all logical; if set to \code{TRUE} all variables in the dataset are used. If there is a stratifying variable then that is the only variable excluded.
+#' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0
+#' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
+#' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
+#' @param medians a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced
+#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
+#' @param test_type has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)
+#' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
+#' @param condense logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category
+#' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
+#' @param rounding the number of digits after the decimal for means and SD's; default is 2
+#' @param var_names custom variable names to be printed in the table
+#' @param format_output has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
+#' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
+#' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
+#' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
+#' @param m_label when \code{NAkeep = TRUE} this provides a label for the missing values in the table
+#' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
+#' 
+#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+#'
+#' @examples 
+#' ## Ficticious Data ##
+#' library(furniture)
+#' library(tidyverse)
+#' 
+#' x  <- runif(1000)
+#' y  <- rnorm(1000)
+#' z  <- factor(sample(c(0,1), 1000, replace=TRUE))
+#' a  <- factor(sample(c(1,2), 1000, replace=TRUE))
+#' df <- data.frame(x, y, z, a)
+#' 
+#' ## Simple
+#' table1(df, x, y, z, a)
+#' 
+#' ## Stratified
+#' ## both below are the same
+#' table1(df, x, y, z,
+#'        splitby = ~ a)
+#' table1(df, x, y, z,
+#'        splitby = "a")
+#' 
+#' ## With Piping
+#' df %>%
+#'   table1(x, y, z, 
+#'          splitby = ~a, 
+#'          piping = TRUE) %>%
+#'   summarise(count = n())
+#' 
+#' ## Adjust variables within function
+#' table1(df, ifelse(x > 0, 1, 0), z,
+#'        var_names = c("X2", "Z"))
+#'          
+#'
+#' @export
+#' @import stats
+#' @importFrom knitr kable
+tableM = function(.data, 
+                  ..., 
+                  all = FALSE,
+                  missing_var = NULL, 
+                  row_wise = FALSE, 
+                  splitby_labels = NULL, 
+                  medians = NULL,
+                  test = FALSE, 
+                  test_type = "default", 
+                  simple = FALSE,
+                  condense = FALSE,
+                  piping = FALSE,
+                  rounding = 2, 
+                  var_names = NULL, 
+                  format_output = "pvalues", 
+                  output_type = "text", 
+                  format_number = FALSE,
+                  NAkeep = FALSE, 
+                  m_label = "Missing",
+                  booktabs = TRUE, 
+                  caption=NULL, 
+                  align=NULL,
+                  export=NULL){
+  
+  .data$splitby2 = eval(parse(text = paste(missing_var)[[length(paste(missing_var))]]), .data)
+  
+  tabM = table1(.data = .data, 
+         ..., 
+         all = all,
+         splitby = ~factor(is.na(splitby2)), 
+         row_wise = row_wise, 
+         splitby_labels = splitby_labels, 
+         medians = medians,
+         test = test, 
+         test_type = test_type, 
+         simple = simple,
+         condense = condense,
+         piping = piping,
+         rounding = rounding, 
+         var_names = var_names, 
+         format_output = format_output, 
+         output_type = output_type, 
+         format_number = format_number,
+         NAkeep = NAkeep, 
+         m_label = m_label,
+         booktabs = booktabs, 
+         caption=caption, 
+         align=align,
+         export=export)
+  
+  return(tabM)
+}
+
+

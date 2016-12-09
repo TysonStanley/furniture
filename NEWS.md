@@ -2,9 +2,10 @@
 
 Three big changes:
 
-1. `simple_table1` and `table1` are no longer with us. The functionality has been integrated into `table1`.
+1. `simple_table1` is no longer with us. The functionality has been integrated into `table1`.
 2. `table1` has a "condensed" version that leaves less white space and is more in line with some academic journals.
 3. The "simple" option has been added to `table1` which allows only the percentages (instead of counts and percentages) for categorical variables.
+4. `tableM` is a new function that can analyze a missing data by putting a variable with missingness in the "missing_var" argument.
 
 Enjoy!
 
