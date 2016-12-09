@@ -82,8 +82,19 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        format_number = TRUE)
 ```
 
-This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table:
+The table can be exported directly to a folder in the working directory called "Table1". Using `export`, we provide it with a string that will be the name of the CSV containing the formatted table.
 ```{r table1.6}
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE,
+       var_names = c("A", "B", "D", "New Var"),
+       splitby_labels = c("Control", "Treatment"),
+       format_number = TRUE,
+       export = "example_table1")
+```
+
+This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table:
+```{r table1.7}
 table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
@@ -92,19 +103,29 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        output_type = "latex")
 ```
 
-## Simple Table 1
-
-Last item to show you: `simple_table1()`. This instead of reporting counts and percentages for categorical variables, it reports only percentages. I have more plans for this function but for now, that is the main benefit over `table1()`.
-
+Last item to show you regarding `table1()` is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.
 ```{r simple_table1.1}
-simple_table1(df, a, b, d, ifelse(a > 1, 1, 0),
-              splitby=~factor(c), 
-              test=TRUE,
-              var_names = c("A", "B", "D", "New Var"),
-              splitby_labels = c("Control", "Treatment"))
+table1(df, a, b, d, ifelse(a > 1, 1, 0),
+       splitby=~factor(c), 
+       test=TRUE,
+       var_names = c("A", "B", "D", "New Var"),
+       splitby_labels = c("Control", "Treatment"),
+       simple = TRUE,
+       condense = TRUE)
 ```
+
+## `tableM`
+
+Final item for this vignette--`tableM`. This function provides the "Table 1" format for a stratifying variable that has missing values.
+```{r simple_table1.1}
+tableM(df, a, b, factor(c),
+       missing_var=~d, 
+       test=TRUE,
+       simple = TRUE)
+```
+
 
 ## Conclusion
 
-The three functions: `table1`, `simple_table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+The three functions: `table1`, `tableM` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
 

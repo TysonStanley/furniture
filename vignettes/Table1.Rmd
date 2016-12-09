@@ -23,13 +23,14 @@ table1(.data, ..., splitby, row_wise, test, output_type, format_output, format_n
 
 It contains several useful features for summarizing your data:
 
-1. It simply summarizes many variables succinctly providing means/counts and SD's/percentages.
-2. The summary can be by a grouping factor (i.e., splitby).
-3. It uses a similar API to the popular tidyverse groups of packages.
-4. It can be used in piping.
-5. It can give bivariate test results for the variable with the grouping variable, which provides the correct test type depending on the variable types.
-6. It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see `knitr::kable`).
-7. Numbers can be formatted nicely.
+1. It simply summarizes many variables succinctly providing means/counts and SD's/percentages. By providing variable names to the `medians` option, you can obtain the median and the first quartile/third quantile.
+2. The descriptive statistics can be by a grouping factor (i.e., splitby).
+3. It uses a similar API to the popular tidyverse groups of packages and can be used in a pipe.
+4. It can give bivariate test results for the variable with the grouping variable, which provides the correct test type depending on the variable types.
+5. It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see `knitr::kable`).
+6. Numbers can be formatted nicely.
+7. Table has multiple formatting options to fit the many needs.
+8. The table can be exported to a CSV with `export = "file_name"`.
 
 To illustrate, we'll walk through the main arguments with an example on some ficticious data.
 
