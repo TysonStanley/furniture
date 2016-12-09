@@ -19,6 +19,8 @@ tableM(.data, ..., all = FALSE, missing_var = NULL, row_wise = FALSE,
 
 \item{all}{logical; if set to \code{TRUE} all variables in the dataset are used. If there is a stratifying variable then that is the only variable excluded.}
 
+\item{missing_var}{the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0}
+
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
 \item{splitby_labels}{allows for custom labels of the splitby levels; must match the number of levels of the splitby variable}
@@ -56,8 +58,6 @@ tableM(.data, ..., all = FALSE, missing_var = NULL, row_wise = FALSE,
 \item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
 \item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
-
-\item{splitby}{the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
