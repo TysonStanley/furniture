@@ -99,7 +99,7 @@ table1 = function(.data,
   } else {
     NAkeep = "no"
   }
-  
+
   if (format_number){
     f1 = ","
   } else {
@@ -144,6 +144,8 @@ table1 = function(.data,
   } else {
     test = FALSE
   }
+  
+  OR = NULL
   
   if (!is.null(splitby_labels))
     levels(d$split) = splitby_labels
@@ -239,7 +241,7 @@ table1 = function(.data,
     
     for (j in 1:length(tab)){
       if (is.factor(d[,j])){
-        if (!grepl("text", output_type)){
+        if (!grepl("^t", output_type)){
           tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
         } else {
           tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
@@ -373,10 +375,9 @@ table1 = function(.data,
     }
   ## == Finished Not Condense == ##
     
+    
   ## == Condense == ##
   } else if (condense){
-    message("condense = TRUE currently being developed fully.")
-    
     if (test){
       if (grepl("p|P", format_output) | grepl("s|S", format_output))
         tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
@@ -388,9 +389,9 @@ table1 = function(.data,
       if (is.factor(d[,j])){
         if (length(levels(d[,j])) == 2){
           if (!grepl("text", output_type)){
-            tabX = data.frame(paste(names(table(d[,j])[2])))
+            tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
           } else {
-            tabX = data.frame(paste(names(table(d[,j])[2])))
+            tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
           }
         } else if (length(levels(d[,j])) > 2){
           if (!grepl("text", output_type)){
@@ -400,46 +401,47 @@ table1 = function(.data,
           }
         }
       } else if (is.numeric(d[,j])){
-        tabX = data.frame(paste(" "))
+        tabX = data.frame(paste(names(d)[j]))
       }
       
       ## Counts and Percentages or Just Percentages
-      if (simple){
-        for (i in 1:length(levels(d$split))){
-          if (is.factor(d[,j])){
-            tabX = data.frame(tabX, 
-                              paste0(round(tab2[[j]][[i]]*100, 1), "%"))
-          } else if (is.numeric(d[,j])){
-            if (!nams[[j]] %in% medians){
+      for (i in 1:length(levels(d$split))){
+        if (is.factor(d[,j])){
+          ## Just percentages
+          if (simple){
+            if (length(levels(d[,j])) == 2){
               tabX = data.frame(tabX, 
-                                paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
-            } else if (nams[[j]] %in% medians){
+                                paste0(round(tab2[[j]][[i]][2]*100, 1), "%"))
+            } else {
+              tabX = data.frame(tabX, paste0(round(tab2[[j]][[i]]*100, 1), "%"))
+            }
+          ## Counts and Percentages
+          } else {
+            if (length(levels(d[,j])) == 2){
               tabX = data.frame(tabX, 
-                                paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
-                                      tab2[[j]][[i]]))
-            }        
-          }
-        }
-      } else if (!simple){
-        for (i in 1:length(levels(d$split))){
-          if (is.factor(d[,j])){
-            tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                     round(tab2[[j]][[i]]*100, 1), "%)"))
-          } else if (is.numeric(d[,j])){
-            if (!nams[[j]] %in% medians){
-              tabX = data.frame(paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
-                                       suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
-            } else if (nams[[j]] %in% medians){
-              tabX = data.frame(paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
-                                      tab2[[j]][[i]]))
+                                paste0(suppressWarnings(formatC(tab[[j]][[i]][2], big.mark = f1)), " (", 
+                                       round(tab2[[j]][[i]][2]*100, 1), "%)"))
+            } else {
+              tabX = data.frame(tabX, 
+                                paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                                       round(tab2[[j]][[i]]*100, 1), "%)"))
             }
           }
+          
+          
+        } else if (is.numeric(d[,j])){
+          if (!nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")), " (", 
+                                     suppressWarnings(formatC(tab2[[j]][[i]], big.mark = f1, digits = 2, format = "f")), ")"))
+          } else if (nams[[j]] %in% medians){
+            tabX = data.frame(tabX, 
+                              paste(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1, digits = 2, format = "f")),
+                                    tab2[[j]][[i]]))
+          }        
         }
-      } else {
-        stop("simple needs to be TRUE or FALSE")
       }
+        
 
       ## If test == TRUE, tests of comparisons by split ##
       if (test){
@@ -449,10 +451,12 @@ table1 = function(.data,
                             paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
             tabX = n3
           } else {
-            n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-            names(n3) = names(tabX)
-            tabX = rbind(n3, tabX)
+            blankX = data.frame(names(d)[j], 
+                                matrix(" ", ncol=(length(levels(d$split))), nrow = 1),
+                                paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
+            n3 = data.frame(tabX, " ")
+            names(blankX) = names(n3)
+            tabX = rbind(blankX, n3)
           }
         } else if (is.numeric(d[,j])){
           if (length(levels(d$split))>2){
@@ -469,10 +473,25 @@ table1 = function(.data,
         tabZ = rbind(tabZ, tabX)
       
       } else if (!test){
-        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
-        names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
-        tabW = rbind(n3, tabX)
-        tabZ = rbind(tabZ, tabW)
+        if (is.factor(d[,j])){
+          if (length(levels(d[,j])) == 2){
+            ## Nothing
+          } else {
+            blankX = data.frame(names(d)[j], matrix(" ", ncol=(length(levels(d$split))), nrow = 1))
+            n3 = data.frame(tabX)
+            names(blankX) = names(n3)
+            tabX = rbind(blankX, n3)
+          }
+        } else if (is.numeric(d[,j])){
+          if (length(levels(d$split))>2){
+            ## Nothing
+          } else {
+            ## Nothing
+          }
+        }
+        names(tabZ) = names(tabX) = c(" ", levels(d$split))
+        tabZ = rbind(tabZ, tabX)
+        
       }
     }
   }
@@ -512,7 +531,7 @@ table1 = function(.data,
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
-  if (!is.null(OR)){
+  if (!is.null(OR) & !condense){
     OR = rbind(tabQ, OR)
     final = cbind(final, OR)
     names(final)[4] = " "
@@ -602,30 +621,32 @@ print.table1 <- function(x, ...){
 #' @export
 #' @import stats
 table1_ <- function(..., d_, .cl=NULL){
-  df1 = df2 = NULL
+  df1 = NULL
   vars = eval(substitute(alist(...)))
   
-  ## for dots_capture
-  for (i in seq_along(vars)){
-    df1[[i]] <- eval(vars[[i]], d_)
-    
-    ## if is an index (built on assumption that lengths will differ)
-    if (length(df1[[i]]) != length(d_[[1]]) & is.numeric(df1[[i]])){
-      df2 <- d_[, df1[[i]]]
+  if (length(vars) == 1){
+    if(grepl("^c\\(.*\\)$", vars)){
+      ## Index
+      df2   <- d_[, eval(vars[[1]])]
+    } else {
+      df1 <- eval(vars[[1]], d_)
+      df2 <- as.data.frame(df1)
+      names(df2) <- paste(vars)
     }
-  }
-  
-  if (is.null(df2)){
+  } else {
+    ## Var Names
+    for (i in seq_along(vars)){
+      df1[[i]] <- eval(vars[[i]], d_)
+    }
     df2 <- as.data.frame(df1)
-    names(df2) = paste(.cl)[3:(length(vars)+2)]
+    names(df2) <- paste(vars)
   }
 
   ## Error catching 
   if (dim(d_)[1] != length(df2[[1]])){
-    stop("There is a problem with the variable names supplied. Make sure the ... only includes unquoted var names [e.g. gender, age] or a single vector of indices [e.g. c(3:5, 6)] or that splitby variable is stated as a formula [e.g. splitby = ~var1]",
+    stop("There is a problem with the variable names supplied.",
          call.=FALSE)
   }
   
   return(df2)
 }
-

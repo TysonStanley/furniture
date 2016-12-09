@@ -122,5 +122,44 @@ test_that("table1 produces table1", {
                          simple = FALSE,
                          export = "test_tab",
                          medians = c("a", "c")), "table1")
+  ## Condense
+  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         test=FALSE, 
+                         output_type = "text2",
+                         simple = FALSE,
+                         condense = TRUE,
+                         medians = c("a", "c")), "table1")
+  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         test=FALSE, 
+                         output_type = "text2",
+                         simple = TRUE,
+                         condense = TRUE,
+                         medians = c("a", "c")), "table1")
+  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text2",
+                         simple = FALSE,
+                         condense = TRUE,
+                         medians = c("a", "c")), "table1")
+  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text2",
+                         simple = TRUE,
+                         condense = TRUE,
+                         medians = c("a", "c")), "table1")
+  expect_s3_class(table1(df, a, x, 
+                         splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text",
+                         simple = TRUE,
+                         condense = TRUE,
+                         medians = c("a", "x")), "table1")
+  expect_s3_class(table1(df, a, x, y, b,
+                         splitby=~b, 
+                         test=TRUE, 
+                         output_type = "text2",
+                         simple = TRUE,
+                         condense = TRUE,
+                         medians = c("a", "x")), "table1")
 })
 
