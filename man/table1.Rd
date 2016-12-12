@@ -7,7 +7,7 @@
 table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
   splitby_labels = NULL, medians = NULL, test = FALSE,
   test_type = "default", simple = FALSE, condense = FALSE,
-  piping = FALSE, rounding = 2, var_names = NULL,
+  piping = FALSE, rounding = 2, rounding_perc = 1, var_names = NULL,
   format_output = "pvalues", output_type = "text", format_number = FALSE,
   NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
   align = NULL, export = NULL)
@@ -38,6 +38,8 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{piping}{if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.}
 
 \item{rounding}{the number of digits after the decimal for means and SD's; default is 2}
+
+\item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
 
 \item{var_names}{custom variable names to be printed in the table}
 

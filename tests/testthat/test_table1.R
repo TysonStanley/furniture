@@ -30,7 +30,7 @@ test_that("table1 produces table1", {
   ## Alternative splitby
   expect_s3_class(table1(df, z, x, y, splitby="a", 
                          test=TRUE), "table1")
-  ## OTher formats
+  ## Other formats
   expect_s3_class(table1(df, z, x, y, splitby=~a, 
                          test=TRUE, 
                          format_output = "full"), "table1")
@@ -39,6 +39,36 @@ test_that("table1 produces table1", {
                          format_output = "stars"), "table1")
   ## Error of quotes
   expect_error(table1(df, "a", splitby=~z))
+  ## Rounding
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding=3), "table1")
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding=3,
+                         simple=TRUE), "table1")
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding=3,
+                         condense=TRUE), "table1")
+  ## Rounding_perc
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding_perc=2), "table1")
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding_perc=2,
+                         simple=TRUE), "table1")
+  expect_s3_class(table1(df, z, x, y, splitby=~a, 
+                         test=TRUE, 
+                         format_output = "stars",
+                         rounding_perc=2,
+                         condense=TRUE), "table1")
   ## Different splitby produce same
   expect_equivalent(table1(df, a, x, y, splitby=~z), table1(df, a, x, y, splitby="z"))
   ## Variable names

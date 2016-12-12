@@ -255,7 +255,7 @@ table1 = function(.data,
         for (i in 1:length(levels(d$split))){
           if (is.factor(d[,j])){
             tabX = data.frame(tabX, 
-                              paste0(round(tab2[[j]][[i]]*100, 1), "%"))
+                              paste0(round(tab2[[j]][[i]]*100, rounding_perc), "%"))
           } else if (is.numeric(d[,j])){
             if (!nams[[j]] %in% medians){
               tabX = data.frame(tabX, 
@@ -273,7 +273,7 @@ table1 = function(.data,
           if (is.factor(d[,j])){
             tabX = data.frame(tabX, 
                               paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                     round(tab2[[j]][[i]]*100, 1), "%)"))
+                                     round(tab2[[j]][[i]]*100, rounding_perc), "%)"))
           } else if (is.numeric(d[,j])){
             if (!nams[[j]] %in% medians){
               tabX = data.frame(tabX, 
