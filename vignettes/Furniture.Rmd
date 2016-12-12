@@ -17,10 +17,10 @@ library(furniture)
 
 We will first make a ficticious data set:
 ```{r data}
-df <- data.frame(a = rnorm(100, 1.5, 2), 
-                 b = seq(1, 100, 1), 
-                 c = c(rep("control", 40), rep("Other", 7), rep("treatment", 50), rep("None", 3)),
-                 d = c(sample(1:1000, 90, replace=TRUE), rep(-99, 10)))
+df <- data.frame(a = rnorm(1000, 1.5, 2), 
+                 b = seq(1, 1000, 1), 
+                 c = c(rep("control", 400), rep("Other", 70), rep("treatment", 500), rep("None", 30)),
+                 d = c(sample(1:1000, 900, replace=TRUE), rep(-99, 100)))
 ```
 
 There are two functions that we'll demonstrate here:
@@ -31,7 +31,7 @@ There are two functions that we'll demonstrate here:
 ## Washer
 
 `washer` is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.
-```{r washer}
+```{r washer, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 df <- df %>%
@@ -69,7 +69,9 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"))
+       splitby_labels = c("Control", "Treatment"),
+       simple = TRUE,
+       condense = TRUE)
 ```
 
 You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):
