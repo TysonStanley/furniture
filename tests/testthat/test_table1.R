@@ -46,7 +46,7 @@ test_that("table1 produces table1", {
                          rounding=3), "table1")
   expect_s3_class(table1(df, z, x, y, splitby=~a, 
                          test=TRUE, 
-                         format_output = "stars",
+                         format_output = "pvalues",
                          rounding=3,
                          simple=TRUE), "table1")
   expect_s3_class(table1(df, z, x, y, splitby=~a, 

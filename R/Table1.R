@@ -20,7 +20,7 @@
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param var_names custom variable names to be printed in the table
-#' @param format_output has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
+#' @param format_output has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance. Only "p-values" works when \code{simple} and \code{condense} are set to TRUE
 #' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
 #' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
@@ -107,6 +107,10 @@ table1 = function(.data,
     f1 = ","
   } else {
     f1 = ""
+  }
+  
+  if (simple | condense){
+    format_output = "pvalue"
   }
   
   ## All Variables or Selected Variables

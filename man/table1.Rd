@@ -43,7 +43,7 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 
 \item{var_names}{custom variable names to be printed in the table}
 
-\item{format_output}{has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance}
+\item{format_output}{has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance. Only "p-values" works when \code{simple} and \code{condense} are set to TRUE}
 
 \item{output_type}{default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.}
 
