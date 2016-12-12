@@ -18,7 +18,7 @@ library(furniture)
 This vignette demonstrates the main function of the `furniture` package--`table1`. The main parts of the package are below:
 
 ```{r structure, eval=FALSE}
-table1(.data, ..., splitby, row_wise, test, output_type, format_output, format_number, NAkeep, piping, splitby_labels, var_names)
+table1(.data, ..., splitby, row_wise, test, output_type, format_output, format_number, NAkeep, piping, splitby_labels, var_names, simple, condense)
 ```
 
 It contains several useful features for summarizing your data:
@@ -29,7 +29,7 @@ It contains several useful features for summarizing your data:
 4. It can give bivariate test results for the variable with the grouping variable, which provides the correct test type depending on the variable types.
 5. It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see `knitr::kable`).
 6. Numbers can be formatted nicely.
-7. Table has multiple formatting options to fit the many needs.
+7. Table has multiple formatting options to fit various needs using `output_type`, `format_output`, `simple` and `condense`.
 8. The table can be exported to a CSV with `export = "file_name"`.
 
 To illustrate, we'll walk through the main arguments with an example on some ficticious data.
@@ -39,11 +39,12 @@ To illustrate, we'll walk through the main arguments with an example on some fic
 ```{r data}
 set.seed(84332)
 ## Create Ficticious Data containing several types of variables
-df <- data.frame(a = rnorm(10000),
+df <- data.frame(a = sample(1:10000, 10000, replace = TRUE),
                  b = runif(10000) + rnorm(10000),
-                 c = factor(sample(c(1,2,3,4), 10000, replace=TRUE)),
-                 d = factor(sample(c(0,1), 10000, replace=TRUE)),
-                 e = trunc(rnorm(10000, 20, 5)))
+                 c = factor(sample(c(1,2,3,4,NA), 10000, replace=TRUE)),
+                 d = factor(sample(c(0,1,NA), 10000, replace=TRUE)),
+                 e = trunc(rnorm(10000, 20, 5)),
+                 f = factor(sample(c(0,1,NA), 10000, replace=TRUE)))
 ```
 
 We will use `df` to show these main features of `table1`.
@@ -88,6 +89,33 @@ table1(df,
        test = TRUE)
 ```
 By default, only the p-values are shown but other options exist such as stars or including the test statistics with the p-values using the `format_output` argument.
+
+## Simple and Condensed
+
+The table can be simplified by just producing percentages for categorical variables. Further, it can be condensed by providing only a reference group's percentages for binary variables and the means and SD's are provided on the same line as the variable name.
+```{r s_c}
+table1(df,
+       f, a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       simple = TRUE,
+       condense = TRUE)
+```
+
+
+## Medians
+
+If the medians and the interquartile range is desired instead of means and SD's, simply use the `medians` argument:
+
+```{r meds}
+table1(df,
+       f, a, b, c,
+       splitby = ~d,
+       test = TRUE,
+       simple = TRUE,
+       condense = TRUE,
+       medians = c("a", "b"))
+```
 
 
 ### Output Type
@@ -140,13 +168,19 @@ Finally, to make it easier to implement in the tidyverse of packages, a piping o
 library(tidyverse)
 
 df %>%
+  filter(f == 1) %>%
+  na.omit %>%
   table1(a, b, c,
          splitby = ~d,
          test = TRUE,
-         piping = TRUE) %>%
+         piping = TRUE,
+         simple = TRUE,
+         condense = TRUE) %>%
   ggplot(aes(x = b, y = a, group = d)) +
     geom_point(aes(color = d), alpha =.25) +
-    scale_color_manual(values = c("dodgerblue3", "chartreuse4"), name = "Group")
+    geom_smooth(aes(color = d), method = "lm", se=FALSE) +
+    scale_color_manual(values = c("dodgerblue3", "chartreuse4"), name = "Group") +
+    theme_bw()
 ```
 
 
@@ -165,7 +199,7 @@ table1(df,
 
 This is particularly useful when you adjust a variable within the function:
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 table1(df,
        factor(ifelse(a > 1, 1, 0)), b, c,
        splitby = ~d,
@@ -192,4 +226,4 @@ data.frame(tab1)
 
 ## Conclusions
 
-`table1` can be a valuable addition to the tools that are being utilized to analyze biobehavioral and social data. Let me know if you find any bugs or if you have suggestions on development. 
+`table1` can be a valuable addition to the tools that are being utilized to analyze descriptive statistics. Enjoy this valuable piece of furniture! 
