@@ -18,6 +18,7 @@
 #' @param condense logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category
 #' @param piping if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.
 #' @param rounding the number of digits after the decimal for means and SD's; default is 2
+#' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param var_names custom variable names to be printed in the table
 #' @param format_output has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance
 #' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
@@ -81,6 +82,7 @@ table1 = function(.data,
                   condense = FALSE,
                   piping = FALSE,
                   rounding = 2, 
+                  rounding_perc = 1,
                   var_names = NULL, 
                   format_output = "pvalues", 
                   output_type = "text", 
@@ -184,7 +186,7 @@ table1 = function(.data,
         tab2[[i]] = round(tapply(d[,i], d$split, sd, na.rm=TRUE), rounding)
       } else if (nams[[i]] %in% medians){
         tab[[i]] = round(tapply(d[,i], d$split, median, na.rm=TRUE), rounding)
-        tab2[[i]] = tapply(d[,i], d$split, function(x) paste0("[", suppressWarnings(formatC(round(IQR(x, na.rm=TRUE), 1), 
+        tab2[[i]] = tapply(d[,i], d$split, function(x) paste0("[", suppressWarnings(formatC(round(IQR(x, na.rm=TRUE), rounding_perc), 
                                                                                             big.mark = f1, digits = 1, format = "f")), "]"))
       }
       if (any(N < 20)){
