@@ -1,5 +1,5 @@
 
-### CRAN Version (1.2.2)
+### CRAN Version (1.4.1)
 
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
@@ -26,7 +26,7 @@ The latest stable build of the package can be downloaded from CRAN via:
 ```r
 install.packages("furniture")
 ```
-However, currently the CRAN version has a small bug with the percentages. Please use the developmental version until the CRAN version is updated past 1.2.2. You can download the developmental version via:
+You can download the developmental version via:
 
 ```r
 library(devtools)
@@ -38,5 +38,5 @@ install_github("tysonstanley/furniture")
 
 The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as `library(dplyr)`, `library(tidyr)`, and `library(ggplot2)` with `library(furniture)` to accomplish this.
 
-
+The most important function--`table1`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonstanley.github.io](tysonstanley.github.io) for several examples of its use.
 
