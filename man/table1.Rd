@@ -5,9 +5,8 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  second = NULL, row_wise = FALSE, test = FALSE, simple = FALSE,
-  condense = FALSE, rounding_perc = 1, var_names = NULL,
-  format_output = "pvalues", output_type = "text", format_number = FALSE,
+  second = NULL, row_wise = FALSE, test = FALSE, type = NULL,
+  rounding_perc = 1, var_names = NULL, format_number = FALSE,
   NAkeep = FALSE, booktabs = TRUE, caption = NULL, align = NULL,
   export = NULL)
 }
@@ -28,17 +27,11 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
 
-\item{simple}{logical; if set to \code{TRUE} then only percentages are shown for categorical variables.}
-
-\item{condense}{logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category}
+\item{type}{a string or a vector of strings; used to define how values will be displayed. Three main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars", 2. can state "simple" and/or "condense", 3. can add the type of output (e.g., "text", "latex", "html", etc.). These are discussed in more depth in the details section below.}
 
 \item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
 
 \item{var_names}{custom variable names to be printed in the table}
-
-\item{format_output}{has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance. Only "p-values" works when \code{simple} and \code{condense} are set to TRUE}
-
-\item{output_type}{default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.}
 
 \item{format_number}{default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
@@ -60,6 +53,12 @@ Produces a descriptive table, stratified by an optional categorical variable,
 providing means/frequencies and standard deviations/percentages. 
 It is well-formatted for easy transition to academic article or report. 
 Can be used within the piping framework [see library(magrittr)].
+}
+\details{
+In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05;
+2. "simple" then only percentages are shown for categorical variable and
+"condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category;
+3. default is "text", with a slight variant of "text2". The other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
 }
 \examples{
 ## Ficticious Data ##

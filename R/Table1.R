@@ -13,18 +13,20 @@
 #' @param second a vector or list of continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
-#' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
-#' @param condense logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category
+#' @param type a string or a vector of strings; used to define how values will be displayed. Three main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars", 2. can state "simple" and/or "condense", 3. can add the type of output (e.g., "text", "latex", "html", etc.). These are discussed in more depth in the details section below.
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param var_names custom variable names to be printed in the table
-#' @param format_output has three options (with partial matching): 1) "full" provides the table with the type of test, test statistic, and the p-value for each variable; 2) "pvalues" provides the table with the p-values; and 3) "stars" provides the table with stars indicating significance. Only "p-values" works when \code{simple} and \code{condense} are set to TRUE
-#' @param output_type default is "text"; the other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
 #' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
 #' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
+#' 
+#' @details In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05;
+#' 2. "simple" then only percentages are shown for categorical variable and
+#' "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category;
+#' 3. default is "text", with a slight variant of "text2". The other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
 #' 
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
@@ -72,12 +74,9 @@ table1 = function(.data,
                   second = NULL,
                   row_wise = FALSE, 
                   test = FALSE, 
-                  simple = FALSE,
-                  condense = FALSE,
+                  type = NULL,
                   rounding_perc = 1,
                   var_names = NULL, 
-                  format_output = "pvalues", 
-                  output_type = "text", 
                   format_number = FALSE,
                   NAkeep = FALSE, 
                   booktabs = TRUE, 
@@ -89,8 +88,27 @@ table1 = function(.data,
   ## Preprocessing ##
   ###################
   .call = match.call()
-  ## Simple and Condense
-  
+  ## Type
+  if (is.null(type)){
+    type = c("pvalues", "text")
+  }
+  format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
+                                         "full", "f",
+                                         "stars", "s"))]
+  output_type = type[which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))]
+  if (any(grepl("simp", type)) & any(grepl("cond", type))){
+    simple = TRUE
+    condense = TRUE
+  } else if (any(grepl("cond", type))){
+    simple = FALSE
+    condense = TRUE
+  } else if (any(grepl("simp", type))){
+    simple = TRUE
+    condense = FALSE
+  } else {
+    simple = FALSE
+    condense = FALSE
+  }
   ## Formatting for default summaries
   if (format_number){
     f1 = ","
@@ -215,6 +233,7 @@ table1 = function(.data,
     tabZ = table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
                                   format_output, second, nams, simple, output_type, f1)
   }
+  ## Combine Aspects of the table
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
