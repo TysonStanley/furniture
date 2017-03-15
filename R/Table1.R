@@ -13,7 +13,8 @@
 #' @param second a vector or list of continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
-#' @param type a string or a vector of strings; used to define how values will be displayed. Three main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars", 2. can state "simple" and/or "condense", 3. can add the type of output (e.g., "text", "latex", "html", etc.). These are discussed in more depth in the details section below.
+#' @param type what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.
+#' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param var_names custom variable names to be printed in the table
 #' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
@@ -23,10 +24,9 @@
 #' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
 #' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
 #' 
-#' @details In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05;
+#' @details In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05; and
 #' 2. "simple" then only percentages are shown for categorical variable and
-#' "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category;
-#' 3. default is "text", with a slight variant of "text2". The other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
+#' "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.
 #' 
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
@@ -74,7 +74,8 @@ table1 = function(.data,
                   second = NULL,
                   row_wise = FALSE, 
                   test = FALSE, 
-                  type = NULL,
+                  type = "pvalues",
+                  output = "text",
                   rounding_perc = 1,
                   var_names = NULL, 
                   format_number = FALSE,
@@ -89,21 +90,9 @@ table1 = function(.data,
   ###################
   .call = match.call()
   ## Type
-  if (is.null(type)){
-    type = c("pvalues", "text")
-  }
-  if (length(which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p", "full", "f", "stars", "s"))) < 1){
-    format_output = "pvalues"
-  } else {
-    format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
-                                           "full", "f",
-                                           "stars", "s"))]
-  }
-  if (length(which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))) < 1){
-    output_type = "text"
-  } else {
-    output_type = type[which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))]
-  }
+  format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
+                                          "full", "f",
+                                          "stars", "s"))]
   if (any(grepl("simp", type)) & any(grepl("cond", type))){
     simple = TRUE
     condense = TRUE

@@ -5,10 +5,10 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  second = NULL, row_wise = FALSE, test = FALSE, type = NULL,
-  rounding_perc = 1, var_names = NULL, format_number = FALSE,
-  NAkeep = FALSE, booktabs = TRUE, caption = NULL, align = NULL,
-  export = NULL)
+  second = NULL, row_wise = FALSE, test = FALSE, type = "pvalues",
+  output = "text", rounding_perc = 1, var_names = NULL,
+  format_number = FALSE, NAkeep = FALSE, booktabs = TRUE,
+  caption = NULL, align = NULL, export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -27,7 +27,9 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
 
-\item{type}{a string or a vector of strings; used to define how values will be displayed. Three main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars", 2. can state "simple" and/or "condense", 3. can add the type of output (e.g., "text", "latex", "html", etc.). These are discussed in more depth in the details section below.}
+\item{type}{what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.}
+
+\item{output}{how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").}
 
 \item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
 
@@ -55,10 +57,9 @@ It is well-formatted for easy transition to academic article or report.
 Can be used within the piping framework [see library(magrittr)].
 }
 \details{
-In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05;
+In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05; and
 2. "simple" then only percentages are shown for categorical variable and
-"condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category;
-3. default is "text", with a slight variant of "text2". The other options are all format options in the \code{kable()} function in \code{knitr} (e.g., latex, html, markdown, pandoc) as well as "text2" which adds a line below the header in the table.
+"condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.
 }
 \examples{
 ## Ficticious Data ##
