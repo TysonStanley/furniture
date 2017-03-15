@@ -1,3 +1,17 @@
+# Version 1.5.0
+
+`table1()` now has the ability to apply any function to numeric variables that the user supplies (all functions that work with `tapply()` should work with `table1()`. Other than that, the changes are mainly internal changes in `table1()` that have bearing on a few arguments.
+
+1. If no variables are named, then all variables are summarized in the `data.frame` (the `all` argument is no longer used).
+2. Piping is automatically detected so `piping` is not longer used as an argument.
+3. `rounding` is no longer used given a user can define their own function with their own rounding limits.
+4. `test_type` is no longer an argument. The functionality of the `"or"` option was just not being used and was too cumbersome.
+
+I apologize for any inconvenience these changes cause. However, I believe it is best in the long run and will make using and upgrading the package much easier.
+
+Thanks!
+
+
 # Version 1.4.1
 
 Three big changes:

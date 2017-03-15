@@ -38,10 +38,6 @@
 #'          splitby = ~groupvar,
 #'          test = TRUE)
 #' 
-#' data %>%
-#'   simple_table1(var1, var2, var3,
-#'                 splitby = ~groupvar,
-#'                 test = TRUE)
 #' 
 #' ## Washer
 #' x = washer(x, 7, 8, 9)

@@ -307,7 +307,7 @@ print.table1 <- function(x, ...){
     cat("=")
   }
   cat("|\n") 
-  if (x[[2]] != 1){
+  if (!is.null(x[[2]])){
     for (i in 1:round(var_width/2 + first_width - length(x[[2]])/2)){
       cat(" ")
     }
