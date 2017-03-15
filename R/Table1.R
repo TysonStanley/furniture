@@ -372,10 +372,11 @@ table1_ <- function(..., d_, .cl=NULL){
 #' 
 #' @param d the data
 #' @param FUN the summarizing function
-#' @param FUN2 the summarizing function
+#' @param FUN2 the second summarizing function
 #' @param second the variables to which FUN2 is to be applied
-#' @param row_wise 
-#' @param test 
+#' @param row_wise the way to compute the percentages
+#' @param test should significance tests be run?
+#' @param NAkeep whether NA's should be shown in the output of categorical variables
 #' 
 #' @return A data.frame
 #'

@@ -54,15 +54,6 @@ test_that("tableM produces correct table", {
   expect_s3_class(tableM(df, z, x, y, missing_var=~a, 
                          test=TRUE, 
                          NAkeep = TRUE), "table1")
-  ## Piping
-  expect_equivalent(tableM(df, a, x, missing_var=~z, piping = TRUE), df)
-  expect_equivalent(tableM(df, a, x, missing_var=~z, 
-                           piping = TRUE), 
-                    tableM(df, a, x, y, missing_var="z", output_type = "markdown",
-                           piping = TRUE))
-  ## Test type == or
-  expect_s3_class(tableM(df, z, x, y, missing_var=~a, 
-                         test=TRUE, test_type = "or"), "table1")
   ## Format number
   expect_s3_class(tableM(df, z, x, y, missing_var=~a, 
                          test=TRUE, format_number = TRUE), "table1")
