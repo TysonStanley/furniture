@@ -17,5 +17,5 @@ table1_(..., d_, .cl = NULL)
 A data.frame
 }
 \description{
-For internal use in table1().
+For internal use in table1() to extract the right data.
 }

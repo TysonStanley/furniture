@@ -5,8 +5,8 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  second = NULL, row_wise = FALSE, splitby_labels = NULL, test = FALSE,
-  simple = FALSE, condense = FALSE, rounding_perc = 1, var_names = NULL,
+  second = NULL, row_wise = FALSE, test = FALSE, simple = FALSE,
+  condense = FALSE, rounding_perc = 1, var_names = NULL,
   format_output = "pvalues", output_type = "text", format_number = FALSE,
   NAkeep = FALSE, booktabs = TRUE, caption = NULL, align = NULL,
   export = NULL)
@@ -25,8 +25,6 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \item{second}{a vector or list of continuous variables for which the \code{FUN2} should be applied}
 
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
-
-\item{splitby_labels}{allows for custom labels of the splitby levels; must match the number of levels of the splitby variable}
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
 

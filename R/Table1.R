@@ -12,7 +12,6 @@
 #' @param FUN2 a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles
 #' @param second a vector or list of continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
-#' @param splitby_labels allows for custom labels of the splitby levels; must match the number of levels of the splitby variable
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
 #' @param simple logical; if set to \code{TRUE} then only percentages are shown for categorical variables.
 #' @param condense logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category
@@ -68,11 +67,10 @@
 table1 = function(.data, 
                   ..., 
                   splitby = NULL, 
-                  FUN=NULL,
-                  FUN2=NULL,
+                  FUN = NULL,
+                  FUN2 = NULL,
                   second = NULL,
                   row_wise = FALSE, 
-                  splitby_labels = NULL, 
                   test = FALSE, 
                   simple = FALSE,
                   condense = FALSE,
@@ -83,19 +81,28 @@ table1 = function(.data,
                   format_number = FALSE,
                   NAkeep = FALSE, 
                   booktabs = TRUE, 
-                  caption=NULL, 
-                  align=NULL,
-                  export=NULL){
+                  caption = NULL, 
+                  align = NULL,
+                  export = NULL){
   
-  # == # Checks and Data # == #
+  ###################
+  ## Preprocessing ##
+  ###################
   .call = match.call()
+  ## Simple and Condense
   
+  ## Formatting for default summaries
   if (format_number){
     f1 = ","
   } else {
     f1 = ""
   }
-  
+  ## Auto-detect piping
+  if (paste(.call)[[2]] == "."){
+    piping = TRUE
+  } else {
+    piping = FALSE
+  }
   ## Primary Function
   if(is.null(FUN)){
     num_fun <- function(x){
@@ -116,27 +123,34 @@ table1 = function(.data,
   } else {
     num_fun2 <- FUN2
   }
-  
+  ## Missing values in categorical variables
   if (NAkeep){ 
     NAkeep = "always" 
   } else {
     NAkeep = "no"
   }
-  
+  ## Only pvalues are shown in simple or condensed versions
   if (simple | condense){
     format_output = "pvalue"
   }
+  ## Test = TRUE and the splitting variable needs to have more than one level
+  if (test & length(levels(d$split))>1){
+    test = TRUE
+  } else {
+    test = FALSE
+  }
   
+  ########################
+  ## Variable Selecting ##
+  ########################
   ## All Variables or Selected Variables using table1_()
   data = table1_(..., d_=.data, .cl=.call)
   d = as.data.frame(data)
-  
   ### Naming of variables
   if (!is.null(var_names)){
     stopifnot(length(var_names)==length(names(d)))
     names(d) = var_names
   }
-  
   ### Splitby Variable (adds the variable to d as "split")
   if (is.null(splitby)){
     splitby_ = as.factor(1)
@@ -145,46 +159,20 @@ table1 = function(.data,
     splitby_ = eval(parse(text = paste(splitby)[[length(paste(splitby))]]), .data)
     d$split  = droplevels(as.factor(splitby_))
   }
-  
-  ## Test = TRUE and the splitting variable needs to have more than one level
-  if (test & length(levels(d$split))>1){
-    test = TRUE
-  } else {
-    test = FALSE
+  ## For print method
+  if (is.null(splitby)){
+    splitting = NULL
+  } else{
+    splitting = paste(splitby)[[length(paste(splitby))]]
   }
   
-  ## Labels for the splitting var
-  if (!is.null(splitby_labels))
-    levels(d$split) = splitby_labels
-  
-  ## Number of observations per group
-  N = t(tapply(d[[1]], d$split, length))
-  
-  ##############################
-  # == # Summarizing Data # == #
-  ##############################
-  summed = table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
-  tab   = summed[[1]]
-  tab2  = summed[[2]]
-  tests = summed[[3]]
-  nams  = summed[[4]]
-  
-  ##############################
-  # == # Formatting Table # == # 
-  ##############################
-  ## == No Condense == ##
-  if (!condense){
-    tabZ = table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                    format_output, second, nams, simple, output_type, f1)
-  ## == Condense == ##
-  } else if (condense){
-    tabZ = table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                  format_output, second, nams, simple, output_type, f1)
-  }
-
-  # === # Observations and Splitby Name # === #
+  ##################
+  ## Observations ##
+  ##################
+  N   = t(tapply(d[[1]], d$split, length))
+  N[] = sapply(N, as.character)
   N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
-  
+  ## Formatting the N line
   if (grepl("f|F", format_output) & test){
     N = data.frame("Observations", N, "", "")
     names(N) = c(" ", levels(d$split), "Test", "P-Value")
@@ -199,10 +187,6 @@ table1 = function(.data,
     N = data.frame("Observations", N)
     names(N) = c(" ", levels(d$split))
   }
-  
-  ## Adjusting type of N
-  N[] = sapply(N, as.character)
-  
   ## Add formatted lines below header
   if (output_type == "text2"){
     N = rbind(N, N)
@@ -211,39 +195,42 @@ table1 = function(.data,
     }
   }
   
+  ######################
+  ## Summarizing Data ##
+  ######################
+  summed = table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
+  tab    = summed[[1]]
+  tab2   = summed[[2]]
+  tests  = summed[[3]]
+  nams   = summed[[4]]
+  
+  ######################
+  ## Formatting Table ## 
+  ######################
+  ## Not Condensed or Condensed
+  if (!condense){
+    tabZ = table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                    format_output, second, nams, simple, output_type, f1)
+  } else if (condense){
+    tabZ = table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                  format_output, second, nams, simple, output_type, f1)
+  }
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
   final$` ` = as.character(final$` `)
   
-  ############################
-  # === # FINAL OUTPUT # === #
-  ############################
-  if (paste(.call)[[2]] == "."){
-    piping = TRUE
-  } else {
-    piping = FALSE
-  }
-  
+  ##################
+  ## FINAL OUTPUT ##
+  ##################
   if (length(levels(d$split)) == 1){
     names(final)[2] = "Mean/Count (SD/%)"
-  }
-  if (is.null(splitby)){
-    splitting = NULL
-  } else{
-    splitting = paste(splitby)[[length(paste(splitby))]]
   }
   final_l = list("Table1"  = final,
                  "Splitby" = splitting)
   
-  if (!is.null(export)){
-    if (!dir.exists("Table1")){
-      dir.create("Table1")
-    }
-    write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
-  }
-  
-  if (grepl("text", output_type)){  ## regular text output
+  ## regular text output
+  if (grepl("text", output_type)){ 
     class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
@@ -251,7 +238,8 @@ table1 = function(.data,
     } else {
       return(final_l)
     } 
-  } else if (output_type %in% c("latex", "markdown", "html", "pandoc", "rst")){ ##  output from kable
+  ## Output from kable
+  } else if (output_type %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
       knitr::kable(final, format=output_type,
                    booktabs = booktabs,
@@ -266,6 +254,13 @@ table1 = function(.data,
                    align = align,
                    row.names = FALSE)
     }
+  }
+  ## Export Option
+  if (!is.null(export)){
+    if (!dir.exists("Table1")){
+      dir.create("Table1")
+    }
+    write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
   }
 }
 
@@ -276,7 +271,7 @@ print.table1 <- function(x, ...){
   ## Extract data set
   x2 = as.data.frame(x[[1]])
   
-  ## Splitby Name
+  ## Splitby Name and Location
   if (!is.null(x[[2]])){
     x3 = as.data.frame(x[[1]])
     x4 = x3[,-1]
@@ -301,19 +296,22 @@ print.table1 <- function(x, ...){
   tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
     dim(x2)[2] - 1
   
-  ## Print
+  ## Print top border
   cat("\n|")
   for (i in 1:tot_width){
     cat("=")
   }
   cat("|\n") 
+  ## Print splitby name
   if (!is.null(x[[2]])){
     for (i in 1:round(var_width/2 + first_width - length(x[[2]])/2 - 3)){
       cat(" ")
     }
     cat(x[[2]][[1]], "\n")
   }
+  ## Print table
   print(x[[1]], ..., row.names = FALSE, right = FALSE)
+  ## Print bottom border
   cat("|")
   for (i in 1:tot_width){
     cat("=")
@@ -323,7 +321,7 @@ print.table1 <- function(x, ...){
 
 #' Internal Table 1 Function
 #' 
-#' For internal use in table1().
+#' For internal use in table1() to extract the right data.
 #' 
 #' @param ... the variables
 #' @param d_ the data.frame
@@ -368,7 +366,7 @@ table1_ <- function(..., d_, .cl=NULL){
 
 #' Internal Table 1 Summarizing Function
 #' 
-#' For internal use in table1().
+#' For internal use in table1() to summarize data.
 #' 
 #' @param d the data
 #' @param num_fun the summarizing function
@@ -403,7 +401,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
       
-      ## Numeric ##
+    ## Numeric ##
     } else if (is.numeric(d[,i]) | is.integer(d[,i])){
       ## Function 1
       if (!nams[[i]] %in% second){
@@ -413,6 +411,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
         tab[[i]]  = tapply(d[,i], d$split, num_fun2)
       }
       
+      ## For splitby vars with more than 2 levels
       if (length(levels(d$split))>2 & test){
         ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
         comp   = complete.cases(d[,i], d$split)
@@ -440,7 +439,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
 
 #' Internal Table 1 Formatting Function (No Condense)
 #' 
-#' For internal use in table1().
+#' For internal use in table1() to format table without condensing.
 #' 
 #' @param d the data
 #' @param tab the summary statistics
@@ -492,13 +491,9 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
                             paste0(round(tab2[[j]][[i]]*100, rounding_perc), "%"))
         }
         
-        ## Numeric
+    ## Numeric
       } else if (is.numeric(d[,j])){
-        if (!nams[[j]] %in% second){
-          tabX = data.frame(tabX, tab[[j]][[i]])
-        } else if (nams[[j]] %in% second){
-          tabX = data.frame(tabX, tab[[j]][[i]])
-        } 
+        tabX = data.frame(tabX, tab[[j]][[i]])
       }
     }
     
@@ -564,7 +559,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 
 #' Internal Table 1 Formatting Function (Condense)
 #' 
-#' For internal use in table1().
+#' For internal use in table1() to format table with condensing.
 #' 
 #' @param d the data
 #' @param tab the summary statistics
@@ -637,11 +632,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
         
         
       } else if (is.numeric(d[,j])){
-        if (!nams[[j]] %in% second){
-          tabX = data.frame(tabX, tab[[j]][[i]])
-        } else if (nams[[j]] %in% second){
-          tabX = data.frame(tabX, tab[[j]][[i]])
-        }        
+        tabX = data.frame(tabX, tab[[j]][[i]])
       }
     }
     

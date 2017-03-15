@@ -38,5 +38,5 @@ table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc,
 A data.frame
 }
 \description{
-For internal use in table1().
+For internal use in table1() to format table with condensing.
 }

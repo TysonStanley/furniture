@@ -25,5 +25,5 @@ table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
 A data.frame
 }
 \description{
-For internal use in table1().
+For internal use in table1() to summarize data.
 }
