@@ -1,22 +1,36 @@
 #' NHANES 2009-2010
 #'
 #' A dataset containing information on health, healthcare, and demographics of adolescents
-#' aged 12 - 19 in the United States from 2009 to 2010. This is a cleaned dataset 
+#' aged 18 - 30 in the United States from 2009 to 2010. This is a cleaned dataset 
 #' which is only a subset of the 2009-2010 data release of
 #' the National Health and Nutrition Examination Survey (NHANES).
 #'
-#' @format A data frame with 4727 rows and 10 variables:
+#' @format A data frame with 1417 rows and 24 variables:
 #' \describe{
-#'   \item{seqn}{individual ID}
-#'   \item{year}{year of data release (2006, 2008, 2010)}
+#'   \item{id}{individual ID}
+#'   \item{gen_health}{general health indicator with five levels}
+#'   \item{mod_active}{minutes of moderate activity}
+#'   \item{vig_active}{minutes of vigorous activity}
+#'   \item{home_meals}{number of home meals a week}
 #'   \item{gender}{gender of the individual (factor with "male" or "female")}
-#'   \item{raceth}{race/ethnicity of the individual (factor with "MexAm", "OtherHisp", "White", "Black", "Other")}
-#'   \item{age}{age of individual (numeric)}
-#'   \item{income}{income as a ratio of income-to-poverty line}
-#'   \item{fmsize}{the size of the individual's family (up to 6)}
-#'   \item{limits}{whether the individual has physical limitations (factor 1 = Limitations, 0 = No Limitations)}
-#'   \item{medcond}{whether the individual has at least one medical condition [i.e. asthma, psoriasis, overweight, celiac, and/or trouble seeing] (factor 1 = Yes, 0 = No)}
-#'   \item{hinsur}{whether the individual has health insurance (factor 1 = insured, 0 = not insured)}
+#'   \item{age}{age of the individual in years}
+#'   \item{marijuana}{whether the individual has used marijuana}
+#'   \item{illicit}{whether the individual has used illicit drugs}
+#'   \item{rehab}{whether the individual has been to rehab for their drug usage}
+#'   \item{asthma}{whether the individual has asthma}
+#'   \item{overweight}{whether the individual is overweight}
+#'   \item{cancer}{whether the individual has cancer}
+#'   \item{low_int}{rating of whether the individual has low interest in things}
+#'   \item{down}{rating of whether the individual has felt down}
+#'   \item{sleeping}{rating of whether the individual has had trouble sleeping}
+#'   \item{low_energy}{rating of whether the individual has low energy}
+#'   \item{appetite}{rating of whether the individual has lost appetite}
+#'   \item{feel_bad}{rating of whether the individual has felt bad}
+#'   \item{no_con}{rating of whether the individual has felt no confidence}
+#'   \item{speak_move}{rating of whether the individual has trouble speaking/moving}
+#'   \item{dead}{rating of whether the individual has wished he/she was dead}
+#'   \item{difficulty}{rating of whether the individual has felt difficulty from the previous conditions}
+#'   \item{active}{minutes of vigorous or moderate activity}
 #' }
 #' @source \url{http://wwwn.cdc.gov/nchs/nhanes/search/nhanes09_10.aspx}
-"nhanes10"
+"nhanes_2010"

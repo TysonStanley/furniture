@@ -797,7 +797,7 @@ tableM = function(.data,
   .call = match.call()
   .d = .data
   .d$splitby2 = eval(parse(text = paste(missing_var)[[length(paste(missing_var))]]), .data)
-  .d$splitby2 = factor(ifelse(is.na(splitby2), "Missing", "Not Missing"))
+  .d$splitby2 = factor(ifelse(is.na(.d$splitby2), "Missing", "Not Missing"))
   
   tabM = table1(.data = .d, 
                 ..., 
