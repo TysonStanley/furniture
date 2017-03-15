@@ -92,10 +92,18 @@ table1 = function(.data,
   if (is.null(type)){
     type = c("pvalues", "text")
   }
-  format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
-                                         "full", "f",
-                                         "stars", "s"))]
-  output_type = type[which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))]
+  if (length(which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p", "full", "f", "stars", "s"))) < 1){
+    format_output = "pvalues"
+  } else {
+    format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
+                                           "full", "f",
+                                           "stars", "s"))]
+  }
+  if (length(which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))) < 1){
+    output_type = "text"
+  } else {
+    output_type = type[which(type %in% c("text", "text2", "latex", "html", "markdown", "pandoc", "rst"))]
+  }
   if (any(grepl("simp", type)) & any(grepl("cond", type))){
     simple = TRUE
     condense = TRUE
