@@ -74,25 +74,20 @@ z  <- factor(sample(c(0,1), 1000, replace=TRUE))
 a  <- factor(sample(c(1,2), 1000, replace=TRUE))
 df <- data.frame(x, y, z, a)
 
-## Simple
-table1(df, x, y, z, a)
-
-## Stratified
 ## both below are the same
-table1(df, x, y, z,
+tableM(df, x, y, z,
        splitby = ~ a)
-table1(df, x, y, z,
+tableM(df, x, y, z,
        splitby = "a")
 
 ## With Piping
 df \%>\%
-  table1(x, y, z, 
-         splitby = ~a, 
-         piping = TRUE) \%>\%
+  tableM(x, y, z, 
+         splitby = ~a) \%>\%
   summarise(count = n())
 
 ## Adjust variables within function
-table1(df, ifelse(x > 0, 1, 0), z,
+tableM(df, ifelse(x > 0, 1, 0), z,
        var_names = c("X2", "Z"))
          
 
