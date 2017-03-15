@@ -371,8 +371,8 @@ table1_ <- function(..., d_, .cl=NULL){
 #' For internal use in table1().
 #' 
 #' @param d the data
-#' @param FUN the summarizing function
-#' @param FUN2 the second summarizing function
+#' @param num_fun the summarizing function
+#' @param num_fun2 the second summarizing function
 #' @param second the variables to which FUN2 is to be applied
 #' @param row_wise the way to compute the percentages
 #' @param test should significance tests be run?

@@ -9,6 +9,10 @@ table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
 \arguments{
 \item{d}{the data}
 
+\item{num_fun}{the summarizing function}
+
+\item{num_fun2}{the second summarizing function}
+
 \item{second}{the variables to which FUN2 is to be applied}
 
 \item{row_wise}{the way to compute the percentages}
@@ -16,10 +20,6 @@ table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
 \item{test}{should significance tests be run?}
 
 \item{NAkeep}{whether NA's should be shown in the output of categorical variables}
-
-\item{FUN}{the summarizing function}
-
-\item{FUN2}{the second summarizing function}
 }
 \value{
 A data.frame
