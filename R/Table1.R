@@ -228,6 +228,13 @@ table1 = function(.data,
   }
   final_l = list("Table1"  = final,
                  "Splitby" = splitting)
+  ## Export Option
+  if (!is.null(export)){
+    if (!dir.exists("Table1")){
+      dir.create("Table1")
+    }
+    write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
+  }
   
   ## regular text output
   if (grepl("text", output_type)){ 
@@ -254,13 +261,6 @@ table1 = function(.data,
                    align = align,
                    row.names = FALSE)
     }
-  }
-  ## Export Option
-  if (!is.null(export)){
-    if (!dir.exists("Table1")){
-      dir.create("Table1")
-    }
-    write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
   }
 }
 
