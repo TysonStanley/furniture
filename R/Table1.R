@@ -277,7 +277,7 @@ print.table1 <- function(x, ...){
   x2 = as.data.frame(x[[1]])
   
   ## Splitby Name
-  if (x[[2]] != 1){
+  if (!is.null(x[[2]])){
     x3 = as.data.frame(x[[1]])
     x4 = x3[,-1]
     x5 = x3[, 1]
