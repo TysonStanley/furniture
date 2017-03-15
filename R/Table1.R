@@ -750,7 +750,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
 #' 
 #' df %>%
 #'   tableM(x, y, z, 
-#'          splitby = ~a) %>%
+#'          missing_var = ~a) %>%
 #'   summarise(count = n())
 #' 
 #'
