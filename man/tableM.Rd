@@ -76,7 +76,7 @@ df <- data.frame(x, y, z, a)
 
 df \%>\%
   tableM(x, y, z, 
-         splitby = ~a) \%>\%
+         missing_var = ~a) \%>\%
   summarise(count = n())
 
 
