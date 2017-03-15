@@ -133,13 +133,7 @@ table1 = function(.data,
   if (simple | condense){
     format_output = "pvalue"
   }
-  ## Test = TRUE and the splitting variable needs to have more than one level
-  if (test & length(levels(d$split))>1){
-    test = TRUE
-  } else {
-    test = FALSE
-  }
-  
+
   ########################
   ## Variable Selecting ##
   ########################
@@ -164,6 +158,12 @@ table1 = function(.data,
     splitting = NULL
   } else{
     splitting = paste(splitby)[[length(paste(splitby))]]
+  }
+  ## Splitby variable needs to have more than one level when test = TRUE
+  if (test & length(levels(d$split))>1){
+    test = TRUE
+  } else {
+    test = FALSE
   }
   
   ##################
