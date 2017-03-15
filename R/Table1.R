@@ -202,6 +202,7 @@ table1 = function(.data,
     N = data.frame("Observations", N)
     names(N) = c(" ", levels(d$split))
   }
+  N[] = sapply(N, as.character)
   ## Add formatted lines below header
   if (output == "text2"){
     N = rbind(N, N)
