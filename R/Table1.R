@@ -19,9 +19,9 @@
 #' @param var_names custom variable names to be printed in the table
 #' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
-#' @param booktabs when \code{output_type != "text"}; option is passed to \code{knitr::kable}
-#' @param caption when \code{output_type != "text"}; option is passed to \code{knitr::kable}
-#' @param align when \code{output_type != "text"}; option is passed to \code{knitr::kable}
+#' @param booktabs when \code{output != "text"}; option is passed to \code{knitr::kable}
+#' @param caption when \code{output != "text"}; option is passed to \code{knitr::kable}
+#' @param align when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
 #' 
 #' @details In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05; and
@@ -203,7 +203,7 @@ table1 = function(.data,
     names(N) = c(" ", levels(d$split))
   }
   ## Add formatted lines below header
-  if (output_type == "text2"){
+  if (output == "text2"){
     N = rbind(N, N)
     for (i in seq_along(N)){
       N[1,i] = paste0(rep("-", times = nchar(names(N)[i])), collapse = "")
@@ -225,10 +225,10 @@ table1 = function(.data,
   ## Not Condensed or Condensed
   if (!condense){
     tabZ = table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                    format_output, second, nams, simple, output_type, f1)
+                                    format_output, second, nams, simple, output, f1)
   } else if (condense){
     tabZ = table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                  format_output, second, nams, simple, output_type, f1)
+                                  format_output, second, nams, simple, output, f1)
   }
   ## Combine Aspects of the table
   tabZ = rbind(N, tabZ)
@@ -253,7 +253,7 @@ table1 = function(.data,
   }
   
   ## regular text output
-  if (grepl("text", output_type)){ 
+  if (grepl("text", output)){ 
     class(final_l) = c("table1", "list")
     if (piping){
       print(final_l)
@@ -262,16 +262,16 @@ table1 = function(.data,
       return(final_l)
     } 
   ## Output from kable
-  } else if (output_type %in% c("latex", "markdown", "html", "pandoc", "rst")){
+  } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
-      knitr::kable(final, format=output_type,
+      knitr::kable(final, format=output,
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
       invisible(.data)
     } else {
-      knitr::kable(final, format=output_type,
+      knitr::kable(final, format=output,
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
@@ -468,13 +468,13 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
 #' @param second the list of variables to apply FUN2
 #' @param nams the variables to which FUN2 is to be applied
 #' @param simple only percentages to be produced?
-#' @param output_type how to print the table (see \code{table1()})
+#' @param output how to print the table (see \code{table1()})
 #' @param f1 the formatting of the numbers
 #' 
 #' @return A data.frame
 #'
 #' @export
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output_type, f1){
+table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
   if (test){
     if (grepl("f|F", format_output))
       tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3))
@@ -486,7 +486,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
   
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
-      if (!grepl("^t", output_type)){
+      if (!grepl("^t", output)){
         tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
       } else {
         tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
@@ -588,13 +588,13 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 #' @param second the list of variables to apply FUN2
 #' @param nams the variables to which FUN2 is to be applied
 #' @param simple only percentages to be produced?
-#' @param output_type how to print the table (see \code{table1()})
+#' @param output how to print the table (see \code{table1()})
 #' @param f1 the formatting of the numbers
 #' 
 #' @return A data.frame
 #'
 #' @export
-table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output_type, f1){
+table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
   if (test){
     if (grepl("p|P", format_output) | grepl("s|S", format_output))
       tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
@@ -605,13 +605,13 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
       if (length(levels(d[,j])) == 2){
-        if (!grepl("text", output_type)){
+        if (!grepl("text", output)){
           tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
         } else {
           tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
         }
       } else if (length(levels(d[,j])) > 2){
-        if (!grepl("text", output_type)){
+        if (!grepl("text", output)){
           tabX = data.frame(paste("--  ", names(table(d[,j]))))
         } else {
           tabX = data.frame(paste("  ", names(table(d[,j]))))

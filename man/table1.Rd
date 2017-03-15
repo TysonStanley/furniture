@@ -39,11 +39,11 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{NAkeep}{when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
 
-\item{booktabs}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
+\item{booktabs}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 
-\item{caption}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
+\item{caption}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 
-\item{align}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
+\item{align}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 
 \item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
 }

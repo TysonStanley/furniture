@@ -5,7 +5,7 @@
 \title{Internal Table 1 Formatting Function (Condense)}
 \usage{
 table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc,
-  format_output, second, nams, simple, output_type, f1)
+  format_output, second, nams, simple, output, f1)
 }
 \arguments{
 \item{d}{the data}
@@ -30,7 +30,7 @@ table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc,
 
 \item{simple}{only percentages to be produced?}
 
-\item{output_type}{how to print the table (see \code{table1()})}
+\item{output}{how to print the table (see \code{table1()})}
 
 \item{f1}{the formatting of the numbers}
 }
