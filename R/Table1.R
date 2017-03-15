@@ -158,7 +158,7 @@ table1 = function(.data,
     levels(d$split) = splitby_labels
   
   ## Number of observations per group
-  N = t(tapply(d[,1], d$split, length))
+  N = t(tapply(d[[1]], d$split, length))
   
   ##############################
   # == # Summarizing Data # == #
@@ -228,7 +228,7 @@ table1 = function(.data,
   if (length(levels(d$split)) == 1){
     names(final)[2] = "Mean/Count (SD/%)"
   }
-  if (splitby_ == 1){
+  if (is.null(splitby)){
     splitting = NULL
   } else{
     splitting = paste(splitby)[[length(paste(splitby))]]
