@@ -111,7 +111,7 @@ table1(df,
        f, a, b, c,
        splitby = ~d,
        test = TRUE,
-       type = c("simple", "condensed")
+       type = c("simple", "condensed"),
        second = c("a", "b"))
 ```
 
