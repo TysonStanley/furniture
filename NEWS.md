@@ -7,7 +7,7 @@
 3. `rounding` is no longer used given a user can define their own function with their own rounding limits.
 4. `test_type` is no longer an argument. The functionality of the `"or"` option was just not being used and was too cumbersome.
 
-I apologize for any inconvenience these changes cause. However, I believe it is best in the long run and will make using and upgrading the package much easier.
+Finally, `tableM()` was removed from the package. It is easily adopted by `table1()` with small modifications to the `splitby` variable. I apologize for any inconvenience these changes cause. However, I believe it is best in the long run and will make using and upgrading the package much easier.
 
 Thanks!
 

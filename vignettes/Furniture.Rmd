@@ -116,15 +116,6 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        condense = TRUE)
 ```
 
-## `tableM`
-
-Final item for this vignette--`tableM`. This function provides the "Table 1" format for a stratifying variable that has missing values.
-```{r tableM}
-tableM(df, a, b, factor(c),
-       missing_var=~d, 
-       test=TRUE,
-       simple = TRUE)
-```
 
 
 ## Conclusion

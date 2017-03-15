@@ -11,9 +11,8 @@ Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
 Description: Contains two main functions (i.e., two pieces of furniture):
     table1() which produces a well-formatted table of descriptives common as Table 1
     in research articles and washer() which is helpful in cleaning up your data. 
-    In addition, tableM() provides a descriptive table to understand patterns of 
-    missing values in the stratifying variable. These furniture functions
-    are designed to simplify common tasks in quantitative analysis.
+    These furniture functions are designed to simplify common tasks in 
+    quantitative analysis.
 Depends:
     R (>= 2.10)
 Imports:
