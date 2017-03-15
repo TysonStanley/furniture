@@ -6,8 +6,12 @@
 2. Piping is automatically detected so `piping` is not longer used as an argument.
 3. `rounding` is no longer used given a user can define their own function with their own rounding limits.
 4. `test_type` is no longer an argument. The functionality of the `"or"` option was just not being used and was too cumbersome.
+5. `format_output`, `condense` and `simple` are combined into one `type` argument (defaults are still the same).
+6. `output_type` is now just `output`.
 
 Finally, `tableM()` was removed from the package. It is easily adopted by `table1()` with small modifications to the `splitby` variable. I apologize for any inconvenience these changes cause. However, I believe it is best in the long run and will make using and upgrading the package much easier.
+
+As an aside, most of these changes are due to a manuscript in review about the package. Several beneficial suggestions were made and so we made those changes at the cost of a small headache at first.
 
 Thanks!
 

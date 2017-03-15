@@ -69,8 +69,7 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       simple = TRUE,
-       condense = TRUE)
+       type = c("simple", "condensed"))
 ```
 
 You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):
@@ -98,7 +97,7 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       output_type = "latex")
+       output = "latex")
 ```
 
 Last item to show you regarding `table1()` is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.
@@ -107,8 +106,7 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       simple = TRUE,
-       condense = TRUE)
+       type = c("simple", "condensed"))
 ```
 
 
