@@ -69,7 +69,6 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"),
        simple = TRUE,
        condense = TRUE)
 ```
@@ -80,17 +79,15 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"),
        format_number = TRUE)
 ```
 
 The table can be exported directly to a folder in the working directory called "Table1". Using `export`, we provide it with a string that will be the name of the CSV containing the formatted table.
-```{r table1.6}
+```{r table1.6, eval=FALSE}
 table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"),
        format_number = TRUE,
        export = "example_table1")
 ```
@@ -101,7 +98,6 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"),
        output_type = "latex")
 ```
 
@@ -111,7 +107,6 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
        var_names = c("A", "B", "D", "New Var"),
-       splitby_labels = c("Control", "Treatment"),
        simple = TRUE,
        condense = TRUE)
 ```
@@ -120,5 +115,5 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
 
 ## Conclusion
 
-The three functions: `table1`, `tableM` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+The three functions: `table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
 

@@ -183,16 +183,15 @@ df %>%
 ```
 
 
-### Splitby Labels and Var Names
+### Var Names
 
-The `splitby_labels` argument gives you the opportunity to name the levels of the splitby factor and the `var_names` argument lets you rename the variables.
+The `var_names` argument lets you rename the variables.
 
 ```{r}
 table1(df,
        a, b, c,
        splitby = ~d,
        test = TRUE,
-       splitby_labels = c("No", "Yes"),
        var_names = c("A", "B", "C"))
 ```
 
@@ -203,7 +202,6 @@ table1(df,
        factor(ifelse(a > 1, 1, 0)), b, c,
        splitby = ~d,
        test = TRUE,
-       splitby_labels = c("No", "Yes"),
        var_names = c("A", "B", "C"))
 ```
 
