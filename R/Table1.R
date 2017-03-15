@@ -748,22 +748,11 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
 #' a  <- factor(sample(c(1,2), 1000, replace=TRUE))
 #' df <- data.frame(x, y, z, a)
 #' 
-#' ## both below are the same
-#' tableM(df, x, y, z,
-#'        splitby = ~ a)
-#' tableM(df, x, y, z,
-#'        splitby = "a")
-#' 
-#' ## With Piping
 #' df %>%
 #'   tableM(x, y, z, 
 #'          splitby = ~a) %>%
 #'   summarise(count = n())
 #' 
-#' ## Adjust variables within function
-#' tableM(df, ifelse(x > 0, 1, 0), z,
-#'        var_names = c("X2", "Z"))
-#'          
 #'
 #' @export
 #' @import stats
