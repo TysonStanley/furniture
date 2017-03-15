@@ -30,4 +30,3 @@ washer(x, is.na, is.nan, value=0)
 washer(x, is.na, is.nan, 1:3, value=0)
 
 }
-

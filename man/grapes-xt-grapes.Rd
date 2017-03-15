@@ -25,4 +25,3 @@ data = data.frame(b, x, y, z)
 factor(data$x) \%xt\% factor(data$b)
 
 }
-

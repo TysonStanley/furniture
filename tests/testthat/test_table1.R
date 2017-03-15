@@ -39,21 +39,6 @@ test_that("table1 produces table1", {
                          format_output = "stars"), "table1")
   ## Error of quotes
   expect_error(table1(df, "a", splitby=~z))
-  ## Rounding
-  expect_s3_class(table1(df, z, x, y, splitby=~a, 
-                         test=TRUE, 
-                         format_output = "stars",
-                         rounding=3), "table1")
-  expect_s3_class(table1(df, z, x, y, splitby=~a, 
-                         test=TRUE, 
-                         format_output = "pvalues",
-                         rounding=3,
-                         simple=TRUE), "table1")
-  expect_s3_class(table1(df, z, x, y, splitby=~a, 
-                         test=TRUE, 
-                         format_output = "stars",
-                         rounding=3,
-                         condense=TRUE), "table1")
   ## Rounding_perc
   expect_s3_class(table1(df, z, x, y, splitby=~a, 
                          test=TRUE, 
@@ -83,15 +68,6 @@ test_that("table1 produces table1", {
   expect_s3_class(table1(df, z, x, y, splitby=~a, 
                          test=TRUE, 
                          NAkeep = TRUE), "table1")
-  ## Piping
-  expect_equal(table1(df, a, x, y, splitby=~z, piping=TRUE), df)
-  expect_equivalent(table1(df, a, x, splitby=~z, 
-                           piping = TRUE), 
-                    table1(df, a, x, y, splitby="z", output_type = "markdown",
-                           piping = TRUE))
-  ## Test type == or
-  expect_s3_class(table1(df, z, x, y, splitby=~a, 
-                         test=TRUE, test_type = "or"), "table1")
   ## Format number
   expect_s3_class(table1(df, z, x, y, splitby=~a, 
                          test=TRUE, format_number = TRUE), "table1")
@@ -125,71 +101,71 @@ test_that("table1 produces table1", {
                          output_type = "text2",
                          simple = TRUE), "table1")
   ## All option
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+  expect_s3_class(table1(df, splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = TRUE), "table1")
   ## Medians
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+  expect_s3_class(table1(df, splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = TRUE,
-                         medians = c("a")), "table1")
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         second = c("a")), "table1")
+  expect_s3_class(table1(df, splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = FALSE,
-                         medians = c("a")), "table1")
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         second = c("a")), "table1")
+  expect_s3_class(table1(df, splitby=~b, 
                          test=FALSE, 
                          output_type = "text2",
                          simple = FALSE,
-                         medians = c("a", "c")), "table1")
+                         second = c("a", "c")), "table1")
   ## Export
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+  expect_s3_class(table1(df, splitby=~b, 
                          test=FALSE, 
                          output_type = "text2",
                          simple = FALSE,
                          export = "test_tab",
-                         medians = c("a", "c")), "table1")
+                         second = c("a", "c")), "table1")
   ## Condense
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+  expect_s3_class(table1(df, splitby=~b, 
                          test=FALSE, 
                          output_type = "text2",
                          simple = FALSE,
                          condense = TRUE,
-                         medians = c("a", "c")), "table1")
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         second = c("a", "c")), "table1")
+  expect_s3_class(table1(df, splitby=~b, 
                          test=FALSE, 
                          output_type = "text2",
                          simple = TRUE,
                          condense = TRUE,
-                         medians = c("a", "c")), "table1")
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         second = c("a", "c")), "table1")
+  expect_s3_class(table1(df, splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = FALSE,
                          condense = TRUE,
-                         medians = c("a", "c")), "table1")
-  expect_s3_class(table1(df, all=TRUE, splitby=~b, 
+                         second = c("a", "c")), "table1")
+  expect_s3_class(table1(df, splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = TRUE,
                          condense = TRUE,
-                         medians = c("a", "c")), "table1")
+                         second = c("a", "c")), "table1")
   expect_s3_class(table1(df, a, x, 
                          splitby=~b, 
                          test=TRUE, 
                          output_type = "text",
                          simple = TRUE,
                          condense = TRUE,
-                         medians = c("a", "x")), "table1")
+                         second = c("a", "x")), "table1")
   expect_s3_class(table1(df, a, x, y, b,
                          splitby=~b, 
                          test=TRUE, 
                          output_type = "text2",
                          simple = TRUE,
                          condense = TRUE,
-                         medians = c("a", "x")), "table1")
+                         second = c("a", "x")), "table1")
 })
 

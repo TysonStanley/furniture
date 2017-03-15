@@ -19,4 +19,3 @@ A data.frame
 \description{
 For internal use in table1().
 }
-

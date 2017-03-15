@@ -4,40 +4,35 @@
 \alias{table1}
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
-table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
-  splitby_labels = NULL, medians = NULL, test = FALSE,
-  test_type = "default", simple = FALSE, condense = FALSE,
-  piping = FALSE, rounding = 2, rounding_perc = 1, var_names = NULL,
+table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
+  second = NULL, row_wise = FALSE, splitby_labels = NULL, test = FALSE,
+  simple = FALSE, condense = FALSE, rounding_perc = 1, var_names = NULL,
   format_output = "pvalues", output_type = "text", format_number = FALSE,
-  NAkeep = FALSE, m_label = "Missing", booktabs = TRUE, caption = NULL,
-  align = NULL, export = NULL)
+  NAkeep = FALSE, booktabs = TRUE, caption = NULL, align = NULL,
+  export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
 
 \item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.}
 
-\item{all}{logical; if set to \code{TRUE} all variables in the dataset are used. If there is a stratifying variable then that is the only variable excluded.}
-
 \item{splitby}{the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0}
+
+\item{FUN}{the function to be applied to summarize the numeric data; default is to report the means and standard deviations}
+
+\item{FUN2}{a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles}
+
+\item{second}{a vector or list of continuous variables for which the \code{FUN2} should be applied}
 
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
 \item{splitby_labels}{allows for custom labels of the splitby levels; must match the number of levels of the splitby variable}
 
-\item{medians}{a vector or list of continuous variables for which medians and 25\% and 75\% quartiles should be produced}
-
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
-
-\item{test_type}{has two options: "default" performs the default tests of significance only; "or" also give unadjusted odds ratios as well based on logistic regression (only use if splitby has 2 levels)}
 
 \item{simple}{logical; if set to \code{TRUE} then only percentages are shown for categorical variables.}
 
 \item{condense}{logical; if set to \code{TRUE} then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category}
-
-\item{piping}{if \code{TRUE} then the table is printed and the original data is passed on. It is very useful in piping situations where one wants the table but wants it to be part of a larger pipe.}
-
-\item{rounding}{the number of digits after the decimal for means and SD's; default is 2}
 
 \item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
 
@@ -50,8 +45,6 @@ table1(.data, ..., all = FALSE, splitby = NULL, row_wise = FALSE,
 \item{format_number}{default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
 \item{NAkeep}{when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
-
-\item{m_label}{when \code{NAkeep = TRUE} this provides a label for the missing values in the table}
 
 \item{booktabs}{when \code{output_type != "text"}; option is passed to \code{knitr::kable}}
 
@@ -94,8 +87,7 @@ table1(df, x, y, z,
 ## With Piping
 df \%>\%
   table1(x, y, z, 
-         splitby = ~a, 
-         piping = TRUE) \%>\%
+         splitby = ~a) \%>\%
   summarise(count = n())
 
 ## Adjust variables within function
@@ -104,4 +96,3 @@ table1(df, ifelse(x > 0, 1, 0), z,
          
 
 }
-
