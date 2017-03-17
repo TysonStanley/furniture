@@ -167,8 +167,6 @@ table1 = function(.data,
   } else {
     splitby_ = eval(parse(text = paste(splitby)[[length(paste(splitby))]]), .data)
     d$split  = droplevels(as.factor(splitby_))
-    which1 = apply(1:(dim(d)[2]-1), 2, function(i) if(all(d[[i]] == splitby_)){i} else {0})
-    d = d[, -which1]
   }
   ## For print method
   if (is.null(splitby)){
