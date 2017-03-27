@@ -278,7 +278,7 @@ table1 = function(.data,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
-      return(kab)
+      kab
     }
   }
 }
