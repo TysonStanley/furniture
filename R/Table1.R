@@ -281,7 +281,7 @@ table1 = function(.data,
       return(kab)
     }
   } else {
-    stop(paste("Output of type:", output, "not recognized"))
+    stop(paste("Output of type", output, "not recognized"))
   }
 }
 
