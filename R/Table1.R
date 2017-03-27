@@ -280,6 +280,8 @@ table1 = function(.data,
                    row.names = FALSE)
       return(kab)
     }
+  } else {
+    stop(paste("Output of type:", output, "not recognized"))
   }
 }
 
