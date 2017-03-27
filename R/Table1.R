@@ -265,18 +265,20 @@ table1 = function(.data,
   ## Output from kable
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
-      knitr::kable(final, format=output,
+      kab = knitr::kable(final, format=output,
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
+      knitr::knit_print(kab)
       invisible(.data)
     } else {
-      knitr::kable(final, format=output,
+      kab = knitr::kable(final, format=output,
                    booktabs = booktabs,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
+      knitr::knit_print(kab)
     }
   }
 }
