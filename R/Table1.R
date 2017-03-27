@@ -270,7 +270,7 @@ table1 = function(.data,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
-      knitr::knit_print(kab)
+      print(kab)
       invisible(.data)
     } else {
       kab = knitr::kable(final, format=output,
@@ -278,7 +278,7 @@ table1 = function(.data,
                    caption = caption,
                    align = align,
                    row.names = FALSE)
-      knitr::knit_print(kab)
+      return(kab)
     }
   }
 }
