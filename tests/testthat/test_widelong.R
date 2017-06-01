@@ -1,0 +1,22 @@
+library(furniture)
+library(testthat)
+
+test_that("long and wide", {
+  x1 <- runif(1000)
+  x2 <- runif(1000)
+  y1 <- rnorm(1000)
+  y2 <- rnorm(1000)
+  z  <- factor(sample(c(0,1), 1000, replace=TRUE))
+  a  <- factor(sample(c(1,2), 1000, replace=TRUE))
+  b  <- factor(sample(c(1,2,3,4), 1000, replace=TRUE))
+  df  <- data.frame(x1, x2, y1, y2, z, a, b)
+  ldf <- long(df, varying = list(c("x1", "x2"),
+                                 c("y1", "y2")),
+              v.names = c("x", "y"))
+  
+  ## Long
+  expect_s3_class(long(df, varying = list(c("x1", "x2"),
+                                          c("y1", "y2")),
+                       sep = ""), "data.frame")
+  expect_s3_class(wide(ldf, v.names = c("x", "y")), "data.frame")
+})
