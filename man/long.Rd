@@ -10,7 +10,9 @@ long(data, varying, ...)
 \item{data}{the data.frame containing the wide format data}
 
 \item{varying}{the variables that are time-varying that are to be placed in long format, 
-needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}}
+needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
+unbalanced (e.g., there are three time points measured for one variable but only two for another),
+using the placeholder variable \code{miss}, helps fix this.}
 
 \item{...}{other arguments accepted by \code{reshape()}}
 }

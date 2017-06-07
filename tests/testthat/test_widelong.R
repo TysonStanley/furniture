@@ -18,5 +18,10 @@ test_that("long and wide", {
   expect_s3_class(long(df, varying = list(c("x1", "x2"),
                                           c("y1", "y2")),
                        sep = ""), "data.frame")
+  expect_s3_class(long(df, varying = list(c("x1", "x2"),
+                                          c("y1", "miss")),
+                       v.names = c("x", "y"),
+                       sep = ""), "data.frame")
+  ## Wide
   expect_s3_class(wide(ldf, v.names = c("x", "y")), "data.frame")
 })

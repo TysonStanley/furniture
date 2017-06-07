@@ -30,7 +30,7 @@ wide.tibble <- function(data, v.names, ...){
 
 #' @importFrom stats reshape
 #' @export
-wide.tbl <- function(data, v.names, ...){
+wide.tbl_df <- function(data, v.names, ...){
   data = as.data.frame(data)
   newd = stats::reshape(data, v.names, ...,
                         direction = "wide")
@@ -63,7 +63,9 @@ wide.matrix <- function(data, v.names, ...){
 #' 
 #' @param data the data.frame containing the wide format data
 #' @param varying the variables that are time-varying that are to be placed in long format, 
-#' needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}
+#' needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
+#' unbalanced (e.g., there are three time points measured for one variable but only two for another),
+#' using the placeholder variable \code{miss}, helps fix this.
 #' @param ... other arguments accepted by \code{reshape()}
 #' 
 #' @seealso \code{stats::reshape()} and \code{sjmisc::to_long()}
@@ -80,6 +82,7 @@ long <- function(data, varying, ...){
 #' @export
 long.tibble <- function(data, varying, ...){
   data = as.data.frame(data)
+  data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
   return(newd)
@@ -87,8 +90,9 @@ long.tibble <- function(data, varying, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.tbl <- function(data, varying, ...){
+long.tbl_df <- function(data, varying, ...){
   data = as.data.frame(data)
+  data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
   return(newd)
@@ -97,6 +101,7 @@ long.tbl <- function(data, varying, ...){
 #' @importFrom stats reshape
 #' @export
 long.data.frame <- function(data, varying, ...){
+  data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
   return(newd)
@@ -105,6 +110,7 @@ long.data.frame <- function(data, varying, ...){
 #' @importFrom stats reshape
 #' @export
 long.matrix <- function(data, varying, ...){
+  data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
   return(newd)
