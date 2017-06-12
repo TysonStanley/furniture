@@ -30,5 +30,3 @@ test_that("long and wide", {
   ## Wide
   expect_s3_class(wide(ldf, v.names = c("x", "y")), "data.frame")
 })
-
-reshape
