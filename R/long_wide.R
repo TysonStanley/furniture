@@ -23,7 +23,7 @@ wide <- function(data, v.names, ...){
 #' @export
 wide.tibble <- function(data, v.names, ...){
   data = as.data.frame(data)
-  newd = stats::reshape(data, v.names, ...,
+  newd = stats::reshape(data, v.names, varying = NULL, ...,
                         direction = "wide")
   return(newd)
 }
@@ -32,14 +32,14 @@ wide.tibble <- function(data, v.names, ...){
 #' @export
 wide.tbl_df <- function(data, v.names, ...){
   data = as.data.frame(data)
-  newd = stats::reshape(data, v.names, ...,
+  newd = stats::reshape(data, v.names, varying = NULL, ...,
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names, ...){
+wide.data.frame <- function(data, v.names, varying = NULL, ...){
   newd = stats::reshape(data, v.names, ...,
                         direction = "wide")
   return(newd)
@@ -48,7 +48,7 @@ wide.data.frame <- function(data, v.names, ...){
 #' @importFrom stats reshape
 #' @export
 wide.matrix <- function(data, v.names, ...){
-  newd = stats::reshape(data, v.names, ...,
+  newd = stats::reshape(data, v.names, varying = NULL, ...,
                         direction = "wide")
   return(newd)
 }
