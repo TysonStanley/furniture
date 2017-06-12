@@ -109,6 +109,10 @@ long.tibble <- function(data, varying, ...){
   data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
+  if (any(names(newd) == "miss")){
+    var_loc = which(names(newd) == "miss")
+    newd = newd[, -var_loc]
+  }
   return(newd)
 }
 
@@ -119,6 +123,10 @@ long.tbl_df <- function(data, varying, ...){
   data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
+  if (any(names(newd) == "miss")){
+    var_loc = which(names(newd) == "miss")
+    newd = newd[, -var_loc]
+  }
   return(newd)
 }
 
@@ -128,6 +136,10 @@ long.data.frame <- function(data, varying, ...){
   data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
+  if (any(names(newd) == "miss")){
+    var_loc = which(names(newd) == "miss")
+    newd = newd[, -var_loc]
+  }
   return(newd)
 }
 
@@ -137,6 +149,10 @@ long.matrix <- function(data, varying, ...){
   data$miss = NA
   newd = stats::reshape(data, varying, ...,
                         direction = "long")
+  if (any(names(newd) == "miss")){
+    var_loc = which(names(newd) == "miss")
+    newd = newd[, -var_loc]
+  }
   return(newd)
 }
 
