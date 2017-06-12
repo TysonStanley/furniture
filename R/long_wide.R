@@ -39,8 +39,8 @@ wide.tbl_df <- function(data, v.names, ...){
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names, varying = NULL, ...){
-  newd = stats::reshape(data, v.names, ...,
+wide.data.frame <- function(data, v.names, ...){
+  newd = stats::reshape(data, v.names, varying = NULL, ...,
                         direction = "wide")
   return(newd)
 }
