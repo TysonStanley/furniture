@@ -611,15 +611,15 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
     if (is.factor(d[,j])){
       if (length(levels(d[,j])) == 2){
         if (!grepl("text", output)){
-          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
+          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j], NAkeep)[2])))
         } else {
-          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j])[2])))
+          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j], NAkeep)[2])))
         }
       } else if (length(levels(d[,j])) > 2){
         if (!grepl("text", output)){
-          tabX = data.frame(paste("--  ", names(table(d[,j]))))
+          tabX = data.frame(paste("--  ", names(table(d[,j], NAkeep))))
         } else {
-          tabX = data.frame(paste("  ", names(table(d[,j]))))
+          tabX = data.frame(paste("  ", names(table(d[,j], NAkeep))))
         }
       }
     } else if (is.numeric(d[,j])){
