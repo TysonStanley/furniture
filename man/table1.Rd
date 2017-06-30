@@ -21,7 +21,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{FUN2}{a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles}
 
-\item{second}{a vector or list of continuous variables for which the \code{FUN2} should be applied}
+\item{second}{a vector or list of quoted continuous variables for which the \code{FUN2} should be applied}
 
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
