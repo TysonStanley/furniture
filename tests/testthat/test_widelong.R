@@ -28,5 +28,8 @@ test_that("long and wide", {
                                   c("y1", "y2", "miss")),
                    v.names = c("x", "y")), "data.frame")
   ## Wide
-  expect_s3_class(wide(ldf, v.names = c("x", "y")), "data.frame")
+  expect_s3_class(wide(ldf, 
+                       v.names = c("x", "y"),
+                       timevar = "time"), "data.frame")
 })
+

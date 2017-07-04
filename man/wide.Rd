@@ -4,12 +4,16 @@
 \alias{wide}
 \title{Long to Wide Data Reshaping}
 \usage{
-wide(data, v.names, ...)
+wide(data, v.names, timevar, idvar = NULL, ...)
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
 
 \item{v.names}{the variable names in quotes of the measures to be separated into multiple columns based on the time variable}
+
+\item{timevar}{the variable name in quotes of the time variable}
+
+\item{idvar}{the ID variable name in quotes}
 
 \item{...}{other arguments accepted by \code{reshape()}}
 }
