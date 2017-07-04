@@ -4,14 +4,14 @@
 \alias{long}
 \title{Wide to Long Data Reshaping}
 \usage{
-long(data, varying, v.names = NULL, id = NULL, timevar = NULL,
-  times = NULL, sep = "")
+long(data, ..., v.names = NULL, id = NULL, timevar = NULL, times = NULL,
+  sep = "")
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
 
-\item{varying}{the variables that are time-varying that are to be placed in long format, 
-needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
+\item{...}{the variables that are time-varying that are to be placed in long format, 
+needs to be in the format \code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is 
 unbalanced (e.g., there are three time points measured for one variable but only two for another),
 using the placeholder variable \code{miss}, helps fix this.}
 
@@ -43,14 +43,13 @@ b  <- factor(sample(c(1,2,3,4), 1000, replace=TRUE))
 df  <- data.frame(x1, x2, x3, y1, y2, z, a, b)
 
 ## "Balanced" Data
-ldf1 <- long(df, varying = list(c("x1", "x2"),
-                                c("y1", "y2")),
+ldf1 <- long(df, 
+             c("x1", "x2"), c("y1", "y2"),
              v.names = c("x", "y"))
 
 ## "Unbalanced" Data
 ldf2 = long(df, 
-            varying = list(c("x1", "x2", "x3"),
-                           c("y1", "y2", "miss")),
+            c("x1", "x2", "x3"), c("y1", "y2", "miss"),
             v.names = c("x", "y"))
 
 

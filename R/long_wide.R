@@ -76,8 +76,8 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL){
 #' have different number of "time points").
 #' 
 #' @param data the data.frame containing the wide format data
-#' @param varying the variables that are time-varying that are to be placed in long format, 
-#' needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
+#' @param ... the variables that are time-varying that are to be placed in long format, 
+#' needs to be in the format \code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is 
 #' unbalanced (e.g., there are three time points measured for one variable but only two for another),
 #' using the placeholder variable \code{miss}, helps fix this.
 #' @param v.names a vector of the names for the newly created variables (length same as number of vectors in \code{varying})
@@ -103,26 +103,26 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL){
 #' df  <- data.frame(x1, x2, x3, y1, y2, z, a, b)
 #' 
 #' ## "Balanced" Data
-#' ldf1 <- long(df, varying = list(c("x1", "x2"),
-#'                                 c("y1", "y2")),
+#' ldf1 <- long(df, 
+#'              c("x1", "x2"), c("y1", "y2"),
 #'              v.names = c("x", "y"))
 #' 
 #' ## "Unbalanced" Data
 #' ldf2 = long(df, 
-#'             varying = list(c("x1", "x2", "x3"),
-#'                            c("y1", "y2", "miss")),
+#'             c("x1", "x2", "x3"), c("y1", "y2", "miss"),
 #'             v.names = c("x", "y"))
 #' 
 #' 
 #' @export
 
-long <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
   UseMethod("long", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-long.tibble <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.tibble <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
       id = names(data)[grep("[i|I][d|D]", names(data))[1]]
@@ -152,7 +152,8 @@ long.tibble <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, time
 
 #' @importFrom stats reshape
 #' @export
-long.tbl_df <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.tbl_df <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
       id = names(data)[grep("[i|I][d|D]", names(data))[1]]
@@ -182,7 +183,8 @@ long.tbl_df <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, time
 
 #' @importFrom stats reshape
 #' @export
-long.data.frame <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.data.frame <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
       id = names(data)[grep("[i|I][d|D]", names(data))[1]]
@@ -211,7 +213,8 @@ long.data.frame <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, 
 
 #' @importFrom stats reshape
 #' @export
-long.matrix <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.matrix <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
       id = names(data)[grep("[i|I][d|D]", names(data))[1]]
