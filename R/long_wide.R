@@ -7,63 +7,63 @@
 #' @param data the data.frame containing the wide format data
 #' @param v.names the variable names in quotes of the measures to be separated into multiple columns based on the time variable
 #' @param timevar the variable name in quotes of the time variable
-#' @param idvar the ID variable name in quotes
+#' @param id the ID variable name in quotes
 #' 
 #' @seealso \code{stats::reshape()}, \code{tidyr::spread()}
 #' 
 #' @importFrom stats reshape
 #' 
 #' @export
-wide <- function(data, v.names, timevar, idvar=NULL){
+wide <- function(data, v.names, timevar, id=NULL){
   UseMethod("wide", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.tibble <- function(data, v.names, timevar, idvar=NULL){
+wide.tibble <- function(data, v.names, timevar, id=NULL){
   data = as.data.frame(data)
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+    id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("id =", id))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, 
+  newd = stats::reshape(data, v.names, timevar, idvar = id, varying = NULL, 
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.tbl_df <- function(data, v.names, timevar, idvar=NULL){
+wide.tbl_df <- function(data, v.names, timevar, id=NULL){
   data = as.data.frame(data)
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+    id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("id =", id))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
+  newd = stats::reshape(data, v.names, timevar, idvar = id, varying = NULL,
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names, timevar, idvar=NULL){
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
+wide.data.frame <- function(data, v.names, timevar, id=NULL){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+    id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("id =", id))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
+  newd = stats::reshape(data, v.names, timevar, idvar = id, varying = NULL,
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.matrix <- function(data, v.names, timevar, idvar=NULL){
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
+wide.matrix <- function(data, v.names, timevar, id=NULL){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+    id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("id =", id))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
+  newd = stats::reshape(data, v.names, timevar, idvar = id, varying = NULL,
                         direction = "wide")
   return(newd)
 }
