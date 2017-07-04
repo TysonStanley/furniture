@@ -4,7 +4,7 @@
 \alias{long}
 \title{Wide to Long Data Reshaping}
 \usage{
-long(data, varying, ...)
+long(data, varying, idvar = NULL, ...)
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
@@ -13,6 +13,8 @@ long(data, varying, ...)
 needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
 unbalanced (e.g., there are three time points measured for one variable but only two for another),
 using the placeholder variable \code{miss}, helps fix this.}
+
+\item{idvar}{the ID variable in quotes}
 
 \item{...}{other arguments accepted by \code{reshape()}}
 }

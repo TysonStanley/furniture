@@ -25,7 +25,7 @@ wide <- function(data, v.names, timevar, idvar=NULL, ...){
 #' @export
 wide.tibble <- function(data, v.names, timevar, idvar=NULL, ...){
   data = as.data.frame(data)
-  if (any(grepl("[i|I][d|D]", names(data)))){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
@@ -38,7 +38,7 @@ wide.tibble <- function(data, v.names, timevar, idvar=NULL, ...){
 #' @export
 wide.tbl_df <- function(data, v.names, timevar, idvar=NULL, ...){
   data = as.data.frame(data)
-  if (any(grepl("[i|I][d|D]", names(data)))){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
@@ -50,7 +50,7 @@ wide.tbl_df <- function(data, v.names, timevar, idvar=NULL, ...){
 #' @importFrom stats reshape
 #' @export
 wide.data.frame <- function(data, v.names, timevar, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
@@ -62,7 +62,7 @@ wide.data.frame <- function(data, v.names, timevar, idvar=NULL, ...){
 #' @importFrom stats reshape
 #' @export
 wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
+  if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
@@ -84,6 +84,7 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
 #' needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
 #' unbalanced (e.g., there are three time points measured for one variable but only two for another),
 #' using the placeholder variable \code{miss}, helps fix this.
+#' @param idvar the ID variable in quotes
 #' @param ... other arguments accepted by \code{reshape()}
 #' 
 #' @seealso \code{stats::reshape()} and \code{sjmisc::to_long()}
@@ -116,16 +117,25 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
 #' 
 #' @export
 
-long <- function(data, varying, ...){
+long <- function(data, varying, idvar=NULL, ...){
   UseMethod("long", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-long.tibble <- function(data, varying, ...){
+long.tibble <- function(data, varying, idvar=NULL, ...){
+  if (any(grepl("[i|I][d|D]", names(data)))){
+    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("idvar =", idvar))
+  } else {
+    if (is.null(idvar)){
+      idvar = "id"
+    }
+  }
   data = as.data.frame(data)
   data$miss = NA
-  newd = stats::reshape(data, varying, ...,
+  ids = 1:NROW(data)
+  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -136,10 +146,19 @@ long.tibble <- function(data, varying, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.tbl_df <- function(data, varying, ...){
+long.tbl_df <- function(data, varying, idvar=NULL, ...){
+  if (any(grepl("[i|I][d|D]", names(data)))){
+    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("idvar =", idvar))
+  } else {
+    if (is.null(idvar)){
+      idvar = "id"
+    }
+  }
   data = as.data.frame(data)
   data$miss = NA
-  newd = stats::reshape(data, varying, ...,
+  ids = 1:NROW(data)
+  newd = stats::reshape(data, varying, idvar = idvar, ids = ids,...,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -150,9 +169,18 @@ long.tbl_df <- function(data, varying, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.data.frame <- function(data, varying, ...){
+long.data.frame <- function(data, varying, idvar=NULL, ...){
+  if (any(grepl("[i|I][d|D]", names(data)))){
+    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("idvar =", idvar))
+  } else {
+    if (is.null(idvar)){
+      idvar = "id"
+    }
+  }
   data$miss = NA
-  newd = stats::reshape(data, varying, ...,
+  ids = 1:NROW(data)
+  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -163,9 +191,18 @@ long.data.frame <- function(data, varying, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.matrix <- function(data, varying, ...){
+long.matrix <- function(data, varying, idvar=NULL, ...){
+  if (any(grepl("[i|I][d|D]", names(data)))){
+    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
+    message(paste("idvar =", idvar))
+  } else {
+    if (is.null(idvar)){
+      idvar = "id"
+    }
+  }
   data$miss = NA
-  newd = stats::reshape(data, varying, ...,
+  ids = 1:NROW(data)
+  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
