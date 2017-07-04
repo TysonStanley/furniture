@@ -4,7 +4,7 @@
 \alias{wide}
 \title{Long to Wide Data Reshaping}
 \usage{
-wide(data, v.names, timevar, idvar = NULL, ...)
+wide(data, v.names, timevar, idvar = NULL)
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
@@ -14,17 +14,13 @@ wide(data, v.names, timevar, idvar = NULL, ...)
 \item{timevar}{the variable name in quotes of the time variable}
 
 \item{idvar}{the ID variable name in quotes}
-
-\item{...}{other arguments accepted by \code{reshape()}}
 }
 \description{
-\code{wide()} is a wrapper of \code{reshape()} that takes the data 
-from a long format to a wide format. All arguments that \code{reshape()} accepts,
-other than \code{direction} since it is set to "wide" here, are accepted 
-here as well.
+\code{wide()} is a wrapper of \code{stats::reshape()} that takes the data 
+from a long format to a wide format.
 }
 \seealso{
-\code{stats::reshape()}
+\code{stats::reshape()}, \code{tidyr::spread()}
 }
 \author{
 Tyson S. Barrett

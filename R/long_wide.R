@@ -1,72 +1,69 @@
 #' @title Long to Wide Data Reshaping
 #' @author Tyson S. Barrett
 #' 
-#' @description \code{wide()} is a wrapper of \code{reshape()} that takes the data 
-#' from a long format to a wide format. All arguments that \code{reshape()} accepts,
-#' other than \code{direction} since it is set to "wide" here, are accepted 
-#' here as well.
+#' @description \code{wide()} is a wrapper of \code{stats::reshape()} that takes the data 
+#' from a long format to a wide format. 
 #' 
 #' @param data the data.frame containing the wide format data
 #' @param v.names the variable names in quotes of the measures to be separated into multiple columns based on the time variable
 #' @param timevar the variable name in quotes of the time variable
 #' @param idvar the ID variable name in quotes
-#' @param ... other arguments accepted by \code{reshape()}
 #' 
-#' @seealso \code{stats::reshape()}
+#' @seealso \code{stats::reshape()}, \code{tidyr::spread()}
 #' 
 #' @importFrom stats reshape
 #' 
 #' @export
-wide <- function(data, v.names, timevar, idvar=NULL, ...){
+wide <- function(data, v.names, timevar, idvar=NULL){
   UseMethod("wide", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.tibble <- function(data, v.names, timevar, idvar=NULL, ...){
+wide.tibble <- function(data, v.names, timevar, idvar=NULL){
   data = as.data.frame(data)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, ...,
+  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, 
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.tbl_df <- function(data, v.names, timevar, idvar=NULL, ...){
+wide.tbl_df <- function(data, v.names, timevar, idvar=NULL){
   data = as.data.frame(data)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, ...,
+  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names, timevar, idvar=NULL, ...){
+wide.data.frame <- function(data, v.names, timevar, idvar=NULL){
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, ...,
+  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
                         direction = "wide")
   return(newd)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
+wide.matrix <- function(data, v.names, timevar, idvar=NULL){
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(idvar)){
     idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("idvar =", idvar))
   }
-  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL, ...,
+  newd = stats::reshape(data, v.names, timevar, idvar, varying = NULL,
                         direction = "wide")
   return(newd)
 }
@@ -74,18 +71,20 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
 #' @title Wide to Long Data Reshaping
 #' @author Tyson S. Barrett
 #' 
-#' @description \code{long()} is a wrapper of \code{reshape()} that takes the data 
-#' from a wide format to a long format. All arguments that \code{reshape()} accepts,
-#' other than \code{direction} since it is set to "long" here, are accepted 
-#' here as well.
+#' @description \code{long()} is a wrapper of \code{stats::reshape()} that takes the data 
+#' from a wide format to a long format. It can also handle unbalanced data (where some measures
+#' have different number of "time points").
 #' 
 #' @param data the data.frame containing the wide format data
 #' @param varying the variables that are time-varying that are to be placed in long format, 
 #' needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If the data is 
 #' unbalanced (e.g., there are three time points measured for one variable but only two for another),
 #' using the placeholder variable \code{miss}, helps fix this.
-#' @param idvar the ID variable in quotes
-#' @param ... other arguments accepted by \code{reshape()}
+#' @param v.names a vector of the names for the newly created variables (length same as number of vectors in \code{varying})
+#' @param id the ID variable in quotes
+#' @param timevar the column with the "time" labels
+#' @param times the labels of the \code{timevar} (default is numeric)
+#' @param sep the separating character between the wide format variable names (default is \code{""}); e.g. "x1" and "x2" would create the variable name of "x"; only applicable if \code{v.names}
 #' 
 #' @seealso \code{stats::reshape()} and \code{sjmisc::to_long()}
 #'
@@ -117,25 +116,32 @@ wide.matrix <- function(data, v.names, timevar, idvar=NULL, ...){
 #' 
 #' @export
 
-long <- function(data, varying, idvar=NULL, ...){
+long <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
   UseMethod("long", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-long.tibble <- function(data, varying, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
-  } else {
-    if (is.null(idvar)){
-      idvar = "id"
+long.tibble <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  if (is.null(id)){
+    if (any(grepl("[i|I][d|D]", names(data)))){
+      id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+      message(paste("id =", id))
+    } else {
+      id = "id"
     }
+  }
+  if (is.null(timevar)){
+    timevar = "time"
+  }
+  if (is.null(times)){
+    times = seq_along(varying[[1]])
   }
   data = as.data.frame(data)
   data$miss = NA
   ids = 1:NROW(data)
-  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
+  newd = stats::reshape(data, varying, v.names, timevar = timevar,
+                        times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -146,19 +152,26 @@ long.tibble <- function(data, varying, idvar=NULL, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.tbl_df <- function(data, varying, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
-  } else {
-    if (is.null(idvar)){
-      idvar = "id"
+long.tbl_df <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  if (is.null(id)){
+    if (any(grepl("[i|I][d|D]", names(data)))){
+      id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+      message(paste("id =", id))
+    } else {
+      id = "id"
     }
+  }
+  if (is.null(timevar)){
+    timevar = "time"
+  }
+  if (is.null(times)){
+    times = seq_along(varying[[1]])
   }
   data = as.data.frame(data)
   data$miss = NA
   ids = 1:NROW(data)
-  newd = stats::reshape(data, varying, idvar = idvar, ids = ids,...,
+  newd = stats::reshape(data, varying, v.names, timevar = timevar,
+                        times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -169,18 +182,25 @@ long.tbl_df <- function(data, varying, idvar=NULL, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.data.frame <- function(data, varying, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
-  } else {
-    if (is.null(idvar)){
-      idvar = "id"
+long.data.frame <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  if (is.null(id)){
+    if (any(grepl("[i|I][d|D]", names(data)))){
+      id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+      message(paste("id =", id))
+    } else {
+      id = "id"
     }
+  }
+  if (is.null(timevar)){
+    timevar = "time"
+  }
+  if (is.null(times)){
+    times = seq_along(varying[[1]])
   }
   data$miss = NA
   ids = 1:NROW(data)
-  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
+  newd = stats::reshape(data, varying, v.names, timevar = timevar,
+                        times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")
@@ -191,18 +211,25 @@ long.data.frame <- function(data, varying, idvar=NULL, ...){
 
 #' @importFrom stats reshape
 #' @export
-long.matrix <- function(data, varying, idvar=NULL, ...){
-  if (any(grepl("[i|I][d|D]", names(data)))){
-    idvar = names(data)[grep("[i|I][d|D]", names(data))[1]]
-    message(paste("idvar =", idvar))
-  } else {
-    if (is.null(idvar)){
-      idvar = "id"
+long.matrix <- function(data, varying, v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+  if (is.null(id)){
+    if (any(grepl("[i|I][d|D]", names(data)))){
+      id = names(data)[grep("[i|I][d|D]", names(data))[1]]
+      message(paste("id =", id))
+    } else {
+      id = "id"
     }
+  }
+  if (is.null(timevar)){
+    timevar = "time"
+  }
+  if (is.null(times)){
+    times = seq_along(varying[[1]])
   }
   data$miss = NA
   ids = 1:NROW(data)
-  newd = stats::reshape(data, varying, idvar = idvar, ids = ids, ...,
+  newd = stats::reshape(data, varying, v.names, timevar = timevar,
+                        times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
   if (any(names(newd) == "miss")){
     var_loc = which(names(newd) == "miss")

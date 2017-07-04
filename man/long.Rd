@@ -4,7 +4,8 @@
 \alias{long}
 \title{Wide to Long Data Reshaping}
 \usage{
-long(data, varying, idvar = NULL, ...)
+long(data, varying, v.names = NULL, id = NULL, timevar = NULL,
+  times = NULL, sep = "")
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
@@ -14,15 +15,20 @@ needs to be in the format \code{list(c("x1", "x2"), c("z1", "z2"), etc.)}. If th
 unbalanced (e.g., there are three time points measured for one variable but only two for another),
 using the placeholder variable \code{miss}, helps fix this.}
 
-\item{idvar}{the ID variable in quotes}
+\item{v.names}{a vector of the names for the newly created variables (length same as number of vectors in \code{varying})}
 
-\item{...}{other arguments accepted by \code{reshape()}}
+\item{id}{the ID variable in quotes}
+
+\item{timevar}{the column with the "time" labels}
+
+\item{times}{the labels of the \code{timevar} (default is numeric)}
+
+\item{sep}{the separating character between the wide format variable names (default is \code{""}); e.g. "x1" and "x2" would create the variable name of "x"; only applicable if \code{v.names}}
 }
 \description{
-\code{long()} is a wrapper of \code{reshape()} that takes the data 
-from a wide format to a long format. All arguments that \code{reshape()} accepts,
-other than \code{direction} since it is set to "long" here, are accepted 
-here as well.
+\code{long()} is a wrapper of \code{stats::reshape()} that takes the data 
+from a wide format to a long format. It can also handle unbalanced data (where some measures
+have different number of "time points").
 }
 \examples{
 

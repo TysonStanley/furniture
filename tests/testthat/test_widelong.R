@@ -11,8 +11,8 @@ test_that("long and wide", {
   a  <- factor(sample(c(1,2), 1000, replace=TRUE))
   b  <- factor(sample(c(1,2,3,4), 1000, replace=TRUE))
   df  <- data.frame(x1, x2, x3, y1, y2, z, a, b)
-  ldf <- long(df, varying = list(c("x1", "x2"),
-                                 c("y1", "y2")),
+  ldf <- long(df, varying = list(c("x1", "x2", "x3"),
+                                 c("y1", "y2", "miss")),
               v.names = c("x", "y"))
   
   ## Long
