@@ -37,7 +37,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{format_number}{default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
-\item{NAkeep}{when sset to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
+\item{NAkeep}{when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
 
 \item{booktabs}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 

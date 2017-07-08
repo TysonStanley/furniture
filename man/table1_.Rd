@@ -11,7 +11,7 @@ table1_(..., d_, .cl = NULL)
 
 \item{d_}{the data.frame}
 
-\item{.cl}{the original functon call}
+\item{.cl}{the original function call}
 }
 \value{
 A data.frame
