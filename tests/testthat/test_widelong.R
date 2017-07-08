@@ -25,9 +25,24 @@ test_that("long and wide", {
   expect_s3_class(long(df, 
                        c("x1", "x2", "x3"), c("y1", "y2", "miss"),
                        v.names = c("x", "y")), "data.frame")
+  ## Long Other Classes
+  expect_s3_class(long(dplyr::as.tbl(df), 
+                       c("x1", "x2"), c("y1", "y2"),
+                       sep = ""), "data.frame")
+  expect_s3_class(long(dplyr::as.tbl(df), 
+                       c("x1", "x2"), c("y1", "miss"),
+                       v.names = c("x", "y"),
+                       sep = ""), "data.frame")
+  expect_s3_class(long(dplyr::as.tbl(df), 
+                       c("x1", "x2", "x3"), c("y1", "y2", "miss"),
+                       v.names = c("x", "y")), "data.frame")
   ## Wide
   expect_s3_class(wide(ldf, 
                        v.names = c("x", "y"),
                        timevar = "time"), "data.frame")
+  expect_s3_class(wide(dplyr::as.tbl(ldf), 
+                       v.names = c("x", "y"),
+                       timevar = "time"), "data.frame")
+  
 })
 
