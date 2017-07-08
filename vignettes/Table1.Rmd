@@ -2,7 +2,7 @@
 title: "Table 1"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Furniture}
+  %\VignetteIndexEntry{Table 1}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 date: "`r Sys.Date()`"

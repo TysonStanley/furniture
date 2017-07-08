@@ -1,7 +1,12 @@
-# Version 1.5.1
+# Version 1.5.4
 
-Small bug fix when using piping and ask for one of the kable output options. This has now been fixed. Additionally, better error catching and improved function tests.
+Three notable changes:
 
+1. Small bug fix when using piping and ask for one of the kable output options. This has now been fixed. Additionally, better error catching and improved function tests.
+2. The `long()` function has been added to the package. It is a wrapper of the `stats::reshape()` function with a direction set to "long", but has added benefits, including a bit clearner syntax, the ability to handle unbalanced data, and works well with the tidyverse.
+3. The `wide()` function has been added as well. It, like `long()`, is a wrapper of `reshape()` but with a set direction of "wide" and has added benefits as well.
+
+Keep me updated on any bugs. Thanks!
 
 
 # Version 1.5.0
