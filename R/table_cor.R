@@ -32,13 +32,14 @@ tableC = function(.data,
   .call = match.call()
   data = table1_(..., d_=.data, .cl=.call)
   d = as.data.frame(data)
-  n = sum(complete.cases(d[[1]]))
   
   ## NA ##
   if (na.rm){
     use1 = "complete.obs"
+    n = sum(with(d, complete.cases(...)))
   } else {
     use1 = "everything"
+    n = length(d[[1]])
   }
   
   ## Correlations ##
