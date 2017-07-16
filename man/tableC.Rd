@@ -12,7 +12,7 @@ tableC(.data, ..., cor_type = "pearson", na.rm = FALSE, rounding = 3,
 
 \item{...}{the unquoted variable names to be included in the correlations}
 
-\item{cor_type}{the correlation type; default is "pearson", other options are "spearman" and "kendall"}
+\item{cor_type}{the correlation type; default is "pearson", other option is "spearman"}
 
 \item{na.rm}{logical (default is \code{FALSE}); if set to \code{TRUE}, the correlations use the "complete.obs" methods option from \code{stats::cor()}}
 

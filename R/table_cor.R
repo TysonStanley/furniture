@@ -4,7 +4,7 @@
 #' 
 #' @param .data the data frame containing the variables
 #' @param ... the unquoted variable names to be included in the correlations
-#' @param cor_type the correlation type; default is "pearson", other options are "spearman" and "kendall"
+#' @param cor_type the correlation type; default is "pearson", other option is "spearman"
 #' @param na.rm logical (default is \code{FALSE}); if set to \code{TRUE}, the correlations use the "complete.obs" methods option from \code{stats::cor()}
 #' @param rounding the value passed to \code{round} for the output of both the correlation and p-value; default is 3
 #' @param output how the table is output; can be "text" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").
@@ -47,7 +47,14 @@ tableC = function(.data,
               method = cor_type,
               use = use1)
   ## Significance ##
-  tvalues = cors/sqrt((1 - cors^2)/(n-2))
+  if (cor_type == "pearson"){
+    tvalues = cors/sqrt((1 - cors^2)/(n-2))
+  } else if (cor_type == "spearman"){
+    tvalues = cors * sqrt((n-2)/(1 - cors^2))
+  } else {
+    stop(paste(cor_type, "is not a possible correlation type with this function."))
+  }
+
   pvalues = 2*pt(abs(tvalues), n-2, lower.tail = FALSE)
   
   ## Formatting Names and Rownames
