@@ -36,7 +36,7 @@ tableC = function(.data,
   ## NA ##
   if (na.rm){
     use1 = "complete.obs"
-    n = sum(with(d, complete.cases(...)))
+    n = sum(complete.cases(d))
   } else {
     use1 = "everything"
     n = length(d[[1]])
