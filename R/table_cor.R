@@ -84,7 +84,7 @@ tableC = function(.data,
   
   ## Output ##
   message("N = ", n, "\n",
-          "P-values are between the parantheses.")
+          "Note: ", cor_type, " correlation (p-value).")
   if (output != "text"){
     kab = knitr::kable(final, format=output,
                        booktabs = booktabs,
