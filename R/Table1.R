@@ -16,8 +16,8 @@
 #' @param type what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.
 #' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
-#' @param var_names custom variable names to be printed in the table
-#' @param format_number default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
+#' @param var_names custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.
+#' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
 #' @param booktabs when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output != "text"}; option is passed to \code{knitr::kable}
@@ -153,10 +153,10 @@ table1 = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using table1_()
-  data = selecting(d_=.data, ...)
-  d = as.data.frame(data)
+  d = selecting(d_=.data, ...)
   ### Naming of variables
   if (!is.null(var_names)){
+    warning("var_names is deprecated. You can now assign names directly:\ne.g. var1 = var1name, var2 = var2name, ...")
     stopifnot(length(var_names)==length(names(d)))
     names(d) = var_names
   }

@@ -33,9 +33,9 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
 
-\item{var_names}{custom variable names to be printed in the table}
+\item{var_names}{custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.}
 
-\item{format_number}{default in FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
+\item{format_number}{default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
 \item{NAkeep}{when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
 
