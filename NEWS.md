@@ -1,3 +1,12 @@
+# Version 1.6.0
+
+A new function was added: `tableC()`, which, like `table1()` provides a nicely formatted table. However, `tableC()` provides correlations instead of the descriptive statistics that  `table1()` focuses on.
+
+We are also deprecating the `var_names` argument in `table1()` since it is now possible to name the variable from within the function itself without relying on a separate argument.
+
+Other small bug fixes.
+
+
 # Version 1.5.4
 
 There are three notable changes in this update:
