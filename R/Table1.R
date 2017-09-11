@@ -153,7 +153,7 @@ table1 = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using table1_()
-  data = table1_(..., d_=.data, .cl=.call)
+  data = selecting(d_=.data, ...)
   d = as.data.frame(data)
   ### Naming of variables
   if (!is.null(var_names)){
@@ -340,49 +340,50 @@ print.table1 <- function(x, ...){
   cat("|\n")
 }
 
-#' Internal Table 1 Function
+#' Selecting Function
 #' 
-#' For internal use in table1() to extract the right data.
+#' For internal use in \code{table1()} and \code{tableC()} to extract the right data. 
+#' Can also be used much like \code{dplyr::select()}, although I'd recommend
+#' one to use \code{dplyr::select()} in general.
 #' 
-#' @param ... the variables
 #' @param d_ the data.frame
-#' @param .cl the original function call
+#' @param ... the variables
 #' 
-#' @return A data.frame
+#' @return The data.frame with the selected variables
 #'
 #' @export
 #' @import stats
-table1_ <- function(..., d_, .cl=NULL){
-  df1 = NULL
-  vars = eval(substitute(alist(...)))
+selecting <- function(d_, ...) {
+  listed <- eval(substitute(alist(...)))
   
-  if (length(vars) == 0){
-    df2 <- d_
-  } else if (length(vars) == 1){
-    if(grepl("^c\\(.*\\)$", vars)){
-      ## Index
-      df2   <- d_[, eval(vars[[1]])]
+  if (length(listed) == 0)
+    return(d_)
+  
+  
+  if (length(listed) == 1 & any(grepl("^c\\(.*\\)$", listed)))
+    return(d_[, eval(listed[[1]])])
+  
+  ## Data Frame
+  df <- lapply(seq_along(listed), 
+               function(i) eval(listed[[i]], d_))
+  
+  ## Variable Names
+  names1 <- names(listed)
+  to_name <- function(i) {
+    if (is.null(names1)) {
+      deparse(listed[[i]])
     } else {
-      df1 <- eval(vars[[1]], d_)
-      df2 <- as.data.frame(df1)
-      names(df2) <- paste(vars)
+      if (names1[[i]] == "") {
+        deparse(listed[[i]])
+      } else {
+        names1[[i]]
+      }
     }
-  } else {
-    ## Var Names
-    for (i in seq_along(vars)){
-      df1[[i]] <- eval(vars[[i]], d_)
-    }
-    df2 <- as.data.frame(df1)
-    names(df2) <- paste(vars)
   }
+  names(df) <- lapply(seq_along(listed), to_name)
   
-  ## Error catching 
-  if (dim(d_)[1] != length(df2[[1]])){
-    stop("There is a problem with the variable names supplied.",
-         call.=FALSE)
-  }
-  
-  return(df2)
+  ## Returned data frame with original row names
+  data.frame(df, row.names = row.names(d_))
 }
 
 #' Internal Table 1 Summarizing Function

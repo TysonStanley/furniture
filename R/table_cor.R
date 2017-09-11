@@ -30,7 +30,7 @@ tableC = function(.data,
   
   ## Preprocessing ##
   .call = match.call()
-  data = table1_(..., d_=.data, .cl=.call)
+  data = selecting(d_=.data, ...)
   d = as.data.frame(data)
   
   ## NA ##

@@ -1,16 +1,17 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.5.5
+Version: 1.6.0
 Date: 2017-07-15
 Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
  	         person("Emily", "Brignone", role="aut"))
 Author: Tyson Barrett [aut, cre],
     Emily Brignone [aut]
 Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
-Description: Contains two main functions (i.e., two pieces of furniture):
+Description: Contains three main functions (i.e., three pieces of furniture):
     table1() which produces a well-formatted table of descriptives common as Table 1
-    in research articles and washer() which is helpful in cleaning up the data. In addition,
+    in research articles, tableC() which produces a well-formatted table of correlations,
+    and washer() which is helpful in cleaning up the data. In addition,
     long() and wide(), built on the stats::reshape(), can help reformat the data.
     These furniture functions are designed to simplify common tasks in 
     quantitative analysis. Other data summary and cleaning tools are also available.
