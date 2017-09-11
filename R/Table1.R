@@ -356,10 +356,10 @@ print.table1 <- function(x, ...){
 selecting <- function(d_, ...) {
   listed <- eval(substitute(alist(...)))
   
+  ## Return all variables
   if (length(listed) == 0)
     return(d_)
-  
-  
+  ## If input are indices
   if (length(listed) == 1 & any(grepl("^c\\(.*\\)$", listed)))
     return(d_[, eval(listed[[1]])])
   
