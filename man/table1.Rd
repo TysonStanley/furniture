@@ -88,8 +88,9 @@ df \%>\%
          splitby = ~a) \%>\%
   summarise(count = n())
 
-## Adjust variables within function
-table1(df, ifelse(x > 0, 1, 0), z,
+## Adjust variables within function and assign name
+table1(df, 
+       x2 = ifelse(x > 0, 1, 0), z,
        var_names = c("X2", "Z"))
          
 
