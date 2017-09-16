@@ -20,7 +20,7 @@ wide <- function(data, v.names, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.tibble <- function(data, v.names, timevar, id=NULL){
+wide.tibble <- function(data, v.names=NULL, timevar, id=NULL){
   data = as.data.frame(data)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
@@ -33,7 +33,7 @@ wide.tibble <- function(data, v.names, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.tbl_df <- function(data, v.names, timevar, id=NULL){
+wide.tbl_df <- function(data, v.names=NULL, timevar, id=NULL){
   data = as.data.frame(data)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
@@ -46,7 +46,7 @@ wide.tbl_df <- function(data, v.names, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names, timevar, id=NULL){
+wide.data.frame <- function(data, v.names=NULL, timevar, id=NULL){
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
@@ -58,7 +58,7 @@ wide.data.frame <- function(data, v.names, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.matrix <- function(data, v.names, timevar, id=NULL){
+wide.matrix <- function(data, v.names=NULL, timevar, id=NULL){
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
