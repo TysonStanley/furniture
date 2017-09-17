@@ -111,14 +111,14 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##               Mean/Count (SD/%)
 ##  Observations 1000             
 ##  a                             
-##               1.6 (1.9)        
+##               1.5 (2.0)        
 ##  b                             
 ##               500.5 (288.8)    
 ##  factor.c.                     
 ##     control   500 (50%)        
 ##     treatment 500 (50%)        
 ##  d                             
-##               497.7 (291.5)    
+##               478.8 (289.9)    
 ## |==============================|</code></pre>
 <p>The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., <code>factor(c)</code>). This can be extended to making a whole new variable in the function as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</code></pre></div>
@@ -127,11 +127,11 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##                      Mean/Count (SD/%)
 ##  Observations        1000             
 ##  a                                    
-##                      1.6 (1.9)        
+##                      1.5 (2.0)        
 ##  b                                    
 ##                      500.5 (288.8)    
 ##  d                                    
-##                      497.7 (291.5)    
+##                      478.8 (289.9)    
 ##  ifelse.a...1..1..0.                  
 ##                      0.6 (0.5)        
 ## |=====================================|</code></pre>
@@ -144,13 +144,13 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##                                  factor(c) 
 ##                      control       treatment     P-Value
 ##  Observations        500           500                  
-##  a                                               0.363  
-##                      1.6 (1.9)     1.5 (2.0)            
+##  a                                               0.969  
+##                      1.5 (2.0)     1.5 (1.9)            
 ##  b                                               &lt;.001  
 ##                      280.5 (221.7) 720.5 (144.5)        
-##  d                                               0.895  
-##                      496.5 (294.9) 499.0 (288.0)        
-##  ifelse.a...1..1..0.                             0.472  
+##  d                                               0.677  
+##                      482.7 (287.1) 474.6 (293.3)        
+##  ifelse.a...1..1..0.                             0.563  
 ##                      0.6 (0.5)     0.6 (0.5)            
 ## |=======================================================|</code></pre>
 <p>The <code>splitby = ~factor(c)</code> stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using <code>test=TRUE</code>.</p>
@@ -167,10 +167,10 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##                           factor(c) 
 ##               control       treatment     P-Value
 ##  Observations 500           500                  
-##  A            1.6 (1.9)     1.5 (2.0)     0.363  
+##  A            1.5 (2.0)     1.5 (1.9)     0.969  
 ##  B            280.5 (221.7) 720.5 (144.5) &lt;.001  
-##  D            496.5 (294.9) 499.0 (288.0) 0.895  
-##  New Var      0.6 (0.5)     0.6 (0.5)     0.472  
+##  D            482.7 (287.1) 474.6 (293.3) 0.677  
+##  New Var      0.6 (0.5)     0.6 (0.5)     0.563  
 ## |================================================|</code></pre>
 <p>You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
@@ -185,13 +185,13 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##                           factor(c) 
 ##               control       treatment     P-Value
 ##  Observations 500           500                  
-##  A                                        0.363  
-##               1.6 (1.9)     1.5 (2.0)            
+##  A                                        0.969  
+##               1.5 (2.0)     1.5 (1.9)            
 ##  B                                        &lt;.001  
 ##               280.5 (221.7) 720.5 (144.5)        
-##  D                                        0.895  
-##               496.5 (294.9) 499.0 (288.0)        
-##  New Var                                  0.472  
+##  D                                        0.677  
+##               482.7 (287.1) 474.6 (293.3)        
+##  New Var                                  0.563  
 ##               0.6 (0.5)     0.6 (0.5)            
 ## |================================================|</code></pre>
 <p>The table can be exported directly to a folder in the working directory called “Table1”. Using <code>export</code>, we provide it with a string that will be the name of the CSV containing the formatted table.</p>
@@ -223,10 +223,10 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
 ##                           factor(c) 
 ##               control       treatment     P-Value
 ##  Observations 500           500                  
-##  A            1.6 (1.9)     1.5 (2.0)     0.363  
+##  A            1.5 (2.0)     1.5 (1.9)     0.969  
 ##  B            280.5 (221.7) 720.5 (144.5) &lt;.001  
-##  D            496.5 (294.9) 499.0 (288.0) 0.895  
-##  New Var      0.6 (0.5)     0.6 (0.5)     0.472  
+##  D            482.7 (287.1) 474.6 (293.3) 0.677  
+##  New Var      0.6 (0.5)     0.6 (0.5)     0.563  
 ## |================================================|</code></pre>
 </div>
 <div id="conclusion" class="section level2">
