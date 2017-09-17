@@ -1,5 +1,5 @@
 
-### CRAN Version (1.5.4)
+### CRAN Version (1.6.0)
 
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
