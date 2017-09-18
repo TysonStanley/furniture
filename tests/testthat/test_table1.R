@@ -132,6 +132,18 @@ test_that("table1 produces table1", {
                          output = "text2",
                          export = "test_tab",
                          second = c("a", "c")), "table1")
+  ## latex2 output
+  expect_is(table1(df, splitby=~b, 
+                         test=FALSE, 
+                         output = "latex2"), "NULL")
+  expect_is(table1(df, splitby=~b, 
+                       test=TRUE, 
+                       output = "latex2"), "NULL")
+  ## header_labels
+  expect_s3_class(table1(df, splitby=~b, 
+                         test=FALSE, 
+                         output = "text2",
+                         header_labels = c(" ", "P-Val"),
+                         second = c("a", "c")), "table1")
 })
-
 

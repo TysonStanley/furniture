@@ -5,10 +5,10 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  second = NULL, row_wise = FALSE, test = FALSE, type = "pvalues",
-  output = "text", rounding_perc = 1, var_names = NULL,
-  format_number = FALSE, NAkeep = FALSE, booktabs = TRUE,
-  caption = NULL, align = NULL, export = NULL)
+  second = NULL, row_wise = FALSE, test = FALSE, header_labels = NULL,
+  type = "pvalues", output = "text", rounding_perc = 1, digits = 1,
+  var_names = NULL, format_number = FALSE, NAkeep = FALSE,
+  booktabs = TRUE, caption = NULL, align = NULL, export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -27,11 +27,15 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level}
 
+\item{header_labels}{a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).}
+
 \item{type}{what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.}
 
-\item{output}{how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").}
+\item{output}{how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc"). A new option, \code{'latex2'}, although more limited, allows the variable name to show and has an overall better appearance.}
 
 \item{rounding_perc}{the number of digits after the decimal for percentages; default is 1}
+
+\item{digits}{the number of significant digits for the numerical variables (if using default functions); default is 1.}
 
 \item{var_names}{custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.}
 

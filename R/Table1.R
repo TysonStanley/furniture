@@ -13,9 +13,11 @@
 #' @param second a vector or list of quoted continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level
+#' @param header_labels a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).
 #' @param type what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.
-#' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc").
+#' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc"). A new option, \code{'latex2'}, although more limited, allows the variable name to show and has an overall better appearance.
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
+#' @param digits the number of significant digits for the numerical variables (if using default functions); default is 1.
 #' @param var_names custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.
 #' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
@@ -75,9 +77,11 @@ table1 = function(.data,
                   second = NULL,
                   row_wise = FALSE, 
                   test = FALSE, 
+                  header_labels = NULL,
                   type = "pvalues",
                   output = "text",
                   rounding_perc = 1,
+                  digits = 1,
                   var_names = NULL, 
                   format_number = FALSE,
                   NAkeep = FALSE, 
@@ -90,54 +94,24 @@ table1 = function(.data,
   ## Preprocessing ##
   ###################
   .call = match.call()
-  ## Type
+  ## Test output
   format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
                                           "full", "f",
                                           "stars", "s"))]
-  if (any(grepl("simp", type)) & any(grepl("cond", type))){
-    simple = TRUE
-    condense = TRUE
-  } else if (any(grepl("cond", type))){
-    simple = FALSE
-    condense = TRUE
-  } else if (any(grepl("simp", type))){
-    simple = TRUE
-    condense = FALSE
-  } else {
-    simple = FALSE
-    condense = FALSE
-  }
-  ## Formatting for default summaries
-  if (format_number){
-    f1 = ","
-  } else {
-    f1 = ""
-  }
+  ## Table type
+  cond_simp = .type_constructor(type)
+  condense  = cond_simp[[1]]
+  simple    = cond_simp[[2]]
+  
+  ## checks
+  .header_labels(header_labels, format_output)
+  
+  
   ## Auto-detect piping
   if (paste(.call)[[2]] == "."){
     piping = TRUE
   } else {
     piping = FALSE
-  }
-  ## Primary Function
-  if(is.null(FUN)){
-    num_fun <- function(x){
-      gettextf("%s (%s)",
-               formatC(mean(x, na.rm=TRUE), big.mark = f1, digits = 1, format = "f"),
-               formatC(sd(x, na.rm=TRUE),   big.mark = f1, digits = 1, format = "f"))
-    }
-  } else {
-    num_fun <- FUN
-  }
-  ## Secondary Function
-  if(is.null(FUN2)){
-    num_fun2 <- function(x){
-      gettextf("%s [%s]",
-               formatC(median(x, na.rm=TRUE), big.mark = f1, digits = 1, format = "f"),
-               formatC(IQR(x, na.rm=TRUE),    big.mark = f1, digits = 1, format = "f"))
-    }
-  } else {
-    num_fun2 <- FUN2
   }
   ## Missing values in categorical variables
   if (NAkeep){ 
@@ -149,15 +123,27 @@ table1 = function(.data,
   if (simple | condense){
     format_output = "pvalue"
   }
+  ## Formatting default functions
+  if (format_number){
+    f1 = ","
+  } else {
+    f1 = ""
+  }
+  ## Functions
+  num_fun  = .summary_functions1(FUN, format_number, digits)
+  num_fun2 = .summary_functions2(FUN2, format_number, digits)
 
   ########################
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using table1_()
   d = selecting(d_=.data, ...)
+  
+  
   ### Naming of variables
   if (!is.null(var_names)){
-    warning("var_names is deprecated. You can now assign names directly:\ne.g. var1 = var1name, var2 = var2name, ...")
+    warning("var_names is deprecated. You can now assign names directly:\ne.g. var1 = var1name, var2 = var2name, ...",
+            call. = FALSE)
     stopifnot(length(var_names)==length(names(d)))
     names(d) = var_names
   }
@@ -182,35 +168,10 @@ table1 = function(.data,
     test = FALSE
   }
   
-  ##################
-  ## Observations ##
-  ##################
-  N   = t(tapply(d[[1]], d$split, length))
-  N[] = sapply(N, as.character)
-  N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
-  ## Formatting the N line
-  if (grepl("f|F", format_output) & test){
-    N = data.frame("Observations", N, "", "")
-    names(N) = c(" ", levels(d$split), "Test", "P-Value")
-  } else if ((grepl("p|P", format_output) | grepl("s|S", format_output)) & test){
-    N = data.frame("Observations", N, " ") 
-    if (grepl("p|P", format_output)){
-      names(N) = c(" ", levels(d$split), "P-Value")
-    } else {
-      names(N) = c(" ", levels(d$split), " ")
-    }
-  } else {
-    N = data.frame("Observations", N)
-    names(N) = c(" ", levels(d$split))
-  }
-  N[] = sapply(N, as.character)
-  ## Add formatted lines below header
-  if (output == "text2"){
-    N = rbind(N, N)
-    for (i in seq_along(N)){
-      N[1,i] = paste0(rep("-", times = nchar(names(N)[i])), collapse = "")
-    }
-  }
+  ####################################
+  ## Observations and Header Labels ##
+  ####################################
+  N = .obs_header(d, f1, format_output, test, output, header_labels)
   
   ######################
   ## Summarizing Data ##
@@ -233,6 +194,7 @@ table1 = function(.data,
                                   format_output, second, nams, simple, output, f1)
   }
   ## Combine Aspects of the table
+  names(tabZ) = names(N)
   tabZ = rbind(N, tabZ)
   rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
   final = tabZ[rem,]
@@ -261,9 +223,18 @@ table1 = function(.data,
       print(final_l)
       invisible(.data)
     } else {
+      cat("\n", caption)
       return(final_l)
     } 
-  ## Output from kable
+  ## Custom Latex Output
+  } else if (output %in% "latex2"){
+    if (is.null(align)){
+      l1 = dim(final)[2]
+      align = c("l", rep("c", (l1-1)))
+    }
+    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby)
+    return(tab)
+  ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
       kab = knitr::kable(final, format=output,
@@ -306,7 +277,7 @@ print.table1 <- function(x, ...){
     max_col_width3 = max(sapply(x5, nchar, type="width"))
     var_width = sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 
       dim(x4)[2] - 1
-    first_width = sum(ifelse(unlist(max_col_width3) > nchar("Observations"), unlist(max_col_width3), nchar("Observations")))
+    first_width = sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
   }
 
   x2[] = sapply(x2, as.character)
@@ -361,7 +332,9 @@ selecting <- function(d_, ...) {
   if (length(listed) == 0)
     return(d_)
   ## If input are indices
-  if (length(listed) == 1 & any(grepl("^c\\(.*\\)$", listed)))
+  if (length(listed) == 1 & 
+      any(grepl("^c\\(.*\\)$", listed) & 
+      length(listed[[1]]) != length(d_[[1]])))
     return(d_[, eval(listed[[1]])])
   
   ## Data Frame
@@ -494,7 +467,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
   for (j in 1:length(tab)){
     if (is.factor(d[,j])){
       if (!grepl("^t", output)){
-        tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep)), "  --"))
+        tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
       } else {
         tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
       }
@@ -619,7 +592,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
         }
       } else if (length(levels(d[,j])) > 2){
         if (!grepl("text", output)){
-          tabX = data.frame(paste("--  ", names(table(d[,j], useNA=NAkeep))))
+          tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
         } else {
           tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
         }
