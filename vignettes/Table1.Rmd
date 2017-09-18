@@ -15,10 +15,12 @@ library(furniture)
 
 # Making Table 1
 
-This vignette demonstrates the main function of the `furniture` package--`table1`. The main parts of the package are below:
+This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `v 1.6.1`.
+
+The main parts of the `table1()` are below:
 
 ```{r structure, eval=FALSE}
-table1(.data, ..., splitby, row_wise, test, type, output, format_number, NAkeep, splitby_labels, var_names)
+table1(.data, ..., splitby, row_wise, test, type, output, format_number, NAkeep)
 ```
 
 It contains several useful features for summarizing your data:
@@ -27,7 +29,7 @@ It contains several useful features for summarizing your data:
 2. The descriptive statistics can be by a grouping factor (i.e., splitby).
 3. It uses a similar API to the popular tidyverse groups of packages and can be used in a pipe.
 4. It can give bivariate test results for the variable with the grouping variable, which provides the correct test type depending on the variable types.
-5. It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see `knitr::kable`).
+5. It is flexible as to its output: can be printed in regular console output or it can be printed in latex (either through kable or through a built-in function), markdown, and pandoc (see `knitr::kable`).
 6. Numbers can be formatted nicely.
 7. Table has multiple formatting options to fit various needs using `output`, `format_output`, `simple` and `condense`.
 8. The table can be exported to a CSV with `export = "file_name"`.
@@ -180,29 +182,27 @@ df %>%
 ```
 
 
-### Var Names
+### Variable Names
 
-The `var_names` argument lets you rename the variables.
+You can also adjust the variable names from within the function as so:
 
 ```{r}
 table1(df,
-       a, b, c,
+       "A var" = a, "B var" = b, "C var" = c,
        splitby = ~d,
-       test = TRUE,
-       var_names = c("A", "B", "C"))
+       test = TRUE)
 ```
 
 This is particularly useful when you adjust a variable within the function:
 
 ```{r, warning=FALSE, message=FALSE}
 table1(df,
-       factor(ifelse(a > 1, 1, 0)), b, c,
+       "New A var" = factor(ifelse(a > 1, 1, 0)), b, c,
        splitby = ~d,
-       test = TRUE,
-       var_names = c("A", "B", "C"))
+       test = TRUE)
 ```
 
-Here we changed `a` to a factor within the function. In order for the name to look better, we can use the `var_names` argument, otherwise it would be named something like `factor.ifelse.a...`.
+Here we changed `a` to a factor within the function. In order for the name to look better, we can assign a new name, otherwise it would be named something like `factor.ifelse.a...`.
 
 
 ## Final Note

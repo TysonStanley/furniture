@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(furniture)
 ```
 
+This vignette is current as of `furniture` `v1.6.1`.
+
 ## Using `furniture`
 
 We will first make a ficticious data set:
@@ -23,10 +25,11 @@ df <- data.frame(a = rnorm(1000, 1.5, 2),
                  d = c(sample(1:1000, 900, replace=TRUE), rep(-99, 100)))
 ```
 
-There are two functions that we'll demonstrate here:
+There are three functions that we'll demonstrate here:
 
 1. `washer`
 2. `table1`
+3. `tableC`
 
 ## Washer
 
@@ -91,27 +94,44 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
        export = "example_table1")
 ```
 
-This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table:
+This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table (not using `kable` however, but a built-in function):
 ```{r table1.7}
-table1(df, a, b, d, ifelse(a > 1, 1, 0),
+table1(df, a, b, d, "new var" = ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
-       var_names = c("A", "B", "D", "New Var"),
-       output = "latex")
+       output = "latex2")
 ```
 
 Last item to show you regarding `table1()` is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.
 ```{r simple_table1.1}
-table1(df, a, b, d, ifelse(a > 1, 1, 0),
+table1(df, a, b, d, "new var" = ifelse(a > 1, 1, 0),
        splitby=~factor(c), 
        test=TRUE,
-       var_names = c("A", "B", "D", "New Var"),
        type = c("simple", "condensed"))
 ```
 
 
+## Table C
+
+This function is to create simple, beautiful correlation tables. The syntax is just like `table1()` in most respects. Below we include all the numberic variables to see their correlations. Since there are missing values in `d` we will use the natural `na.rm=TRUE`.
+
+```{r tableC.1}
+tableC(df, 
+       a, b, d,
+       na.rm = TRUE)
+```
+
+All the adjustments that you can make in `table1()` can be done here as well. For example,
+
+```{r tableC.2}
+tableC(df, 
+       "A" = a, "B" = b, "D" = d,
+       na.rm = TRUE,
+       output = "html")
+```
+
 
 ## Conclusion
 
-The three functions: `table1` and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+The three functions: `table1`, `tableC`, and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
 
