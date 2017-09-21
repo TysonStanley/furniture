@@ -8,7 +8,8 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
   second = NULL, row_wise = FALSE, test = FALSE, header_labels = NULL,
   type = "pvalues", output = "text", rounding_perc = 1, digits = 1,
   var_names = NULL, format_number = FALSE, NAkeep = FALSE,
-  booktabs = TRUE, caption = NULL, align = NULL, export = NULL)
+  booktabs = TRUE, caption = NULL, align = NULL, float = "ht",
+  export = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -48,6 +49,8 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \item{caption}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 
 \item{align}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
+
+\item{float}{the float applied to the table in Latex when output is \code{latex2}}
 
 \item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
 }

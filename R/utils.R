@@ -134,14 +134,14 @@
 }
 
 
-to_latex = function(tab, caption, align, len, splitby){
+to_latex = function(tab, caption, align, len, splitby, float){
   if (is.null(splitby)){
     splitby = "Total"
   }
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
   
-  cat("\\begin{table}[ht]
+  cat("\\begin{table}[", float, "]
   \\centering \n", 
   "\\caption{", caption, "}\n",
   "\\begin{tabular}{", align, "}",
