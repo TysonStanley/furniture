@@ -235,7 +235,7 @@ table1 = function(.data,
       align = c("l", rep("c", (l1-1)))
     }
     tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float)
-    tab
+    invisible(tab)
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
@@ -299,10 +299,11 @@ print.table1 <- function(x, ...){
   cat("|\n") 
   ## Print splitby name
   if (!is.null(x[[2]])){
-    for (i in 1:round(var_width/2 + first_width - length(x[[2]])/2 - 3)){
+    len1 = nchar(gsub("`", "", x[[2]][[1]]))
+    for (i in 1:round(var_width/2 + first_width - len1/2)){
       cat(" ")
     }
-    cat(x[[2]][[1]], "\n")
+    cat(gsub("`", "", x[[2]][[1]]), "\n")
   }
   ## Print table
   print(x[[1]], ..., row.names = FALSE, right = FALSE)

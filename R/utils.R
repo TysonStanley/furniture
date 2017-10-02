@@ -137,18 +137,19 @@
 to_latex = function(tab, caption, align, len, splitby, float){
   if (is.null(splitby)){
     splitby = "Total"
+  } else {
+    splitby = gsub("`", "", paste(splitby))
   }
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
   
-  cat("\\begin{table}[", float, "]
-  \\centering \n", 
-  "\\caption{", caption, "}\n",
-  "\\begin{tabular}{", align, "}",
-  "\\hline \n",
-  " & \\multicolumn{", len, "}{c}{", paste(splitby)[length(paste(splitby))], "}\n",
-  paste(names(tab), collapse = " & "), "\\\\", "\n",
-  "\\hline \n")
+  cat("\\begin{table}[", float, "]")
+  cat("\\centering \n")
+  cat("\\caption{", caption, "}\n", sep = "")
+  cat("\\begin{tabular}{", align, "}\n")
+  cat("\\hline \n")
+  cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
+  cat(paste(names(tab), collapse = " & "), "\\\\", "\n", "\\hline \n")
   
   cat(
     for (i in 1:length(tab[[1]])){
@@ -162,8 +163,8 @@ to_latex = function(tab, caption, align, len, splitby, float){
       
     },
   "\\hline
-  \\end{tabular}
-  \\end{table} \n"
+\\end{tabular}
+\\end{table} \n"
   )
 }
 
