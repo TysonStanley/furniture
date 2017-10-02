@@ -165,7 +165,6 @@ to_latex = function(tab, caption, align, len, splitby, float){
   \\end{tabular}
   \\end{table} \n"
   )
-  
 }
 
 

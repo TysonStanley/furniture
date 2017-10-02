@@ -235,7 +235,7 @@ table1 = function(.data,
       align = c("l", rep("c", (l1-1)))
     }
     tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float)
-    return(tab)
+    tab
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
