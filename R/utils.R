@@ -143,7 +143,7 @@ to_latex = function(tab, caption, align, len, splitby, float){
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
   
-  cat("\\begin{table}[", float, "]")
+  cat("\\begin{table}[", float, "] \n")
   cat("\\centering \n")
   cat("\\caption{", caption, "}\n", sep = "")
   cat("\\begin{tabular}{", align, "}\n")
