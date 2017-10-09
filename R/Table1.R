@@ -149,12 +149,20 @@ table1 = function(.data,
     stopifnot(length(var_names)==length(names(d)))
     names(d) = var_names
   }
+  
   ### Splitby Variable (adds the variable to d as "split")
-  if (is.null(splitby)){
+  splitby = substitute(splitby)
+  if (is.null(substitute(splitby))){
     splitby_ = as.factor(1)
     d$split  = droplevels(splitby_)
   } else {
-    splitby_ = eval(parse(text = paste(splitby)[[length(paste(splitby))]]), .data)
+    if (class(substitute(splitby)) == "name"){
+      splitby_ = eval(substitute(splitby), .data)
+    } else if (class(substitute(splitby)) == "call"){
+      splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
+    } else if (class(substitute(splitby)) == "character"){
+      splitby_ = .data[[splitby]]
+    }
     d$split  = droplevels(as.factor(splitby_))
   }
   ## For print method
