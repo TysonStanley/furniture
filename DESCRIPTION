@@ -3,12 +3,15 @@ Type: Package
 Title: Furniture for Quantitative Scientists
 Version: 1.7.0
 Date: 2017-09-16
-Authors@R: c(person("Tyson", "Barrett",  role=c("aut","cre"), email = "t.barrett@aggiemail.usu.edu"),
+Authors@R: c(person("Tyson", "Barrett",  
+                    role=c("aut","cre"), 
+                    email = "t.barrett@aggiemail.usu.edu", 
+                    comment = c(ORCID = "0000-0002-2137-1391")),
  	         person("Emily", "Brignone", role="aut"),
- 	         person("Daniel", "Laxman", role="ctb"))
+ 	         person("Daniel", "Laxman", role="aut"))
 Author: Tyson Barrett [aut, cre],
     Emily Brignone [aut],
-    Daniel Laxman [ctb]
+    Daniel Laxman [aut]
 Maintainer: Tyson Barrett <t.barrett@aggiemail.usu.edu>
 Description: Contains three main functions (i.e., three pieces of furniture):
     table1() which produces a well-formatted table of descriptives common as Table 1
