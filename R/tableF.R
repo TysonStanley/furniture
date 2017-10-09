@@ -14,6 +14,7 @@
 tableF = function(.data, x, n = 20, splitby = NULL){
   .call = match.call()
   x = eval(substitute(x), .data)
+  splitby = substitute(splitby)
   if (class(substitute(splitby)) == "name"){
     splitby_ = eval(substitute(splitby), .data)
   } else if (class(substitute(splitby)) == "call"){
@@ -21,11 +22,11 @@ tableF = function(.data, x, n = 20, splitby = NULL){
   } else if (class(substitute(splitby)) == "character"){
     splitby_ = .data[[splitby]]
   } else if(is.null(splitby)){
-    splitby = factor(1, labels = paste(.call[3]))
+    splitby_ = factor(1, labels = paste(.call[3]))
   }
   
-  if(any(is.na(splitby))){
-    splitby = factor(ifelse(is.na(splitby),"Missing", splitby))
+  if(any(is.na(splitby_))){
+    splitby_ = factor(ifelse(is.na(splitby_),"Missing", splitby_))
   }
   
   ## Error catch for all missing
@@ -36,8 +37,8 @@ tableF = function(.data, x, n = 20, splitby = NULL){
   }
   
   final_list = list()
-  for(i in levels(splitby)){
-    x1=x[splitby==i & !is.na(splitby)]
+  for(i in levels(splitby_)){
+    x1=x[splitby_==i & !is.na(splitby_)]
     ## Summary statistics
     Freq     = table(x1, useNA="ifany")
     CumFreq  = round(cumsum(table(x1, useNA="ifany")))
@@ -88,7 +89,7 @@ tableF = function(.data, x, n = 20, splitby = NULL){
     
     final_list[[i]]=final  
   }
-  final_list[[length(levels(splitby)) + 1]] = paste(.call[3])
+  final_list[[length(levels(splitby_)) + 1]] = paste(.call[3])
   
   ## Output
   class(final_list) = c("tableF", "list")
