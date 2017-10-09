@@ -196,7 +196,7 @@ table1.data.frame = function(.data,
     } else if(is.null(splitby)){
       splitby_ = factor(1)
     }
-    d$split = splitby_
+    d$split = factor(splitby_)
     ## For print method
     if (is.null(splitby)){
       splitting = NULL
@@ -209,7 +209,7 @@ table1.data.frame = function(.data,
       d$split = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
     } else {
       interacts = interaction(.data[attr(.data, "vars")], sep = "_")
-      d$split = interacts
+      d$split = factor(interacts)
     }
     ## For print method
     if (is.null(attr(.data, "vars"))){
