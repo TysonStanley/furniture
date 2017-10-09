@@ -187,19 +187,16 @@ table1.data.frame = function(.data,
   if (is.null(attr(.data, "vars"))){
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
-    if (is.null(substitute(splitby))){
-      splitby_ = as.factor(1)
-      d$split  = droplevels(splitby_)
-    } else {
-      if (class(substitute(splitby)) == "name"){
-        splitby_ = eval(substitute(splitby), .data)
-      } else if (class(substitute(splitby)) == "call"){
-        splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
-      } else if (class(substitute(splitby)) == "character"){
-        splitby_ = .data[[splitby]]
-      }
-      d$split  = droplevels(as.factor(splitby_))
+    if (class(substitute(splitby)) == "name"){
+      splitby_ = eval(substitute(splitby), .data)
+    } else if (class(substitute(splitby)) == "call"){
+      splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
+    } else if (class(substitute(splitby)) == "character"){
+      splitby_ = .data[[splitby]]
+    } else if(is.null(splitby)){
+      splitby_ = factor(1)
     }
+    d$split = splitby_
     ## For print method
     if (is.null(splitby)){
       splitting = NULL

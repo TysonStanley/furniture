@@ -14,15 +14,26 @@
 tableF = function(.data, x, n = 20, splitby = NULL){
   .call = match.call()
   x = eval(substitute(x), .data)
-  splitby = substitute(splitby)
-  if (class(substitute(splitby)) == "name"){
-    splitby_ = eval(substitute(splitby), .data)
-  } else if (class(substitute(splitby)) == "call"){
-    splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
-  } else if (class(substitute(splitby)) == "character"){
-    splitby_ = .data[[splitby]]
-  } else if(is.null(splitby)){
-    splitby_ = factor(1, labels = paste(.call[3]))
+  if (is.null(attr(.data, "vars"))){
+    ### Splitby Variable (adds the variable to d as "split")
+    splitby = substitute(splitby)
+    if (class(substitute(splitby)) == "name"){
+      splitby_ = eval(substitute(splitby), .data)
+    } else if (class(substitute(splitby)) == "call"){
+      splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
+    } else if (class(substitute(splitby)) == "character"){
+      splitby_ = .data[[splitby]]
+    } else if(is.null(splitby)){
+      splitby_ = factor(1)
+    }
+  } else {
+    message("Using a grouped data frame: default using the grouping variables and not splitby")
+    if (length(attr(.data, "vars")) == 1){
+      splitby_ = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
+    } else {
+      interacts = interaction(.data[attr(.data, "vars")], sep = "_")
+      splitby_ = interacts
+    }
   }
   
   if(any(is.na(splitby_))){
