@@ -7,7 +7,7 @@
 #' 
 #' @param .data the data.frame that is to be summarized
 #' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.
-#' @param splitby the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0
+#' @param splitby the categorical variable to stratify (in formula form  \code{splitby = ~gender}), quoted \code{splitby = "gender"}, or bare \code{splitby = gender}); instead, \code{dplyr::group_by(...)} can be used
 #' @param FUN the function to be applied to summarize the numeric data; default is to report the means and standard deviations
 #' @param FUN2 a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles
 #' @param second a vector or list of quoted continuous variables for which the \code{FUN2} should be applied
@@ -48,22 +48,26 @@
 #' table1(df, x, y, z, a)
 #' 
 #' ## Stratified
-#' ## both below are the same
+#' ## all three below are the same
 #' table1(df, x, y, z,
 #'        splitby = ~ a)
 #' table1(df, x, y, z,
 #'        splitby = "a")
+#' table1(df, x, y, z,
+#'        splitby = a)
 #' 
 #' ## With Piping
 #' df %>%
 #'   table1(x, y, z, 
 #'          splitby = ~a) %>%
 #'   summarise(count = n())
+#' df %>%
+#'   group_by(a) %>%
+#'   table1(x, y, z)
 #' 
 #' ## Adjust variables within function and assign name
 #' table1(df, 
-#'        x2 = ifelse(x > 0, 1, 0), z,
-#'        var_names = c("X2", "Z"))
+#'        x2 = ifelse(x > 0, 1, 0), z = z)
 #'          
 #'
 #' @export
@@ -71,6 +75,35 @@
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
 table1 = function(.data, 
+                             ..., 
+                             splitby = NULL, 
+                             FUN = NULL,
+                             FUN2 = NULL,
+                             second = NULL,
+                             row_wise = FALSE, 
+                             test = FALSE, 
+                             header_labels = NULL,
+                             type = "pvalues",
+                             output = "text",
+                             rounding_perc = 1,
+                             digits = 1,
+                             var_names = NULL, 
+                             format_number = FALSE,
+                             NAkeep = FALSE, 
+                             booktabs = TRUE, 
+                             caption = NULL, 
+                             align = NULL,
+                             float = "ht",
+                             export = NULL){
+  UseMethod("table1", .data)
+}
+
+
+#' @export
+#' @import stats
+#' @importFrom utils write.csv
+#' @importFrom knitr kable
+table1.data.frame = function(.data, 
                   ..., 
                   splitby = NULL, 
                   FUN = NULL,
@@ -150,26 +183,43 @@ table1 = function(.data,
     names(d) = var_names
   }
   
-  ### Splitby Variable (adds the variable to d as "split")
-  splitby = substitute(splitby)
-  if (is.null(substitute(splitby))){
-    splitby_ = as.factor(1)
-    d$split  = droplevels(splitby_)
-  } else {
-    if (class(substitute(splitby)) == "name"){
-      splitby_ = eval(substitute(splitby), .data)
-    } else if (class(substitute(splitby)) == "call"){
-      splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
-    } else if (class(substitute(splitby)) == "character"){
-      splitby_ = .data[[splitby]]
+  ## Splitby or group_by
+  if (is.null(attr(.data, "vars"))){
+    ### Splitby Variable (adds the variable to d as "split")
+    splitby = substitute(splitby)
+    if (is.null(substitute(splitby))){
+      splitby_ = as.factor(1)
+      d$split  = droplevels(splitby_)
+    } else {
+      if (class(substitute(splitby)) == "name"){
+        splitby_ = eval(substitute(splitby), .data)
+      } else if (class(substitute(splitby)) == "call"){
+        splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
+      } else if (class(substitute(splitby)) == "character"){
+        splitby_ = .data[[splitby]]
+      }
+      d$split  = droplevels(as.factor(splitby_))
     }
-    d$split  = droplevels(as.factor(splitby_))
-  }
-  ## For print method
-  if (is.null(splitby)){
-    splitting = NULL
-  } else{
-    splitting = paste(splitby)[[length(paste(splitby))]]
+    ## For print method
+    if (is.null(splitby)){
+      splitting = NULL
+    } else{
+      splitting = paste(splitby)[[length(paste(splitby))]]
+    }
+  } else {
+    message("Using a grouped data frame: default using the grouping variables and not splitby")
+    if (length(attr(.data, "vars")) == 1){
+      d$split = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
+    } else {
+      interacts = interaction(.data[attr(.data, "vars")], sep = "_")
+      d$split = interacts
+    }
+    ## For print method
+    if (is.null(attr(.data, "vars"))){
+      splitting = NULL
+    } else{
+      splitting = paste(attr(.data, "vars"), collapse = ", ")
+    }
   }
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
@@ -268,6 +318,7 @@ table1 = function(.data,
 }
 
 
+
 #' @export
 print.table1 <- function(x, ...){
   max_col_width = max_col_width2 = list()
@@ -321,378 +372,5 @@ print.table1 <- function(x, ...){
     cat("=")
   }
   cat("|\n")
-}
-
-#' Selecting Function
-#' 
-#' For internal use in \code{table1()} and \code{tableC()} to extract the right data. 
-#' Can also be used much like \code{dplyr::select()}, although I'd recommend
-#' one to use \code{dplyr::select()} in general.
-#' 
-#' @param d_ the data.frame
-#' @param ... the variables
-#' 
-#' @return The data.frame with the selected variables
-#'
-#' @export
-#' @import stats
-selecting <- function(d_, ...) {
-  listed <- eval(substitute(alist(...)))
-  
-  ## Return all variables
-  if (length(listed) == 0)
-    return(d_)
-  ## If input are indices
-  if (length(listed) == 1 & 
-      any(grepl("^c\\(.*\\)$", listed) & 
-      length(listed[[1]]) != length(d_[[1]])))
-    return(d_[, eval(listed[[1]])])
-  
-  ## Data Frame
-  df <- lapply(seq_along(listed), 
-               function(i) eval(listed[[i]], d_))
-  
-  ## Variable Names
-  names1 <- names(listed)
-  to_name <- function(i) {
-    if (is.null(names1)) {
-      deparse(listed[[i]])
-    } else {
-      if (names1[[i]] == "") {
-        deparse(listed[[i]])
-      } else {
-        names1[[i]]
-      }
-    }
-  }
-  names(df) <- lapply(seq_along(listed), to_name)
-  
-  ## Returned data frame with original row names
-  data.frame(df, row.names = row.names(d_))
-}
-
-#' Internal Table 1 Summarizing Function
-#' 
-#' For internal use in table1() to summarize data.
-#' 
-#' @param d the data
-#' @param num_fun the summarizing function
-#' @param num_fun2 the second summarizing function
-#' @param second the variables to which FUN2 is to be applied
-#' @param row_wise the way to compute the percentages
-#' @param test should significance tests be run?
-#' @param NAkeep whether NA's should be shown in the output of categorical variables
-#' 
-#' @return A data.frame
-#'
-#' @export
-#' @import stats
-table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){
-  ## Summarizing The Data
-  tab = tab2 = tests = tests2 = nams = list()
-  for (i in 1:(dim(d)[2]-1)){
-    nams[[i]] = names(d)[i]
-    ## If character
-    if (is.character(d[,i])){
-      d[,i] = factor(d[,i])
-    }
-    
-    ## Factor ##
-    if (is.factor(d[,i])){
-      tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
-      if (!row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
-      } else if (row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
-      }
-      if (test)
-        tests[[i]] = chisq.test(d$split, d[,i])
-      
-    ## Numeric ##
-    } else if (is.numeric(d[,i]) | is.integer(d[,i])){
-      ## Function 1
-      if (!nams[[i]] %in% second){
-        tab[[i]]  = tapply(d[,i], d$split, num_fun)
-        ## Function 2
-      } else if (nams[[i]] %in% second){
-        tab[[i]]  = tapply(d[,i], d$split, num_fun2)
-      }
-      
-      ## For splitby vars with more than 2 levels
-      if (length(levels(d$split))>2 & test){
-        ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
-        comp   = complete.cases(d[,i], d$split)
-        resids = resid(lm(d[comp,i] ~ d$split[comp]))^2
-        r2     = summary(lm(resids ~ d$split[comp]))$r.squared
-        lt     = dchisq(length(resids)*r2, df = length(levels(d$split)))
-        if (lt<0.05){
-          ## Performs an approximate method of Welch (1951)
-          tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=FALSE)
-        } else {
-          ## Performs a simple one-way ANOVA
-          tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=TRUE)
-        }
-      } else if (test){
-        tests[[i]] = t.test(d[,i] ~ d$split)        
-      } 
-      
-    } else {
-      stop("Variables need to be either factor, character or numeric.")
-    }
-  }
-  
-  invisible(list(tab, tab2, tests, nams))
-}
-
-#' Internal Table 1 Formatting Function (No Condense)
-#' 
-#' For internal use in table1() to format table without condensing.
-#' 
-#' @param d the data
-#' @param tab the summary statistics
-#' @param tab2 the secondary summary statistics
-#' @param tests the tests
-#' @param test whether there should be significance tests performed
-#' @param NAkeep logical; should we keep the NA's in factor variables
-#' @param rounding_perc the number of decimal places to round the percentages
-#' @param format_output the output to be displayed (see \code{table1()})
-#' @param second the list of variables to apply FUN2
-#' @param nams the variables to which FUN2 is to be applied
-#' @param simple only percentages to be produced?
-#' @param output how to print the table (see \code{table1()})
-#' @param f1 the formatting of the numbers
-#' 
-#' @return A data.frame
-#'
-#' @export
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
-  if (test){
-    if (grepl("f|F", format_output))
-      tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3))
-    else if (grepl("p|P", format_output) | grepl("s|S", format_output))
-      tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
-  } else {
-    tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
-  }
-  
-  for (j in 1:length(tab)){
-    if (is.factor(d[,j])){
-      if (!grepl("^t", output)){
-        tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
-      } else {
-        tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
-      }
-    } else if (is.numeric(d[,j])){
-      tabX = data.frame(paste(" "))
-    }
-    
-    ## Factor
-    for (i in 1:length(levels(d$split))){
-      if (is.factor(d[,j])){
-        if (!simple){
-          tabX = data.frame(tabX, 
-                            paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                   round(tab2[[j]][[i]]*100, rounding_perc), "%)"))
-        } else if (simple){
-          tabX = data.frame(tabX, 
-                            paste0(round(tab2[[j]][[i]]*100, rounding_perc), "%"))
-        }
-        
-    ## Numeric
-      } else if (is.numeric(d[,j])){
-        tabX = data.frame(tabX, tab[[j]][[i]])
-      }
-    }
-    
-    ## If test == TRUE, tests of comparisons by split ##
-    if (test & grepl("f|F", format_output)){
-      if (is.factor(d[,j])){
-        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                        paste("Chi Square:", round(tests[[j]]$statistic,2)), 
-                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
-        } else {
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-        }
-      }
-      tabX = data.frame(tabX, "", "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "Test", "P-Value")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
-      
-    } else if (test & grepl("p|P", format_output)){
-      if (is.factor(d[,j])){
-        n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
-                        paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
-        } else {
-          n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-        }
-      }
-      tabX = data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
-      
-    } else if (test & grepl("s|S", format_output)){
-      n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
-                      paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
-                             ifelse(tests[[j]]$p.value < 0.01,  "**", 
-                             ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
-      tabX = data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
-      
-    } else {
-      n3 = data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
-      tabW = rbind(n3, tabX)
-      tabZ = rbind(tabZ, tabW)
-    }
-  }
-  invisible(tabZ)
-}
-
-#' Internal Table 1 Formatting Function (Condense)
-#' 
-#' For internal use in table1() to format table with condensing.
-#' 
-#' @param d the data
-#' @param tab the summary statistics
-#' @param tab2 the secondary summary statistics
-#' @param tests the tests
-#' @param test whether there should be significance tests performed
-#' @param NAkeep logical; should we keep the NA's in factor variables
-#' @param rounding_perc the number of decimal places to round the percentages
-#' @param format_output the output to be displayed (see \code{table1()})
-#' @param second the list of variables to apply FUN2
-#' @param nams the variables to which FUN2 is to be applied
-#' @param simple only percentages to be produced?
-#' @param output how to print the table (see \code{table1()})
-#' @param f1 the formatting of the numbers
-#' 
-#' @return A data.frame
-#'
-#' @export
-table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
-  if (test){
-    if (grepl("p|P", format_output) | grepl("s|S", format_output))
-      tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
-  } else {
-    tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
-  }
-  
-  for (j in 1:length(tab)){
-    if (is.factor(d[,j])){
-      if (length(levels(d[,j])) == 2){
-        if (!grepl("text", output)){
-          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j], useNA=NAkeep)[2])))
-        } else {
-          tabX = data.frame(paste0(names(d)[j], ": ", names(table(d[,j], useNA=NAkeep)[2])))
-        }
-      } else if (length(levels(d[,j])) > 2){
-        if (!grepl("text", output)){
-          tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
-        } else {
-          tabX = data.frame(paste("  ", names(table(d[,j], useNA=NAkeep))))
-        }
-      }
-    } else if (is.numeric(d[,j])){
-      tabX = data.frame(paste(names(d)[j]))
-    }
-    
-    ## Counts and Percentages or Just Percentages
-    for (i in 1:length(levels(d$split))){
-      if (is.factor(d[,j])){
-        ## Just percentages
-        if (simple){
-          if (length(levels(d[,j])) == 2){
-            tabX = data.frame(tabX, 
-                              paste0(round(tab2[[j]][[i]][2]*100, 1), "%"))
-          } else {
-            tabX = data.frame(tabX, 
-                              paste0(round(tab2[[j]][[i]]*100, 1), "%"))
-          }
-          ## Counts and Percentages
-        } else {
-          if (length(levels(d[,j])) == 2){
-            tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]][2], big.mark = f1)), " (", 
-                                     round(tab2[[j]][[i]][2]*100, 1), "%)"))
-          } else {
-            tabX = data.frame(tabX, 
-                              paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
-                                     round(tab2[[j]][[i]]*100, 1), "%)"))
-          }
-        }
-        
-        
-      } else if (is.numeric(d[,j])){
-        tabX = data.frame(tabX, tab[[j]][[i]])
-      }
-    }
-    
-    ## If test == TRUE, tests of comparisons by split ##
-    if (test){
-      if (is.factor(d[,j])){
-        if (length(levels(d[,j])) == 2){
-          n3 = data.frame(tabX, 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-          tabX = n3
-        } else {
-          blankX = data.frame(names(d)[j], 
-                              matrix(" ", ncol=(length(levels(d$split))), nrow = 1),
-                              paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-          n3 = data.frame(tabX, " ")
-          names(blankX) = names(n3)
-          tabX = rbind(blankX, n3)
-        }
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          n3 = data.frame(tabX, 
-                          paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
-          tabX = n3
-        } else {
-          n3 = data.frame(tabX, 
-                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
-          tabX = n3
-        }
-      }
-      names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
-      tabZ = rbind(tabZ, tabX)
-      
-    } else if (!test){
-      if (is.factor(d[,j])){
-        if (length(levels(d[,j])) == 2){
-          ## Nothing
-        } else {
-          blankX = data.frame(names(d)[j], matrix(" ", ncol=(length(levels(d$split))), nrow = 1))
-          n3 = data.frame(tabX)
-          names(blankX) = names(n3)
-          tabX = rbind(blankX, n3)
-        }
-      } else if (is.numeric(d[,j])){
-        if (length(levels(d$split))>2){
-          ## Nothing
-        } else {
-          ## Nothing
-        }
-      }
-      names(tabZ) = names(tabX) = c(" ", levels(d$split))
-      tabZ = rbind(tabZ, tabX)
-    }
-  }
-  invisible(tabZ)
 }
 

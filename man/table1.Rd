@@ -16,7 +16,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.}
 
-\item{splitby}{the categorical variable to stratify by in formula form (e.g., \code{splitby = ~gender}) or quoted (e.g., \code{splitby = "gender"}); not too surprisingly, it requires that the number of levels be > 0}
+\item{splitby}{the categorical variable to stratify (in formula form  \code{splitby = ~gender}), quoted \code{splitby = "gender"}, or bare \code{splitby = gender}); instead, \code{dplyr::group_by(...)} can be used}
 
 \item{FUN}{the function to be applied to summarize the numeric data; default is to report the means and standard deviations}
 
@@ -83,22 +83,26 @@ df <- data.frame(x, y, z, a)
 table1(df, x, y, z, a)
 
 ## Stratified
-## both below are the same
+## all three below are the same
 table1(df, x, y, z,
        splitby = ~ a)
 table1(df, x, y, z,
        splitby = "a")
+table1(df, x, y, z,
+       splitby = a)
 
 ## With Piping
 df \%>\%
   table1(x, y, z, 
          splitby = ~a) \%>\%
   summarise(count = n())
+df \%>\%
+  group_by(a) \%>\%
+  table1(x, y, z)
 
 ## Adjust variables within function and assign name
 table1(df, 
-       x2 = ifelse(x > 0, 1, 0), z,
-       var_names = c("X2", "Z"))
+       x2 = ifelse(x > 0, 1, 0), z = z)
          
 
 }
