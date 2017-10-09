@@ -5,15 +5,16 @@
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
-# furniture: 1.6.0
+# furniture: 1.7.0
 
-The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains four main functions:
+The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains six main functions:
 
-1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. 
+1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.
 2. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
 3. `long()` -- is a wrapper of `stats::reshape()`, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.
 4. `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
 5. `tableC()` -- gives a well-formatted table of correlations.
+6. `tableF()` -- provides a thorough frequency table for quick checks of the levels of a variable.
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
