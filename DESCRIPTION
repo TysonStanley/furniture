@@ -3,12 +3,12 @@ Type: Package
 Title: Furniture for Quantitative Scientists
 Version: 1.7.0
 Date: 2017-09-16
-Authors@R: c(person("Tyson", "Barrett",  
+Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett@aggiemail.usu.edu", 
                     comment = c(ORCID = "0000-0002-2137-1391")),
  	         person("Emily", "Brignone", role="aut"),
- 	         person("Daniel", "Laxman", role="aut"))
+ 	         person("Daniel J.", "Laxman", role="aut"))
 Author: Tyson Barrett [aut, cre],
     Emily Brignone [aut],
     Daniel Laxman [aut]

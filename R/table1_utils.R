@@ -49,35 +49,36 @@ selecting <- function(d_, ...) {
 ## Does the summary of table1
 table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){
   ## Summarizing The Data
+  d = data.frame(d)
   tab = tab2 = tests = tests2 = nams = list()
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] = names(d)[i]
     ## If character
-    if (is.character(d[,i])){
-      d[,i] = factor(d[,i])
+    if (is.character(d[[i]])){
+      d[,i] = factor(d[[i]])
     }
     
     ## Factor ##
     if (is.factor(d[,i])){
-      tab[[i]] = tapply(d[,i], d$split, table, useNA=NAkeep)
+      tab[[i]] = tapply(d[[i]], d$split, table, useNA=NAkeep)
       if (!row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
+        tab2[[i]] = tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
       } else if (row_wise){
-        tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
+        tab2[[i]] = tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
       } else {
         stop("'rowwise' argument must be TRUE or FALSE", call. = FALSE)
       }
       if (test)
-        tests[[i]] = chisq.test(d$split, d[,i])
+        tests[[i]] = chisq.test(d$split, d[[i]])
     
     ## Numeric ##
-    } else if (is.numeric(d[,i])){
+    } else if (is.numeric(d[[i]])){
       ## Function 1
       if (!nams[[i]] %in% second){
-        tab[[i]]  = tapply(d[,i], d$split, num_fun)
+        tab[[i]]  = tapply(d[[i]], d$split, num_fun)
         ## Function 2
       } else if (nams[[i]] %in% second){
-        tab[[i]]  = tapply(d[,i], d$split, num_fun2)
+        tab[[i]]  = tapply(d[[i]], d$split, num_fun2)
       } else {
         stop("variable(s) in 'second' not found", call. = FALSE)
       }
@@ -85,19 +86,19 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
       ## For splitby vars with more than 2 levels
       if (length(levels(d$split))>2 & test){
         ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
-        comp   = complete.cases(d[,i], d$split)
+        comp   = complete.cases(d[[i]], d$split)
         resids = resid(lm(d[comp,i] ~ d$split[comp]))^2
         r2     = summary(lm(resids ~ d$split[comp]))$r.squared
         lt     = dchisq(length(resids)*r2, df = length(levels(d$split)))
         if (lt<0.05){
           ## Performs an approximate method of Welch (1951)
-          tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=FALSE)
+          tests[[i]] = oneway.test(d[[i]] ~ d$split, var.equal=FALSE)
         } else {
           ## Performs a simple one-way ANOVA
-          tests[[i]] = oneway.test(d[,i] ~ d$split, var.equal=TRUE)
+          tests[[i]] = oneway.test(d[[i]] ~ d$split, var.equal=TRUE)
         }
       } else if (test){
-        tests[[i]] = t.test(d[,i] ~ d$split)        
+        tests[[i]] = t.test(d[[i]] ~ d$split)        
       }
       
     } else {
@@ -110,6 +111,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
 
 ## Formatting of table1 with no condense
 table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
+  d = as.data.frame(d)
   if (test){
     if (grepl("f|F", format_output))
       tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3))
@@ -210,6 +212,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 
 ## Formatting of table1 with condense
 table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
+  d = as.data.frame(d)
   if (test){
     if (grepl("p|P", format_output) | grepl("s|S", format_output))
       tabZ = data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
