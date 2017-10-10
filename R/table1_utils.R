@@ -64,18 +64,22 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
         tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
       } else if (row_wise){
         tab2[[i]] = tapply(d[,i], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
+      } else {
+        stop("'rowwise' argument must be TRUE or FALSE", call. = FALSE)
       }
       if (test)
         tests[[i]] = chisq.test(d$split, d[,i])
-      
-      ## Numeric ##
-    } else if (is.numeric(d[,i]) | is.integer(d[,i])){
+    
+    ## Numeric ##
+    } else if (is.numeric(d[,i])){
       ## Function 1
       if (!nams[[i]] %in% second){
         tab[[i]]  = tapply(d[,i], d$split, num_fun)
         ## Function 2
       } else if (nams[[i]] %in% second){
         tab[[i]]  = tapply(d[,i], d$split, num_fun2)
+      } else {
+        stop("variable(s) in 'second' not found", call. = FALSE)
       }
       
       ## For splitby vars with more than 2 levels
@@ -94,10 +98,10 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
         }
       } else if (test){
         tests[[i]] = t.test(d[,i] ~ d$split)        
-      } 
+      }
       
     } else {
-      stop("Variables need to be either factor, character or numeric.")
+      stop("Variables need to be either factor, character or numeric.", call. = FALSE)
     }
   }
   
