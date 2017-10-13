@@ -134,11 +134,11 @@
 }
 
 
-to_latex = function(tab, caption, align, len, splitby, float){
+to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   if (is.null(splitby)){
     splitby = "Total"
   } else if (is.na(splitby)){
-    splitby = "Correlations"
+    splitby = cor_type
   } else {
     splitby = gsub("`", "", paste(splitby))
   }
