@@ -93,7 +93,7 @@ tableC = function(.data,
         l1 = dim(final)[2]
         align = c("l", rep("c", (l1-1)))
       }
-      tab = to_latex(final, caption, align, len = dim(final)[2], splitby = NA, float)
+      tab = to_latex(final, caption, align, len = dim(final)[2] - 1, splitby = NA, float)
       invisible(tab)
     } else {
       kab = knitr::kable(final, format=output,
