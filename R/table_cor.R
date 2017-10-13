@@ -63,7 +63,12 @@ tableC = function(.data,
   cors = as.data.frame(cors)
   pvalues = as.data.frame(pvalues)
   dims = dim(cors)
-  row.names(cors) = paste0("[", 1:dims[1], "]", row.names(cors))
+  if (output == "latex2"){
+    row.names(cors) = paste0("{[", 1:dims[1], "]}", row.names(cors))
+  } else {
+    row.names(cors) = paste0("[", 1:dims[1], "]", row.names(cors))
+  }
+  
   names(cors) = paste0("[", 1:dims[1], "]")
   
   ## Combine
