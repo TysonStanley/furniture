@@ -28,7 +28,7 @@ tableC = function(.data,
                   booktabs = TRUE, 
                   caption = NULL, 
                   align = NULL,
-                  float = NULL){
+                  float = "htb"){
   
   ## Preprocessing ##
   .call = match.call()
