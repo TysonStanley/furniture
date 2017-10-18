@@ -24,7 +24,7 @@ tableF = function(.data, x, n = 20, splitby = NULL){
     } else if (class(substitute(splitby)) == "character"){
       splitby_ = .data[[splitby]]
     } else if(is.null(splitby)){
-      splitby_ = factor(1)
+      splitby_ = factor(1, labels = paste(.call[3]))
     }
   } else {
     message("Using a grouped data frame: default using the grouping variables and not splitby")
