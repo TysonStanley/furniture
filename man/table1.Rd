@@ -7,7 +7,7 @@
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
   second = NULL, row_wise = FALSE, test = FALSE, header_labels = NULL,
   type = "pvalues", output = "text", rounding_perc = 1, digits = 1,
-  var_names = NULL, format_number = FALSE, NAkeep = FALSE,
+  var_names = NULL, format_number = FALSE, NAkeep = NULL, na.rm = TRUE,
   booktabs = TRUE, caption = NULL, align = NULL, float = "ht",
   export = NULL)
 }
@@ -42,7 +42,9 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{format_number}{default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
-\item{NAkeep}{when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized}
+\item{NAkeep}{when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use \code{na.rm})}
+
+\item{na.rm}{when set to \code{FALSE} it also shows how many missing values are in the data for each categorical variable being summarized}
 
 \item{booktabs}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 

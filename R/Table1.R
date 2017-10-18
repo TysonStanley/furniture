@@ -20,7 +20,8 @@
 #' @param digits the number of significant digits for the numerical variables (if using default functions); default is 1.
 #' @param var_names custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.
 #' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
-#' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized
+#' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use \code{na.rm})
+#' @param na.rm when set to \code{FALSE} it also shows how many missing values are in the data for each categorical variable being summarized
 #' @param booktabs when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param align when \code{output != "text"}; option is passed to \code{knitr::kable}
@@ -75,26 +76,27 @@
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
 table1 = function(.data, 
-                             ..., 
-                             splitby = NULL, 
-                             FUN = NULL,
-                             FUN2 = NULL,
-                             second = NULL,
-                             row_wise = FALSE, 
-                             test = FALSE, 
-                             header_labels = NULL,
-                             type = "pvalues",
-                             output = "text",
-                             rounding_perc = 1,
-                             digits = 1,
-                             var_names = NULL, 
-                             format_number = FALSE,
-                             NAkeep = FALSE, 
-                             booktabs = TRUE, 
-                             caption = NULL, 
-                             align = NULL,
-                             float = "ht",
-                             export = NULL){
+                   ..., 
+                   splitby = NULL, 
+                   FUN = NULL,
+                   FUN2 = NULL,
+                   second = NULL,
+                   row_wise = FALSE, 
+                   test = FALSE, 
+                   header_labels = NULL,
+                   type = "pvalues",
+                   output = "text",
+                   rounding_perc = 1,
+                   digits = 1,
+                   var_names = NULL, 
+                   format_number = FALSE,
+                   NAkeep = NULL, 
+                   na.rm = TRUE,
+                   booktabs = TRUE, 
+                   caption = NULL, 
+                   align = NULL,
+                   float = "ht",
+                   export = NULL){
   UseMethod("table1", .data)
 }
 
@@ -118,7 +120,8 @@ table1.data.frame = function(.data,
                   digits = 1,
                   var_names = NULL, 
                   format_number = FALSE,
-                  NAkeep = FALSE, 
+                  NAkeep = NULL, 
+                  na.rm = TRUE,
                   booktabs = TRUE, 
                   caption = NULL, 
                   align = NULL,
@@ -141,6 +144,11 @@ table1.data.frame = function(.data,
   ## checks
   .header_labels(header_labels, format_output)
   
+  ##
+  if (!is.null(NAkeep)){
+    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that NAkeep = TRUE == na.rm = FALSE.")
+    na.rm = !NAkeep
+  }
   
   ## Auto-detect piping
   if (paste(.call)[[2]] == "."){
@@ -149,7 +157,7 @@ table1.data.frame = function(.data,
     piping = FALSE
   }
   ## Missing values in categorical variables
-  if (NAkeep){ 
+  if (!na.rm){ 
     NAkeep = "always" 
   } else {
     NAkeep = "no"
