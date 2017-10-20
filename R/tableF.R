@@ -98,9 +98,9 @@ tableF = function(.data, x, n = 20, splitby = NULL){
         row.names(final) =  ifelse(final$Freq=="...", "...", row.names(final))
       }}
     
-    final_list[[i]]=final  
+    final_list[[i]] = final  
   }
-  final_list[[length(levels(splitby_)) + 1]] = paste(.call[3])
+  message(paste("Variable =", paste(.call[3])))
   
   ## Output
   class(final_list) = c("tableF", "list")
@@ -110,10 +110,7 @@ tableF = function(.data, x, n = 20, splitby = NULL){
 #' @export
 print.tableF <- function(x, ...){
   max_col_width = max_col_width2 = list()
-  len = length(x) - 1
-  
-  ## Print variable
-  message(paste("Variable =", x[[length(x)]]))
+  len = length(x)
   
   for (i in 1:len){
     x2 = as.data.frame(x[[i]])
