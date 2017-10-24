@@ -15,12 +15,12 @@ library(furniture)
 
 # Making Table 1
 
-This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `v 1.6.1`.
+This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `v 1.7.2`.
 
 The main parts of the `table1()` are below:
 
 ```{r structure, eval=FALSE}
-table1(.data, ..., splitby, row_wise, test, type, output, format_number, NAkeep)
+table1(.data, ..., splitby, row_wise, test, type, output, format_number, na.rm)
 ```
 
 It contains several useful features for summarizing your data:
@@ -146,16 +146,16 @@ table1(df,
        format_number = TRUE)
 ```
 
-### NA Keep
+### `na.rm`
 
-In order to explore the missingness in the factor variables, using `NAkeep = TRUE` does the counts and percentages of the missing values as well.
+In order to explore the missingness in the factor variables, using `na.rm = FALSE` does the counts and percentages of the missing values as well.
 
 ```{r nakeep}
 table1(df,
        a, b, c,
        splitby = ~d,
        test = TRUE,
-       NAkeep = TRUE)
+       na.rm = FALSE)
 ```
 Here we do not have any missingness but it shows up as zeros to show that there are none there.
 
@@ -164,14 +164,13 @@ Here we do not have any missingness but it shows up as zeros to show that there 
 
 Finally, to make it easier to implement in the tidyverse of packages, a piping option is available. This option invisibly returns the data frame that was given to the table 1 function and prints the table in console.
 
-```{r tidyverse, fig.width=5}
+```{r tidyverse, fig.width=5, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 df %>%
   filter(f == 1) %>%
-  na.omit %>%
+  group_by(d) %>%
   table1(a, b, c,
-         splitby = ~d,
          test = TRUE,
          type = c("simple", "condensed")) %>%
   ggplot(aes(x = b, y = a, group = d)) +
@@ -188,7 +187,7 @@ You can also adjust the variable names from within the function as so:
 
 ```{r}
 table1(df,
-       "A var" = a, "B var" = b, "C var" = c,
+       "Avar" = a, "Bvar" = b, "Cvar" = c,
        splitby = ~d,
        test = TRUE)
 ```
@@ -197,13 +196,22 @@ This is particularly useful when you adjust a variable within the function:
 
 ```{r, warning=FALSE, message=FALSE}
 table1(df,
-       "New A var" = factor(ifelse(a > 1, 1, 0)), b, c,
+       "A" = factor(ifelse(a > 1, 1, 0)), b, c,
        splitby = ~d,
        test = TRUE)
 ```
 
 Here we changed `a` to a factor within the function. In order for the name to look better, we can assign a new name, otherwise it would be named something like `factor.ifelse.a...`.
 
+
+For more complex naming (e.g., using spacing, brackets, or other values not allowed as name in a data.frame), use the `var_names` argument.
+```{r, warning=FALSE, message=FALSE}
+table1(df,
+       factor(ifelse(a > 1, 1, 0)), b, c,
+       splitby = ~d,
+       test = TRUE,
+       var_names = c("A New Variable", "B Variable", "C Variable"))
+```
 
 ## Final Note
 
