@@ -128,13 +128,13 @@
 
 
 to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
-  if (is.null(splitby)){
+  if (is.null(cor_type) & is.null(splitby)){
     splitby = "Total"
   } else if (!is.null(cor_type)){
     cor_type2 = paste(toupper(substr(cor_type, 1, 1)), substring(cor_type, 2),
                       sep = "")
     splitby = paste(cor_type2, "Correlations")
-  } else {
+  } else if (is.null(cor_type) & !is.null(splitby)) {
     splitby = gsub("`", "", paste(splitby))
   }
   
