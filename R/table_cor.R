@@ -109,9 +109,10 @@ tableC = function(.data,
       return(kab)
     }
   } else {
-    final = list("Table1" = final,
-                 "NULL" = NULL)
+    final = list("Table1" = final)
     class(final) = c("table1", "list")
+    attr(final, "splitby") = NULL
+    attr(final, "output") = NULL
     return(final)
   }
 }

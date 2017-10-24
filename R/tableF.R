@@ -124,19 +124,19 @@ print.tableF <- function(x, ...){
       dim(x2)[2] - 1
     
     ## Print top border
-    cat("\n|")
+    cat("\n\u2500")
     for (j in 1:tot_width){
-      cat("=")
+      cat("\u2500")
     }
-    cat("|\n") 
+    cat("\u2500\n") 
     ## Print table
     print(x2, ..., row.names = FALSE, right = FALSE)
     ## Print bottom border
-    cat("|")
+    cat("\u2500")
     for (j in 1:tot_width){
-      cat("=")
+      cat("\u2500")
     }
-    cat("|\n")
+    cat("\u2500\n")
   }
 }
 

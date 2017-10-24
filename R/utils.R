@@ -83,13 +83,6 @@
 
   }
   N[] = sapply(N, as.character)
-  ## Add formatted lines below header
-  if (output == "text2"){
-    N = rbind(N, N)
-    for (i in seq_along(N)){
-      N[1,i] = paste0(rep("-", times = nchar(names(N)[i])), collapse = "")
-    }
-  }
   N
 }
 
@@ -153,10 +146,11 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   cat("\\begin{tabular}{", align, "}\n")
   cat("\\hline \n")
   cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
-  cat(paste(names(tab), collapse = " & "), "\\\\", "\n", "\\hline \n")
+  cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
+  cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", "\\hline \n")
   
   cat(
-    for (i in 1:length(tab[[1]])){
+    for (i in 2:length(tab[[1]])){
       if (grepl("^ ", tab[i, 1])){
         cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
         cat("\\\\", "\n")

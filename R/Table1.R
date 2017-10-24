@@ -271,8 +271,10 @@ table1.data.frame = function(.data,
   if (length(levels(d$split)) == 1){
     names(final)[2] = "Mean/Count (SD/%)"
   }
-  final_l = list("Table1"  = final,
-                 "Splitby" = splitting)
+  final_l = list("Table1"  = final)
+  attr(final_l, "splitby") = splitting
+  attr(final_l, "output") = output
+  
   ## Export Option
   if (!is.null(export)){
     if (!dir.exists("Table1")){
@@ -297,7 +299,7 @@ table1.data.frame = function(.data,
       l1 = dim(final)[2]
       align = c("l", rep("c", (l1-1)))
     }
-    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float)
+    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float, cor_type = NA)
     invisible(tab)
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
@@ -331,7 +333,7 @@ print.table1 <- function(x, ...){
   x2 = as.data.frame(x[[1]])
   
   ## Splitby Name and Location
-  if (!is.null(x[[2]])){
+  if (!is.null(attr(x, "splitby"))){
     x3 = as.data.frame(x[[1]])
     x4 = x3[,-1]
     x5 = x3[, 1]
@@ -356,26 +358,39 @@ print.table1 <- function(x, ...){
     dim(x2)[2] - 1
   
   ## Print top border
-  cat("\n|")
+  cat("\n\u2500")
   for (i in 1:tot_width){
-    cat("=")
+    cat("\u2500")
   }
-  cat("|\n") 
+  cat("\u2500\n") 
   ## Print splitby name
-  if (!is.null(x[[2]])){
-    len1 = nchar(gsub("`", "", x[[2]][[1]]))
+  if (!is.null(attr(x, "splitby"))){
+    len1 = nchar(gsub("`", "", attr(x, "splitby")))
     for (i in 1:round(var_width/2 + first_width - len1/2)){
       cat(" ")
     }
-    cat(gsub("`", "", x[[2]][[1]]), "\n")
+    cat(gsub("`", "", attr(x, "splitby")), "\n")
   }
   ## Print table
-  print(x[[1]], ..., row.names = FALSE, right = FALSE)
-  ## Print bottom border
-  cat("|")
-  for (i in 1:tot_width){
-    cat("=")
+  if (!is.null(attr(x, "output"))){
+    if (attr(x, "output") == "text2"){
+      ## Special "text2" formatting
+      x4 = rbind(x[[1]][1,],
+                 sapply(max_col_width, function(x) paste0(rep("-", times = x), collapse = "")),
+                 x[[1]][2:dim(x[[1]])[1], ])
+      print(x4, ..., row.names = FALSE, right = FALSE)
+    } else {
+      print(x[[1]], ..., row.names = FALSE, right = FALSE)
+    }
+  } else {
+    print(x[[1]], ..., row.names = FALSE, right = FALSE)
   }
-  cat("|\n")
+  
+  ## Print bottom border
+  cat("\u2500")
+  for (i in 1:tot_width){
+    cat("\u2500")
+  }
+  cat("\u2500\n")
 }
 
