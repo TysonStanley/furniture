@@ -2,8 +2,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture) [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](http://cranlogs.r-pkg.org/badges/grand-total/furniture) [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture) [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
-
-# furniture: 1.7.2
+furniture: 1.7.2
+================
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains six main functions:
 
@@ -45,7 +45,7 @@ data("nhanes_2010")
 table1(nhanes_2010,
        age, marijuana, illicit, rehab, asthma,
        splitby=~asthma)
-
+#> 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
@@ -74,7 +74,7 @@ table1(nhanes_2010,
        age, marijuana, illicit, rehab, asthma,
        splitby=~asthma, 
        output = "text2")
- 
+#> 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
@@ -101,7 +101,6 @@ table1(nhanes_2010,
 tableC(nhanes_2010, 
        age, active, vig_active, 
        na.rm=TRUE)
-       
 #> N = 317
 #> Note: pearson correlation (p-value).
 #> 
@@ -115,8 +114,8 @@ tableC(nhanes_2010,
 
 ``` r
 tableF(nhanes_2010, age)
-
 #> Variable = age
+#> 
 #> ──────────────────────────────────
 #>  age Freq CumFreq Percent CumPerc
 #>  18  191  191     13.48%  13.48% 
