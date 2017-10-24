@@ -299,7 +299,7 @@ table1.data.frame = function(.data,
       l1 = dim(final)[2]
       align = c("l", rep("c", (l1-1)))
     }
-    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float, cor_type = NA)
+    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float)
     invisible(tab)
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
