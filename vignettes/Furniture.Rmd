@@ -162,16 +162,26 @@ tableF(df, a)
 Similarly to `table1()` we can use a `splitby` argument (or `group_by()`).
 
 ```{r tableF.2}
-tableF(df, a, splitby = c)
+tableF(df, d, splitby = c)
 ```
 
 ```{r tableF.3}
 df %>%
   group_by(c) %>%
-  tableF(a)
+  tableF(d)
 ```
 
 
+## Table X
+
+Lastly, `tableX()` is a pipable two-way version of `table()` with a similar syntax to that of the rest of the `furniture` functions.
+
+```{r tableX.1}
+df %>%
+  tableX(c, ifelse(d > 500, 1, 0))
+```
+
+By default, it provides the total counts for the rows and columns with flexibility as to what is displayed and where.
 
 
 ## Conclusion
