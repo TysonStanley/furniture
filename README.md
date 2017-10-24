@@ -5,7 +5,6 @@
 
 # furniture: 1.7.2
 
-
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains six main functions:
 
 1.  `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.
@@ -46,7 +45,7 @@ data("nhanes_2010")
 table1(nhanes_2010,
        age, marijuana, illicit, rehab, asthma,
        splitby=~asthma)
-#> 
+
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
@@ -75,7 +74,7 @@ table1(nhanes_2010,
        age, marijuana, illicit, rehab, asthma,
        splitby=~asthma, 
        output = "text2")
-#> 
+ 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
@@ -102,6 +101,7 @@ table1(nhanes_2010,
 tableC(nhanes_2010, 
        age, active, vig_active, 
        na.rm=TRUE)
+       
 #> N = 317
 #> Note: pearson correlation (p-value).
 #> 
@@ -115,8 +115,8 @@ tableC(nhanes_2010,
 
 ``` r
 tableF(nhanes_2010, age)
+
 #> Variable = age
-#> 
 #> ──────────────────────────────────
 #>  age Freq CumFreq Percent CumPerc
 #>  18  191  191     13.48%  13.48% 
