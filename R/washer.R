@@ -8,7 +8,7 @@
 #' @param ... the values in the variable that are to be replaced by either NA's or the value set by the user. Can be a function (or multiple functions) to specify values to change (e.g., is.nan(), is.na()).
 #' @param value (optional) if specified, the values in ... will be replaced by this value (must be a single value)
 #' 
-#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+#' @return the original vector (although if the original was a factor, it was changed to a character) with the values changed where indicated. 
 #'
 #' @examples 
 #' x = c(1:20, NA, NaN)

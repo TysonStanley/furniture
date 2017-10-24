@@ -14,7 +14,7 @@ washer(x, ..., value = NA)
 \item{value}{(optional) if specified, the values in ... will be replaced by this value (must be a single value)}
 }
 \value{
-A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+the original vector (although if the original was a factor, it was changed to a character) with the values changed where indicated.
 }
 \description{
 Washes the data by replacing values with either NA's or other values set by the user. 
