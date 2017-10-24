@@ -47,6 +47,8 @@ tableF = function(.data, x, n = 20, splitby = NULL){
     return("NA")
   }
   
+  splitby_ = factor(splitby_)
+  
   final_list = list()
   for(i in levels(splitby_)){
     x1=x[splitby_==i & !is.na(splitby_)]
@@ -100,10 +102,10 @@ tableF = function(.data, x, n = 20, splitby = NULL){
     
     final_list[[i]] = final  
   }
-  message(paste("Variable =", paste(.call[3])))
   
   ## Output
   class(final_list) = c("tableF", "list")
+  attr(final_list, "variable") = paste(.call[3])
   final_list
 }
 
@@ -111,6 +113,10 @@ tableF = function(.data, x, n = 20, splitby = NULL){
 print.tableF <- function(x, ...){
   max_col_width = max_col_width2 = list()
   len = length(x)
+  
+  if (len > 1){
+    message("Variable:", attr(x, "variable"))
+  }
   
   for (i in 1:len){
     x2 = as.data.frame(x[[i]])

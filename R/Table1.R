@@ -185,8 +185,6 @@ table1.data.frame = function(.data,
   
   ### Naming of variables
   if (!is.null(var_names)){
-    warning("var_names is deprecated. You can now assign names directly:\ne.g. var1 = var1name, var2 = var2name, ...",
-            call. = FALSE)
     stopifnot(length(var_names)==length(names(d)))
     names(d) = var_names
   }
