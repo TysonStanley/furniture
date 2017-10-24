@@ -147,7 +147,7 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   cat("\\hline \n")
   cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
   
-  if (is.na(cor_type)){
+  if (is.null(cor_type)){
     cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
     cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", "\\hline \n")
     
