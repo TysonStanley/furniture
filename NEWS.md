@@ -1,3 +1,14 @@
+# Version 1.7.2
+
+Several new features were added:
+
+1. `table1()` can take a `grouped_df` from the tidyverse's `group_by()`. This also means `table1()` can take on any number of stratifying variables in a clean way.
+2. `table1()` also has a new 'latex2' output option. This is not dependent on `knitr::kable()` and is better suited for this situation. Should provide better latex tables than before.
+3. `tableF()` is a new function that provides frequency tables (potentially by a grouping variable).
+4. General formatting was improved.
+5. Other internal improvements that should help with error-catching, syntax simplicity, and flexibility for the user.
+
+
 # Version 1.6.0
 
 A new function was added: `tableC()`, which, like `table1()` provides a nicely formatted table. However, `tableC()` provides correlations instead of the descriptive statistics that  `table1()` focuses on.
