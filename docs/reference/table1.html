@@ -104,10 +104,11 @@ Can be used within the piping framework [see library(magrittr)].</p>
     
 
     <pre class="usage"><span class='fu'>table1</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>second</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_wise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"pvalues"</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>rounding_perc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>format_number</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>NAkeep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>booktabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>export</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>second</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_wise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>header_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"pvalues"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>rounding_perc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>format_number</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>NAkeep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>booktabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>float</span> <span class='kw'>=</span> <span class='st'>"ht"</span>,
+  <span class='kw'>export</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -122,7 +123,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>splitby</th>
-      <td><p>the categorical variable to stratify by in formula form (e.g., <code>splitby = ~gender</code>) or quoted (e.g., <code>splitby = "gender"</code>); not too surprisingly, it requires that the number of levels be &gt; 0</p></td>
+      <td><p>the categorical variable to stratify (in formula form  <code>splitby = ~gender</code>), quoted <code>splitby = "gender"</code>, or bare <code>splitby = gender</code>); instead, <code><a href='http://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by(...)</a></code> can be used</p></td>
     </tr>
     <tr>
       <th>FUN</th>
@@ -145,16 +146,24 @@ Can be used within the piping framework [see library(magrittr)].</p>
       <td><p>logical; if set to <code>TRUE</code> then the appropriate bivariate tests of significance are performed if splitby has more than 1 level</p></td>
     </tr>
     <tr>
+      <th>header_labels</th>
+      <td><p>a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).</p></td>
+    </tr>
+    <tr>
       <th>type</th>
       <td><p>what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.</p></td>
     </tr>
     <tr>
       <th>output</th>
-      <td><p>how the table is output; can be "text" or "text2" for regular console output or any of <code>kable()</code>'s options from <code>knitr</code> (e.g., "latex", "markdown", "pandoc").</p></td>
+      <td><p>how the table is output; can be "text" or "text2" for regular console output or any of <code>kable()</code>'s options from <code>knitr</code> (e.g., "latex", "markdown", "pandoc"). A new option, <code>'latex2'</code>, although more limited, allows the variable name to show and has an overall better appearance.</p></td>
     </tr>
     <tr>
       <th>rounding_perc</th>
       <td><p>the number of digits after the decimal for percentages; default is 1</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>the number of significant digits for the numerical variables (if using default functions); default is 1.</p></td>
     </tr>
     <tr>
       <th>var_names</th>
@@ -166,7 +175,11 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>NAkeep</th>
-      <td><p>when set to <code>TRUE</code> it also shows how many missing values are in the data for each categorical variable being summarized</p></td>
+      <td><p>when set to <code>TRUE</code> it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use <code>na.rm</code>)</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>when set to <code>FALSE</code> it also shows how many missing values are in the data for each categorical variable being summarized</p></td>
     </tr>
     <tr>
       <th>booktabs</th>
@@ -179,6 +192,10 @@ Can be used within the piping framework [see library(magrittr)].</p>
     <tr>
       <th>align</th>
       <td><p>when <code>output != "text"</code>; option is passed to <code><a href='http://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
+    </tr>
+    <tr>
+      <th>float</th>
+      <td><p>the float applied to the table in Latex when output is <code>latex2</code></p></td>
     </tr>
     <tr>
       <th>export</th>
@@ -200,13 +217,14 @@ Can be used within the piping framework [see library(magrittr)].</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Ficticious Data ##</span>
 <span class='fu'>library</span>(<span class='no'>furniture</span>)
-<span class='fu'>library</span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>Loading tidyverse: ggplot2</span>
-#&gt; <span class='message'>Loading tidyverse: tibble</span>
-#&gt; <span class='message'>Loading tidyverse: tidyr</span>
-#&gt; <span class='message'>Loading tidyverse: readr</span>
-#&gt; <span class='message'>Loading tidyverse: purrr</span>
-#&gt; <span class='message'>Loading tidyverse: dplyr</span></div><div class='output co'>#&gt; <span class='message'>Conflicts with tidy packages ---------------------------------------------------</span></div><div class='output co'>#&gt; <span class='message'>filter(): dplyr, furniture, stats</span>
-#&gt; <span class='message'>lag():    dplyr, furniture, stats</span></div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.2.0 ──</span></div><div class='output co'>#&gt; <span class='message'>✔ ggplot2 2.2.1     ✔ purrr   0.2.4</span>
+#&gt; <span class='message'>✔ tibble  1.3.4     ✔ dplyr   0.7.4</span>
+#&gt; <span class='message'>✔ tidyr   0.7.2     ✔ stringr 1.2.0</span>
+#&gt; <span class='message'>✔ readr   1.1.1     ✔ forcats 0.2.0</span></div><div class='output co'>#&gt; <span class='message'>── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
+#&gt; <span class='message'>✖ dplyr::filter()  masks furniture::filter(), stats::filter()</span>
+#&gt; <span class='message'>✖ purrr::is_null() masks testthat::is_null()</span>
+#&gt; <span class='message'>✖ dplyr::lag()     masks furniture::lag(), stats::lag()</span>
+#&gt; <span class='message'>✖ dplyr::matches() masks testthat::matches()</span></div><div class='input'>
 <span class='no'>x</span>  <span class='kw'>&lt;-</span> <span class='fu'>runif</span>(<span class='fl'>1000</span>)
 <span class='no'>y</span>  <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>1000</span>)
 <span class='no'>z</span>  <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>sample</span>(<span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='fl'>1000</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
@@ -214,82 +232,107 @@ Can be used within the piping framework [see library(magrittr)].</p>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)
 
 <span class='co'>## Simple</span>
-<span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; 
-#&gt; |==============================|
-#&gt;               Mean/Count (SD/%)
-#&gt;  Observations 1000             
-#&gt;  x                             
-#&gt;               0.5 (0.3)        
-#&gt;  y                             
-#&gt;               -0.0 (1.0)       
-#&gt;  z                             
-#&gt;     0         510 (51%)        
-#&gt;     1         490 (49%)        
-#&gt;  a                             
-#&gt;     1         525 (52.5%)      
-#&gt;     2         475 (47.5%)      
-#&gt; |==============================|</div><div class='input'>
+<span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+#&gt; ────────────────────────
+#&gt;       Mean/Count (SD/%)
+#&gt;       n = 1000         
+#&gt;  x                     
+#&gt;       0.5 (0.3)        
+#&gt;  y                     
+#&gt;       -0.0 (1.0)       
+#&gt;  z                     
+#&gt;     0 510 (51%)        
+#&gt;     1 490 (49%)        
+#&gt;  a                     
+#&gt;     1 525 (52.5%)      
+#&gt;     2 475 (47.5%)      
+#&gt; ────────────────────────</div><div class='input'>
 <span class='co'>## Stratified</span>
-<span class='co'>## both below are the same</span>
+<span class='co'>## all three below are the same</span>
 <span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
-       <span class='kw'>splitby</span> <span class='kw'>=</span> ~ <span class='no'>a</span>)</div><div class='output co'>#&gt; 
-#&gt; |===================================|
-#&gt;                     a 
-#&gt;               1          2          
-#&gt;  Observations 525        475        
-#&gt;  x                                  
-#&gt;               0.5 (0.3)  0.5 (0.3)  
-#&gt;  y                                  
-#&gt;               -0.0 (1.0) -0.0 (1.0) 
-#&gt;  z                                  
-#&gt;     0         257 (49%)  253 (53.3%)
-#&gt;     1         268 (51%)  222 (46.7%)
-#&gt; |===================================|</div><div class='input'><span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
-       <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='st'>"a"</span>)</div><div class='output co'>#&gt; 
-#&gt; |===================================|
-#&gt;                     a 
-#&gt;               1          2          
-#&gt;  Observations 525        475        
-#&gt;  x                                  
-#&gt;               0.5 (0.3)  0.5 (0.3)  
-#&gt;  y                                  
-#&gt;               -0.0 (1.0) -0.0 (1.0) 
-#&gt;  z                                  
-#&gt;     0         257 (49%)  253 (53.3%)
-#&gt;     1         268 (51%)  222 (46.7%)
-#&gt; |===================================|</div><div class='input'>
+       <span class='kw'>splitby</span> <span class='kw'>=</span> ~ <span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+#&gt; ─────────────────────────────
+#&gt;               a 
+#&gt;       1          2          
+#&gt;       n = 525    n = 475    
+#&gt;  x                          
+#&gt;       0.5 (0.3)  0.5 (0.3)  
+#&gt;  y                          
+#&gt;       -0.0 (1.0) -0.0 (1.0) 
+#&gt;  z                          
+#&gt;     0 257 (49%)  253 (53.3%)
+#&gt;     1 268 (51%)  222 (46.7%)
+#&gt; ─────────────────────────────</div><div class='input'><span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
+       <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='st'>"a"</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+#&gt; ─────────────────────────────
+#&gt;               a 
+#&gt;       1          2          
+#&gt;       n = 525    n = 475    
+#&gt;  x                          
+#&gt;       0.5 (0.3)  0.5 (0.3)  
+#&gt;  y                          
+#&gt;       -0.0 (1.0) -0.0 (1.0) 
+#&gt;  z                          
+#&gt;     0 257 (49%)  253 (53.3%)
+#&gt;     1 268 (51%)  222 (46.7%)
+#&gt; ─────────────────────────────</div><div class='input'><span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
+       <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+#&gt; ─────────────────────────────
+#&gt;               a 
+#&gt;       1          2          
+#&gt;       n = 525    n = 475    
+#&gt;  x                          
+#&gt;       0.5 (0.3)  0.5 (0.3)  
+#&gt;  y                          
+#&gt;       -0.0 (1.0) -0.0 (1.0) 
+#&gt;  z                          
+#&gt;     0 257 (49%)  253 (53.3%)
+#&gt;     1 268 (51%)  222 (46.7%)
+#&gt; ─────────────────────────────</div><div class='input'>
 <span class='co'>## With Piping</span>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
          <span class='kw'>splitby</span> <span class='kw'>=</span> ~<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise</span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'>n</span>())</div><div class='output co'>#&gt; 
-#&gt; |===================================|
-#&gt;                     a 
-#&gt;               1          2          
-#&gt;  Observations 525        475        
-#&gt;  x                                  
-#&gt;               0.5 (0.3)  0.5 (0.3)  
-#&gt;  y                                  
-#&gt;               -0.0 (1.0) -0.0 (1.0) 
-#&gt;  z                                  
-#&gt;     0         257 (49%)  253 (53.3%)
-#&gt;     1         268 (51%)  222 (46.7%)
-#&gt; |===================================|</div><div class='output co'>#&gt;   count
-#&gt; 1  1000</div><div class='input'>
+#&gt; ─────────────────────────────
+#&gt;               a 
+#&gt;       1          2          
+#&gt;       n = 525    n = 475    
+#&gt;  x                          
+#&gt;       0.5 (0.3)  0.5 (0.3)  
+#&gt;  y                          
+#&gt;       -0.0 (1.0) -0.0 (1.0) 
+#&gt;  z                          
+#&gt;     0 257 (49%)  253 (53.3%)
+#&gt;     1 268 (51%)  222 (46.7%)
+#&gt; ─────────────────────────────</div><div class='output co'>#&gt;   count
+#&gt; 1  1000</div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>)</div><div class='output co'>#&gt; <span class='message'>Using a grouped data frame: default using the grouping variables and not splitby</span></div><div class='output co'>#&gt; 
+#&gt; ─────────────────────────────
+#&gt;               a 
+#&gt;       1          2          
+#&gt;       n = 525    n = 475    
+#&gt;  x                          
+#&gt;       0.5 (0.3)  0.5 (0.3)  
+#&gt;  y                          
+#&gt;       -0.0 (1.0) -0.0 (1.0) 
+#&gt;  z                          
+#&gt;     0 257 (49%)  253 (53.3%)
+#&gt;     1 268 (51%)  222 (46.7%)
+#&gt; ─────────────────────────────</div><div class='input'>
 <span class='co'>## Adjust variables within function and assign name</span>
 <span class='fu'>table1</span>(<span class='no'>df</span>,
-       <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>), <span class='no'>z</span>,
-       <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"X2"</span>, <span class='st'>"Z"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: var_names is deprecated. You can now assign names directly:</span>
-#&gt; <span class='warning'>e.g. var1 = var1name, var2 = var2name, ...</span></div><div class='output co'>#&gt; 
-#&gt; |==============================|
-#&gt;               Mean/Count (SD/%)
-#&gt;  Observations 1000             
-#&gt;  X2                            
-#&gt;               1.0 (0.0)        
-#&gt;  Z                             
-#&gt;     0         510 (51%)        
-#&gt;     1         490 (49%)        
-#&gt; |==============================|</div><div class='input'>         
+       <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+#&gt; ────────────────────────
+#&gt;       Mean/Count (SD/%)
+#&gt;       n = 1000         
+#&gt;  x2                    
+#&gt;       1.0 (0.0)        
+#&gt;  z                     
+#&gt;     0 510 (51%)        
+#&gt;     1 490 (49%)        
+#&gt; ────────────────────────</div><div class='input'>         
 
 </div></pre>
   </div>
@@ -310,7 +353,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Tyson Barrett, Emily Brignone.</p>
+  <p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
 </div>
 
 <div class="pkgdown">

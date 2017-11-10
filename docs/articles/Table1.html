@@ -70,7 +70,7 @@
     <div class="page-header toc-ignore">
       <h1>Table 1</h1>
             
-            <h4 class="date">2017-09-17</h4>
+            <h4 class="date">2017-11-10</h4>
           </div>
 
     
@@ -79,15 +79,16 @@
 <div id="making-table-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#making-table-1" class="anchor"></a>Making Table 1</h1>
-<p>This vignette demonstrates the main function of the <code>furniture</code> package–<code>table1</code>. The main parts of the package are below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(.data, ..., splitby, row_wise, test, type, output, format_number, NAkeep, splitby_labels, var_names)</code></pre></div>
+<p>This vignette demonstrates the main function of the <code>furniture</code> package–<code><a href="../reference/table1.html">table1()</a></code>. This vignette is current as of <code>furniture</code> <code>v 1.7.2</code>.</p>
+<p>The main parts of the <code><a href="../reference/table1.html">table1()</a></code> are below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(.data, ..., splitby, row_wise, test, type, output, format_number, na.rm)</code></pre></div>
 <p>It contains several useful features for summarizing your data:</p>
 <ol style="list-style-type: decimal">
 <li>It simply summarizes many variables succinctly providing means/counts and SD’s/percentages. By providing variable names to the <code>medians</code> option, you can obtain the median and the first quartile/third quantile.</li>
 <li>The descriptive statistics can be by a grouping factor (i.e., splitby).</li>
 <li>It uses a similar API to the popular tidyverse groups of packages and can be used in a pipe.</li>
 <li>It can give bivariate test results for the variable with the grouping variable, which provides the correct test type depending on the variable types.</li>
-<li>It is flexible as to its output: can be printed in regular console output or it can be printed in latex, markdown, and pandoc (see <code><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">knitr::kable</a></code>).</li>
+<li>It is flexible as to its output: can be printed in regular console output or it can be printed in latex (either through kable or through a built-in function), markdown, and pandoc (see <code><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">knitr::kable</a></code>).</li>
 <li>Numbers can be formatted nicely.</li>
 <li>Table has multiple formatting options to fit various needs using <code>output</code>, <code>format_output</code>, <code>simple</code> and <code>condense</code>.</li>
 <li>The table can be exported to a CSV with <code>export = "file_name"</code>.</li>
@@ -112,24 +113,24 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, 
        a, b, c, d, e)</code></pre></div>
 <pre><code>## 
-## |==============================|
-##               Mean/Count (SD/%)
-##  Observations 10000            
-##  a                             
-##               4971.4 (2890.5)  
-##  b                             
-##               0.5 (1.0)        
-##  c                             
-##     1         1962 (24.5%)     
-##     2         2064 (25.8%)     
-##     3         1945 (24.3%)     
-##     4         2023 (25.3%)     
-##  d                             
-##     0         3295 (49.8%)     
-##     1         3315 (50.2%)     
-##  e                             
-##               19.4 (5.0)       
-## |==============================|</code></pre>
+## ────────────────────────
+##       Mean/Count (SD/%)
+##       n = 10000        
+##  a                     
+##       4971.4 (2890.5)  
+##  b                     
+##       0.5 (1.0)        
+##  c                     
+##     1 1962 (24.5%)     
+##     2 2064 (25.8%)     
+##     3 1945 (24.3%)     
+##     4 2023 (25.3%)     
+##  d                     
+##     0 3295 (49.8%)     
+##     1 3315 (50.2%)     
+##  e                     
+##       19.4 (5.0)       
+## ────────────────────────</code></pre>
 </div>
 <div id="splitby" class="section level3">
 <h3 class="hasAnchor">
@@ -139,20 +140,20 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
        a, b, c,
        <span class="dt">splitby =</span> <span class="op">~</span>d)</code></pre></div>
 <pre><code>## 
-## |============================================|
-##                         d 
-##               0               1              
-##  Observations 3295            3315           
-##  a                                           
-##               4949.8 (2868.8) 4969.0 (2884.4)
-##  b                                           
-##               0.5 (1.0)       0.5 (1.0)      
-##  c                                           
-##     1         665 (25.3%)     639 (24.1%)    
-##     2         652 (24.8%)     677 (25.6%)    
-##     3         645 (24.6%)     622 (23.5%)    
-##     4         663 (25.3%)     709 (26.8%)    
-## |============================================|</code></pre>
+## ──────────────────────────────────────
+##                    d 
+##       0               1              
+##       n = 3295        n = 3315       
+##  a                                   
+##       4949.8 (2868.8) 4969.0 (2884.4)
+##  b                                   
+##       0.5 (1.0)       0.5 (1.0)      
+##  c                                   
+##     1 665 (25.3%)     639 (24.1%)    
+##     2 652 (24.8%)     677 (25.6%)    
+##     3 645 (24.6%)     622 (23.5%)    
+##     4 663 (25.3%)     709 (26.8%)    
+## ──────────────────────────────────────</code></pre>
 </div>
 <div id="row-wise" class="section level3">
 <h3 class="hasAnchor">
@@ -163,20 +164,20 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
        <span class="dt">splitby =</span> <span class="op">~</span>d,
        <span class="dt">row_wise =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## |============================================|
-##                         d 
-##               0               1              
-##  Observations 3295            3315           
-##  a                                           
-##               4949.8 (2868.8) 4969.0 (2884.4)
-##  b                                           
-##               0.5 (1.0)       0.5 (1.0)      
-##  c                                           
-##     1         665 (33.9%)     639 (32.6%)    
-##     2         652 (31.6%)     677 (32.8%)    
-##     3         645 (33.2%)     622 (32%)      
-##     4         663 (32.8%)     709 (35%)      
-## |============================================|</code></pre>
+## ──────────────────────────────────────
+##                    d 
+##       0               1              
+##       n = 3295        n = 3315       
+##  a                                   
+##       4949.8 (2868.8) 4969.0 (2884.4)
+##  b                                   
+##       0.5 (1.0)       0.5 (1.0)      
+##  c                                   
+##     1 665 (33.9%)     639 (32.6%)    
+##     2 652 (31.6%)     677 (32.8%)    
+##     3 645 (33.2%)     622 (32%)      
+##     4 663 (32.8%)     709 (35%)      
+## ──────────────────────────────────────</code></pre>
 </div>
 <div id="test" class="section level3">
 <h3 class="hasAnchor">
@@ -187,20 +188,20 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
        <span class="dt">splitby =</span> <span class="op">~</span>d,
        <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 3295            3315                   
-##  a                                            0.786  
-##               4949.8 (2868.8) 4969.0 (2884.4)        
-##  b                                            0.112  
-##               0.5 (1.0)       0.5 (1.0)              
-##  c                                            0.414  
-##     1         665 (25.3%)     639 (24.1%)            
-##     2         652 (24.8%)     677 (25.6%)            
-##     3         645 (24.6%)     622 (23.5%)            
-##     4         663 (25.3%)     709 (26.8%)            
-## |====================================================|</code></pre>
+## ──────────────────────────────────────────────
+##                        d 
+##       0               1               P-Value
+##       n = 3295        n = 3315               
+##  a                                    0.786  
+##       4949.8 (2868.8) 4969.0 (2884.4)        
+##  b                                    0.112  
+##       0.5 (1.0)       0.5 (1.0)              
+##  c                                    0.414  
+##     1 665 (25.3%)     639 (24.1%)            
+##     2 652 (24.8%)     677 (25.6%)            
+##     3 645 (24.6%)     622 (23.5%)            
+##     4 663 (25.3%)     709 (26.8%)            
+## ──────────────────────────────────────────────</code></pre>
 <p>By default, only the p-values are shown but other options exist such as stars or including the test statistics with the p-values using the <code>format_output</code> argument.</p>
 </div>
 </div>
@@ -214,19 +215,19 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
        <span class="dt">test =</span> <span class="ot">TRUE</span>,
        <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 3295            3315                   
-##  f: 1         50.4%           50.1%           0.857  
-##  a            4949.8 (2868.8) 4969.0 (2884.4) 0.786  
-##  b            0.5 (1.0)       0.5 (1.0)       0.112  
-##  c                                            0.414  
-##     1         25.3%           24.1%                  
-##     2         24.8%           25.6%                  
-##     3         24.6%           23.5%                  
-##     4         25.3%           26.8%                  
-## |====================================================|</code></pre>
+## ──────────────────────────────────────────────
+##                        d 
+##       0               1               P-Value
+##       n = 3295        n = 3315               
+##  f: 1 50.4%           50.1%           0.857  
+##  a    4949.8 (2868.8) 4969.0 (2884.4) 0.786  
+##  b    0.5 (1.0)       0.5 (1.0)       0.112  
+##  c                                    0.414  
+##     1 25.3%           24.1%                  
+##     2 24.8%           25.6%                  
+##     3 24.6%           23.5%                  
+##     4 25.3%           26.8%                  
+## ──────────────────────────────────────────────</code></pre>
 </div>
 <div id="medians" class="section level2">
 <h2 class="hasAnchor">
@@ -239,19 +240,19 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
        <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>),
        <span class="dt">second =</span> <span class="kw">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>))</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 3295            3315                   
-##  f: 1         50.4%           50.1%           0.857  
-##  a            4958.0 [4902.0] 5031.0 [4937.5] 0.786  
-##  b            0.5 [1.4]       0.5 [1.4]       0.112  
-##  c                                            0.414  
-##     1         25.3%           24.1%                  
-##     2         24.8%           25.6%                  
-##     3         24.6%           23.5%                  
-##     4         25.3%           26.8%                  
-## |====================================================|</code></pre>
+## ──────────────────────────────────────────────
+##                        d 
+##       0               1               P-Value
+##       n = 3295        n = 3315               
+##  f: 1 50.4%           50.1%           0.857  
+##  a    4958.0 [4902.0] 5031.0 [4937.5] 0.786  
+##  b    0.5 [1.4]       0.5 [1.4]       0.112  
+##  c                                    0.414  
+##     1 25.3%           24.1%                  
+##     2 24.8%           25.6%                  
+##     3 24.6%           23.5%                  
+##     4 25.3%           26.8%                  
+## ──────────────────────────────────────────────</code></pre>
 <div id="output-type" class="section level3">
 <h3 class="hasAnchor">
 <a href="#output-type" class="anchor"></a>Output Type</h3>
@@ -283,13 +284,12 @@ P-Value
 <tbody>
 <tr>
 <td>
-Observations
 </td>
 <td>
-3295
+n = 3295
 </td>
 <td>
-3315
+n = 3315
 </td>
 <td>
 </td>
@@ -356,7 +356,7 @@ c
 </tr>
 <tr>
 <td>
-– 1 –
+1
 </td>
 <td>
 665 (25.3%)
@@ -369,7 +369,7 @@ c
 </tr>
 <tr>
 <td>
-– 2 –
+2
 </td>
 <td>
 652 (24.8%)
@@ -382,7 +382,7 @@ c
 </tr>
 <tr>
 <td>
-– 3 –
+3
 </td>
 <td>
 645 (24.6%)
@@ -395,7 +395,7 @@ c
 </tr>
 <tr>
 <td>
-– 4 –
+4
 </td>
 <td>
 663 (25.3%)
@@ -419,67 +419,59 @@ c
        <span class="dt">test =</span> <span class="ot">TRUE</span>,
        <span class="dt">format_number =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## |========================================================|
-##                               d 
-##               0                 1                 P-Value
-##  Observations 3295              3315                     
-##  a                                                0.786  
-##               4,949.8 (2,868.8) 4,969.0 (2,884.4)        
-##  b                                                0.112  
-##               0.5 (1.0)         0.5 (1.0)                
-##  c                                                0.414  
-##     1         665 (25.3%)       639 (24.1%)              
-##     2         652 (24.8%)       677 (25.6%)              
-##     3         645 (24.6%)       622 (23.5%)              
-##     4         663 (25.3%)       709 (26.8%)              
-## |========================================================|</code></pre>
+## ──────────────────────────────────────────────────
+##                          d 
+##       0                 1                 P-Value
+##       n = 3295          n = 3315                 
+##  a                                        0.786  
+##       4,949.8 (2,868.8) 4,969.0 (2,884.4)        
+##  b                                        0.112  
+##       0.5 (1.0)         0.5 (1.0)                
+##  c                                        0.414  
+##     1 665 (25.3%)       639 (24.1%)              
+##     2 652 (24.8%)       677 (25.6%)              
+##     3 645 (24.6%)       622 (23.5%)              
+##     4 663 (25.3%)       709 (26.8%)              
+## ──────────────────────────────────────────────────</code></pre>
 </div>
-<div id="na-keep" class="section level3">
+<div id="na-rm" class="section level3">
 <h3 class="hasAnchor">
-<a href="#na-keep" class="anchor"></a>NA Keep</h3>
-<p>In order to explore the missingness in the factor variables, using <code>NAkeep = TRUE</code> does the counts and percentages of the missing values as well.</p>
+<a href="#na-rm" class="anchor"></a><code>na.rm</code>
+</h3>
+<p>In order to explore the missingness in the factor variables, using <code>na.rm = FALSE</code> does the counts and percentages of the missing values as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df,
        a, b, c,
        <span class="dt">splitby =</span> <span class="op">~</span>d,
        <span class="dt">test =</span> <span class="ot">TRUE</span>,
-       <span class="dt">NAkeep =</span> <span class="ot">TRUE</span>)</code></pre></div>
+       <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 3295            3315                   
-##  a                                            0.786  
-##               4949.8 (2868.8) 4969.0 (2884.4)        
-##  b                                            0.112  
-##               0.5 (1.0)       0.5 (1.0)              
-##  c                                            0.414  
-##     1         665 (20.2%)     639 (19.3%)            
-##     2         652 (19.8%)     677 (20.4%)            
-##     3         645 (19.6%)     622 (18.8%)            
-##     4         663 (20.1%)     709 (21.4%)            
-##     NA        670 (20.3%)     668 (20.2%)            
-## |====================================================|</code></pre>
+## ───────────────────────────────────────────────
+##                         d 
+##        0               1               P-Value
+##        n = 3295        n = 3315               
+##  a                                     0.786  
+##        4949.8 (2868.8) 4969.0 (2884.4)        
+##  b                                     0.112  
+##        0.5 (1.0)       0.5 (1.0)              
+##  c                                     0.414  
+##     1  665 (20.2%)     639 (19.3%)            
+##     2  652 (19.8%)     677 (20.4%)            
+##     3  645 (19.6%)     622 (18.8%)            
+##     4  663 (20.1%)     709 (21.4%)            
+##     NA 670 (20.3%)     668 (20.2%)            
+## ───────────────────────────────────────────────</code></pre>
 <p>Here we do not have any missingness but it shows up as zeros to show that there are none there.</p>
 </div>
 <div id="piping" class="section level3">
 <h3 class="hasAnchor">
 <a href="#piping" class="anchor"></a>Piping</h3>
 <p>Finally, to make it easier to implement in the tidyverse of packages, a piping option is available. This option invisibly returns the data frame that was given to the table 1 function and prints the table in console.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr</code></pre>
-<pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
-<pre><code>## filter(): dplyr, stats
-## lag():    dplyr, stats</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(f <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>na.omit <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(d) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, c,
-         <span class="dt">splitby =</span> <span class="op">~</span>d,
          <span class="dt">test =</span> <span class="ot">TRUE</span>,
          <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> b, <span class="dt">y =</span> a, <span class="dt">group =</span> d)) <span class="op">+</span>
@@ -488,69 +480,87 @@ c
 <span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"dodgerblue3"</span>, <span class="st">"chartreuse4"</span>), <span class="dt">name =</span> <span class="st">"Group"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 879             903                    
-##  a            4964.1 (2872.3) 4968.2 (2922.8) 0.976  
-##  b            0.5 (1.0)       0.5 (1.1)       0.556  
-##  c                                            0.485  
-##     1         25.1%           24.9%                  
-##     2         24.6%           23.4%                  
-##     3         23.5%           21.8%                  
-##     4         26.7%           29.9%                  
-## |====================================================|</code></pre>
+## ──────────────────────────────────────────────
+##                        d 
+##       0               1               P-Value
+##       n = 1112        n = 1107               
+##  a    4912.7 (2883.3) 4958.2 (2938.0) 0.713  
+##  b    0.5 (1.0)       0.5 (1.0)       0.503  
+##  c                                    0.485  
+##     1 25.1%           24.9%                  
+##     2 24.6%           23.4%                  
+##     3 23.5%           21.8%                  
+##     4 26.7%           29.9%                  
+## ──────────────────────────────────────────────</code></pre>
 <p><img src="Table1_files/figure-html/tidyverse-1.png" width="480"></p>
 </div>
-<div id="var-names" class="section level3">
+<div id="variable-names" class="section level3">
 <h3 class="hasAnchor">
-<a href="#var-names" class="anchor"></a>Var Names</h3>
-<p>The <code>var_names</code> argument lets you rename the variables.</p>
+<a href="#variable-names" class="anchor"></a>Variable Names</h3>
+<p>You can also adjust the variable names from within the function as so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df,
-       a, b, c,
+       <span class="st">"Avar"</span> =<span class="st"> </span>a, <span class="st">"Bvar"</span> =<span class="st"> </span>b, <span class="st">"Cvar"</span> =<span class="st"> </span>c,
        <span class="dt">splitby =</span> <span class="op">~</span>d,
-       <span class="dt">test =</span> <span class="ot">TRUE</span>,
-       <span class="dt">var_names =</span> <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))</code></pre></div>
-<pre><code>## Warning in table1(df, a, b, c, splitby = ~d, test = TRUE, var_names = c("A", : var_names is deprecated. You can now assign names directly:
-## e.g. var1 = var1name, var2 = var2name, ...</code></pre>
+       <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## |====================================================|
-##                             d 
-##               0               1               P-Value
-##  Observations 3295            3315                   
-##  A                                            0.786  
-##               4949.8 (2868.8) 4969.0 (2884.4)        
-##  B                                            0.112  
-##               0.5 (1.0)       0.5 (1.0)              
-##  C                                            0.414  
-##     1         665 (25.3%)     639 (24.1%)            
-##     2         652 (24.8%)     677 (25.6%)            
-##     3         645 (24.6%)     622 (23.5%)            
-##     4         663 (25.3%)     709 (26.8%)            
-## |====================================================|</code></pre>
+## ──────────────────────────────────────────────
+##                        d 
+##       0               1               P-Value
+##       n = 3295        n = 3315               
+##  Avar                                 0.786  
+##       4949.8 (2868.8) 4969.0 (2884.4)        
+##  Bvar                                 0.112  
+##       0.5 (1.0)       0.5 (1.0)              
+##  Cvar                                 0.414  
+##     1 665 (25.3%)     639 (24.1%)            
+##     2 652 (24.8%)     677 (25.6%)            
+##     3 645 (24.6%)     622 (23.5%)            
+##     4 663 (25.3%)     709 (26.8%)            
+## ──────────────────────────────────────────────</code></pre>
 <p>This is particularly useful when you adjust a variable within the function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df,
+       <span class="st">"A"</span> =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)), b, c,
+       <span class="dt">splitby =</span> <span class="op">~</span>d,
+       <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## ──────────────────────────────────────
+##                    d 
+##       0           1           P-Value
+##       n = 3295    n = 3315           
+##  A                            1      
+##     0 0 (0%)      1 (0%)             
+##     1 3295 (100%) 3314 (100%)        
+##  b                            0.112  
+##       0.5 (1.0)   0.5 (1.0)          
+##  c                            0.414  
+##     1 665 (25.3%) 639 (24.1%)        
+##     2 652 (24.8%) 677 (25.6%)        
+##     3 645 (24.6%) 622 (23.5%)        
+##     4 663 (25.3%) 709 (26.8%)        
+## ──────────────────────────────────────</code></pre>
+<p>Here we changed <code>a</code> to a factor within the function. In order for the name to look better, we can assign a new name, otherwise it would be named something like <code>factor.ifelse.a...</code>.</p>
+<p>For more complex naming (e.g., using spacing, brackets, or other values not allowed as name in a data.frame), use the <code>var_names</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df,
        <span class="kw">factor</span>(<span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)), b, c,
        <span class="dt">splitby =</span> <span class="op">~</span>d,
        <span class="dt">test =</span> <span class="ot">TRUE</span>,
-       <span class="dt">var_names =</span> <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))</code></pre></div>
+       <span class="dt">var_names =</span> <span class="kw">c</span>(<span class="st">"A New Variable"</span>, <span class="st">"B Variable"</span>, <span class="st">"C Variable"</span>))</code></pre></div>
 <pre><code>## 
-## |============================================|
-##                         d 
-##               0           1           P-Value
-##  Observations 3295        3315               
-##  A                                    1      
-##     0         0 (0%)      1 (0%)             
-##     1         3295 (100%) 3314 (100%)        
-##  B                                    0.112  
-##               0.5 (1.0)   0.5 (1.0)          
-##  C                                    0.414  
-##     1         665 (25.3%) 639 (24.1%)        
-##     2         652 (24.8%) 677 (25.6%)        
-##     3         645 (24.6%) 622 (23.5%)        
-##     4         663 (25.3%) 709 (26.8%)        
-## |============================================|</code></pre>
-<p>Here we changed <code>a</code> to a factor within the function. In order for the name to look better, we can use the <code>var_names</code> argument, otherwise it would be named something like <code>factor.ifelse.a...</code>.</p>
+## ────────────────────────────────────────────────
+##                              d 
+##                 0           1           P-Value
+##                 n = 3295    n = 3315           
+##  A New Variable                         1      
+##     0           0 (0%)      1 (0%)             
+##     1           3295 (100%) 3314 (100%)        
+##  B Variable                             0.112  
+##                 0.5 (1.0)   0.5 (1.0)          
+##  C Variable                             0.414  
+##     1           665 (25.3%) 639 (24.1%)        
+##     2           652 (24.8%) 677 (25.6%)        
+##     3           645 (24.6%) 622 (23.5%)        
+##     4           663 (25.3%) 709 (26.8%)        
+## ────────────────────────────────────────────────</code></pre>
 </div>
 </div>
 <div id="final-note" class="section level2">
@@ -560,19 +570,19 @@ c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tab1 =<span class="st"> </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(df,
               a, b, c,
               <span class="dt">splitby =</span> <span class="op">~</span>d,
-              <span class="dt">test =</span> <span class="ot">TRUE</span>)
-<span class="kw">data.frame</span>(tab1)</code></pre></div>
-<pre><code>##        Table1..        Table1.0        Table1.1 Table1.P.Value Splitby
-## 1  Observations            3295            3315                      d
-## 2             a                                          0.786       d
-## 3               4949.8 (2868.8) 4969.0 (2884.4)                      d
-## 4             b                                          0.112       d
-## 5                     0.5 (1.0)       0.5 (1.0)                      d
-## 6             c                                          0.414       d
-## 7             1     665 (25.3%)     639 (24.1%)                      d
-## 8             2     652 (24.8%)     677 (25.6%)                      d
-## 9             3     645 (24.6%)     622 (23.5%)                      d
-## 10            4     663 (25.3%)     709 (26.8%)                      d</code></pre>
+              <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(tab1)</code></pre></div>
+<pre><code>##    Table1..        Table1.0        Table1.1 Table1.P.Value
+## 1                  n = 3295        n = 3315               
+## 2         a                                          0.786
+## 3           4949.8 (2868.8) 4969.0 (2884.4)               
+## 4         b                                          0.112
+## 5                 0.5 (1.0)       0.5 (1.0)               
+## 6         c                                          0.414
+## 7         1     665 (25.3%)     639 (24.1%)               
+## 8         2     652 (24.8%)     677 (25.6%)               
+## 9         3     645 (24.6%)     622 (23.5%)               
+## 10        4     663 (25.3%)     709 (26.8%)</code></pre>
 </div>
 <div id="conclusions" class="section level2">
 <h2 class="hasAnchor">
@@ -605,7 +615,7 @@ c
 
 
       <footer><div class="copyright">
-  <p>Developed by Tyson Barrett, Emily Brignone.</p>
+  <p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
 </div>
 
 <div class="pkgdown">

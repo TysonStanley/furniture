@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -66,16 +66,22 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9">
     
 
-<div id="furniture-1-6-0" class="section level1">
+    
+    
+<div class="contents">
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<div id="furniture-1-7-2" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#furniture-1-6-0" class="anchor"></a>furniture: 1.6.0</h1></div>
-<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code>washer</code>), exploratory data analysis and reporting (e.g., <code>table1</code>, <code>%xt%</code>). It currently contains four main functions:</p>
-<ol>
+<a href="#furniture-1-7-2" class="anchor"></a>furniture: 1.7.2 <img src="reference/figures/furniture_hex.png" align="right">
+</h1></div>
+
+<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code>washer</code>), exploratory data analysis and reporting (e.g., <code>table1</code>, <code>%xt%</code>). It currently contains six main functions:</p>
+<ol style="list-style-type: decimal">
 <li>
-<code><a href="reference/table1.html">table1()</a></code> – gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well.</li>
+<code><a href="reference/table1.html">table1()</a></code> – gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with <code><a href="http://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by()</a></code>.</li>
 <li>
 <code><a href="reference/washer.html">washer()</a></code> – changes several values in a variable (very useful for changing place holder values to missing).</li>
 <li>
@@ -84,6 +90,8 @@
 <code><a href="reference/wide.html">wide()</a></code> – also a wrapper of <code><a href="http://www.rdocumentation.org/packages/stats/topics/reshape">stats::reshape()</a></code>, takes the data from long to wide, and like <code><a href="reference/long.html">long()</a></code>, works well with the tidyverse and can handle unbalanced multilevel data.</li>
 <li>
 <code><a href="reference/tableC.html">tableC()</a></code> – gives a well-formatted table of correlations.</li>
+<li>
+<code><a href="reference/tableF.html">tableF()</a></code> – provides a thorough frequency table for quick checks of the levels of a variable.</li>
 </ol>
 <p>In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.</p>
 </div>
@@ -99,14 +107,104 @@
 <div id="using-furniture" class="section level1">
 <h1 class="hasAnchor">
 <a href="#using-furniture" class="anchor"></a>Using furniture</h1>
+<p>The main functions are the <code>table_()</code> functions (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(furniture)
+<span class="co">#&gt; furniture 1.7.2: learn more at tysonbarrett.com</span>
+<span class="kw">data</span>(<span class="st">"nhanes_2010"</span>)
+
+<span class="kw"><a href="reference/table1.html">table1</a></span>(nhanes_<span class="dv">2010</span>,
+       age, marijuana, illicit, rehab, asthma,
+       <span class="dt">splitby=</span><span class="op">~</span>asthma)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ───────────────────────────────────</span>
+<span class="co">#&gt;                   asthma </span>
+<span class="co">#&gt;            Yes         No         </span>
+<span class="co">#&gt;             n = 251    n = 1164   </span>
+<span class="co">#&gt;  age                              </span>
+<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
+<span class="co">#&gt;  marijuana                        </span>
+<span class="co">#&gt;     Yes    131 (57.5%) 584 (57.4%)</span>
+<span class="co">#&gt;     No     97 (42.5%)  434 (42.6%)</span>
+<span class="co">#&gt;  illicit                          </span>
+<span class="co">#&gt;     Yes    23 (10.1%)  117 (11.5%)</span>
+<span class="co">#&gt;     No     205 (89.9%) 901 (88.5%)</span>
+<span class="co">#&gt;  rehab                            </span>
+<span class="co">#&gt;     Yes    10 (7.6%)   37 (6.3%)  </span>
+<span class="co">#&gt;     No     121 (92.4%) 547 (93.7%)</span>
+<span class="co">#&gt;  asthma                           </span>
+<span class="co">#&gt;     Yes    251 (100%)  0 (0%)     </span>
+<span class="co">#&gt;     No     0 (0%)      1164 (100%)</span>
+<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"nhanes_2010"</span>)
+
+<span class="kw"><a href="reference/table1.html">table1</a></span>(nhanes_<span class="dv">2010</span>,
+       age, marijuana, illicit, rehab, asthma,
+       <span class="dt">splitby=</span><span class="op">~</span>asthma, 
+       <span class="dt">output =</span> <span class="st">"text2"</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ───────────────────────────────────</span>
+<span class="co">#&gt;                   asthma </span>
+<span class="co">#&gt;            Yes         No         </span>
+<span class="co">#&gt;             n = 251    n = 1164   </span>
+<span class="co">#&gt;  --------- ----------- -----------</span>
+<span class="co">#&gt;  age                              </span>
+<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
+<span class="co">#&gt;  marijuana                        </span>
+<span class="co">#&gt;     Yes    131 (57.5%) 584 (57.4%)</span>
+<span class="co">#&gt;     No     97 (42.5%)  434 (42.6%)</span>
+<span class="co">#&gt;  illicit                          </span>
+<span class="co">#&gt;     Yes    23 (10.1%)  117 (11.5%)</span>
+<span class="co">#&gt;     No     205 (89.9%) 901 (88.5%)</span>
+<span class="co">#&gt;  rehab                            </span>
+<span class="co">#&gt;     Yes    10 (7.6%)   37 (6.3%)  </span>
+<span class="co">#&gt;     No     121 (92.4%) 547 (93.7%)</span>
+<span class="co">#&gt;  asthma                           </span>
+<span class="co">#&gt;     Yes    251 (100%)  0 (0%)     </span>
+<span class="co">#&gt;     No     0 (0%)      1164 (100%)</span>
+<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/tableC.html">tableC</a></span>(nhanes_<span class="dv">2010</span>, 
+       age, active, vig_active, 
+       <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+<span class="co">#&gt; N = 317</span>
+<span class="co">#&gt; Note: pearson correlation (p-value).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ──────────────────────────────────────────────────</span>
+<span class="co">#&gt;                [1]            [2]           [3]  </span>
+<span class="co">#&gt;  [1]age        1.00                              </span>
+<span class="co">#&gt;  [2]active     -0.148 (0.008) 1.00               </span>
+<span class="co">#&gt;  [3]vig_active -0.083 (0.141) 0.828 (&lt;.001) 1.00 </span>
+<span class="co">#&gt; ──────────────────────────────────────────────────</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/tableF.html">tableF</a></span>(nhanes_<span class="dv">2010</span>, age)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ──────────────────────────────────</span>
+<span class="co">#&gt;  age Freq CumFreq Percent CumPerc</span>
+<span class="co">#&gt;  18  191  191     13.48%  13.48% </span>
+<span class="co">#&gt;  19  153  344     10.80%  24.28% </span>
+<span class="co">#&gt;  20  111  455     7.83%   32.11% </span>
+<span class="co">#&gt;  21  95   550     6.70%   38.81% </span>
+<span class="co">#&gt;  22  100  650     7.06%   45.87% </span>
+<span class="co">#&gt;  23  112  762     7.90%   53.78% </span>
+<span class="co">#&gt;  24  93   855     6.56%   60.34% </span>
+<span class="co">#&gt;  25  100  955     7.06%   67.40% </span>
+<span class="co">#&gt;  26  91   1046    6.42%   73.82% </span>
+<span class="co">#&gt;  27  77   1123    5.43%   79.25% </span>
+<span class="co">#&gt;  28  91   1214    6.42%   85.67% </span>
+<span class="co">#&gt;  29  86   1300    6.07%   91.74% </span>
+<span class="co">#&gt;  30  117  1417    8.26%   100.00%</span>
+<span class="co">#&gt; ──────────────────────────────────</span></code></pre></div>
+<div id="notes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#notes" class="anchor"></a>Notes</h2>
 <p>The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as <code>library(dplyr)</code>, <code>library(tidyr)</code>, and <code>library(ggplot2)</code> with <code>library(furniture)</code> to accomplish this.</p>
 <p>The most important function–<code>table1</code>–is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or <a href="https://tysonstanley.github.io/">tysonstanley.github.io</a> for several examples of its use. Also see the pre-print of our paper in the <a href="https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf">R Journal</a>.</p>
 </div>
-
+</div>
+</div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
-    <h2>Links</h2>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=furniture">https://​cran.r-project.org/​package=furniture</a>
 </li>
@@ -115,8 +213,10 @@
 <p><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Tyson Barrett <br><small class="roles"> Author, maintainer </small> </li>
+<li>Tyson S. Barrett <br><small class="roles"> Author, maintainer </small> <br><small>(0000-0002-2137-1391)</small>
+</li>
 <li>Emily Brignone <br><small class="roles"> Author </small> </li>
+<li>Daniel J. Laxman <br><small class="roles"> Author </small> </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
@@ -127,11 +227,12 @@
 <li><a href="https://codecov.io/gh/tysonstanley/furniture"><img src="https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg" alt="codecov"></a></li>
 </ul>
 </div>
+
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Tyson Barrett, Emily Brignone.</p>
+  <p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
 </div>
 
 <div class="pkgdown">

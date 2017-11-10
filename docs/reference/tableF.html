@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Correlation Table — tableC • furniture</title>
+<title>Frequency Table — tableF • furniture</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -93,65 +93,39 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Correlation Table</h1>
+    <h1>Frequency Table</h1>
     </div>
 
     
-    <p>Correlations printed in a nicely formatted table.</p>
+    <p>Provides in-depth frequency counts and percentages.</p>
     
 
-    <pre class="usage"><span class='fu'>tableC</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>cor_type</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rounding</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>booktabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>float</span> <span class='kw'>=</span> <span class='st'>"htb"</span>)</pre>
+    <pre class="usage"><span class='fu'>tableF</span>(<span class='no'>.data</span>, <span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>the data frame containing the variables</p></td>
+      <td><p>the data frame containing the variable</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>the unquoted variable names to be included in the correlations</p></td>
+      <th>x</th>
+      <td><p>the bare variable name (not quoted)</p></td>
     </tr>
     <tr>
-      <th>cor_type</th>
-      <td><p>the correlation type; default is "pearson", other option is "spearman"</p></td>
+      <th>n</th>
+      <td><p>the number of values shown int he table</p></td>
     </tr>
     <tr>
-      <th>na.rm</th>
-      <td><p>logical (default is <code>FALSE</code>); if set to <code>TRUE</code>, the correlations use the "complete.obs" methods option from <code><a href='http://www.rdocumentation.org/packages/stats/topics/cor'>stats::cor()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>rounding</th>
-      <td><p>the value passed to <code>round</code> for the output of both the correlation and p-value; default is 3</p></td>
-    </tr>
-    <tr>
-      <th>output</th>
-      <td><p>how the table is output; can be "text" for regular console output, "latex2" for specialized latex output, or any of <code>kable()</code>'s options from <code>knitr</code> (e.g., "latex", "markdown", "pandoc").</p></td>
-    </tr>
-    <tr>
-      <th>booktabs</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='http://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
-    </tr>
-    <tr>
-      <th>caption</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='http://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
-    </tr>
-    <tr>
-      <th>align</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='http://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
-    </tr>
-    <tr>
-      <th>float</th>
-      <td><p>when <code>output == "latex2"</code> it controls the floating parameter (h, t, b, H)</p></td>
+      <th>splitby</th>
+      <td><p>the stratifying variable</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>stats::cor</p>
+    <p>a list of class <code>tableF</code> containing the frequency table(s)</p>
     
 
   </div>
@@ -160,7 +134,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
