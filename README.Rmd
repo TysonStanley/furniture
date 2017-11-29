@@ -56,17 +56,23 @@ library(furniture)
 data("nhanes_2010")
 
 table1(nhanes_2010,
-       age, marijuana, illicit, rehab, asthma,
+       age, marijuana, illicit, rehab,
        splitby=~asthma)
 ```
 
 ```{r}
-data("nhanes_2010")
-
 table1(nhanes_2010,
-       age, marijuana, illicit, rehab, asthma,
+       age, marijuana, illicit, rehab,
        splitby=~asthma, 
        output = "text2")
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2")
 ```
 
 ```{r}

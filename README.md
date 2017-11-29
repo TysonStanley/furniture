@@ -43,7 +43,7 @@ library(furniture)
 data("nhanes_2010")
 
 table1(nhanes_2010,
-       age, marijuana, illicit, rehab, asthma,
+       age, marijuana, illicit, rehab,
        splitby=~asthma)
 #> 
 #> ───────────────────────────────────
@@ -61,17 +61,12 @@ table1(nhanes_2010,
 #>  rehab                            
 #>     Yes    10 (7.6%)   37 (6.3%)  
 #>     No     121 (92.4%) 547 (93.7%)
-#>  asthma                           
-#>     Yes    251 (100%)  0 (0%)     
-#>     No     0 (0%)      1164 (100%)
 #> ───────────────────────────────────
 ```
 
 ``` r
-data("nhanes_2010")
-
 table1(nhanes_2010,
-       age, marijuana, illicit, rehab, asthma,
+       age, marijuana, illicit, rehab,
        splitby=~asthma, 
        output = "text2")
 #> 
@@ -91,9 +86,32 @@ table1(nhanes_2010,
 #>  rehab                            
 #>     Yes    10 (7.6%)   37 (6.3%)  
 #>     No     121 (92.4%) 547 (93.7%)
-#>  asthma                           
-#>     Yes    251 (100%)  0 (0%)     
-#>     No     0 (0%)      1164 (100%)
+#> ───────────────────────────────────
+```
+
+``` r
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2")
+#> 
+#> ───────────────────────────────────
+#>                   asthma 
+#>            Yes         No         
+#>             n = 251    n = 1164   
+#>  --------- ----------- -----------
+#>  age                              
+#>            23.0 (3.9)  23.4 (4.0) 
+#>  marijuana                        
+#>     Yes    131 (57.5%) 584 (57.4%)
+#>     No     97 (42.5%)  434 (42.6%)
+#>  illicit                          
+#>     Yes    23 (10.1%)  117 (11.5%)
+#>     No     205 (89.9%) 901 (88.5%)
+#>  rehab                            
+#>     Yes    10 (7.6%)   37 (6.3%)  
+#>     No     121 (92.4%) 547 (93.7%)
 #> ───────────────────────────────────
 ```
 
