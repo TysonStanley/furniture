@@ -153,6 +153,8 @@ tableF(nhanes_2010, age)
 #> ──────────────────────────────────
 ```
 
+In addition, the `rowmeans()` and `rowsums()` functions offer a simplified use of `rowMeans()` and `rowSums()`, particularly when using the tidyverse's `mutate()`.
+
 ``` r
 nhanes_2010 %>%
   select(vig_active, mod_active) %>%
@@ -161,16 +163,16 @@ nhanes_2010 %>%
 #> # A tibble: 1,417 x 4
 #>    vig_active mod_active avg_active sum_active
 #>         <dbl>      <dbl>      <dbl>      <dbl>
-#>  1       30.0       NA         NA         NA  
+#>  1       30.0       NA         30.0       30.0
 #>  2      180        180        180        360  
-#>  3       NA         NA         NA         NA  
+#>  3       NA         NA        NaN          0  
 #>  4       20.0       70.0       45.0       90.0
-#>  5      120         NA         NA         NA  
-#>  6       NA         NA         NA         NA  
-#>  7       NA        120         NA         NA  
-#>  8      120         NA         NA         NA  
-#>  9       NA         NA         NA         NA  
-#> 10       NA         NA         NA         NA  
+#>  5      120         NA        120        120  
+#>  6       NA         NA        NaN          0  
+#>  7       NA        120        120        120  
+#>  8      120         NA        120        120  
+#>  9       NA         NA        NaN          0  
+#> 10       NA         NA        NaN          0  
 #> # ... with 1,407 more rows
 ```
 

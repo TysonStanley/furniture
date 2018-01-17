@@ -87,6 +87,8 @@ tableC(nhanes_2010,
 tableF(nhanes_2010, age)
 ```
 
+In addition, the `rowmeans()` and `rowsums()` functions offer a simplified use of `rowMeans()` and `rowSums()`, particularly when using the tidyverse's `mutate()`.
+
 ```{r, echo=FALSE}
 nhanes_2010 = tibble::as_tibble(nhanes_2010)
 ```
