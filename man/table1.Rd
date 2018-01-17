@@ -71,6 +71,8 @@ In defining \code{type}, 1. options are "pvalues" that display the p-values of t
 "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.
 }
 \examples{
+
+\dontrun{
 ## Ficticious Data ##
 library(furniture)
 library(tidyverse)
@@ -105,6 +107,6 @@ df \%>\%
 ## Adjust variables within function and assign name
 table1(df, 
        x2 = ifelse(x > 0, 1, 0), z = z)
-         
+}        
 
 }

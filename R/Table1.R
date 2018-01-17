@@ -35,6 +35,8 @@
 #' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
 #'
 #' @examples 
+#' 
+#' \dontrun{
 #' ## Ficticious Data ##
 #' library(furniture)
 #' library(tidyverse)
@@ -69,7 +71,7 @@
 #' ## Adjust variables within function and assign name
 #' table1(df, 
 #'        x2 = ifelse(x > 0, 1, 0), z = z)
-#'          
+#' }        
 #'
 #' @export
 #' @import stats
