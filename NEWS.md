@@ -1,3 +1,10 @@
+# Version 1.7.3
+
+Minor changes and two new functions:
+
+1. `rowmeans()` provides a tidyverse friendly `rowMeans()`
+2. `rowsums()` provides a tidyverse friendly `rowSums()`
+
 # Version 1.7.2
 
 Several new features were added:
