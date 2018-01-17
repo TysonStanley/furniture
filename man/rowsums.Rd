@@ -7,12 +7,12 @@
 rowsums(..., na.rm = FALSE)
 }
 \arguments{
-\item{...}{the values in the variable that are to be replaced by either NA's or the value set by the user. Can be a function (or multiple functions) to specify values to change (e.g., is.nan(), is.na()).}
+\item{...}{the variables to be included in the row sums}
 
 \item{na.rm}{default is FALSE}
 }
 \value{
-the row means
+the row sums
 }
 \description{
 Does what \code{rowSums()} does but without having to cbind the variables. Makes it easier to use

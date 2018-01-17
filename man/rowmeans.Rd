@@ -7,7 +7,7 @@
 rowmeans(..., na.rm = FALSE)
 }
 \arguments{
-\item{...}{the values in the variable that are to be replaced by either NA's or the value set by the user. Can be a function (or multiple functions) to specify values to change (e.g., is.nan(), is.na()).}
+\item{...}{the variables to be included in the row means}
 
 \item{na.rm}{default is FALSE}
 }

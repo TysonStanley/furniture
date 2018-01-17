@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 ```
 
 
-# furniture: 1.7.2 <img src="man/figures/furniture_hex.png" align="right" />
+# furniture: 1.7.3 <img src="man/figures/furniture_hex.png" align="right" />
 
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
 
-The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains six main functions:
+The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains eight main functions:
 
 1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.
 2. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
@@ -30,6 +30,8 @@ The furniture R package contains functions to help with data cleaning/tidying (e
 4. `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
 5. `tableC()` -- gives a well-formatted table of correlations.
 6. `tableF()` -- provides a thorough frequency table for quick checks of the levels of a variable.
+7. `rowmeans()` -- a tidyverse friendly version of `rowMeans()`
+7. `rowsums()` -- a tidyverse friendly version of `rowSums()`
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
@@ -83,6 +85,13 @@ tableC(nhanes_2010,
 
 ```{r}
 tableF(nhanes_2010, age)
+```
+
+```{r}
+nhanes_2010 %>%
+  select(vig_active, mod_active) %>%
+  mutate(avg_active = rowmeans(vig_active, mod_active)) %>%
+  mutate(sum_active = rowsums(vig_active, mod_active))
 ```
 
 
