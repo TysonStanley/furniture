@@ -127,11 +127,11 @@ test_that("table1 produces table1", {
                          type = c("simple", "condensed", "pvalues"),
                          second = c("a", "c")), "table1")
   ## Export
-  expect_s3_class(table1(df, splitby=~b, 
-                         test=FALSE, 
-                         output = "text2",
-                         export = "test_tab",
-                         second = c("a", "c")), "table1")
+  # expect_s3_class(table1(df, splitby=~b, 
+  #                        test=FALSE, 
+  #                        output = "text2",
+  #                        export = "test_tab",
+  #                        second = c("a", "c")), "table1")
   ## latex2 output
   expect_is(table1(df, splitby=~b, 
                          test=FALSE, 
