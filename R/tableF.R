@@ -8,6 +8,29 @@
 #' @param splitby the stratifying variable
 #'
 #' @return a list of class \code{tableF} containing the frequency table(s)
+#' 
+#' @examples 
+#' 
+#' \dontrun{
+#' 
+#' library(furniture)
+#' 
+#' data <- data.frame(
+#'   x = sample(c(1,2,3,4), 100, replace=TRUE),
+#'   y = rnorm(100)
+#' )
+#' 
+#' ## Basic Use
+#' tableF(data, x)
+#' tableF(data, y)
+#' 
+#' ## Adjust the number of items shown
+#' tableF(data, y, n = 10)
+#' 
+#' ## Add splitby
+#' tableF(data, x, splitby = y)
+#' 
+#' }
 #'
 #' @export
 

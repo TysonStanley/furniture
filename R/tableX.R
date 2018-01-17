@@ -11,6 +11,29 @@
 #' 
 #' @import stats
 #' 
+#' 
+#' @examples 
+#' 
+#' \dontrun{
+#' 
+#' library(furniture)
+#' library(tidyverse)
+#' 
+#' data <- data.frame(
+#'   x = sample(c(1,2,3,4), 100, replace=TRUE),
+#'   y = sample(c(0,1), 100, replace=TRUE)
+#' )
+#' 
+#' tableX(data, x, y)
+#' 
+#' data %>%
+#'   tableX(x, y)
+#' 
+#' data %>%
+#'   tableX(x, y, na.rm = TRUE)
+#' 
+#' }
+#' 
 #' @export
 tableX = function(.data, x1, x2, type = "count", na.rm = FALSE, format_number = FALSE){
   

@@ -45,6 +45,9 @@ data \%>\%
          splitby = ~groupvar,
          test = TRUE)
 
+## Table F
+data \%>\%
+  tableF(var1)
 
 ## Washer
 x = washer(x, 7, 8, 9)
