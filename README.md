@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-furniture: 1.7.2 <img src="man/figures/furniture_hex.png" align="right" />
+furniture: 1.7.3 <img src="man/figures/furniture_hex.png" align="right" />
 ==========================================================================
 
 [![CRAN](http://www.r-pkg.org/badges/version/furniture)](http://www.r-pkg.org/badges/version/furniture) [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](http://cranlogs.r-pkg.org/badges/grand-total/furniture) [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture) [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
-The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains six main functions:
+The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer`), exploratory data analysis and reporting (e.g., `table1`, `%xt%`). It currently contains eight main functions:
 
 1.  `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.
 2.  `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
@@ -13,6 +13,8 @@ The furniture R package contains functions to help with data cleaning/tidying (e
 4.  `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
 5.  `tableC()` -- gives a well-formatted table of correlations.
 6.  `tableF()` -- provides a thorough frequency table for quick checks of the levels of a variable.
+7.  `rowmeans()` -- a tidyverse friendly version of `rowMeans()`
+8.  `rowsums()` -- a tidyverse friendly version of `rowSums()`
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
@@ -39,7 +41,7 @@ The main functions are the `table_()` functions (e.g., `table1()`, `tableC()`, `
 
 ``` r
 library(furniture)
-#> furniture 1.7.2: learn more at tysonbarrett.com
+#> furniture 1.7.3: learn more at tysonbarrett.com
 data("nhanes_2010")
 
 table1(nhanes_2010,
@@ -149,6 +151,27 @@ tableF(nhanes_2010, age)
 #>  29  86   1300    6.07%   91.74% 
 #>  30  117  1417    8.26%   100.00%
 #> ──────────────────────────────────
+```
+
+``` r
+nhanes_2010 %>%
+  select(vig_active, mod_active) %>%
+  mutate(avg_active = rowmeans(vig_active, mod_active, na.rm=TRUE)) %>%
+  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE))
+#> # A tibble: 1,417 x 4
+#>    vig_active mod_active avg_active sum_active
+#>         <dbl>      <dbl>      <dbl>      <dbl>
+#>  1       30.0       NA         NA         NA  
+#>  2      180        180        180        360  
+#>  3       NA         NA         NA         NA  
+#>  4       20.0       70.0       45.0       90.0
+#>  5      120         NA         NA         NA  
+#>  6       NA         NA         NA         NA  
+#>  7       NA        120         NA         NA  
+#>  8      120         NA         NA         NA  
+#>  9       NA         NA         NA         NA  
+#> 10       NA         NA         NA         NA  
+#> # ... with 1,407 more rows
 ```
 
 Notes

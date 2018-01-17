@@ -11,7 +11,7 @@
 #'
 #' @export
 rowmeans = function(..., na.rm=FALSE){
-  rowMeans(cbind(...))
+  rowMeans(cbind(...), na.rm = na.rm)
 }
 
 
@@ -28,5 +28,5 @@ rowmeans = function(..., na.rm=FALSE){
 #'
 #' @export
 rowsums = function(..., na.rm=FALSE){
-  rowSums(cbind(...))
+  rowSums(cbind(...), na.rm = na.rm)
 }

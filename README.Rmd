@@ -87,11 +87,15 @@ tableC(nhanes_2010,
 tableF(nhanes_2010, age)
 ```
 
+```{r, echo=FALSE}
+nhanes_2010 = tibble::as_tibble(nhanes_2010)
+```
+
 ```{r}
 nhanes_2010 %>%
   select(vig_active, mod_active) %>%
-  mutate(avg_active = rowmeans(vig_active, mod_active)) %>%
-  mutate(sum_active = rowsums(vig_active, mod_active))
+  mutate(avg_active = rowmeans(vig_active, mod_active, na.rm=TRUE)) %>%
+  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE))
 ```
 
 
