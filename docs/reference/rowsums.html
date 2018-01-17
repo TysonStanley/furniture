@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Selecting Function — selecting • furniture</title>
+<title>Get Row Sums — rowsums • furniture</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -93,33 +93,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Selecting Function</h1>
+    <h1>Get Row Sums</h1>
     </div>
 
     
-    <p>For internal use in <code><a href='table1.html'>table1()</a></code> and <code><a href='tableC.html'>tableC()</a></code> to extract the right data. 
-Can also be used much like <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>, although I'd recommend
-one to use <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code> in general.</p>
+    <p>Does what <code>rowSums()</code> does but without having to cbind the variables. Makes it easier to use
+with the tidyverse</p>
     
 
-    <pre class="usage"><span class='fu'>selecting</span>(<span class='no'>d_</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>rowsums</span>(<span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>d_</th>
-      <td><p>the data.frame</p></td>
+      <th>...</th>
+      <td><p>the variables to be included in the row sums</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>the variables</p></td>
+      <th>na.rm</th>
+      <td><p>should the missing values be ignored? default is FALSE</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The data.frame with the selected variables</p>
+    <p>the row sums</p>
     
 
   </div>

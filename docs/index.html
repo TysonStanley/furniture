@@ -29,7 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -73,12 +73,12 @@
     
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="furniture-1-7-2" class="section level1">
+<div id="furniture-1-7-3" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#furniture-1-7-2" class="anchor"></a>furniture: 1.7.2 <img src="reference/figures/furniture_hex.png" align="right">
+<a href="#furniture-1-7-3" class="anchor"></a>furniture: 1.7.3 <img src="reference/figures/furniture_hex.png" align="right">
 </h1></div>
 
-<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code>washer</code>), exploratory data analysis and reporting (e.g., <code>table1</code>, <code>%xt%</code>). It currently contains six main functions:</p>
+<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code>washer</code>), exploratory data analysis and reporting (e.g., <code>table1</code>, <code>%xt%</code>). It currently contains eight main functions:</p>
 <ol style="list-style-type: decimal">
 <li>
 <code><a href="reference/table1.html">table1()</a></code> – gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with <code><a href="http://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by()</a></code>.</li>
@@ -92,6 +92,12 @@
 <code><a href="reference/tableC.html">tableC()</a></code> – gives a well-formatted table of correlations.</li>
 <li>
 <code><a href="reference/tableF.html">tableF()</a></code> – provides a thorough frequency table for quick checks of the levels of a variable.</li>
+<li>
+<code><a href="reference/rowmeans.html">rowmeans()</a></code> – a tidyverse friendly version of <code>rowMeans()</code>
+</li>
+<li>
+<code><a href="reference/rowsums.html">rowsums()</a></code> – a tidyverse friendly version of <code>rowSums()</code>
+</li>
 </ol>
 <p>In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.</p>
 </div>
@@ -109,11 +115,11 @@
 <a href="#using-furniture" class="anchor"></a>Using furniture</h1>
 <p>The main functions are the <code>table_()</code> functions (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(furniture)
-<span class="co">#&gt; furniture 1.7.2: learn more at tysonbarrett.com</span>
+<span class="co">#&gt; furniture 1.7.3: learn more at tysonbarrett.com</span>
 <span class="kw">data</span>(<span class="st">"nhanes_2010"</span>)
 
 <span class="kw"><a href="reference/table1.html">table1</a></span>(nhanes_<span class="dv">2010</span>,
-       age, marijuana, illicit, rehab, asthma,
+       age, marijuana, illicit, rehab,
        <span class="dt">splitby=</span><span class="op">~</span>asthma)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ───────────────────────────────────</span>
@@ -131,14 +137,9 @@
 <span class="co">#&gt;  rehab                            </span>
 <span class="co">#&gt;     Yes    10 (7.6%)   37 (6.3%)  </span>
 <span class="co">#&gt;     No     121 (92.4%) 547 (93.7%)</span>
-<span class="co">#&gt;  asthma                           </span>
-<span class="co">#&gt;     Yes    251 (100%)  0 (0%)     </span>
-<span class="co">#&gt;     No     0 (0%)      1164 (100%)</span>
 <span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"nhanes_2010"</span>)
-
-<span class="kw"><a href="reference/table1.html">table1</a></span>(nhanes_<span class="dv">2010</span>,
-       age, marijuana, illicit, rehab, asthma,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/table1.html">table1</a></span>(nhanes_<span class="dv">2010</span>,
+       age, marijuana, illicit, rehab,
        <span class="dt">splitby=</span><span class="op">~</span>asthma, 
        <span class="dt">output =</span> <span class="st">"text2"</span>)
 <span class="co">#&gt; </span>
@@ -158,9 +159,29 @@
 <span class="co">#&gt;  rehab                            </span>
 <span class="co">#&gt;     Yes    10 (7.6%)   37 (6.3%)  </span>
 <span class="co">#&gt;     No     121 (92.4%) 547 (93.7%)</span>
-<span class="co">#&gt;  asthma                           </span>
-<span class="co">#&gt;     Yes    251 (100%)  0 (0%)     </span>
-<span class="co">#&gt;     No     0 (0%)      1164 (100%)</span>
+<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+nhanes_<span class="dv">2010</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(asthma) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/table1.html">table1</a></span>(age, marijuana, illicit, rehab,
+         <span class="dt">output =</span> <span class="st">"text2"</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ───────────────────────────────────</span>
+<span class="co">#&gt;                   asthma </span>
+<span class="co">#&gt;            Yes         No         </span>
+<span class="co">#&gt;             n = 251    n = 1164   </span>
+<span class="co">#&gt;  --------- ----------- -----------</span>
+<span class="co">#&gt;  age                              </span>
+<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
+<span class="co">#&gt;  marijuana                        </span>
+<span class="co">#&gt;     Yes    131 (57.5%) 584 (57.4%)</span>
+<span class="co">#&gt;     No     97 (42.5%)  434 (42.6%)</span>
+<span class="co">#&gt;  illicit                          </span>
+<span class="co">#&gt;     Yes    23 (10.1%)  117 (11.5%)</span>
+<span class="co">#&gt;     No     205 (89.9%) 901 (88.5%)</span>
+<span class="co">#&gt;  rehab                            </span>
+<span class="co">#&gt;     Yes    10 (7.6%)   37 (6.3%)  </span>
+<span class="co">#&gt;     No     121 (92.4%) 547 (93.7%)</span>
 <span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/tableC.html">tableC</a></span>(nhanes_<span class="dv">2010</span>, 
        age, active, vig_active, 
@@ -192,6 +213,25 @@
 <span class="co">#&gt;  29  86   1300    6.07%   91.74% </span>
 <span class="co">#&gt;  30  117  1417    8.26%   100.00%</span>
 <span class="co">#&gt; ──────────────────────────────────</span></code></pre></div>
+<p>In addition, the <code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowsums.html">rowsums()</a></code> functions offer a simplified use of <code>rowMeans()</code> and <code>rowSums()</code>, particularly when using the tidyverse’s <code>mutate()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nhanes_<span class="dv">2010</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(vig_active, mod_active) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">avg_active =</span> <span class="kw"><a href="reference/rowmeans.html">rowmeans</a></span>(vig_active, mod_active, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sum_active =</span> <span class="kw"><a href="reference/rowsums.html">rowsums</a></span>(vig_active, mod_active, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))
+<span class="co">#&gt; # A tibble: 1,417 x 4</span>
+<span class="co">#&gt;    vig_active mod_active avg_active sum_active</span>
+<span class="co">#&gt;         &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt;  1       30.0       NA         30.0       30.0</span>
+<span class="co">#&gt;  2      180        180        180        360  </span>
+<span class="co">#&gt;  3       NA         NA        NaN          0  </span>
+<span class="co">#&gt;  4       20.0       70.0       45.0       90.0</span>
+<span class="co">#&gt;  5      120         NA        120        120  </span>
+<span class="co">#&gt;  6       NA         NA        NaN          0  </span>
+<span class="co">#&gt;  7       NA        120        120        120  </span>
+<span class="co">#&gt;  8      120         NA        120        120  </span>
+<span class="co">#&gt;  9       NA         NA        NaN          0  </span>
+<span class="co">#&gt; 10       NA         NA        NaN          0  </span>
+<span class="co">#&gt; # ... with 1,407 more rows</span></code></pre></div>
 <div id="notes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#notes" class="anchor"></a>Notes</h2>
@@ -236,7 +276,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
