@@ -55,7 +55,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
     nams[[i]] = names(d)[i]
     ## If character
     if (is.character(d[[i]])){
-      d[,i] = factor(d[[i]])
+      d[[i]] = factor(d[[i]])
     }
     
     ## Factor ##
@@ -130,6 +130,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
       }
     } else if (is.numeric(d[,j])){
       tabX = data.frame(paste(" "))
+    } else {
+      stop(paste("Problem with variable", names(d)[j]))
     }
     
     ## Factor
@@ -147,6 +149,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
         ## Numeric
       } else if (is.numeric(d[,j])){
         tabX = data.frame(tabX, tab[[j]][[i]])
+      } else {
+        stop(paste("Problem with variable", names(d)[j]))
       }
     }
     
@@ -237,6 +241,8 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
       }
     } else if (is.numeric(d[,j])){
       tabX = data.frame(paste(names(d)[j]))
+    } else {
+      stop(paste("Problem with variable", names(d)[j]))
     }
     
     ## Counts and Percentages or Just Percentages
