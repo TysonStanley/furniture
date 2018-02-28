@@ -134,7 +134,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
     
     ## Factor
     for (i in 1:length(levels(d$split))){
-      if (is.factor(d[,j]) | is.character(d[,j)){
+      if (is.factor(d[,j])){
         if (!simple){
           tabX = data.frame(tabX, 
                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
@@ -241,7 +241,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
     
     ## Counts and Percentages or Just Percentages
     for (i in 1:length(levels(d$split))){
-      if (is.factor(d[,j]) | is.character(d[,j)){
+      if (is.factor(d[,j])){
         ## Just percentages
         if (simple){
           if (length(levels(d[,j])) == 2){
