@@ -20,9 +20,18 @@
 #'
 #' @export
 washer = function(x, ..., value=NA){
-  if (is.factor(x)){
-    x = as.character(x)
+  
+  fct = is.factor(x)
+  
+  for (i in seq_along(c(...))){
+    if (!is.function(c(...)[[i]])){
+      j = c(...)[i]
+      if (sum(x == j) > 0 & fct){
+        x = as.character(x)
+      }
+    } 
   }
+  
   for (i in seq_along(c(...))){
     if (is.function(c(...)[[i]])){
       x[c(...)[[i]](x)] = value
@@ -31,6 +40,11 @@ washer = function(x, ..., value=NA){
       x[x == j] = value
     }
   }
+  
+  if (fct){
+    x = as.factor(x)
+  }
+  
   return(x)
 }
 
