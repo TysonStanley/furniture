@@ -7,7 +7,7 @@
 rowmeans(..., na.rm = FALSE)
 }
 \arguments{
-\item{...}{the variables to be included in the row means}
+\item{...}{the variables (unquoted) to be included in the row means}
 
 \item{na.rm}{should the missing values be ignored? default is FALSE}
 }

@@ -3,7 +3,7 @@
 #' Does what \code{rowMeans()} does but without having to cbind the variables. Makes it easier to use
 #' with the tidyverse
 #' 
-#' @param ... the variables to be included in the row means
+#' @param ... the variables (unquoted) to be included in the row means
 #' @param na.rm should the missing values be ignored? default is FALSE
 #' 
 #' @return the row means

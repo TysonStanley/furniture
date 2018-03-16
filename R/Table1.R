@@ -300,7 +300,7 @@ table1.data.frame = function(.data,
       align = c("l", rep("c", (l1-1)))
     }
     tab = to_latex(final, caption, align, len = length(levels(d$split)), splitby, float)
-    invisible(tab)
+    tab
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     if (piping){
@@ -394,3 +394,7 @@ print.table1 <- function(x, ...){
   cat("\u2500\n")
 }
 
+#' @export
+print.latex2 = function(x, ...){
+  cat(paste(x, collapse = "\n"))
+}

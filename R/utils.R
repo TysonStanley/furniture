@@ -140,51 +140,49 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
   
-  cat("\\begin{table}[", float, "] \n")
-  cat("\\centering \n")
-  cat("\\caption{", caption, "}\n", sep = "")
-  cat("\\begin{tabular}{", align, "}\n")
-  cat("\\hline \n")
-  cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
-  
-  if (is.null(cor_type)){
-    cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
-    cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", "\\hline \n")
+  out = capture.output({
+    cat("\\begin{table}[", float, "] \n")
+    cat("\\centering \n")
+    cat("\\caption{", caption, "}\n", sep = "")
+    cat("\\begin{tabular}{", align, "}\n")
+    cat("\\hline \n")
+    cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
     
-    cat(
-      for (i in 2:length(tab[[1]])){
-        if (grepl("^ ", tab[i, 1])){
-          cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
-          cat("\\\\", "\n")
-        } else {
-          cat(paste(tab[i, ], collapse = " & "))
-          cat("\\\\", "\n")
-        }
-        
-      },
-      "\\hline
-      \\end{tabular}
-      \\end{table} \n"
-    )
-  } else {
-    cat(paste(names(tab), collapse = " & "), "\\\\", "\n \\hline \n")
-    
-    cat(
-      for (i in 1:length(tab[[1]])){
-        if (grepl("^ ", tab[i, 1])){
-          cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
-          cat("\\\\", "\n")
-        } else {
-          cat(paste(tab[i, ], collapse = " & "))
-          cat("\\\\", "\n")
-        }
-        
-      },
-      "\\hline
-      \\end{tabular}
-      \\end{table} \n"
-    )
-  }
+    if (is.null(cor_type)){
+      cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
+      cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", "\\hline \n")
+      
+      cat(
+        for (i in 2:length(tab[[1]])){
+          if (grepl("^ ", tab[i, 1])){
+            cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
+            cat("\\\\", "\n")
+          } else {
+            cat(paste(tab[i, ], collapse = " & "))
+            cat("\\\\", "\n")
+          }
+          
+        },
+        "\\hline
+        \\end{tabular}
+        \\end{table} \n"
+      )
+    } else {
+      cat(paste(names(tab), collapse = " & "), "\\\\", "\n \\hline \n")
+      cat(
+        for (i in 1:length(tab[[1]])){
+          if (grepl("^ ", tab[i, 1])){
+            cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
+            cat("\\\\", "\n")
+          } else {
+            cat(paste(tab[i, ], collapse = " & "))
+            cat("\\\\", "\n")
+          }
+        }, "\\hline\n\\end{tabular}\n\\end{table} \n")
+    }
+  })
+  class(out) = c("latex2", "character", "table1")
+  out
 }
 
-
+      
