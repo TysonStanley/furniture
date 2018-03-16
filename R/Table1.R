@@ -18,7 +18,7 @@
 #' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc"). A new option, \code{'latex2'}, although more limited, allows the variable name to show and has an overall better appearance.
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param digits the number of significant digits for the numerical variables (if using default functions); default is 1.
-#' @param var_names custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.
+#' @param var_names custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.
 #' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use \code{na.rm})
 #' @param na.rm when set to \code{FALSE} it also shows how many missing values are in the data for each categorical variable being summarized

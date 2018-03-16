@@ -38,7 +38,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{digits}{the number of significant digits for the numerical variables (if using default functions); default is 1.}
 
-\item{var_names}{custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.}
+\item{var_names}{custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.}
 
 \item{format_number}{default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
