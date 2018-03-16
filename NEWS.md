@@ -1,3 +1,12 @@
+# Version 1.7.6
+
+Minor updates to the `"latex2"` output option for `table1()` and `tableC()` where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. 
+
+Other minor bug fixes.
+
+`%xt%` is now deprecated. `tableF()` and `tableX()` effectively do what `%xt%` was designed to do, but with better and more thorough output.
+
+
 # Version 1.7.3
 
 Minor changes and two new functions:
