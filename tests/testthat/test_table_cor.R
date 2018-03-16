@@ -22,6 +22,8 @@ test_that("table1 produces table1", {
   ## Other output types
   expect_s3_class(tableC(df, a, x, y,
                          output = "markdown"), "knitr_kable")
+  expect_s3_class(tableC(df, a, x, y,
+                         output = "latex2"), "latex2")
 })
 
 
