@@ -135,10 +135,10 @@ test_that("table1 produces table1", {
   ## latex2 output
   expect_is(table1(df, splitby=~b, 
                          test=FALSE, 
-                         output = "latex2"), "NULL")
+                         output = "latex2"), "latex2")
   expect_is(table1(df, splitby=~b, 
                        test=TRUE, 
-                       output = "latex2"), "NULL")
+                       output = "latex2"), "latex2")
   ## header_labels
   expect_s3_class(table1(df, splitby=~b, 
                          test=FALSE, 

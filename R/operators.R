@@ -13,12 +13,13 @@
 #' x = c(1,2,3,2,3,3,1,0,0,0)
 #' y = rnorm(10)
 #' z = c("Yes", "No", "Yes", "No", "No", "Yes", "No", "No", "Yes", "No")
-#' data = data.frame(b, x, y, z)
 #' 
-#' factor(data$x) %xt% factor(data$b)
+#' factor(x) %xt% factor(b)
 #' 
 #' @export
 `%xt%` <- function(lhs, rhs){
+  warning("`%xt%` is now deprecated. Please use tableX() or tableF() instead.")
+  
   match = match.call()
   lhss  = match[[2]]
   rhss  = match[[3]]

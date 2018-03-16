@@ -394,7 +394,4 @@ print.table1 <- function(x, ...){
   cat("\u2500\n")
 }
 
-#' @export
-print.latex2 = function(x, ...){
-  cat(paste(x, collapse = "\n"))
-}
+
