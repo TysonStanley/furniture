@@ -1,6 +1,6 @@
 # Version 1.7.6
 
-Minor updates to the `"latex2"` output option for `table1()` and `tableC()` where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. 
+Minor updates to the `"latex2"` output option for `table1()` and `tableC()` where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. It also outputs more `\emph{Missing}` when `na.rm=FALSE`. Thanks to [Joshua Pritikin](https://github.com/jpritikin) for the ideas and the pull requests leading to these improvements.
 
 Other minor bug fixes.
 
