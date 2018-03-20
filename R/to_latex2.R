@@ -48,11 +48,7 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
             cat("\\\\", "\n")
           }
           
-        },
-        "\\hline
-        \\end{tabular}
-        \\end{table} \n"
-      )
+        })
     } else {
       cat(paste(names(tab), collapse = " & "), "\\\\", "\n \\hline \n")
       cat(
@@ -64,8 +60,11 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
             cat(paste(tab[i, ], collapse = " & "))
             cat("\\\\", "\n")
           }
-        }, "\\hline\n\\end{tabular}\n\\end{table} \n")
+        })
     }
+    cat(paste0(c("\\hline",
+      "\\end{tabular}",
+      "\\end{table}\n"), collapse="\n"))
   })
   class(out) = c("latex2", "character", "table1")
   out
