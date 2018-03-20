@@ -25,6 +25,7 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   }
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
+  tab[] = lapply(tab, function(x) gsub("NA", "\\emph{Missing}", x, fixed = TRUE))
   
   out = capture.output({
     cat("\\begin{table}[", float, "] \n")
