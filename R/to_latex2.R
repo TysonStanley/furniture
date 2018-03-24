@@ -13,7 +13,22 @@
 #' @export
 #' @import utils
 #' 
-to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
+
+hrule <- function(location, booktabs) {
+  if (booktabs) {
+    if (location == 'top') {
+      "\\toprule\n"
+    } else if (location == 'mid') {
+      "\\midrule\n"
+    } else if (location == 'bottom') {
+      "\\bottomrule\n"
+    } else { stop(location) }
+  } else {
+    "\\hline\n"
+  }
+}
+
+to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
     splitby = "Total"
   } else if (!is.null(cor_type)){
@@ -25,19 +40,19 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
   }
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
-  tab[] = lapply(tab, function(x) gsub("NA", "\\emph{Missing}", x, fixed = TRUE))
+  tab[] = lapply(tab, function(x) gsub("NA", "\\emph{missing}", x, fixed = TRUE))
   
   out = capture.output({
     cat("\\begin{table}[", float, "] \n")
     cat("\\centering \n")
     cat("\\caption{", caption, "}\n", sep = "")
     cat("\\begin{tabular}{", align, "}\n")
-    cat("\\hline \n")
+    cat(hrule('top', booktabs))
     cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
     
     if (is.null(cor_type)){
       cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
-      cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", "\\hline \n")
+      cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", hrule('mid', booktabs))
       
       cat(
         for (i in 2:length(tab[[1]])){
@@ -51,7 +66,7 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
           
         })
     } else {
-      cat(paste(names(tab), collapse = " & "), "\\\\", "\n \\hline \n")
+      cat(paste(names(tab), collapse = " & "), "\\\\", paste0("\n",hrule('mid', booktabs)))
       cat(
         for (i in 1:length(tab[[1]])){
           if (grepl("^ ", tab[i, 1])){
@@ -63,7 +78,7 @@ to_latex = function(tab, caption, align, len, splitby, float, cor_type=NULL){
           }
         })
     }
-    cat(paste0(c("\\hline",
+    cat(paste0(c(hrule('bottom', booktabs),
       "\\end{tabular}",
       "\\end{table}\n"), collapse="\n"))
   })
