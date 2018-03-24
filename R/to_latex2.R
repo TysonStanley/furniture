@@ -9,24 +9,11 @@
 #' @param splitby the name of the grouping factor
 #' @param float argument for latex formatting
 #' @param cor_type optional argument regarding the correlation type (for tableC)
+#' @param booktabs add booktabs to latex table?
 #' 
 #' @export
 #' @import utils
 #' 
-
-hrule <- function(location, booktabs) {
-  if (booktabs) {
-    if (location == 'top') {
-      "\\toprule\n"
-    } else if (location == 'mid') {
-      "\\midrule\n"
-    } else if (location == 'bottom') {
-      "\\bottomrule\n"
-    } else { stop(location) }
-  } else {
-    "\\hline\n"
-  }
-}
 
 to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
@@ -89,4 +76,19 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type
 #' @export
 print.latex2 = function(x, ...){
   cat(paste(x, collapse = "\n"))
+}
+
+                 
+hrule <- function(location, booktabs) {
+  if (booktabs) {
+    if (location == 'top') {
+      "\\toprule\n"
+    } else if (location == 'mid') {
+      "\\midrule\n"
+    } else if (location == 'bottom') {
+      "\\bottomrule\n"
+    } else { stop(location) }
+  } else {
+    "\\hline\n"
+  }
 }
