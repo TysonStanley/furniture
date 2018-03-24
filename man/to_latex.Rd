@@ -4,7 +4,7 @@
 \alias{to_latex}
 \title{From Table 1 to Latex 2}
 \usage{
-to_latex(tab, caption, align, len, splitby, float, cor_type = NULL)
+to_latex(tab, caption, align, len, splitby, float, booktabs, cor_type = NULL)
 }
 \arguments{
 \item{tab}{the table1 object}
@@ -18,6 +18,8 @@ to_latex(tab, caption, align, len, splitby, float, cor_type = NULL)
 \item{splitby}{the name of the grouping factor}
 
 \item{float}{argument for latex formatting}
+
+\item{booktabs}{add booktabs to latex table?}
 
 \item{cor_type}{optional argument regarding the correlation type (for tableC)}
 }

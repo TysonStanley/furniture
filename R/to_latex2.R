@@ -63,7 +63,8 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type
             cat(paste(tab[i, ], collapse = " & "))
             cat("\\\\", "\n")
           }
-        })
+        }
+      )
     }
     cat(paste0(c(hrule('bottom', booktabs),
       "\\end{tabular}",
