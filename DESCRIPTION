@@ -13,9 +13,10 @@ Maintainer: Tyson S. Barrett <t.barrett@aggiemail.usu.edu>
 Description: Contains three main functions (i.e., three pieces of furniture):
     table1() which produces a well-formatted table of descriptives common as Table 1
     in research articles, tableC() which produces a well-formatted table of correlations,
+    tableF() which provides frequency counts,
     and washer() which is helpful in cleaning up the data. In addition,
     long() and wide(), built on the stats::reshape(), can help reformat the data.
-    These furniture functions are designed to simplify common tasks in 
+    These furniture-themed functions are designed to simplify common tasks in 
     quantitative analysis. Other data summary and cleaning tools are also available.
 Depends:
     R (>= 2.10)
