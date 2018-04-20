@@ -24,6 +24,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type
     splitby = paste(cor_type2, "Correlations")
   } else if (is.null(cor_type) & !is.null(splitby)) {
     splitby = gsub("`", "", paste(splitby))
+    splitby = gsub("%", "\\%", splitby)
   }
   
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
