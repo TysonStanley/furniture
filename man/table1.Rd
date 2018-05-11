@@ -9,7 +9,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
   type = "pvalues", output = "text", rounding_perc = 1, digits = 1,
   var_names = NULL, format_number = FALSE, NAkeep = NULL, na.rm = TRUE,
   booktabs = TRUE, caption = NULL, align = NULL, float = "ht",
-  export = NULL)
+  export = NULL, label = NULL)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
@@ -55,6 +55,8 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \item{float}{the float applied to the table in Latex when output is \code{latex2}}
 
 \item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
+
+\item{label}{for \code{output == "latex2"}, this provides a table reference label for latex}
 }
 \value{
 A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.

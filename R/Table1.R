@@ -27,6 +27,7 @@
 #' @param align when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param float the float applied to the table in Latex when output is \code{latex2}
 #' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
+#' @param label for \code{output == "latex2"}, this provides a table reference label for latex
 #' 
 #' @details In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05; and
 #' 2. "simple" then only percentages are shown for categorical variable and
@@ -98,7 +99,8 @@ table1 = function(.data,
                    caption = NULL, 
                    align = NULL,
                    float = "ht",
-                   export = NULL){
+                   export = NULL,
+                   label = NULL){
   UseMethod("table1", .data)
 }
 
@@ -128,7 +130,8 @@ table1.data.frame = function(.data,
                   caption = NULL, 
                   align = NULL,
                   float = "ht",
-                  export = NULL){
+                  export = NULL,
+                  label = NULL){
   
   ###################
   ## Preprocessing ##
@@ -299,7 +302,7 @@ table1.data.frame = function(.data,
       l1 = dim(final)[2]
       align = c("l", rep("c", (l1-1)))
     }
-    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitting, float, booktabs)
+    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitting, float, booktabs, label)
     tab
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){

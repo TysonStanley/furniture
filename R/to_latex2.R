@@ -9,13 +9,14 @@
 #' @param splitby the name of the grouping factor
 #' @param float argument for latex formatting
 #' @param cor_type optional argument regarding the correlation type (for tableC)
-#' @param booktabs add booktabs to latex table?
+#' @param booktabs add booktabs to latex table
+#' @param label latex label option
 #' 
 #' @export
 #' @import utils
 #' 
 
-to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type=NULL){
+to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
     splitby = "Total"
   } else if (!is.null(cor_type)){
@@ -68,7 +69,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type
       )
     }
     cat(paste0(c(hrule('bottom', booktabs),
-      "\\end{tabular}",
+      "\\end{tabular}", "\\label{", ifelse(is.null(label), "", label), "}",
       "\\end{table}\n"), collapse="\n"))
   })
   class(out) = c("latex2", "character", "table1")
