@@ -208,11 +208,11 @@ table1.data.frame = function(.data,
     ## For print method
     if (is.null(splitby)){
       splitting = NULL
-    } else{
+    } else {
       splitting = paste(splitby)[[length(paste(splitby))]]
     }
   } else {
-    message("Using a grouped data frame: default using the grouping variables and not splitby")
+    message("Using a grouped data frame: using the grouping variables and not splitby")
     if (length(attr(.data, "vars")) == 1){
       d$split = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
     } else {
