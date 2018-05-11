@@ -34,7 +34,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
   out = capture.output({
     cat("\\begin{table}[", float, "] \n")
     cat("\\centering \n")
-    cat("\\caption{", caption, "}\n", sep = "")
+    cat("\\caption{", caption, "}", "\\label{", ifelse(is.null(label), "", label), "}\n", sep = "")
     cat("\\begin{tabular}{", align, "}\n")
     cat(hrule('top', booktabs))
     cat(" & \\multicolumn{", paste0(len), "}{c}{", ifelse(is.null(splitby), "Total", splitby), "}\\\\ \n")
@@ -69,7 +69,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
       )
     }
     cat(paste0(c(hrule('bottom', booktabs),
-      "\\end{tabular}", "\\label{", ifelse(is.null(label), "", label), "}",
+      "\\end{tabular}", 
       "\\end{table}\n"), collapse="\n"))
   })
   class(out) = c("latex2", "character", "table1")
