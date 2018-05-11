@@ -36,7 +36,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, cor_type
     cat("\\caption{", caption, "}\n", sep = "")
     cat("\\begin{tabular}{", align, "}\n")
     cat(hrule('top', booktabs))
-    cat(" & \\multicolumn{", paste0(len), "}{c}{", paste(splitby)[length(paste(splitby))], "}\\\\ \n")
+    cat(" & \\multicolumn{", paste0(len), "}{c}{", ifelse(is.null(splitby), "Total", splitby), "}\\\\ \n")
     
     if (is.null(cor_type)){
       cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
