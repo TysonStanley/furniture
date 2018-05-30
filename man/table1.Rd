@@ -14,7 +14,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \arguments{
 \item{.data}{the data.frame that is to be summarized}
 
-\item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.}
+\item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.}
 
 \item{splitby}{the categorical variable to stratify (in formula form  \code{splitby = ~gender}), quoted \code{splitby = "gender"}, or bare \code{splitby = gender}); instead, \code{dplyr::group_by(...)} can be used}
 
