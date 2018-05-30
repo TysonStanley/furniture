@@ -21,7 +21,8 @@ Description: Contains three main functions (i.e., three pieces of furniture):
 Depends:
     R (>= 2.10)
 Imports:
-    knitr
+    knitr,
+    magrittr
 Suggests:
     tidyverse,
     dplyr,

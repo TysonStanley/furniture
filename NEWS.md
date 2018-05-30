@@ -1,6 +1,6 @@
 # Version 1.7.9
 
-Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n's in really messy data.
+Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n's in really messy data. We also now re-export the pipe from `magrittr`.
 
 # Version 1.7.6
 
