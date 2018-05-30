@@ -1,3 +1,7 @@
+# Version 1.7.9
+
+Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n's in really messy data.
+
 # Version 1.7.6
 
 Updates to the `"latex2"` output option for `table1()` and `tableC()` where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. It also outputs `\emph{Missing}` when `na.rm=FALSE`. Thanks to [Joshua Pritikin](https://github.com/jpritikin) for the ideas and the pull requests leading to these improvements.

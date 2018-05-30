@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# furniture: 1.7.6 <img src="man/figures/furniture_hex.png" align="right" />
+# furniture: 1.7.9 <img src="man/figures/furniture_hex.png" align="right" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/furniture)](https://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
@@ -11,9 +11,9 @@ Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https:/
 [![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
 
 The furniture R package contains functions to help with data
-cleaning/tidying (e.g., `washer`), exploratory data analysis and
-reporting (e.g., `table1`, `tableC()`, `tableF()`). It currently
-contains eight main functions:
+cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
+exploratory data analysis and reporting (e.g., `table1()`, `tableC()`,
+`tableF()`). It currently contains eight main functions:
 
 1.  `table1()` – gives a well-formatted table for academic publication
     of descriptive statistics. Very useful for quick analyses as well.
@@ -59,6 +59,7 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
+#> furniture 1.7.9: learn more at tysonbarrett.com
 data("nhanes_2010")
 
 table1(nhanes_2010,
@@ -187,16 +188,16 @@ nhanes_2010 %>%
 #> # A tibble: 1,417 x 4
 #>    vig_active mod_active avg_active sum_active
 #>         <dbl>      <dbl>      <dbl>      <dbl>
-#>  1        30.        NA         30.        30.
-#>  2       180.       180.       180.       360.
-#>  3        NA         NA        NaN          0.
-#>  4        20.        70.        45.        90.
-#>  5       120.        NA        120.       120.
-#>  6        NA         NA        NaN          0.
-#>  7        NA        120.       120.       120.
-#>  8       120.        NA        120.       120.
-#>  9        NA         NA        NaN          0.
-#> 10        NA         NA        NaN          0.
+#>  1         30         NA         30         30
+#>  2        180        180        180        360
+#>  3         NA         NA        NaN          0
+#>  4         20         70         45         90
+#>  5        120         NA        120        120
+#>  6         NA         NA        NaN          0
+#>  7         NA        120        120        120
+#>  8        120         NA        120        120
+#>  9         NA         NA        NaN          0
+#> 10         NA         NA        NaN          0
 #> # ... with 1,407 more rows
 ```
 
