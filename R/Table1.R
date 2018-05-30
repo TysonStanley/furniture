@@ -184,7 +184,8 @@ table1.data.frame = function(.data,
   ########################
   ## Variable Selecting ##
   ########################
-  ## All Variables or Selected Variables using table1_()
+  ## All Variables or Selected Variables using selecting()
+  ##   and empty rows are removed from the data
   d = selecting(d_=.data, ...)
   if (!is.null(attr(d, "empty_rows"))){ 
     .data <- .data[-attr(d, "empty_rows"), ]}   ## keeps all data frames equal in rows
