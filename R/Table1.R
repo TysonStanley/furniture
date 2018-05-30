@@ -151,7 +151,7 @@ table1.data.frame = function(.data,
   
   ##
   if (!is.null(NAkeep)){
-    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that NAkeep = TRUE == na.rm = FALSE.")
+    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
     na.rm = !NAkeep
   }
   
@@ -186,7 +186,9 @@ table1.data.frame = function(.data,
   ########################
   ## All Variables or Selected Variables using table1_()
   d = selecting(d_=.data, ...)
-  
+  if (!is.null(attr(d, "empty_rows"))){ 
+    .data <- .data[-attr(d, "empty_rows"), ]}   ## keeps all data frames equal in rows
+  d <- data.frame(d)
   
   ### Naming of variables
   if (!is.null(var_names)){
@@ -196,6 +198,7 @@ table1.data.frame = function(.data,
   
   ## Splitby or group_by
   if (is.null(attr(.data, "vars"))){
+    
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
     if (class(substitute(splitby)) == "name"){

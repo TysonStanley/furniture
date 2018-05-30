@@ -42,8 +42,20 @@ selecting <- function(d_, ...) {
   }
   names(df) <- lapply(seq_along(listed), to_name)
   
-  ## Returned data frame with original row names
-  data.frame(df, row.names = row.names(d_))
+  ## data frame with original row names
+  df <- data.frame(df, row.names = row.names(d_))
+  
+  ## Remove any empty rows and Add attribute for splitby to work
+  empty_rows <- which(apply(df, 1, function(x) all(is.na(x))))
+  if (length(empty_rows) == 0){
+    attr(df, "empty_rows") <- NULL
+  } else {
+    df <- df[-empty_rows, ]
+    attr(df, "empty_rows") <- empty_rows
+  }
+  
+  ## Returned data.frame
+  df
 }
 
 ## Does the summary of table1
