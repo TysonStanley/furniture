@@ -1,5 +1,6 @@
 library(furniture)
 library(testthat)
+library(dplyr)
 
 test_that("long and wide", {
   x1 <- runif(1000)
