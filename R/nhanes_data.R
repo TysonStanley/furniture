@@ -32,5 +32,5 @@
 #'   \item{difficulty}{rating of whether the individual has felt difficulty from the previous conditions}
 #'   \item{active}{minutes of vigorous or moderate activity}
 #' }
-#' @source \url{http://wwwn.cdc.gov/nchs/nhanes/search/nhanes09_10.aspx}
+#' @source \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2009}
 "nhanes_2010"

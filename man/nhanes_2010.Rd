@@ -32,7 +32,7 @@
   \item{active}{minutes of vigorous or moderate activity}
 }}
 \source{
-\url{http://wwwn.cdc.gov/nchs/nhanes/search/nhanes09_10.aspx}
+\url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2009}
 }
 \usage{
 nhanes_2010
