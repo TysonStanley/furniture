@@ -7,4 +7,4 @@
 There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream Dependencies
-Currently, there are no downstream dependencies relating to this package.
+Only one downstream dependency exists (MarginalMediation). This was checked with no errors, warnings, or notes.
