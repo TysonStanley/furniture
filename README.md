@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# furniture: 1.7.9 <img src="man/figures/furniture_hex.png" align="right" />
+# furniture: 1.7.10 <img src="man/figures/furniture_hex.png" align="right" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/furniture)](https://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
@@ -59,7 +59,7 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> furniture 1.7.9: learn more at tysonbarrett.com
+#> furniture 1.7.10: learn more at tysonbarrett.com
 data("nhanes_2010")
 
 table1(nhanes_2010,
