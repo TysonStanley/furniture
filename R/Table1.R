@@ -190,6 +190,7 @@ table1.data.frame = function(.data,
   if (!is.null(attr(d, "empty_rows"))){ 
     .data <- .data[-attr(d, "empty_rows"), ]}   ## keeps all data frames equal in rows
   d <- data.frame(d)
+  names(d) <- gsub("\\.", " ", names(d))
   
   ### Naming of variables
   if (!is.null(var_names)){
