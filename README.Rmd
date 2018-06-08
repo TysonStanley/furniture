@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 ```
 
 
-# furniture: 1.7.10 <img src="man/figures/furniture_hex.png" align="right" />
+# furniture: 1.7.11 <img src="man/figures/furniture_hex.png" align="right" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/furniture)](https://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)

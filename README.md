@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# furniture: 1.7.10 <img src="man/figures/furniture_hex.png" align="right" />
+# furniture: 1.7.11 <img src="man/figures/furniture_hex.png" align="right" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/furniture)](https://www.r-pkg.org/badges/version/furniture)
 [![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
@@ -59,7 +59,8 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> furniture 1.7.10: learn more at tysonbarrett.com
+#> ── furniture 1.7.11 ─────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ✔ No function conflicts found.
 data("nhanes_2010")
 
 table1(nhanes_2010,
@@ -116,23 +117,22 @@ nhanes_2010 %>%
   table1(age, marijuana, illicit, rehab,
          output = "text2")
 #> 
-#> ───────────────────────────────────
-#>                   asthma 
-#>            Yes         No         
-#>             n = 251    n = 1164   
-#>  --------- ----------- -----------
-#>  age                              
-#>            23.0 (3.9)  23.4 (4.0) 
-#>  marijuana                        
-#>     Yes    131 (57.5%) 584 (57.4%)
-#>     No     97 (42.5%)  434 (42.6%)
-#>  illicit                          
-#>     Yes    23 (10.1%)  117 (11.5%)
-#>     No     205 (89.9%) 901 (88.5%)
-#>  rehab                            
-#>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 547 (93.7%)
-#> ───────────────────────────────────
+#> ─────────────────────────────
+#>            Mean/Count (SD/%)
+#>            n = 1417         
+#>  --------- ------------     
+#>  age                        
+#>            23.3 (4.0)       
+#>  marijuana                  
+#>     Yes    716 (57.4%)      
+#>     No     532 (42.6%)      
+#>  illicit                    
+#>     Yes    141 (11.3%)      
+#>     No     1107 (88.7%)     
+#>  rehab                      
+#>     Yes    48 (6.7%)        
+#>     No     668 (93.3%)      
+#> ─────────────────────────────
 ```
 
 `table1()` can be outputted directly to other formats. All
