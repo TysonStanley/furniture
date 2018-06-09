@@ -15,7 +15,7 @@
                                  gsub("package:", "", confs$rowname), "::", rownames(confs), " (", 
                                  sapply(paste0(gsub("package:", "", confs$rowname), "::", rownames(confs)), 
                                         function(x) class(eval(parse(text = x)))[1]), ")\n"))
-    helper_msg <- text_col(crayon::italic("   Consider using `furniture::` for each function call.\n"))
+    helper_msg <- text_col(crayon::italic("   Consider using `furniture::` for each function call."))
   }
   
   packageStartupMessage(text_col(cli::cat_rule(left = paste0("furniture ", furniture_version("furniture")), 
