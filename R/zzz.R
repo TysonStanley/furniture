@@ -10,7 +10,7 @@
                                  " The furniture::", rownames(confs), "() function is conflicted with ", 
                                  gsub("package:", "", confs$rowname),
                                  "::", rownames(confs), "", "\n"))
-    helper_msg <- crayon::italic("   Consider using `furniture::` for each function call.\n")
+    helper_msg <- text_col(crayon::italic("   Consider using `furniture::` for each function call.\n"))
   }
   
   packageStartupMessage(text_col(cli::cat_rule(left = paste0("furniture ", furniture_version("furniture")), 

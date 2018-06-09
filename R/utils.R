@@ -166,7 +166,7 @@ search_conflicts <- function(path = search()){
         tibble::rownames_to_column() %>%
         .[.$conflicted == TRUE & 
             .$rowname != "package:furniture" &
-            grepl("%\\>%", .$rowname),]
+            (!grepl("%\\>%", .$rowname)),]
     }
   } else {
     other_conflicts <- list()
