@@ -4,7 +4,8 @@
   confs <- search_conflicts() %>%
     do.call("rbind", .) %>%
     .[(!grepl("%>%", rownames(.))) &
-        (!grepl("group_by", rownames(.))),] %>%
+        (!grepl("group_by", rownames(.))) &
+        (.$rowname != ".GlobalEnv"),] %>%
     data.frame
   if (dim(confs)[1] == 0){
     confs_msg <- text_col(paste0(crayon::green(cli::symbol$tick), " No potential conflicts found"))
