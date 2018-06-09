@@ -3,13 +3,13 @@
   confs <- search_conflicts() %>%
     do.call("rbind", .)
   if (length(confs) == 0){
-    confs_msg <- text_col(paste0(crayon::green(cli::symbol$tick), " No function conflicts found."))
+    confs_msg <- text_col(paste0(crayon::green(cli::symbol$tick), " No conflicts found."))
   } else {
     confs_msg <- text_col(paste0(crayon::yellow(cli::symbol$cross),
                                  " The furniture::", rownames(confs), "() function is conflicted with ", 
                                  gsub("package:", "", confs$rowname),
-                                 "::", rownames(confs), "()", "\n",
-                                 crayon::italic("   Consider using `furniture::` for each function call.")))
+                                 "::", rownames(confs), "", "\n",
+                                 crayon::italic("   Consider using `furniture::` for each function call.\n")))
   }
   
   packageStartupMessage(text_col(cli::cat_rule(left = paste0("furniture ", furniture_version("furniture")), 

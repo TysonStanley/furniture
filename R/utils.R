@@ -164,7 +164,9 @@ search_conflicts <- function(path = search()){
         data.frame %>%
         setNames(c("conflicted")) %>%
         tibble::rownames_to_column() %>%
-        .[.$conflicted == TRUE & .$rowname != "package:furniture",]
+        .[.$conflicted == TRUE & 
+            .$rowname != "package:furniture" &
+            .$rowname != "%>%",]
     }
   } else {
     other_conflicts <- list()
