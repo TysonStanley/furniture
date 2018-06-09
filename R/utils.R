@@ -168,7 +168,7 @@ search_conflicts <- function(path = search()){
             .$rowname != "package:furniture",]
     }
   } else {
-    other_conflicts <- list()
+    other_conflicts <- data.frame()
   }
   other_conflicts
 }
