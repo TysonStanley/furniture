@@ -19,9 +19,9 @@
     helper_msg <- text_col(crayon::italic("   Consider using `furniture::` for each function call."))
   }
   
-  packageStartupMessage(text_col(cli::cat_rule(left = paste0("furniture ", furniture_version("furniture")), 
+  packageStartupMessage(text_col(cli::rule(left = paste0("furniture ", furniture_version("furniture")), 
                                                right = "learn more at tysonbarrett.com")),
-                        text_col(paste0(crayon::green(cli::symbol$tick), " furniture attached\n")),
+                        text_col(paste0("\n", crayon::green(cli::symbol$tick), " furniture attached\n")),
                         confs_msg,
                         helper_msg)
   
