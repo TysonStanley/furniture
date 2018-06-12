@@ -162,10 +162,10 @@ table1.data.frame = function(.data,
     piping = FALSE
   }
   ## Missing values in categorical variables
-  if (isFALSE(na.rm)){ 
-    NAkeep = "always" 
+  if (isTRUE(na.rm)){ 
+    NAkeep = "no" 
   } else {
-    NAkeep = "no"
+    NAkeep = "always"
   }
   ## Only pvalues are shown in simple or condensed versions
   if (simple | condense){
