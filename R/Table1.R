@@ -239,8 +239,12 @@ table1.data.frame = function(.data,
   }
 
   ## Remove missing values?
-  if (isTRUE(na.rm)) 
+  if (isTRUE(na.rm)) {
     d <- d[complete.cases(d), ]
+    if (nrow(d) == 0)
+      stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
+  }
+    
   
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
