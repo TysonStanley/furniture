@@ -39,8 +39,7 @@
 
 
 ## Observations and Header Labels
-.obs_header = function(d, f1, format_output, test, output, header_labels, na.rm){
-  if (isTRUE(na.rm)) d <- na.omit(d) %>% data.frame
+.obs_header = function(d, f1, format_output, test, output, header_labels){
   N   = t(tapply(d[[1]], d$split, length))
   N[] = sapply(N, function(x) as.character(paste("n =", x)))
   N = suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
