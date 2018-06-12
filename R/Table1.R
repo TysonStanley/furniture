@@ -239,7 +239,8 @@ table1.data.frame = function(.data,
   }
 
   ## Remove missing values?
-  if (isTRUE(na.rm)) d <- na.omit(d) %>% data.frame
+  if (isTRUE(na.rm)) 
+    d <- d[complete.cases(d), ]
   
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
