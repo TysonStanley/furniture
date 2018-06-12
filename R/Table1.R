@@ -162,7 +162,7 @@ table1.data.frame = function(.data,
     piping = FALSE
   }
   ## Missing values in categorical variables
-  if (!na.rm){ 
+  if (isFALSE(na.rm)){ 
     NAkeep = "always" 
   } else {
     NAkeep = "no"
@@ -249,7 +249,7 @@ table1.data.frame = function(.data,
   ####################################
   ## Observations and Header Labels ##
   ####################################
-  N = .obs_header(d, f1, format_output, test, output, header_labels)
+  N = .obs_header(d, f1, format_output, test, output, header_labels, na.rm)
   
   ######################
   ## Summarizing Data ##
