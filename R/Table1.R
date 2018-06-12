@@ -149,7 +149,7 @@ table1.data.frame = function(.data,
   ## checks
   .header_labels(header_labels, format_output)
   
-  ##
+  ## Deprecation
   if (!is.null(NAkeep)){
     warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
     na.rm = !NAkeep
@@ -185,21 +185,18 @@ table1.data.frame = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using selecting()
-  ##   and empty rows are removed from the data
-  d = selecting(d_=.data, ...)
-  if (!is.null(attr(d, "empty_rows"))){ 
-    .data <- .data[-attr(d, "empty_rows"), ]}   ## keeps all data frames equal in rows
-  d <- data.frame(d)
-  names(d) <- gsub("\\.", " ", names(d))
+  d <- selecting(data.frame(.data), ...) %>%
+    setNames(gsub("\\.", " ", names(.))) %>%
+    data.frame
   
   ### Naming of variables
   if (!is.null(var_names)){
     stopifnot(length(var_names)==length(names(d)))
-    names(d) = var_names
+    names(d) <- var_names
   }
   
   ## Splitby or group_by
-  if (is.null(attr(.data, "vars"))){
+  if (is.null(attr(.data, "groups"))){
     
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
@@ -221,19 +218,28 @@ table1.data.frame = function(.data,
     }
   } else {
     message("Using a grouped data frame: using the grouping variables and not splitby")
-    if (length(attr(.data, "vars")) == 1){
-      d$split = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
+    groups <- attr(.data, "groups") %>% names %>% .[-length(.)]
+    
+    if (length(groups) == 1){
+      d$split = droplevels(as.factor(.data[groups][[1]]))
     } else {
-      interacts = interaction(.data[attr(.data, "vars")], sep = "_")
+      interacts = interaction(.data[groups], sep = "_")
       d$split = factor(interacts)
     }
     ## For print method
-    if (is.null(attr(.data, "vars"))){
+    if (is.null(attr(.data, "groups"))){
       splitting = NULL
     } else{
-      splitting = paste(attr(.data, "vars"), collapse = ", ")
+      splitting = paste(groups, collapse = ", ")
+    }
+    ## Remove any redundant grouping vars
+    vars <- length(paste(substitute(list(...))))
+    if (vars == 1){
+      d <- d[, -which(names(d) %in% groups)]
     }
   }
+
+  
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
     test = TRUE
