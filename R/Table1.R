@@ -195,7 +195,7 @@ table1.data.frame = function(.data,
   }
   
   ## Splitby or group_by
-  if (is.null(attr(.data, "groups"))){
+  if (is.null(attr(.data, "vars"))){
     
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
@@ -217,7 +217,7 @@ table1.data.frame = function(.data,
     }
   } else {
     message("Using a grouped data frame: using the grouping variables and not splitby")
-    groups <- attr(.data, "groups") %>% names %>% .[-length(.)]
+    groups <- attr(.data, "vars") %>% names %>% .[-length(.)]
     
     if (length(groups) == 1){
       d$split = droplevels(as.factor(.data[groups][[1]]))
@@ -226,7 +226,7 @@ table1.data.frame = function(.data,
       d$split = factor(interacts)
     }
     ## For print method
-    if (is.null(attr(.data, "groups"))){
+    if (is.null(attr(.data, "vars"))){
       splitting = NULL
     } else{
       splitting = paste(groups, collapse = ", ")

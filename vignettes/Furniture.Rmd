@@ -69,7 +69,7 @@ The `splitby = ~factor(c)` stratifies the means and counts by a factor variable 
 
 We can also use it intuitively within the pipe:
 ```{r table1.3.2, message=FALSE, warning=FALSE}
-library(tidyverse)
+library(dplyr)
 
 df %>%
   group_by(c) %>%
