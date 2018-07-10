@@ -217,7 +217,7 @@ table1.data.frame = function(.data,
     }
   } else {
     message("Using a grouped data frame: using the grouping variables and not splitby")
-    groups <- attr(.data, "vars") %>% names %>% .[-length(.)]
+    groups <- attr(.data, "vars")
     
     if (length(groups) == 1){
       d$split = droplevels(as.factor(.data[groups][[1]]))
