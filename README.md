@@ -1,30 +1,36 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-furniture: 1.7.11 <img src="man/figures/furniture_hex.png" align="right" />
-===========================================================================
 
-[![CRAN](https://www.r-pkg.org/badges/version/furniture)](https://www.r-pkg.org/badges/version/furniture)
-[![Rdoc](http://www.rdocumentation.org/badges/version/furniture)](http://www.rdocumentation.org/packages/furniture)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/furniture)](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
-[![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
-[![codecov](https://codecov.io/gh/tysonstanley/furniture/branch/master/graph/badge.svg)](https://codecov.io/gh/tysonstanley/furniture)
+# furniture: 1.7.12 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
+The furniture R package contains functions to help with data
+cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
+exploratory data analysis and reporting (e.g., `table1()`, `tableC()`,
+`tableF()`). It currently contains eight main functions:
 
-The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`), exploratory data analysis and reporting (e.g., `table1()`, `tableC()`, `tableF()`). It currently contains eight main functions:
+1.  `table1()` – gives a well-formatted table for academic publication
+    of descriptive statistics. Very useful for quick analyses as well.
+    Notably, `table1()` now works with `dplyr::group_by()`.
+2.  `tableC()` – gives a well-formatted table of correlations.
+3.  `tableF()` – provides a thorough frequency table for quick checks of
+    the levels of a variable.
+4.  `washer()` – changes several values in a variable (very useful for
+    changing place holder values to missing).
+5.  `long()` – is a wrapper of `stats::reshape()`, takes the data from
+    wide to long format (long is often the tidy version of the data),
+    works well with the tidyverse, and can handle unbalanced multilevel
+    data.
+6.  `wide()` – also a wrapper of `stats::reshape()`, takes the data from
+    long to wide, and like `long()`, works well with the tidyverse and
+    can handle unbalanced multilevel data.
+7.  `rowmeans()` – a tidyverse friendly version of `rowMeans()`
+8.  `rowsums()` – a tidyverse friendly version of `rowSums()`
 
-1.  `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.
-2.  `tableC()` -- gives a well-formatted table of correlations.
-3.  `tableF()` -- provides a thorough frequency table for quick checks of the levels of a variable.
-4.  `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
-5.  `long()` -- is a wrapper of `stats::reshape()`, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.
-6.  `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
-7.  `rowmeans()` -- a tidyverse friendly version of `rowMeans()`
-8.  `rowsums()` -- a tidyverse friendly version of `rowSums()`
+In conjunction with many other tidy tools, the package should be useful
+for health, behavioral, and social scientists working on quantitative
+research.
 
-In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
-
-Installation
-============
+# Installation
 
 The latest stable build of the package can be downloaded from CRAN via:
 
@@ -39,14 +45,14 @@ library(devtools)
 install_github("tysonstanley/furniture")
 ```
 
-Using furniture
-===============
+# Using furniture
 
-The main functions are the `table_()` functions (e.g., `table1()`, `tableC()`, `tableF()`).
+The main functions are the `table_()` functions (e.g., `table1()`,
+`tableC()`, `tableF()`).
 
 ``` r
 library(furniture)
-#> ── furniture 1.7.11 ───────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.7.12 ────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 data("nhanes_2010")
@@ -58,18 +64,18 @@ table1(nhanes_2010,
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>             n = 251    n = 1164   
+#>            n = 131     n = 583    
 #>  age                              
-#>            23.0 (3.9)  23.4 (4.0) 
+#>            23.2 (3.7)  23.2 (3.9) 
 #>  marijuana                        
-#>     Yes    131 (57.5%) 584 (57.4%)
-#>     No     97 (42.5%)  434 (42.6%)
+#>     Yes    131 (100%)  583 (100%) 
+#>     No     0 (0%)      0 (0%)     
 #>  illicit                          
-#>     Yes    23 (10.1%)  117 (11.5%)
-#>     No     205 (89.9%) 901 (88.5%)
+#>     Yes    23 (17.6%)  117 (20.1%)
+#>     No     108 (82.4%) 466 (79.9%)
 #>  rehab                            
 #>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 547 (93.7%)
+#>     No     121 (92.4%) 546 (93.7%)
 #> ───────────────────────────────────
 ```
 
@@ -82,19 +88,19 @@ table1(nhanes_2010,
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>             n = 251    n = 1164   
+#>            n = 131     n = 583    
 #>  --------- ----------- -----------
 #>  age                              
-#>            23.0 (3.9)  23.4 (4.0) 
+#>            23.2 (3.7)  23.2 (3.9) 
 #>  marijuana                        
-#>     Yes    131 (57.5%) 584 (57.4%)
-#>     No     97 (42.5%)  434 (42.6%)
+#>     Yes    131 (100%)  583 (100%) 
+#>     No     0 (0%)      0 (0%)     
 #>  illicit                          
-#>     Yes    23 (10.1%)  117 (11.5%)
-#>     No     205 (89.9%) 901 (88.5%)
+#>     Yes    23 (17.6%)  117 (20.1%)
+#>     No     108 (82.4%) 466 (79.9%)
 #>  rehab                            
 #>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 547 (93.7%)
+#>     No     121 (92.4%) 546 (93.7%)
 #> ───────────────────────────────────
 ```
 
@@ -108,23 +114,26 @@ nhanes_2010 %>%
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>             n = 251    n = 1164   
+#>            n = 131     n = 583    
 #>  --------- ----------- -----------
 #>  age                              
-#>            23.0 (3.9)  23.4 (4.0) 
+#>            23.2 (3.7)  23.2 (3.9) 
 #>  marijuana                        
-#>     Yes    131 (57.5%) 584 (57.4%)
-#>     No     97 (42.5%)  434 (42.6%)
+#>     Yes    131 (100%)  583 (100%) 
+#>     No     0 (0%)      0 (0%)     
 #>  illicit                          
-#>     Yes    23 (10.1%)  117 (11.5%)
-#>     No     205 (89.9%) 901 (88.5%)
+#>     Yes    23 (17.6%)  117 (20.1%)
+#>     No     108 (82.4%) 466 (79.9%)
 #>  rehab                            
 #>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 547 (93.7%)
+#>     No     121 (92.4%) 546 (93.7%)
 #> ───────────────────────────────────
 ```
 
-`table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
+`table1()` can be outputted directly to other formats. All
+`knitr::kable()` options are available for this and there is an extra
+option `"latex2"` which provides a publication ready table in Latex
+documents.
 
 ``` r
 tableC(nhanes_2010, 
@@ -162,7 +171,9 @@ tableF(nhanes_2010, age)
 #> ──────────────────────────────────
 ```
 
-In addition, the `rowmeans()` and `rowsums()` functions offer a simplified use of `rowMeans()` and `rowSums()`, particularly when using the tidyverse's `mutate()`.
+In addition, the `rowmeans()` and `rowsums()` functions offer a
+simplified use of `rowMeans()` and `rowSums()`, particularly when using
+the tidyverse’s `mutate()`.
 
 ``` r
 nhanes_2010 %>%
@@ -185,9 +196,15 @@ nhanes_2010 %>%
 #> # ... with 1,407 more rows
 ```
 
-Notes
------
+## Notes
 
-The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as `library(dplyr)`, `library(tidyr)`, and `library(ggplot2)` with `library(furniture)` to accomplish this.
+The package is most useful in conjunction with other tidy tools to get
+data cleaned/tidied and start exploratory data analysis. I recommend
+using packages such as `library(dplyr)`, `library(tidyr)`, and
+`library(ggplot2)` with `library(furniture)` to accomplish this.
 
-The most important function--`table1`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonstanley.github.io](https://tysonstanley.github.io/) for several examples of its use. Also see our paper in the [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
+The most important function–`table1`–is simply built for both
+exploratory descriptive analysis and communication of findings. See
+vignettes or [tysonstanley.github.io](https://tysonstanley.github.io/)
+for several examples of its use. Also see our paper in the [R
+Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
