@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NHANES 2009-2010 — nhanes_2010 • furniture</title>
+<title>From Table 1 to Latex 2 — to_latex • furniture</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
 
 
-<meta property="og:title" content="NHANES 2009-2010 — nhanes_2010" />
+<meta property="og:title" content="From Table 1 to Latex 2 — to_latex" />
 
-<meta property="og:description" content="A dataset containing information on health, healthcare, and demographics of adolescents
-aged 18 - 30 in the United States from 2009 to 2010. This is a cleaned dataset 
-which is only a subset of the 2009-2010 data release of
-the National Health and Nutrition Examination Survey (NHANES)." />
+<meta property="og:description" content="Internal table1() and tableC() function for providing output = &quot;latex2&quot;" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,65 +110,68 @@ the National Health and Nutrition Examination Survey (NHANES)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NHANES 2009-2010</h1>
+    <h1>From Table 1 to Latex 2</h1>
     
-    <div class="hidden name"><code>nhanes_2010.Rd</code></div>
+    <div class="hidden name"><code>to_latex.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A dataset containing information on health, healthcare, and demographics of adolescents
-aged 18 - 30 in the United States from 2009 to 2010. This is a cleaned dataset 
-which is only a subset of the 2009-2010 data release of
-the National Health and Nutrition Examination Survey (NHANES).</p>
+    <p>Internal <code><a href='table1.html'>table1()</a></code> and <code><a href='tableC.html'>tableC()</a></code> function for providing output = "latex2"</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>nhanes_2010</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data frame with 1417 rows and 24 variables:</p><dl class='dl-horizontal'>
-  <dt>id</dt><dd><p>individual ID</p></dd>
-  <dt>gen_health</dt><dd><p>general health indicator with five levels</p></dd>
-  <dt>mod_active</dt><dd><p>minutes of moderate activity</p></dd>
-  <dt>vig_active</dt><dd><p>minutes of vigorous activity</p></dd>
-  <dt>home_meals</dt><dd><p>number of home meals a week</p></dd>
-  <dt>gender</dt><dd><p>gender of the individual (factor with "male" or "female")</p></dd>
-  <dt>age</dt><dd><p>age of the individual in years</p></dd>
-  <dt>marijuana</dt><dd><p>whether the individual has used marijuana</p></dd>
-  <dt>illicit</dt><dd><p>whether the individual has used illicit drugs</p></dd>
-  <dt>rehab</dt><dd><p>whether the individual has been to rehab for their drug usage</p></dd>
-  <dt>asthma</dt><dd><p>whether the individual has asthma</p></dd>
-  <dt>overweight</dt><dd><p>whether the individual is overweight</p></dd>
-  <dt>cancer</dt><dd><p>whether the individual has cancer</p></dd>
-  <dt>low_int</dt><dd><p>rating of whether the individual has low interest in things</p></dd>
-  <dt>down</dt><dd><p>rating of whether the individual has felt down</p></dd>
-  <dt>sleeping</dt><dd><p>rating of whether the individual has had trouble sleeping</p></dd>
-  <dt>low_energy</dt><dd><p>rating of whether the individual has low energy</p></dd>
-  <dt>appetite</dt><dd><p>rating of whether the individual has lost appetite</p></dd>
-  <dt>feel_bad</dt><dd><p>rating of whether the individual has felt bad</p></dd>
-  <dt>no_con</dt><dd><p>rating of whether the individual has felt no confidence</p></dd>
-  <dt>speak_move</dt><dd><p>rating of whether the individual has trouble speaking/moving</p></dd>
-  <dt>dead</dt><dd><p>rating of whether the individual has wished he/she was dead</p></dd>
-  <dt>difficulty</dt><dd><p>rating of whether the individual has felt difficulty from the previous conditions</p></dd>
-  <dt>active</dt><dd><p>minutes of vigorous or moderate activity</p></dd>
-</dl>
+    <pre class="usage"><span class='fu'>to_latex</span>(<span class='no'>tab</span>, <span class='no'>caption</span>, <span class='no'>align</span>, <span class='no'>len</span>, <span class='no'>splitby</span>, <span class='no'>float</span>, <span class='no'>booktabs</span>, <span class='no'>label</span>,
+  <span class='kw'>cor_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2009'>https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2009</a></p>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>tab</th>
+      <td><p>the table1 object</p></td>
+    </tr>
+    <tr>
+      <th>caption</th>
+      <td><p>caption character vector</p></td>
+    </tr>
+    <tr>
+      <th>align</th>
+      <td><p>align character vector</p></td>
+    </tr>
+    <tr>
+      <th>len</th>
+      <td><p>the number of levels of the grouping factor</p></td>
+    </tr>
+    <tr>
+      <th>splitby</th>
+      <td><p>the name of the grouping factor</p></td>
+    </tr>
+    <tr>
+      <th>float</th>
+      <td><p>argument for latex formatting</p></td>
+    </tr>
+    <tr>
+      <th>booktabs</th>
+      <td><p>add booktabs to latex table</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>latex label option</p></td>
+    </tr>
+    <tr>
+      <th>cor_type</th>
+      <td><p>optional argument regarding the correlation type (for tableC)</p></td>
+    </tr>
+    </table>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-          </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>

@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">furniture</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">furniture</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,13 +89,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -90,112 +104,126 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;1.7.3</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="furniture.html">furniture</a></code> </p>
-          </td>
-          <td><p>furniture</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="grapes-xt-grapes.html">%xt%</a></code> </p>
-          </td>
-          <td><p>Simple Crosstabs Operator</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="long.html">long</a></code> </p>
-          </td>
-          <td><p>Wide to Long Data Reshaping</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="nhanes_2010.html">nhanes_2010</a></code> </p>
-          </td>
-          <td><p>NHANES 2009-2010</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rowmeans.html">rowmeans</a></code> </p>
-          </td>
-          <td><p>Get Row Means</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rowsums.html">rowsums</a></code> </p>
-          </td>
-          <td><p>Get Row Sums</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="selecting.html">selecting</a></code> </p>
-          </td>
-          <td><p>Selecting Function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="table1.html">table1</a></code> </p>
-          </td>
-          <td><p>Table 1 for Simple and Stratified Descriptive Statistics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tableC.html">tableC</a></code> </p>
-          </td>
-          <td><p>Correlation Table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tableF.html">tableF</a></code> </p>
-          </td>
-          <td><p>Frequency Table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tableX.html">tableX</a></code> </p>
-          </td>
-          <td><p>Table X (for Cross-Tabs)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="washer.html">washer</a></code> </p>
-          </td>
-          <td><p>Wash Your Data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="wide.html">wide</a></code> </p>
-          </td>
-          <td><p>Long to Wide Data Reshaping</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="furniture.html">furniture</a></code> </p>
+        </td>
+        <td><p>furniture</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grapes-xt-grapes.html">`%xt%`</a></code> </p>
+        </td>
+        <td><p>Simple Crosstabs Operator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="group_by.html">group_by</a></code> </p>
+        </td>
+        <td><p>re-export dplyr group_by function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="long.html">long()</a></code> </p>
+        </td>
+        <td><p>Wide to Long Data Reshaping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nhanes_2010.html">nhanes_2010</a></code> </p>
+        </td>
+        <td><p>NHANES 2009-2010</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pipe.html">%>%</a></code> </p>
+        </td>
+        <td><p>re-export magrittr pipe operator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rowmeans.html">rowmeans()</a></code> </p>
+        </td>
+        <td><p>Get Row Means</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rowsums.html">rowsums()</a></code> </p>
+        </td>
+        <td><p>Get Row Sums</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="selecting.html">selecting()</a></code> </p>
+        </td>
+        <td><p>Selecting Function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="table1.html">table1()</a></code> </p>
+        </td>
+        <td><p>Table 1 for Simple and Stratified Descriptive Statistics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tableC.html">tableC()</a></code> </p>
+        </td>
+        <td><p>Correlation Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tableF.html">tableF()</a></code> </p>
+        </td>
+        <td><p>Frequency Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tableX.html">tableX()</a></code> </p>
+        </td>
+        <td><p>Table X (for Cross-Tabs)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_latex.html">to_latex()</a></code> </p>
+        </td>
+        <td><p>From Table 1 to Latex 2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="washer.html">washer()</a></code> </p>
+        </td>
+        <td><p>Wash Your Data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wide.html">wide()</a></code> </p>
+        </td>
+        <td><p>Long to Wide Data Reshaping</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -218,5 +246,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

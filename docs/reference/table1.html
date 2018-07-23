@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Table 1 for Simple and Stratified Descriptive Statistics — table1" />
+
+<meta property="og:description" content="Produces a descriptive table, stratified by an optional categorical variable, 
+providing means/frequencies and standard deviations/percentages. 
+It is well-formatted for easy transition to academic article or report. 
+Can be used within the piping framework [see library(magrittr)]." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">furniture</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">furniture</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,13 +95,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -90,27 +110,31 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Table 1 for Simple and Stratified Descriptive Statistics</h1>
+    
+    <div class="hidden name"><code>table1.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Produces a descriptive table, stratified by an optional categorical variable, 
 providing means/frequencies and standard deviations/percentages. 
 It is well-formatted for easy transition to academic article or report. 
 Can be used within the piping framework [see library(magrittr)].</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>table1</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>second</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_wise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>header_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"pvalues"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>rounding_perc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>format_number</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>NAkeep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>booktabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>float</span> <span class='kw'>=</span> <span class='st'>"ht"</span>,
-  <span class='kw'>export</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>export</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -119,7 +143,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously.</p></td>
+      <td><p>variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.</p></td>
     </tr>
     <tr>
       <th>splitby</th>
@@ -167,7 +191,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>var_names</th>
-      <td><p>custom variable names to be printed in the table (deprecated). Variable names can be applied directly in the list of variables.</p></td>
+      <td><p>custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.</p></td>
     </tr>
     <tr>
       <th>format_number</th>
@@ -200,6 +224,10 @@ Can be used within the piping framework [see library(magrittr)].</p>
     <tr>
       <th>export</th>
       <td><p>character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>for <code>output == "latex2"</code>, this provides a table reference label for latex</p></td>
     </tr>
     </table>
     
@@ -245,7 +273,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
          <span class='kw'>splitby</span> <span class='kw'>=</span> ~<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise</span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'>n</span>())
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>group_by</span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>)
 
 <span class='co'>## Adjust variables within function and assign name</span>
@@ -281,5 +309,8 @@ Can be used within the piping framework [see library(magrittr)].</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

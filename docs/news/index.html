@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • furniture</title>
+<title>Changelog • furniture</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Changelog" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">furniture</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">furniture</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,13 +89,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -90,17 +104,31 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      
     </div>
 
-    <div class="contents">
+    <div id="version-1-7-9" class="section level1">
+<h1 class="page-header">
+<a href="#version-1-7-9" class="anchor"></a>Version 1.7.9<small> 2018-06-01 </small>
+</h1>
+<p>Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n’s in really messy data. We also now re-export the pipe from <code>magrittr</code>.</p>
+</div>
+    <div id="version-1-7-6" class="section level1">
+<h1 class="page-header">
+<a href="#version-1-7-6" class="anchor"></a>Version 1.7.6<small> 2018-04-06 </small>
+</h1>
+<p>Updates to the <code>"latex2"</code> output option for <code><a href="../reference/table1.html">table1()</a></code> and <code><a href="../reference/tableC.html">tableC()</a></code> where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. It also outputs <code>\emph{Missing}</code> when <code>na.rm=FALSE</code>. Thanks to <a href="https://github.com/jpritikin">Joshua Pritikin</a> for the ideas and the pull requests leading to these improvements.</p>
+<p>Other minor bug fixes.</p>
+<p><code>%xt%</code> is now deprecated. <code><a href="../reference/tableF.html">tableF()</a></code> and <code><a href="../reference/tableX.html">tableX()</a></code> effectively do what <code>%xt%</code> was designed to do, but with better and more thorough output.</p>
+</div>
     <div id="version-1-7-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-7-3" class="anchor"></a>Version 1.7.3</h1>
+<h1 class="page-header">
+<a href="#version-1-7-3" class="anchor"></a>Version 1.7.3<small> 2018-01-17 </small>
+</h1>
 <p>Minor changes and two new functions:</p>
 <ol>
 <li>
@@ -112,12 +140,13 @@
 </ol>
 </div>
     <div id="version-1-7-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-7-2" class="anchor"></a>Version 1.7.2</h1>
+<h1 class="page-header">
+<a href="#version-1-7-2" class="anchor"></a>Version 1.7.2<small> 2017-11-10 </small>
+</h1>
 <p>Several new features were added:</p>
 <ol>
 <li>
-<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverse’s <code>group_by()</code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
+<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverse’s <code><a href="../reference/group_by.html">group_by()</a></code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
 <li>
 <code><a href="../reference/table1.html">table1()</a></code> also has a new ‘latex2’ output option. This is not dependent on <code><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">knitr::kable()</a></code> and is better suited for this situation. Should provide better latex tables than before.</li>
 <li>
@@ -127,15 +156,17 @@
 </ol>
 </div>
     <div id="version-1-6-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-6-0" class="anchor"></a>Version 1.6.0</h1>
+<h1 class="page-header">
+<a href="#version-1-6-0" class="anchor"></a>Version 1.6.0<small> 2017-09-16 </small>
+</h1>
 <p>A new function was added: <code><a href="../reference/tableC.html">tableC()</a></code>, which, like <code><a href="../reference/table1.html">table1()</a></code> provides a nicely formatted table. However, <code><a href="../reference/tableC.html">tableC()</a></code> provides correlations instead of the descriptive statistics that <code><a href="../reference/table1.html">table1()</a></code> focuses on.</p>
 <p>We are also deprecating the <code>var_names</code> argument in <code><a href="../reference/table1.html">table1()</a></code> since it is now possible to name the variable from within the function itself without relying on a separate argument.</p>
 <p>Other small bug fixes.</p>
 </div>
     <div id="version-1-5-4" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-5-4" class="anchor"></a>Version 1.5.4</h1>
+<h1 class="page-header">
+<a href="#version-1-5-4" class="anchor"></a>Version 1.5.4<small> 2017-07-08 </small>
+</h1>
 <p>There are three notable changes in this update:</p>
 <ol>
 <li>Small bug fix when using piping and ask for one of the kable output options. This has now been fixed. Additionally, better error catching and improved function tests.</li>
@@ -144,8 +175,9 @@
 </ol>
 </div>
     <div id="version-1-5-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-5-0" class="anchor"></a>Version 1.5.0</h1>
+<h1 class="page-header">
+<a href="#version-1-5-0" class="anchor"></a>Version 1.5.0<small> 2017-03-17 </small>
+</h1>
 <p><code><a href="../reference/table1.html">table1()</a></code> now has the ability to apply any function to numeric variables that the user supplies (all functions that work with <code>tapply()</code> should work with <code><a href="../reference/table1.html">table1()</a></code>. Other than that, the changes are mainly internal changes in <code><a href="../reference/table1.html">table1()</a></code> that have bearing on a few arguments.</p>
 <ol>
 <li>If no variables are named, then all variables are summarized in the <code>data.frame</code> (the <code>all</code> argument is no longer used).</li>
@@ -164,8 +196,9 @@
 <p>Thanks!</p>
 </div>
     <div id="version-1-4-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-4-1" class="anchor"></a>Version 1.4.1</h1>
+<h1 class="page-header">
+<a href="#version-1-4-1" class="anchor"></a>Version 1.4.1<small> 2016-12-13 </small>
+</h1>
 <p>Three big changes:</p>
 <ol>
 <li>
@@ -179,8 +212,9 @@
 <p>Enjoy!</p>
 </div>
     <div id="version-1-3-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-3-0" class="anchor"></a>Version 1.3.0</h1>
+<h1 class="page-header">
+<a href="#version-1-3-0" class="anchor"></a>Version 1.3.0<small> Unreleased </small>
+</h1>
 <p>Three notable changes:</p>
 <ol>
 <li>A new function–<code>tableM</code>–has been added to the package. It produces a table much like <code>table1</code> but analyzes a variable with missingness.</li>
@@ -197,13 +231,15 @@
 <p>Thanks!</p>
 </div>
     <div id="version-1-2-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-2-3" class="anchor"></a>Version 1.2.3</h1>
+<h1 class="page-header">
+<a href="#version-1-2-3" class="anchor"></a>Version 1.2.3<small> Unreleased </small>
+</h1>
 <p>A bug that rounded the percentages to the nearest tenth place was found and fixed for both <code>table1</code> and <code>simple_table1</code>.</p>
 </div>
     <div id="version-1-2-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-2-2" class="anchor"></a>Version 1.2.2</h1>
+<h1 class="page-header">
+<a href="#version-1-2-2" class="anchor"></a>Version 1.2.2<small> 2016-11-15 </small>
+</h1>
 <p>An error was found when using <code>table1</code> with a splitby factor with more than 2 levels. This has been fixed in version 1.2.2.</p>
 <p>There were also two notable inclusions:</p>
 <ol>
@@ -216,8 +252,9 @@
 <p>Thanks.</p>
 </div>
     <div id="version-1-2-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#version-1-2-0" class="anchor"></a>Version 1.2.0</h1>
+<h1 class="page-header">
+<a href="#version-1-2-0" class="anchor"></a>Version 1.2.0<small> 2016-10-21 </small>
+</h1>
 <p>We are excited to announce that we are updating our <code>furniture</code> package from 1.0.1 to 1.2.0. We included a new operator (<code>%xt%</code>) for simple cross tabulations that includes a chi-square test and some data from NHANES 2005-2010. Although these additions are nice, most of the updates were to <code>table1</code>. These included:</p>
 <ol>
 <li>Bug fixes (the function got confused if there was an object in the global environment that had the same name as a variable in the data frame you were analyzing)</li>
@@ -228,13 +265,14 @@
 <p>None of these changes will break programs already in place using this package. Instead, there are additional uses of the functions as shown in points 3 and 4.</p>
 <p>Thanks.</p>
 </div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#version-1-7-9">1.7.9</a></li>
+        <li><a href="#version-1-7-6">1.7.6</a></li>
         <li><a href="#version-1-7-3">1.7.3</a></li>
         <li><a href="#version-1-7-2">1.7.2</a></li>
         <li><a href="#version-1-6-0">1.6.0</a></li>
@@ -263,5 +301,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

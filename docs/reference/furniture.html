@@ -18,13 +18,37 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="furniture — furniture" />
+
+<meta property="og:description" content="The furniture package offers simple functions (i.e. pieces of furniture) and an 
+operator that are aimed at helping applied researchers explore and communicate 
+their data as well as clean their data in a tidy way. The package follows similar 
+semantics to the &quot;tidyverse&quot; packages. It contains two main tools (along with an 
+operator):
+table1 provides a well-formatted descriptive table often seen 
+        as table 1 in academic journals (also a version that simplifies the output is 
+        available as simple_table1),
+washer provides a simple way to clean up data where there are placeholder
+        values, and
+%xt% is an operator that takes two factor variables and creates a cross tabulation and
+        tests for significance via a chi-square test.
+" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +71,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">furniture</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">furniture</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,13 +104,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -90,12 +119,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>furniture</h1>
+    
+    <div class="hidden name"><code>furniture.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The furniture package offers simple functions (i.e. pieces of furniture) and an 
 operator that are aimed at helping applied researchers explore and communicate 
@@ -111,6 +143,7 @@ operator):</p><ul>
         tests for significance via a chi-square test.</p></li>
 </ul>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -137,6 +170,9 @@ is designed to be "furniture" for quantitative research.</p>
          <span class='kw'>splitby</span> <span class='kw'>=</span> ~<span class='no'>groupvar</span>,
          <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
+<span class='co'>## Table F</span>
+<span class='no'>data</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='tableF.html'>tableF</a></span>(<span class='no'>var1</span>)
 
 <span class='co'>## Washer</span>
 <span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='washer.html'>washer</a></span>(<span class='no'>x</span>, <span class='fl'>7</span>, <span class='fl'>8</span>, <span class='fl'>9</span>)
@@ -172,5 +208,8 @@ is designed to be "furniture" for quantitative research.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
