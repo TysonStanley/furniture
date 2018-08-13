@@ -154,6 +154,8 @@ table1.data.frame = function(.data,
     warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
     na.rm = !NAkeep
   }
+  if (!is.null(splitby))
+    warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue through furniture 1.8.0")
   
   ## Auto-detect piping
   if (paste(.call)[[2]] == "."){
@@ -195,9 +197,10 @@ table1.data.frame = function(.data,
   }
   
   ## Splitby or group_by
-  if (is.null(attr(.data, "vars"))){
+  if (is.null(attr(.data, "vars")) && is.null(attr(.data, "groups"))){
     
     ### Splitby Variable (adds the variable to d as "split")
+    if (!is.null(splitby))
     splitby = substitute(splitby)
     if (class(substitute(splitby)) == "name"){
       splitby_ = eval(substitute(splitby), .data)
@@ -215,9 +218,17 @@ table1.data.frame = function(.data,
     } else {
       splitting = paste(splitby)[[length(paste(splitby))]]
     }
+    ## Remove any redundant grouping vars
+    vars <- length(paste(substitute(list(...))))
+    if (vars == 1){
+      d <- d[, -which(names(d) %in% splitting)]
+    }
   } else {
-    message("Using a grouped data frame: using the grouping variables and not splitby")
-    groups <- attr(.data, "vars")
+    groups <- attr(.data, "vars") %||% attr(.data, "groups")
+    groups <- groups %>% 
+      dplyr::select(-.rows) %>%
+      names()
+    message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
     if (length(groups) == 1){
       d$split = droplevels(as.factor(.data[groups][[1]]))
@@ -226,7 +237,7 @@ table1.data.frame = function(.data,
       d$split = factor(interacts)
     }
     ## For print method
-    if (is.null(attr(.data, "vars"))){
+    if (is.null(groups)){
       splitting = NULL
     } else{
       splitting = paste(groups, collapse = ", ")

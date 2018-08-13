@@ -173,17 +173,9 @@ search_conflicts <- function(path = search()){
   other_conflicts
 }
 
-#' re-export magrittr pipe operator
-#'
-#' @importFrom magrittr %>%
-#' @name %>%
-#' @rdname pipe
-#' @export
-NULL
+`%>%` <- magrittr::`%>%`
 
-#' re-export dplyr group_by function
-#'
-#' @importFrom dplyr group_by
-#' @name group_by
-#' @export
-NULL
+group_by <- dplyr::group_by
+
+## If null operator
+`%||%` <- purrr::`%||%`
