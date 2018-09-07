@@ -1,3 +1,8 @@
+# Version 1.7.15
+
+* When piping with `table1()`, it no longer returns the data set. This feature caused too many unexpected issues.
+* The class of `table1` is now no longer tied to the `data.frame`, for printing purposes. It is still possible to coerce to a `data.frame`.
+
 # Version 1.7.9
 
 Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n's in really messy data. We also now re-export the pipe from `magrittr`.

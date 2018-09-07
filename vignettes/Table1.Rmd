@@ -3,9 +3,11 @@ title: "Table 1"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Table 1}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 date: "`r Sys.Date()`"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -162,7 +164,7 @@ Here we do not have any missingness but it shows up as zeros to show that there 
 
 ### Piping
 
-Finally, to make it easier to implement in the tidyverse of packages, a piping option is available. This option invisibly returns the data frame that was given to the table 1 function and prints the table in console.
+Finally, and very importantly, to make it easier to implement in the tidyverse of packages, a piping option is available. This option can use a `grouped_df` object output by `dplyr::group_by()` and use the groups indicated there as shown below.
 
 ```{r tidyverse, fig.width=5, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -172,14 +174,17 @@ df %>%
   group_by(d) %>%
   table1(a, b, c,
          test = TRUE,
-         type = c("simple", "condensed")) %>%
-  ggplot(aes(x = b, y = a, group = d)) +
-    geom_point(aes(color = d), alpha =.25) +
-    geom_smooth(aes(color = d), method = "lm", se=FALSE) +
-    scale_color_manual(values = c("dodgerblue3", "chartreuse4"), name = "Group") +
-    theme_bw()
+         type = c("simple", "condensed"))
 ```
 
+This includes the ability to use multiple grouping variables. The first value is the first grouping variable, then an underscore, followed by the value of the second grouping variable.
+```{r tidyverse2, fig.width=5, message=FALSE, warning=FALSE}
+df %>%
+  group_by(d, f) %>%
+  table1(a, b, c,
+         test = TRUE,
+         type = c("simple", "condensed"))
+```
 
 ### Variable Names
 
@@ -221,7 +226,7 @@ tab1 = table1(df,
               a, b, c,
               splitby = ~d,
               test = TRUE)
-data.frame(tab1)
+as.data.frame(tab1)
 ```
 
 

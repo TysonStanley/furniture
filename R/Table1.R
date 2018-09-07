@@ -78,6 +78,8 @@
 #' @import stats
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
+#' @importFrom dplyr group_by
+#' @importFrom dplyr mutate
 table1 = function(.data, 
                    ..., 
                    splitby = NULL, 
@@ -154,15 +156,10 @@ table1.data.frame = function(.data,
     warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
     na.rm = !NAkeep
   }
-  if (!is.null(splitby))
-    warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue through furniture 1.8.0")
+  ## Not yet deprecated
+  #if (!is.null(splitby))
+  #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue through furniture 1.8.0")
   
-  ## Auto-detect piping
-  if (paste(.call)[[2]] == "."){
-    piping = TRUE
-  } else {
-    piping = FALSE
-  }
   ## Missing values in categorical variables
   if (isTRUE(na.rm)){ 
     NAkeep = "no" 
@@ -316,14 +313,10 @@ table1.data.frame = function(.data,
   
   ## regular text output
   if (grepl("text", output)){ 
-    class(final_l) = c("table1", "list")
-    if (piping){
-      print(final_l)
-      invisible(.data)
-    } else {
-      cat("\n", caption)
-      return(final_l)
-    } 
+    class(final_l) = c("table1")
+    cat("\n", caption)
+    return(final_l)
+
   ## Custom Latex Output
   } else if (output %in% "latex2"){
     if (is.null(align)){
@@ -334,22 +327,12 @@ table1.data.frame = function(.data,
     tab
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
-    if (piping){
-      kab = knitr::kable(final, format=output,
-                   booktabs = booktabs,
-                   caption = caption,
-                   align = align,
-                   row.names = FALSE)
-      print(kab)
-      invisible(.data)
-    } else {
-      kab = knitr::kable(final, format=output,
-                   booktabs = booktabs,
-                   caption = caption,
-                   align = align,
-                   row.names = FALSE)
-      return(kab)
-    }
+    kab = knitr::kable(final, format=output,
+                 booktabs = booktabs,
+                 caption = caption,
+                 align = align,
+                 row.names = FALSE)
+    return(kab)
   } else {
     stop(paste("Output of type", output, "not recognized"))
   }
@@ -425,4 +408,11 @@ print.table1 <- function(x, ...){
   cat("\u2500\n")
 }
 
-
+#' @export
+as.data.frame.table1 <- function(x, row.names = NULL, optional = FALSE, ...,
+                                 cut.names = FALSE, col.names = names(x), fix.empty.names = TRUE,
+                                 stringsAsFactors = default.stringsAsFactors()){
+  
+  as.data.frame.list(x)
+  
+}

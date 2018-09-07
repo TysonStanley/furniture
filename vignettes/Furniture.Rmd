@@ -3,9 +3,11 @@ title: "Furniture"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Furniture}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 date: "`r Sys.Date()`"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -67,7 +69,7 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
 
 The `splitby = ~factor(c)` stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using `test=TRUE`. 
 
-We can also use it intuitively within the pipe:
+We can also use it intuitively within the pipe (for more about this, see the "Table 1" vignette):
 ```{r table1.3.2, message=FALSE, warning=FALSE}
 library(dplyr)
 
@@ -186,5 +188,5 @@ By default, it provides the total counts for the rows and columns with flexibili
 
 ## Conclusion
 
-The three functions: `table1`, `tableC`, `tableF`, and `washer` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
+The four functions: `table1()`, `tableC()`, `tableF()`, and `washer()` add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.
 
