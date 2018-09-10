@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(furniture)
 ```
 
-This vignette is current as of `furniture` `v1.7.2`.
+This vignette is current as of `furniture` `r packageVersion("furniture")`.
 
 ## Using `furniture`
 

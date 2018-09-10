@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 ```
 
 
-# furniture: 1.7.12 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: `r packageVersion("furniture")` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 
 
@@ -49,8 +49,16 @@ install_github("tysonstanley/furniture")
 
 The main functions are the `table_()` functions (e.g., `table1()`, `tableC()`, `tableF()`).
 
-```{r}
+```{r, eval = FALSE}
 library(furniture)
+```
+
+```{r, echo = FALSE}
+devtools::load_all()
+```
+
+
+```{r}
 data("nhanes_2010")
 
 table1(nhanes_2010,

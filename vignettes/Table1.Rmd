@@ -17,7 +17,7 @@ library(furniture)
 
 # Making Table 1
 
-This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `v 1.7.2`.
+This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `r packageVersion("furniture")`.
 
 The main parts of the `table1()` are below:
 

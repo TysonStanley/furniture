@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# furniture: 1.7.12 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.7.15 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -52,9 +52,14 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.7.12 ────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
-#> ✔ furniture attached
-#> ✔ No potential conflicts found
+```
+
+    #> Loading furniture
+    #> ── furniture 1.7.15 ─────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+    #> ✔ furniture attached
+    #> ✔ No potential conflicts found
+
+``` r
 data("nhanes_2010")
 
 table1(nhanes_2010,
@@ -193,7 +198,7 @@ nhanes_2010 %>%
 #>  8        120         NA        120        120
 #>  9         NA         NA        NaN          0
 #> 10         NA         NA        NaN          0
-#> # ... with 1,407 more rows
+#> # … with 1,407 more rows
 ```
 
 ## Notes
