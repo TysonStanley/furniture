@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# furniture: 1.7.15 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.8.0 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -23,8 +23,10 @@ exploratory data analysis and reporting (e.g., `table1()`, `tableC()`,
 6.  `wide()` – also a wrapper of `stats::reshape()`, takes the data from
     long to wide, and like `long()`, works well with the tidyverse and
     can handle unbalanced multilevel data.
-7.  `rowmeans()` – a tidyverse friendly version of `rowMeans()`
-8.  `rowsums()` – a tidyverse friendly version of `rowSums()`
+7.  `rowmeans()` and `mutate_rowmeans()` – tidyverse friendly versions
+    of `rowMeans()`
+8.  `rowsums()` and `mutate_rowsums()` – tidyverse friendly versions of
+    `rowSums()`
 
 In conjunction with many other tidy tools, the package should be useful
 for health, behavioral, and social scientists working on quantitative
@@ -55,7 +57,7 @@ library(furniture)
 ```
 
     #> Loading furniture
-    #> ── furniture 1.7.15 ─────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+    #> ── furniture 1.8.0 ──────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
     #> ✔ furniture attached
     #> ✔ No potential conflicts found
 

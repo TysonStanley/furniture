@@ -26,8 +26,8 @@ The furniture R package contains functions to help with data cleaning/tidying (e
 4. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
 5. `long()` -- is a wrapper of `stats::reshape()`, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.
 6. `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
-7. `rowmeans()` -- a tidyverse friendly version of `rowMeans()`
-8. `rowsums()` -- a tidyverse friendly version of `rowSums()`
+7. `rowmeans()` and `mutate_rowmeans()` -- tidyverse friendly versions of `rowMeans()`
+8. `rowsums()` and `mutate_rowsums()` -- tidyverse friendly versions of `rowSums()`
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
