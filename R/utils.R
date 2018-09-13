@@ -173,9 +173,9 @@ search_conflicts <- function(path = search()){
   other_conflicts
 }
 
+## Pipe
 `%>%` <- magrittr::`%>%`
-
+## Group by
 group_by <- dplyr::group_by
-
 ## If null operator
 `%||%` <- purrr::`%||%`

@@ -25,7 +25,7 @@
 #' @param booktabs when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param caption when \code{output != "text"}; option is passed to \code{knitr::kable}
 #' @param align when \code{output != "text"}; option is passed to \code{knitr::kable}
-#' @param float the float applied to the table in Latex when output is \code{latex2}
+#' @param float the float applied to the table in Latex when output is \code{latex2}, default is "ht".
 #' @param export character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")
 #' @param label for \code{output == "latex2"}, this provides a table reference label for latex
 #' 

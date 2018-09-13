@@ -5,6 +5,7 @@
 * Using the `var_names` argument is now deprecated. In its place, it is recommended to name the variable in place (e.g., `"General Health" = gen_health` will produce the label `General Health` in the table instead of the variable name of `gen_health`).
 * Fixed issue of having an underscore in a variable name in `output = "latex2"`.
 * Added new attaching message more like the tidyverse to provide information about function conflicts.
+* Added `mutate_rowmeans()` and `mutate_rowsums()` to more easily get the rowmeans/rowsums of a larger list of variables using the syntax that can be used within `dplyr::select()` (e.g., `var1:var30` for selecting `var1` through `var30` in the data frame).
 
 # Version 1.7.9
 

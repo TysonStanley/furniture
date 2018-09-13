@@ -52,7 +52,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{align}{when \code{output != "text"}; option is passed to \code{knitr::kable}}
 
-\item{float}{the float applied to the table in Latex when output is \code{latex2}}
+\item{float}{the float applied to the table in Latex when output is \code{latex2}, default is "ht".}
 
 \item{export}{character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")}
 
