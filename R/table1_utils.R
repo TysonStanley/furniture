@@ -27,12 +27,12 @@ selecting <- function(d_, ...) {
   df <- lapply(seq_along(listed), 
                function(i) eval(listed[[i]], d_))
   
+  ## data frame with original row names
+  df <- data.frame(df, row.names = row.names(d_))
+  
   ## Variable Names
   names1 <- names(listed)
   names(df) <- lapply(seq_along(listed), function(x) to_name(listed, names1, x))
-  
-  ## data frame with original row names
-  df <- data.frame(df, row.names = row.names(d_))
   
   ## Remove any empty rows and Add attribute for splitby to work
   empty_rows <- which(apply(df, 1, function(x) all(is.na(x))))

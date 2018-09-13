@@ -28,9 +28,12 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
     splitby = gsub("%", "\\%", splitby)
   }
   
+  ## Fix problematic latex characters
   tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
   tab[] = lapply(tab, function(x) gsub("NA", "\\emph{missing}", x, fixed = TRUE))
+  tab[] = lapply(tab, function(x) gsub("_", "\\_", x, fixed = TRUE))
   
+  ## Produce latex table
   out = capture.output({
     cat("\\begin{table}[", float, "] \n")
     cat("\\centering \n")

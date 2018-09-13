@@ -1,7 +1,10 @@
-# Version 1.7.15
+# Version 1.8.0
 
 * When piping with `table1()`, it no longer returns the data set. This feature caused too many unexpected issues.
-* The class of `table1` is now no longer tied to the `data.frame`, for printing purposes. It is still possible to coerce to a `data.frame`.
+* The class of `table1` is now no longer tied to the `data.frame`, for printing purposes. It is still possible to coerce to a `data.frame` using `as.data.frame()`.
+* Using the `var_names` argument is now deprecated. In its place, it is recommended to name the variable in place (e.g., `"General Health" = gen_health` will produce the label `General Health` in the table instead of the variable name of `gen_health`).
+* Fixed issue of having an underscore in a variable name in `output = "latex2"`.
+* Added new attaching message more like the tidyverse to provide information about function conflicts.
 
 # Version 1.7.9
 
