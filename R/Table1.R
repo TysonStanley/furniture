@@ -221,9 +221,10 @@ table1.data.frame = function(.data,
       d <- d[, -which(names(d) %in% splitting)]
     }
   } else {
-    groups <- attr(.data, "vars") %||% attr(.data, "groups")
-    groups <- names(groups)
-    groups <- groups[-length(groups)]
+    groups <- attr(.data, "vars") %||% attr(.data, "groups") %>% names(.)
+    if (groups[length(groups)] == ".rows")
+      groups <- groups[-length(groups)]
+    
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
     if (length(groups) == 1){
