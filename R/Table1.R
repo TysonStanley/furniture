@@ -222,13 +222,12 @@ table1.data.frame = function(.data,
     }
   } else {
     groups <- attr(.data, "vars") %||% attr(.data, "groups")
-    groups <- groups %>% 
-      dplyr::select(-.rows) %>%
-      names()
+    groups <- names(groups)
+    groups <- groups[-length(groups)]
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
     if (length(groups) == 1){
-      d$split = droplevels(as.factor(.data[groups][[1]]))
+      d$split = droplevels(as.factor(.data[[groups]]))
     } else {
       interacts = interaction(.data[groups], sep = "_")
       d$split = factor(interacts)
@@ -245,6 +244,7 @@ table1.data.frame = function(.data,
       d <- d[, -which(names(d) %in% groups)]
     }
   }
+
 
   ## Remove missing values?
   if (isTRUE(na.rm)) {

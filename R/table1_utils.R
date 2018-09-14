@@ -28,7 +28,7 @@ selecting <- function(d_, ...) {
                function(i) eval(listed[[i]], d_))
   
   ## data frame with original row names
-  df <- data.frame(df, row.names = row.names(d_))
+  df <- data.frame(df)
   
   ## Variable Names
   names1 <- names(listed)
@@ -59,6 +59,8 @@ to_name <- function(listed, names1, i) {
     }
   }
 }
+
+
 
 ## Does the summary of table1
 table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){

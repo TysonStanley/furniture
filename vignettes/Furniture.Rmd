@@ -71,12 +71,10 @@ The `splitby = ~factor(c)` stratifies the means and counts by a factor variable 
 
 We can also use it intuitively within the pipe (for more about this, see the "Table 1" vignette):
 ```{r table1.3.2, message=FALSE, warning=FALSE}
-library(dplyr)
-
 df %>%
   group_by(c) %>%
   table1(a, b, d, ifelse(a > 1, 1, 0), 
-       test=TRUE)
+        test=TRUE)
 ```
 In this case, we used the `group_by()` function from `dplyr` (within the `tidyverse`) and `table1()` knows to use that as the grouping variable in place of the `splitby` argument.
 
