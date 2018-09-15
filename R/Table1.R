@@ -221,7 +221,13 @@ table1.data.frame = function(.data,
       d <- d[, -which(names(d) %in% splitting)]
     }
   } else {
-    groups <- attr(.data, "vars") %||% attr(.data, "groups") %>% names(.)
+    
+    ## Working around different versions of dplyr with group_by()
+    ## Older (0.7.6) uses "vars": produces the grouping name
+    ## Developmental one (0.7.9.9000) uses "groups" but it produces a nested table
+    groups <- attr(.data, "vars")
+    if (is.null(groups))
+      groups <- attr(.data, "groups") %>% names(.)
     if (groups[length(groups)] == ".rows")
       groups <- groups[-length(groups)]
     

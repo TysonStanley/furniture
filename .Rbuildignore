@@ -4,3 +4,5 @@ cran-comments.md
 .gitignore
 ^docs$
 README.Rmd
+^.*\.Rproj$
+^\.Rproj\.user$
