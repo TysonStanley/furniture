@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.8.0</span>
       </span>
     </div>
 
@@ -111,6 +111,19 @@
       
     </div>
 
+    <div id="version-1-8-0" class="section level1">
+<h1 class="page-header">
+<a href="#version-1-8-0" class="anchor"></a>Version 1.8.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>When piping with <code><a href="../reference/table1.html">table1()</a></code>, it no longer returns the data set. This feature caused too many unexpected issues.</li>
+<li>The class of <code>table1</code> is now no longer tied to the <code>data.frame</code>, for printing purposes. It is still possible to coerce to a <code>data.frame</code> using <code>as.data.frame()</code>.</li>
+<li>Using the <code>var_names</code> argument is now deprecated. In its place, it is recommended to name the variable in place (e.g., <code>"General Health" = gen_health</code> will produce the label <code>General Health</code> in the table instead of the variable name of <code>gen_health</code>).</li>
+<li>Fixed issue of having an underscore in a variable name in <code>output = "latex2"</code>.</li>
+<li>Added new attaching message more like the tidyverse to provide information about function conflicts.</li>
+<li>Added <code><a href="../reference/mutate_rowmeans.html">mutate_rowmeans()</a></code> and <code><a href="../reference/mutate_rowsums.html">mutate_rowsums()</a></code> to more easily get the rowmeans/rowsums of a larger list of variables using the syntax that can be used within <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> (e.g., <code>var1:var30</code> for selecting <code>var1</code> through <code>var30</code> in the data frame).</li>
+</ul>
+</div>
     <div id="version-1-7-9" class="section level1">
 <h1 class="page-header">
 <a href="#version-1-7-9" class="anchor"></a>Version 1.7.9<small> 2018-06-01 </small>
@@ -146,7 +159,7 @@
 <p>Several new features were added:</p>
 <ol>
 <li>
-<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverse’s <code><a href="../reference/group_by.html">group_by()</a></code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
+<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverse’s <code>group_by()</code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
 <li>
 <code><a href="../reference/table1.html">table1()</a></code> also has a new ‘latex2’ output option. This is not dependent on <code><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">knitr::kable()</a></code> and is better suited for this situation. Should provide better latex tables than before.</li>
 <li>
@@ -271,6 +284,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#version-1-8-0">1.8.0</a></li>
         <li><a href="#version-1-7-9">1.7.9</a></li>
         <li><a href="#version-1-7-6">1.7.6</a></li>
         <li><a href="#version-1-7-3">1.7.3</a></li>

@@ -64,7 +64,7 @@ Can be used within the piping framework [see library(magrittr)]." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.8.0</span>
       </span>
     </div>
 
@@ -219,7 +219,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>float</th>
-      <td><p>the float applied to the table in Latex when output is <code>latex2</code></p></td>
+      <td><p>the float applied to the table in Latex when output is <code>latex2</code>, default is "ht".</p></td>
     </tr>
     <tr>
       <th>export</th>
@@ -273,7 +273,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
          <span class='kw'>splitby</span> <span class='kw'>=</span> ~<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>summarise</span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'>n</span>())
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='group_by.html'>group_by</a></span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>group_by</span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>)
 
 <span class='co'>## Adjust variables within function and assign name</span>

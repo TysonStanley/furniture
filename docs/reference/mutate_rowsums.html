@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Frequency Table — tableF • furniture</title>
+<title>Get Row Sums within a Pipe — mutate_rowsums • furniture</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Frequency Table — tableF" />
+<meta property="og:title" content="Get Row Sums within a Pipe — mutate_rowsums" />
 
-<meta property="og:description" content="Provides in-depth frequency counts and percentages." />
+<meta property="og:description" content="Does what rowSums() does can be used one its own without dplyr::mutate() 
+within a pipe." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,66 +111,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Frequency Table</h1>
+    <h1>Get Row Sums within a Pipe</h1>
     
-    <div class="hidden name"><code>tableF.Rd</code></div>
+    <div class="hidden name"><code>mutate_rowsums.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Provides in-depth frequency counts and percentages.</p>
+    <p>Does what <code>rowSums()</code> does can be used one its own without dplyr::mutate() 
+within a pipe.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tableF</span>(<span class='no'>.data</span>, <span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate_rowsums</span>(<span class='no'>data</span>, <span class='no'>new_var</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>the data frame containing the variable</p></td>
+      <th>data</th>
+      <td><p>the dataframe that contains the variables to get the row means from</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>the bare variable name (not quoted)</p></td>
+      <th>new_var</th>
+      <td><p>the name of the new variable for which you'll put the row means in quotes</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>the number of values shown int he table</p></td>
+      <th>...</th>
+      <td><p>the variables (unquoted) to be included in the row means</p></td>
     </tr>
     <tr>
-      <th>splitby</th>
-      <td><p>the stratifying variable</p></td>
+      <th>na.rm</th>
+      <td><p>should the missing values be ignored? default is FALSE</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list of class <code>tableF</code> containing the frequency table(s)</p>
+    <p>the row means included within the data.frame</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>furniture</span>)
+</div># NOT RUN {
+library(furniture)
+library(tidyverse)
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>), <span class='fl'>100</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
+data <- data.frame(
+  x = sample(c(1,2,3,4), 100, replace=TRUE),
+  y = rnorm(100),
+  z = rnorm(100)
 )
 
-<span class='co'>## Basic Use</span>
-<span class='fu'>tableF</span>(<span class='no'>data</span>, <span class='no'>x</span>)
-<span class='fu'>tableF</span>(<span class='no'>data</span>, <span class='no'>y</span>)
+data2 <- data %>%
+  mutate_rowsums("y_z_sums", y, z))
+data2 <- data %>%
+  mutate_rowsums("y_z_sums", y, z, na.rm=TRUE))
 
-<span class='co'>## Adjust the number of items shown</span>
-<span class='fu'>tableF</span>(<span class='no'>data</span>, <span class='no'>y</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-
-<span class='co'>## Add splitby</span>
-<span class='fu'>tableF</span>(<span class='no'>data</span>, <span class='no'>x</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='no'>y</span>)
-
-<span class='co'># }</span><div class='input'>
+# }
+<div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

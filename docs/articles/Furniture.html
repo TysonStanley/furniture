@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.12</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.8.0</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
     <div class="page-header toc-ignore">
       <h1>Furniture</h1>
             
-            <h4 class="date">2018-07-23</h4>
+            <h4 class="date">2018-09-18</h4>
       
       
       <div class="hidden name"><code>Furniture.Rmd</code></div>
@@ -86,7 +86,7 @@
 
     
     
-<p>This vignette is current as of <code>furniture</code> <code>v1.7.2</code>.</p>
+<p>This vignette is current as of <code>furniture</code> 1.8.0.</p>
 <div id="using-furniture" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-furniture" class="anchor"></a>Using <code>furniture</code>
@@ -124,14 +124,14 @@
 ##               Mean/Count (SD/%)
 ##               n = 900          
 ##  a                             
-##               1.4 (2.0)        
+##               1.6 (2.0)        
 ##  b                             
 ##               450.5 (260.0)    
-##  factor c                      
+##  factor(c)                     
 ##     control   470 (52.2%)      
 ##     treatment 430 (47.8%)      
 ##  d                             
-##               503.5 (291.2)    
+##               492.6 (286.9)    
 ## ────────────────────────────────</code></pre>
 <p>The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., <code>factor(c)</code>). This can be extended to making a whole new variable in the function as well.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
@@ -140,12 +140,12 @@
 ##                      Mean/Count (SD/%)
 ##                      n = 900          
 ##  a                                    
-##                      1.4 (2.0)        
+##                      1.6 (2.0)        
 ##  b                                    
 ##                      450.5 (260.0)    
 ##  d                                    
-##                      503.5 (291.2)    
-##  ifelse a   1  1  0                   
+##                      492.6 (286.9)    
+##  ifelse(a &gt; 1, 1, 0)                  
 ##                      0.6 (0.5)        
 ## ───────────────────────────────────────</code></pre>
 <p>This is just the beginning though. Two powerful things the function can do are shown below:</p>
@@ -157,37 +157,36 @@
 ##                                 factor(c) 
 ##                      control       treatment     P-Value
 ##                      n = 470       n = 430              
-##  a                                               0.483  
-##                      1.4 (1.8)     1.3 (2.1)            
+##  a                                               0.714  
+##                      1.5 (2.0)     1.6 (2.0)            
 ##  b                                               &lt;.001  
 ##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.639  
-##                      507.9 (294.5) 498.8 (287.8)        
-##  ifelse a   1  1  0                              0.283  
+##  d                                               0.14   
+##                      479.1 (288.7) 507.3 (284.6)        
+##  ifelse(a &gt; 1, 1, 0)                             0.482  
 ##                      0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────────────────</code></pre>
 <p>The <code>splitby = ~factor(c)</code> stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using <code>test=TRUE</code>.</p>
-<p>We can also use it intuitively within the pipe:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">       <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p>We can also use it intuitively within the pipe (for more about this, see the “Table 1” vignette):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">        <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## 
-## ───────────────────────────────────────
-##                      Mean/Count (SD/%)
-##                      n = 900          
-##  a                                    
-##                      1.4 (2.0)        
-##  b                                    
-##                      450.5 (260.0)    
-##  d                                    
-##                      503.5 (291.2)    
-##  ifelse a   1  1  0                   
-##                      0.6 (0.5)        
-## ───────────────────────────────────────</code></pre>
-<p>In this case, we used the <code><a href="../reference/group_by.html">group_by()</a></code> function from <code>dplyr</code> (within the <code>tidyverse</code>) and <code><a href="../reference/table1.html">table1()</a></code> knows to use that as the grouping variable in place of the <code>splitby</code> argument.</p>
+## ─────────────────────────────────────────────────────────
+##                                     c 
+##                      control       treatment     P-Value
+##                      n = 470       n = 430              
+##  a                                               0.714  
+##                      1.5 (2.0)     1.6 (2.0)            
+##  b                                               &lt;.001  
+##                      235.5 (135.8) 685.5 (124.3)        
+##  d                                               0.14   
+##                      479.1 (288.7) 507.3 (284.6)        
+##  ifelse(a &gt; 1, 1, 0)                             0.482  
+##                      0.6 (0.5)     0.6 (0.5)            
+## ─────────────────────────────────────────────────────────</code></pre>
+<p>In this case, we used the <code>group_by()</code> function from <code>dplyr</code> (within the <code>tidyverse</code>) and <code><a href="../reference/table1.html">table1()</a></code> knows to use that as the grouping variable in place of the <code>splitby</code> argument.</p>
 <p>Finally, you can polish it quite a bit using a few other options. For example, you can do the following:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw">factor</span>(c), </a>
@@ -199,10 +198,10 @@
 ##                     factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  A       1.4 (1.8)     1.3 (2.1)     0.483  
+##  A       1.5 (2.0)     1.6 (2.0)     0.714  
 ##  B       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D       507.9 (294.5) 498.8 (287.8) 0.639  
-##  New Var 0.6 (0.5)     0.6 (0.5)     0.283  
+##  D       479.1 (288.7) 507.3 (284.6) 0.14   
+##  New Var 0.6 (0.5)     0.6 (0.5)     0.482  
 ## ─────────────────────────────────────────────</code></pre>
 <p>Note that <code>var_names</code> can be used for more complex naming (e.g., with spaces, brackets) that otherwise cannot be used with data frames. Alternatively, for more simple naming, we can name them directly.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, <span class="dt">A =</span> a, <span class="dt">B =</span> b, <span class="dt">D =</span> d, <span class="dt">A2 =</span> <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
@@ -214,10 +213,10 @@
 ##                factor(c) 
 ##     control       treatment     P-Value
 ##     n = 470       n = 430              
-##  A  1.4 (1.8)     1.3 (2.1)     0.483  
+##  A  1.5 (2.0)     1.6 (2.0)     0.714  
 ##  B  235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D  507.9 (294.5) 498.8 (287.8) 0.639  
-##  A2 0.6 (0.5)     0.6 (0.5)     0.283  
+##  D  479.1 (288.7) 507.3 (284.6) 0.14   
+##  A2 0.6 (0.5)     0.6 (0.5)     0.482  
 ## ────────────────────────────────────────</code></pre>
 <p>You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw">ifelse</span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
@@ -230,13 +229,13 @@
 ##                     factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  A                                   0.483  
-##          1.4 (1.8)     1.3 (2.1)            
+##  A                                   0.714  
+##          1.5 (2.0)     1.6 (2.0)            
 ##  B                                   &lt;.001  
 ##          235.5 (135.8) 685.5 (124.3)        
-##  D                                   0.639  
-##          507.9 (294.5) 498.8 (287.8)        
-##  New Var                             0.283  
+##  D                                   0.14   
+##          479.1 (288.7) 507.3 (284.6)        
+##  New Var                             0.482  
 ##          0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────</code></pre>
 <p>The table can be exported directly to a folder in the working directory called “Table1”. Using <code>export</code>, we provide it with a string that will be the name of the CSV containing the formatted table.</p>
@@ -260,13 +259,13 @@
 ##   &amp; control &amp; treatment &amp; P-Value \\ 
 ##   &amp; n = 470 &amp; n = 430 &amp;   \\ 
 ##  \midrule
-## a &amp;   &amp;   &amp; 0.483\\ 
-## \hspace{6pt}   &amp; 1.4 (1.8) &amp; 1.3 (2.1) &amp; \\ 
+## a &amp;   &amp;   &amp; 0.714\\ 
+## \hspace{6pt}   &amp; 1.5 (2.0) &amp; 1.6 (2.0) &amp; \\ 
 ## b &amp;   &amp;   &amp; &lt;.001\\ 
 ## \hspace{6pt}   &amp; 235.5 (135.8) &amp; 685.5 (124.3) &amp; \\ 
-## d &amp;   &amp;   &amp; 0.639\\ 
-## \hspace{6pt}   &amp; 507.9 (294.5) &amp; 498.8 (287.8) &amp; \\ 
-## new var &amp;   &amp;   &amp; 0.283\\ 
+## d &amp;   &amp;   &amp; 0.14\\ 
+## \hspace{6pt}   &amp; 479.1 (288.7) &amp; 507.3 (284.6) &amp; \\ 
+## new var &amp;   &amp;   &amp; 0.482\\ 
 ## \hspace{6pt}   &amp; 0.6 (0.5) &amp; 0.6 (0.5) &amp; \\ 
 ## \bottomrule
 ## 
@@ -282,10 +281,10 @@
 ##                     factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  a       1.4 (1.8)     1.3 (2.1)     0.483  
+##  a       1.5 (2.0)     1.6 (2.0)     0.714  
 ##  b       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  d       507.9 (294.5) 498.8 (287.8) 0.639  
-##  new var 0.6 (0.5)     0.6 (0.5)     0.283  
+##  d       479.1 (288.7) 507.3 (284.6) 0.14   
+##  new var 0.6 (0.5)     0.6 (0.5)     0.482  
 ## ─────────────────────────────────────────────</code></pre>
 </div>
 <div id="table-c" class="section level2">
@@ -298,12 +297,12 @@
 <pre><code>## N = 900
 ## Note: pearson correlation (p-value).</code></pre>
 <pre><code>## 
-## ──────────────────────────────────────────
-##       [1]            [2]            [3]  
-##  [1]a 1.00                               
-##  [2]b -0.014 (0.665) 1.00                
-##  [3]d -0.037 (0.267) -0.004 (0.916) 1.00 
-## ──────────────────────────────────────────</code></pre>
+## ────────────────────────────────────────
+##       [1]           [2]           [3]  
+##  [1]a 1.00                             
+##  [2]b 0.014 (0.675) 1.00               
+##  [3]d 0.004 (0.916) 0.046 (0.165) 1.00 
+## ────────────────────────────────────────</code></pre>
 <p>All the adjustments that you can make in <code><a href="../reference/table1.html">table1()</a></code> can be done here as well. For example,</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/tableC.html">tableC</a></span>(df, </a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">       <span class="st">"A"</span> =<span class="st"> </span>a, <span class="st">"B"</span> =<span class="st"> </span>b, <span class="st">"D"</span> =<span class="st"> </span>d,</a>
@@ -343,7 +342,7 @@
 [2]B
 </td>
 <td>
--0.014 (0.665)
+0.014 (0.675)
 </td>
 <td>
 1.00
@@ -356,10 +355,10 @@
 [3]D
 </td>
 <td>
--0.037 (0.267)
+0.004 (0.916)
 </td>
 <td>
--0.004 (0.916)
+0.046 (0.165)
 </td>
 <td>
 1.00
@@ -376,111 +375,111 @@
 <pre><code>## 
 ## ────────────────────────────────────────────────
 ##  a                 Freq CumFreq Percent CumPerc
-##  -5.32635495112791 1    1       0.10%   0.10%  
-##  -5.11116498748691 1    2       0.10%   0.20%  
-##  -4.55987659972423 1    3       0.10%   0.30%  
-##  -4.19942299455294 1    4       0.10%   0.40%  
-##  -3.86683858108222 1    5       0.10%   0.50%  
-##  -3.70486783055744 1    6       0.10%   0.60%  
-##  -3.65623913034926 1    7       0.10%   0.70%  
-##  -3.46036030284614 1    8       0.10%   0.80%  
-##  -3.3832088577224  1    9       0.10%   0.90%  
-##  -3.35870229092444 1    10      0.10%   1.00%  
+##  -4.97051927284324 1    1       0.10%   0.10%  
+##  -4.30459221865233 1    2       0.10%   0.20%  
+##  -4.26160314361685 1    3       0.10%   0.30%  
+##  -4.00891839047001 1    4       0.10%   0.40%  
+##  -3.65492421565404 1    5       0.10%   0.50%  
+##  -3.63851591548459 1    6       0.10%   0.60%  
+##  -3.17406943201842 1    7       0.10%   0.70%  
+##  -3.16468058604751 1    8       0.10%   0.80%  
+##  -3.1245747947314  1    9       0.10%   0.90%  
+##  -3.07412293993654 1    10      0.10%   1.00%  
 ##  ...               ...  ...     ...     ...    
-##  5.98067445085474  1    990     0.10%   99.00% 
-##  6.0133685849993   1    991     0.10%   99.10% 
-##  6.36393683278702  1    992     0.10%   99.20% 
-##  6.48067359163374  1    993     0.10%   99.30% 
-##  6.8896842017695   1    994     0.10%   99.40% 
-##  6.94628117446147  1    995     0.10%   99.50% 
-##  7.05246674308113  1    996     0.10%   99.60% 
-##  7.13039063820991  1    997     0.10%   99.70% 
-##  7.69819614879604  1    998     0.10%   99.80% 
-##  7.72518997876399  1    999     0.10%   99.90% 
-##  8.11719176989841  1    1000    0.10%   100.00%
+##  5.98077809720644  1    990     0.10%   99.00% 
+##  5.99827072578779  1    991     0.10%   99.10% 
+##  6.06198812398466  1    992     0.10%   99.20% 
+##  6.08632178159868  1    993     0.10%   99.30% 
+##  6.22312567190549  1    994     0.10%   99.40% 
+##  6.27502624918262  1    995     0.10%   99.50% 
+##  6.48109396550309  1    996     0.10%   99.60% 
+##  6.72211099609216  1    997     0.10%   99.70% 
+##  7.06785645710427  1    998     0.10%   99.80% 
+##  7.35860881069804  1    999     0.10%   99.90% 
+##  8.22428039536663  1    1000    0.10%   100.00%
 ## ────────────────────────────────────────────────</code></pre>
-<p>Similarly to <code><a href="../reference/table1.html">table1()</a></code> we can use a <code>splitby</code> argument (or <code><a href="../reference/group_by.html">group_by()</a></code>).</p>
+<p>Similarly to <code><a href="../reference/table1.html">table1()</a></code> we can use a <code>splitby</code> argument (or <code>group_by()</code>).</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(df, d, <span class="dt">splitby =</span> c)</a></code></pre></div>
 <pre><code>## Variable:d</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────
 ##  control Freq CumFreq Percent CumPerc Valid CumValid
-##  3       2    2       0.40%   0.40%   0.43% 0.43%   
-##  4       1    3       0.20%   0.60%   0.21% 0.64%   
-##  5       2    5       0.40%   1.00%   0.43% 1.06%   
-##  6       2    7       0.40%   1.40%   0.43% 1.49%   
-##  9       1    8       0.20%   1.60%   0.21% 1.70%   
-##  12      1    9       0.20%   1.80%   0.21% 1.91%   
-##  15      1    10      0.20%   2.00%   0.21% 2.13%   
-##  18      1    11      0.20%   2.20%   0.21% 2.34%   
-##  20      1    12      0.20%   2.40%   0.21% 2.55%   
-##  22      1    13      0.20%   2.60%   0.21% 2.77%   
+##  3       1    1       0.20%   0.20%   0.21% 0.21%   
+##  4       1    2       0.20%   0.40%   0.21% 0.43%   
+##  5       1    3       0.20%   0.60%   0.21% 0.64%   
+##  6       1    4       0.20%   0.80%   0.21% 0.85%   
+##  11      1    5       0.20%   1.00%   0.21% 1.06%   
+##  14      1    6       0.20%   1.20%   0.21% 1.28%   
+##  15      1    7       0.20%   1.40%   0.21% 1.49%   
+##  20      1    8       0.20%   1.60%   0.21% 1.70%   
+##  21      1    9       0.20%   1.80%   0.21% 1.91%   
+##  22      1    10      0.20%   2.00%   0.21% 2.13%   
 ##  ...     ...  ...     ...     ...     ...   ...     
-##  980     2    459     0.40%   91.80%  0.43% 97.66%  
-##  981     1    460     0.20%   92.00%  0.21% 97.87%  
-##  987     1    461     0.20%   92.20%  0.21% 98.09%  
-##  988     1    462     0.20%   92.40%  0.21% 98.30%  
-##  993     1    463     0.20%   92.60%  0.21% 98.51%  
-##  994     1    464     0.20%   92.80%  0.21% 98.72%  
-##  996     1    465     0.20%   93.00%  0.21% 98.94%  
-##  997     2    467     0.40%   93.40%  0.43% 99.36%  
-##  999     2    469     0.40%   93.80%  0.43% 99.79%  
+##  980     1    460     0.20%   92.00%  0.21% 97.87%  
+##  981     1    461     0.20%   92.20%  0.21% 98.09%  
+##  982     1    462     0.20%   92.40%  0.21% 98.30%  
+##  985     1    463     0.20%   92.60%  0.21% 98.51%  
+##  987     1    464     0.20%   92.80%  0.21% 98.72%  
+##  989     2    466     0.40%   93.20%  0.43% 99.15%  
+##  993     1    467     0.20%   93.40%  0.21% 99.36%  
+##  994     1    468     0.20%   93.60%  0.21% 99.57%  
+##  999     1    469     0.20%   93.80%  0.21% 99.79%  
 ##  1000    1    470     0.20%   94.00%  0.21% 100.00% 
 ##  Missing 30   500     6.00%   100.00%               
 ## ─────────────────────────────────────────────────────
 ## 
 ## ───────────────────────────────────────────────────────
 ##  treatment Freq CumFreq Percent CumPerc Valid CumValid
-##  1         1    1       0.20%   0.20%   0.23% 0.23%   
-##  6         1    2       0.20%   0.40%   0.23% 0.47%   
-##  8         1    3       0.20%   0.60%   0.23% 0.70%   
-##  10        1    4       0.20%   0.80%   0.23% 0.93%   
-##  11        1    5       0.20%   1.00%   0.23% 1.16%   
-##  12        1    6       0.20%   1.20%   0.23% 1.40%   
-##  13        2    8       0.40%   1.60%   0.47% 1.86%   
-##  14        1    9       0.20%   1.80%   0.23% 2.09%   
-##  19        1    10      0.20%   2.00%   0.23% 2.33%   
-##  24        1    11      0.20%   2.20%   0.23% 2.56%   
+##  1         3    3       0.60%   0.60%   0.70% 0.70%   
+##  8         1    4       0.20%   0.80%   0.23% 0.93%   
+##  18        1    5       0.20%   1.00%   0.23% 1.16%   
+##  20        1    6       0.20%   1.20%   0.23% 1.40%   
+##  21        1    7       0.20%   1.40%   0.23% 1.63%   
+##  26        1    8       0.20%   1.60%   0.23% 1.86%   
+##  27        1    9       0.20%   1.80%   0.23% 2.09%   
+##  28        1    10      0.20%   2.00%   0.23% 2.33%   
+##  29        1    11      0.20%   2.20%   0.23% 2.56%   
+##  30        1    12      0.20%   2.40%   0.23% 2.79%   
 ##  ...       ...  ...     ...     ...     ...   ...     
-##  974       2    417     0.40%   83.40%  0.47% 96.98%  
-##  982       2    419     0.40%   83.80%  0.47% 97.44%  
-##  984       2    421     0.40%   84.20%  0.47% 97.91%  
-##  986       1    422     0.20%   84.40%  0.23% 98.14%  
-##  988       1    423     0.20%   84.60%  0.23% 98.37%  
-##  989       1    424     0.20%   84.80%  0.23% 98.60%  
-##  990       1    425     0.20%   85.00%  0.23% 98.84%  
-##  995       2    427     0.40%   85.40%  0.47% 99.30%  
-##  996       2    429     0.40%   85.80%  0.47% 99.77%  
-##  998       1    430     0.20%   86.00%  0.23% 100.00% 
+##  974       1    419     0.20%   83.80%  0.23% 97.44%  
+##  975       1    420     0.20%   84.00%  0.23% 97.67%  
+##  980       1    421     0.20%   84.20%  0.23% 97.91%  
+##  985       2    423     0.40%   84.60%  0.47% 98.37%  
+##  986       1    424     0.20%   84.80%  0.23% 98.60%  
+##  987       1    425     0.20%   85.00%  0.23% 98.84%  
+##  993       1    426     0.20%   85.20%  0.23% 99.07%  
+##  998       1    427     0.20%   85.40%  0.23% 99.30%  
+##  999       1    428     0.20%   85.60%  0.23% 99.53%  
+##  1000      2    430     0.40%   86.00%  0.47% 100.00% 
 ##  Missing   70   500     14.00%  100.00%               
 ## ───────────────────────────────────────────────────────</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(c) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(d)</a></code></pre></div>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────
 ##  d       Freq CumFreq Percent CumPerc Valid CumValid
-##  1       1    1       0.10%   0.10%   0.11% 0.11%   
-##  3       2    3       0.20%   0.30%   0.22% 0.33%   
-##  4       1    4       0.10%   0.40%   0.11% 0.44%   
-##  5       2    6       0.20%   0.60%   0.22% 0.67%   
-##  6       3    9       0.30%   0.90%   0.33% 1.00%   
-##  8       1    10      0.10%   1.00%   0.11% 1.11%   
-##  9       1    11      0.10%   1.10%   0.11% 1.22%   
-##  10      1    12      0.10%   1.20%   0.11% 1.33%   
-##  11      1    13      0.10%   1.30%   0.11% 1.44%   
-##  12      2    15      0.20%   1.50%   0.22% 1.67%   
+##  1       3    3       0.30%   0.30%   0.33% 0.33%   
+##  3       1    4       0.10%   0.40%   0.11% 0.44%   
+##  4       1    5       0.10%   0.50%   0.11% 0.56%   
+##  5       1    6       0.10%   0.60%   0.11% 0.67%   
+##  6       1    7       0.10%   0.70%   0.11% 0.78%   
+##  8       1    8       0.10%   0.80%   0.11% 0.89%   
+##  11      1    9       0.10%   0.90%   0.11% 1.00%   
+##  14      1    10      0.10%   1.00%   0.11% 1.11%   
+##  15      1    11      0.10%   1.10%   0.11% 1.22%   
+##  18      1    12      0.10%   1.20%   0.11% 1.33%   
 ##  ...     ...  ...     ...     ...     ...   ...     
-##  989     1    886     0.10%   88.60%  0.11% 98.44%  
-##  990     1    887     0.10%   88.70%  0.11% 98.56%  
-##  993     1    888     0.10%   88.80%  0.11% 98.67%  
-##  994     1    889     0.10%   88.90%  0.11% 98.78%  
-##  995     2    891     0.20%   89.10%  0.22% 99.00%  
-##  996     3    894     0.30%   89.40%  0.33% 99.33%  
-##  997     2    896     0.20%   89.60%  0.22% 99.56%  
-##  998     1    897     0.10%   89.70%  0.11% 99.67%  
-##  999     2    899     0.20%   89.90%  0.22% 99.89%  
-##  1000    1    900     0.10%   90.00%  0.11% 100.00% 
+##  982     1    883     0.10%   88.30%  0.11% 98.11%  
+##  985     3    886     0.30%   88.60%  0.33% 98.44%  
+##  986     1    887     0.10%   88.70%  0.11% 98.56%  
+##  987     2    889     0.20%   88.90%  0.22% 98.78%  
+##  989     2    891     0.20%   89.10%  0.22% 99.00%  
+##  993     2    893     0.20%   89.30%  0.22% 99.22%  
+##  994     1    894     0.10%   89.40%  0.11% 99.33%  
+##  998     1    895     0.10%   89.50%  0.11% 99.44%  
+##  999     2    897     0.20%   89.70%  0.22% 99.67%  
+##  1000    3    900     0.30%   90.00%  0.33% 100.00% 
 ##  Missing 100  1000    10.00%  100.00%               
 ## ─────────────────────────────────────────────────────</code></pre>
 </div>
@@ -492,15 +491,15 @@
 <a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/tableX.html">tableX</a></span>(c, <span class="kw">ifelse</span>(d <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>##            ifelse(d &gt; 500, 1, 0)
 ## c           0   1   Missing Total
-##   control   232 238 30      500  
-##   treatment 225 205 70      500  
-##   Total     457 443 100     1000</code></pre>
+##   control   248 222 30      500  
+##   treatment 214 216 70      500  
+##   Total     462 438 100     1000</code></pre>
 <p>By default, it provides the total counts for the rows and columns with flexibility as to what is displayed and where.</p>
 </div>
 <div id="conclusion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conclusion" class="anchor"></a>Conclusion</h2>
-<p>The three functions: <code>table1</code>, <code>tableC</code>, <code>tableF</code>, and <code>washer</code> add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.</p>
+<p>The four functions: <code><a href="../reference/table1.html">table1()</a></code>, <code><a href="../reference/tableC.html">tableC()</a></code>, <code><a href="../reference/tableF.html">tableF()</a></code>, and <code><a href="../reference/washer.html">washer()</a></code> add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.</p>
 </div>
   </div>
 
