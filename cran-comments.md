@@ -7,5 +7,7 @@
 There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream Dependencies
-Currently, there are no downstream dependencies relating to this package.
+Currently, there is one downstream dependency for this package (`MarginalMediation`). 
+This package has been checked with no errors, warnings, or notes resulting from the changes
+to the `furniture` package.
 
