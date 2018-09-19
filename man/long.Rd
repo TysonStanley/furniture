@@ -4,8 +4,8 @@
 \alias{long}
 \title{Wide to Long Data Reshaping}
 \usage{
-long(data, ..., v.names = NULL, id = NULL, timevar = NULL, times = NULL,
-  sep = "")
+long(data, ..., v.names = NULL, id = NULL, timevar = NULL,
+  times = NULL, sep = "")
 }
 \arguments{
 \item{data}{the data.frame containing the wide format data}
