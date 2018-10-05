@@ -9,7 +9,6 @@
 #' @param na.rm logical; whether missing values should be removed
 #' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' 
-#' @import stats
 #' 
 #' 
 #' @examples 

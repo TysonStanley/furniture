@@ -1,3 +1,7 @@
+# Version 1.8.1
+
+A minor update to fix an error that occurred when only a single variable was being summarized.
+
 # Version 1.8.0
 
 * When piping with `table1()`, it no longer returns the data set. This feature caused too many unexpected issues.
@@ -91,7 +95,7 @@ Enjoy!
 Three notable changes:
 
 1. A new function--`tableM`--has been added to the package. It produces a table much like `table1` but analyzes a variable with missingness.
-2. `table1` (and its related functons such as `simple_table1` and `tableM`) now has better formatting and has an additional option `output_type = "text2"` which provides lines to separate the header from the rest of the table.
+2. `table1` (and its related functions such as `simple_table1` and `tableM`) now has better formatting and has an additional option `output_type = "text2"` which provides lines to separate the header from the rest of the table.
 3. `table1` can give percentages based on the row using `row_wise = TRUE`. The default is giving percentages by column.
 
 Also, a bug fix:

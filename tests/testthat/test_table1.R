@@ -144,5 +144,19 @@ test_that("table1 produces table1", {
                          output = "text2",
                          header_labels = c(" ", "P-Val"),
                          second = c("a", "c")), "table1")
+  ## Single Variable
+  expect_s3_class(table1(df, x,
+                         splitby=~b, 
+                         test=FALSE, 
+                         output = "text2",
+                         header_labels = c(" ", "P-Val"),
+                         second = c("a", "c")), "table1")
+  expect_s3_class(df %>%
+                    group_by(b) %>%
+                    table1(x,
+                         test=FALSE, 
+                         output = "text2",
+                         header_labels = c(" ", "P-Val"),
+                         second = c("a", "c")), "table1")
 })
 

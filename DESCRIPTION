@@ -1,8 +1,8 @@
 Package: furniture
 Type: Package
 Title: Tables for Quantitative Scientists
-Version: 1.8.0
-Date: 2018-09-18
+Version: 1.8.1
+Date: 2018-10-04
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett@aggiemail.usu.edu", 
@@ -26,8 +26,10 @@ Imports:
     crayon,
     dplyr,
     rstudioapi,
-    tibble
+    tibble,
+    forcats
 Suggests:
+    devtools,
     tidyverse,
     rmarkdown,
     testthat,

@@ -12,10 +12,17 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(furniture)
 ```
 
 # Making Table 1
+
+
+```{r, eval = FALSE}
+library(furniture)
+```
+```{r, echo = FALSE}
+devtools::load_all()
+```
 
 This vignette demonstrates the main function of the `furniture` package--`table1()`. This vignette is current as of `furniture` `r packageVersion("furniture")`.
 

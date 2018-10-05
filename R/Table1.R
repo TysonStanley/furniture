@@ -75,7 +75,7 @@
 #' }        
 #'
 #' @export
-#' @import stats
+#' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
 #' @importFrom dplyr group_by
@@ -108,9 +108,10 @@ table1 = function(.data,
 
 
 #' @export
-#' @import stats
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
+#' @importFrom forcats fct_drop
+#' @importFrom dplyr filter
 table1.data.frame = function(.data, 
                   ..., 
                   splitby = NULL, 
@@ -198,7 +199,7 @@ table1.data.frame = function(.data,
     
     ### Splitby Variable (adds the variable to d as "split")
     if (!is.null(splitby))
-    splitby = substitute(splitby)
+      splitby = substitute(splitby)
     if (class(substitute(splitby)) == "name"){
       splitby_ = eval(substitute(splitby), .data)
     } else if (class(substitute(splitby)) == "call"){
@@ -216,10 +217,10 @@ table1.data.frame = function(.data,
       splitting = paste(splitby)[[length(paste(splitby))]]
     }
     ## Remove any redundant grouping vars
-    vars <- length(paste(substitute(list(...))))
-    if (vars == 1){
-      d <- d[, -which(names(d) %in% splitting)]
+    if (length(which(names(d) %in% splitby_)) != 0){
+      d <- d[, -which(names(d) %in% splitby_)]
     }
+
   } else {
     
     ## Working around different versions of dplyr with group_by()
@@ -234,7 +235,7 @@ table1.data.frame = function(.data,
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
     if (length(groups) == 1){
-      d$split = droplevels(as.factor(.data[[groups]]))
+      d$split = factor(.data[[groups]])
     } else {
       interacts = interaction(.data[groups], sep = "_")
       d$split = factor(interacts)
@@ -246,20 +247,19 @@ table1.data.frame = function(.data,
       splitting = paste(groups, collapse = ", ")
     }
     ## Remove any redundant grouping vars
-    vars <- length(paste(substitute(list(...))))
-    if (vars == 1){
+    if (length(which(names(d) %in% groups)) != 0){
       d <- d[, -which(names(d) %in% groups)]
     }
   }
 
-
+  
   ## Remove missing values?
   if (isTRUE(na.rm)) {
     d <- d[complete.cases(d), ]
     if (nrow(d) == 0)
       stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
   }
-    
+
   
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
@@ -272,7 +272,7 @@ table1.data.frame = function(.data,
   ## Observations and Header Labels ##
   ####################################
   N = .obs_header(d, f1, format_output, test, output, header_labels)
-  
+
   ######################
   ## Summarizing Data ##
   ######################
@@ -360,7 +360,7 @@ print.table1 <- function(x, ...){
     x5 = x3[, 1]
     x4[] = sapply(x4, as.character)
     x5[] = sapply(x5, as.character)
-    for (i in 1:dim(x4)[2]){
+    for (i in 1:ncol(x4)){
       max_col_width2[[i]] = max(sapply(x4[[i]], nchar, type="width"))
     }
     max_col_width3 = max(sapply(x5, nchar, type="width"))

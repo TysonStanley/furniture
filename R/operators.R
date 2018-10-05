@@ -16,6 +16,7 @@
 #' 
 #' factor(x) %xt% factor(b)
 #' 
+#' @importFrom stats chisq.test
 #' @export
 `%xt%` <- function(lhs, rhs){
   warning("`%xt%` is now deprecated. Please use tableX() or tableF() instead.")
@@ -31,7 +32,7 @@
     stop("Both vectors need to be factors.")
   
   .tab = table("Left"=.x, "Right"=.y)
-  .ctest = chisq.test(.tab)
+  .ctest = stats::chisq.test(.tab)
   return(list("CrossTab"=.tab, "Test"=.ctest))
   
 }

@@ -10,7 +10,6 @@
 #' @return The data.frame with the selected variables
 #'
 #' @export
-#' @import stats
 selecting <- function(d_, ...) {
   listed <- eval(substitute(alist(...)))
   
@@ -18,31 +17,30 @@ selecting <- function(d_, ...) {
   if (length(listed) == 0)
     return(d_)
   ## If input are indices
-  if (length(listed) == 1 & 
-      any(grepl("^c\\(.*\\)$", listed) & 
-          length(listed[[1]]) != length(d_[[1]])))
+  if (length(listed) == 1 & any(grepl("^c\\(.*\\)$", listed) & length(listed[[1]]) != length(d_[[1]]))){
     return(d_[, eval(listed[[1]])])
-  
-  ## Data Frame
-  df <- lapply(seq_along(listed), 
-               function(i) eval(listed[[i]], d_))
-  
-  ## data frame with original row names
-  df <- data.frame(df)
+  } else if (length(listed) >= 1){
+    ## Data Frame
+    df <- lapply(seq_along(listed), 
+                 function(i) eval(listed[[i]], d_))
+    ## data frame with original row names
+    df <- data.frame(df)
+  } else {
+    stop("Something went wrong with the variables listed", call. = FALSE)
+  }
   
   ## Variable Names
   names1 <- names(listed)
-  names(df) <- lapply(seq_along(listed), function(x) to_name(listed, names1, x))
+  names(df) <- sapply(seq_along(listed), function(x) to_name(listed, names1, x))
   
   ## Remove any empty rows and Add attribute for splitby to work
   empty_rows <- which(apply(df, 1, function(x) all(is.na(x))))
   if (length(empty_rows) == 0){
     attr(df, "empty_rows") <- NULL
   } else {
-    df <- df[-empty_rows, ]
     attr(df, "empty_rows") <- empty_rows
   }
-  
+
   ## Returned data.frame
   df
 }
@@ -59,6 +57,8 @@ to_name <- function(listed, names1, i) {
     }
   }
 }
+
+
 
 
 
