@@ -5,8 +5,7 @@
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-
-furniture: 1.8.0 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+furniture: 1.8.2 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 ===========================================================================================================
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`), exploratory data analysis and reporting (e.g., `table1()`, `tableC()`, `tableF()`). It currently contains eight main functions:
