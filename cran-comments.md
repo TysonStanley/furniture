@@ -12,5 +12,5 @@ This package has been checked with no errors, warnings, or notes resulting from 
 to the `furniture` package.
 
 ## Resubmission
-An error that impacted a few edge cases was found and fixed. A unit test was included to catch these
-edge cases.
+An error that impacted a few edge cases was found and fixed. An additional unit 
+test was included to catch these edge cases.

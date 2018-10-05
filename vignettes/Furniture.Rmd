@@ -18,12 +18,10 @@ This vignette is current as of `furniture` `r packageVersion("furniture")`.
 
 ## Using `furniture`
 
-```{r, eval = FALSE}
+```{r}
 library(furniture)
 ```
-```{r, echo = FALSE}
-devtools::load_all()
-```
+
 
 We will first make a ficticious data set:
 ```{r data}
