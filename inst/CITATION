@@ -1,0 +1,7 @@
+bibentry(bibtype = "Article",
+         title = "Furniture for Quantitative Scientists",
+         author = c(person("Tyson S.", "Barrett"),
+                    person("Emily", "Brignone")),
+         year = "2017",
+         journal = "R Journal",
+         volume = "9")
