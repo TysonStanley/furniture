@@ -139,15 +139,15 @@ table1.data.frame = function(.data,
   ###################
   ## Preprocessing ##
   ###################
-  .call = match.call()
+  .call <- match.call()
   ## Test output
-  format_output = type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
+  format_output <- type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
                                           "full", "f",
                                           "stars", "s"))]
   ## Table type
-  cond_simp = .type_constructor(type)
-  condense  = cond_simp[[1]]
-  simple    = cond_simp[[2]]
+  cond_simp <- .type_constructor(type)
+  condense  <- cond_simp[[1]]
+  simple    <- cond_simp[[2]]
   
   ## checks
   .header_labels(header_labels, format_output)
@@ -155,7 +155,7 @@ table1.data.frame = function(.data,
   ## Deprecation
   if (!is.null(NAkeep)){
     warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
-    na.rm = !NAkeep
+    na.rm <- !NAkeep
   }
   ## Not yet deprecated
   #if (!is.null(splitby))
@@ -163,23 +163,23 @@ table1.data.frame = function(.data,
   
   ## Missing values in categorical variables
   if (isTRUE(na.rm)){ 
-    NAkeep = "no" 
+    NAkeep <- "no" 
   } else {
-    NAkeep = "always"
+    NAkeep <- "always"
   }
   ## Only pvalues are shown in simple or condensed versions
   if (simple | condense){
-    format_output = "pvalue"
+    format_output <- "pvalue"
   }
   ## Formatting default functions
   if (format_number){
-    f1 = ","
+    f1 <- ","
   } else {
-    f1 = ""
+    f1 <- ""
   }
   ## Functions
-  num_fun  = .summary_functions1(FUN, format_number, digits)
-  num_fun2 = .summary_functions2(FUN2, format_number, digits)
+  num_fun  <- .summary_functions1(FUN, format_number, digits)
+  num_fun2 <- .summary_functions2(FUN2, format_number, digits)
 
   ########################
   ## Variable Selecting ##
@@ -199,22 +199,22 @@ table1.data.frame = function(.data,
     
     ### Splitby Variable (adds the variable to d as "split")
     if (!is.null(splitby))
-      splitby = substitute(splitby)
+      splitby <- substitute(splitby)
     if (class(substitute(splitby)) == "name"){
-      splitby_ = eval(substitute(splitby), .data)
+      splitby_ <- eval(substitute(splitby), .data)
     } else if (class(substitute(splitby)) == "call"){
-      splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
+      splitby_ <- model.frame(splitby, .data, na.action = "na.pass")[[1]]
     } else if (class(substitute(splitby)) == "character"){
-      splitby_ = .data[[splitby]]
+      splitby_ <- .data[[splitby]]
     } else if(is.null(splitby)){
-      splitby_ = factor(1)
+      splitby_ <- factor(1)
     }
     d$split = factor(splitby_)
     ## For print method
     if (is.null(splitby)){
-      splitting = NULL
+      splitting <- NULL
     } else {
-      splitting = paste(splitby)[[length(paste(splitby))]]
+      splitting <- paste(splitby)[[length(paste(splitby))]]
     }
     ## Remove any redundant grouping vars
     if (length(which(names(d) %in% splitby_)) != 0){
@@ -235,16 +235,16 @@ table1.data.frame = function(.data,
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
     if (length(groups) == 1){
-      d$split = factor(.data[[groups]])
+      d$split <- factor(.data[[groups]])
     } else {
-      interacts = interaction(.data[groups], sep = "_")
-      d$split = factor(interacts)
+      interacts <- interaction(.data[groups], sep = "_")
+      d$split <- factor(interacts)
     }
     ## For print method
     if (is.null(groups)){
-      splitting = NULL
+      splitting <- NULL
     } else{
-      splitting = paste(groups, collapse = ", ")
+      splitting <- paste(groups, collapse = ", ")
     }
     ## Remove any redundant grouping vars
     if (length(which(names(d) %in% groups)) != 0){
@@ -263,52 +263,52 @@ table1.data.frame = function(.data,
   
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
-    test = TRUE
+    test <- TRUE
   } else {
-    test = FALSE
+    test <- FALSE
   }
   
   ####################################
   ## Observations and Header Labels ##
   ####################################
-  N = .obs_header(d, f1, format_output, test, output, header_labels)
+  N <- .obs_header(d, f1, format_output, test, output, header_labels)
 
   ######################
   ## Summarizing Data ##
   ######################
-  summed = table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
-  tab    = summed[[1]]
-  tab2   = summed[[2]]
-  tests  = summed[[3]]
-  nams   = summed[[4]]
+  summed <- table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep)
+  tab    <- summed[[1]]
+  tab2   <- summed[[2]]
+  tests  <- summed[[3]]
+  nams   <- summed[[4]]
   
   ######################
   ## Formatting Table ## 
   ######################
   ## Not Condensed or Condensed
   if (!condense){
-    tabZ = table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                    format_output, second, nams, simple, output, f1)
+    tabZ <- table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                     format_output, second, nams, simple, output, f1)
   } else if (condense){
-    tabZ = table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                  format_output, second, nams, simple, output, f1)
+    tabZ <- table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                   format_output, second, nams, simple, output, f1)
   }
   ## Combine Aspects of the table
-  names(tabZ) = names(N)
-  tabZ = rbind(N, tabZ)
-  rem  = ifelse(is.na(tabZ[,2]), FALSE, TRUE)
-  final = tabZ[rem,]
-  final$` ` = as.character(final$` `)
+  names(tabZ) <- names(N)
+  tabZ <- rbind(N, tabZ)
+  rem <- ifelse(is.na(tabZ[,2]), FALSE, TRUE)
+  final <- tabZ[rem,]
+  final$` ` <- as.character(final$` `)
   
   ##################
   ## FINAL OUTPUT ##
   ##################
   if (length(levels(d$split)) == 1){
-    names(final)[2] = "Mean/Count (SD/%)"
+    names(final)[2] <- "Mean/Count (SD/%)"
   }
-  final_l = list("Table1"  = final)
-  attr(final_l, "splitby") = splitting
-  attr(final_l, "output") = output
+  final_l <- list("Table1" = final)
+  attr(final_l, "splitby") <- splitting
+  attr(final_l, "output") <- output
   
   ## Export Option
   if (!is.null(export)){
@@ -320,21 +320,21 @@ table1.data.frame = function(.data,
   
   ## regular text output
   if (grepl("text", output)){ 
-    class(final_l) = c("table1")
+    class(final_l) <- c("table1")
     cat("\n", caption)
     return(final_l)
 
   ## Custom Latex Output
   } else if (output %in% "latex2"){
     if (is.null(align)){
-      l1 = dim(final)[2]
-      align = c("l", rep("c", (l1-1)))
+      l1 <- dim(final)[2]
+      align <- c("l", rep("c", (l1-1)))
     }
-    tab = to_latex(final, caption, align, len = length(levels(d$split)), splitting, float, booktabs, label)
+    tab <- to_latex(final, caption, align, len = length(levels(d$split)), splitting, float, booktabs, label)
     tab
   ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
-    kab = knitr::kable(final, format=output,
+    kab <- knitr::kable(final, format=output,
                  booktabs = booktabs,
                  caption = caption,
                  align = align,
@@ -351,31 +351,31 @@ table1.data.frame = function(.data,
 print.table1 <- function(x, ...){
   max_col_width = max_col_width2 = list()
   ## Extract data set
-  x2 = as.data.frame(x[[1]])
+  x2 <- as.data.frame(x[[1]])
   
   ## Splitby Name and Location
   if (!is.null(attr(x, "splitby"))){
-    x3 = as.data.frame(x[[1]])
-    x4 = x3[,-1]
-    x5 = x3[, 1]
-    x4[] = sapply(x4, as.character)
-    x5[] = sapply(x5, as.character)
+    x3 <- as.data.frame(x[[1]])
+    x4 <- x3[,-1]
+    x5 <- x3[, 1]
+    x4[] <- sapply(x4, as.character)
+    x5[] <- sapply(x5, as.character)
     for (i in 1:ncol(x4)){
-      max_col_width2[[i]] = max(sapply(x4[[i]], nchar, type="width"))
+      max_col_width2[[i]] <- max(sapply(x4[[i]], nchar, type="width"))
     }
-    max_col_width3 = max(sapply(x5, nchar, type="width"))
-    var_width = sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 
+    max_col_width3 <- max(sapply(x5, nchar, type="width"))
+    var_width <- sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 
       dim(x4)[2] - 1
-    first_width = sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
+    first_width <- sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
   }
 
-  x2[] = sapply(x2, as.character)
+  x2[] <- sapply(x2, as.character)
 
   ## Get width of table for lines
   for (i in 1:dim(x2)[2]){
     max_col_width[[i]] = max(sapply(x2[[i]], nchar, type="width"))
   }
-  tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
+  tot_width <- sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
     dim(x2)[2] - 1
   
   ## Print top border
@@ -396,7 +396,7 @@ print.table1 <- function(x, ...){
   if (!is.null(attr(x, "output"))){
     if (attr(x, "output") == "text2"){
       ## Special "text2" formatting
-      x4 = rbind(x[[1]][1,],
+      x4 <- rbind(x[[1]][1,],
                  sapply(max_col_width, function(x) paste0(rep("-", times = x), collapse = "")),
                  x[[1]][2:dim(x[[1]])[1], ])
       print(x4, ..., row.names = FALSE, right = FALSE)

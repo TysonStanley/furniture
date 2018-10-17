@@ -19,30 +19,30 @@
 #' washer(x, is.na, is.nan, 1:3, value=0)
 #'
 #' @export
-washer = function(x, ..., value=NA){
+washer <- function(x, ..., value=NA){
   
-  fct = is.factor(x)
+  fct <- is.factor(x)
   
   for (i in seq_along(c(...))){
     if (!is.function(c(...)[[i]])){
-      j = c(...)[i]
+      j <- c(...)[i]
       if (sum(x == j, na.rm=TRUE) > 0 & fct){
-        x = as.character(x)
+        x <- as.character(x)
       }
     } 
   }
   
   for (i in seq_along(c(...))){
     if (is.function(c(...)[[i]])){
-      x[c(...)[[i]](x)] = value
+      x[c(...)[[i]](x)] <- value
     } else {
-      j = c(...)[i]
-      x[x == j] = value
+      j <-c(...)[i]
+      x[x == j] <- value
     }
   }
   
   if (fct){
-    x = as.factor(x)
+    x <- as.factor(x)
   }
   
   x

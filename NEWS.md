@@ -1,6 +1,6 @@
-# Version 1.8.1
+# Version 1.8.3
 
-A minor update to fix an error that occurred when only a single variable was being summarized.
+A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was also adjusted.
 
 # Version 1.8.0
 

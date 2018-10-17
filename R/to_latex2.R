@@ -18,23 +18,23 @@
 
 to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
-    splitby = "Total"
+    splitby <- "Total"
   } else if (!is.null(cor_type)){
-    cor_type2 = paste(toupper(substr(cor_type, 1, 1)), substring(cor_type, 2),
-                      sep = "")
-    splitby = paste(cor_type2, "Correlations")
+    cor_type2 <- paste(toupper(substr(cor_type, 1, 1)), substring(cor_type, 2),
+                       sep = "")
+    splitby <- paste(cor_type2, "Correlations")
   } else if (is.null(cor_type) & !is.null(splitby)) {
-    splitby = gsub("`", "", paste(splitby))
-    splitby = gsub("%", "\\%", splitby)
+    splitby <- gsub("`", "", paste(splitby))
+    splitby <- gsub("%", "\\%", splitby)
   }
   
   ## Fix problematic latex characters
-  tab[] = lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
-  tab[] = lapply(tab, function(x) gsub("NA", "\\emph{missing}", x, fixed = TRUE))
-  tab[] = lapply(tab, function(x) gsub("_", "\\_", x, fixed = TRUE))
+  tab[] <- lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
+  tab[] <- lapply(tab, function(x) gsub("NA", "\\emph{missing}", x, fixed = TRUE))
+  tab[] <- lapply(tab, function(x) gsub("_", "\\_", x, fixed = TRUE))
   
   ## Produce latex table
-  out = capture.output({
+  out <- capture.output({
     cat("\\begin{table}[", float, "] \n")
     cat("\\centering \n")
     cat("\\caption{", caption, "}", "\\label{", ifelse(is.null(label), "", label), "}\n", sep = "")
@@ -75,7 +75,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
       "\\end{tabular}", 
       "\\end{table}\n"), collapse="\n"))
   })
-  class(out) = c("latex2", "character", "table1")
+  class(out) <- c("latex2", "character", "table1")
   out
 }
 

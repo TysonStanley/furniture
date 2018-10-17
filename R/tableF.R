@@ -34,10 +34,12 @@
 #'
 #' @export
 
-tableF = function(.data, x, n = 20, splitby = NULL){
-  .call = match.call()
-  x = eval(substitute(x), .data)
-  if (is.null(attr(.data, "vars"))){
+tableF <- function(.data, x, n = 20, splitby = NULL){
+  .call <- match.call()
+  x <- eval(substitute(x), .data)
+  
+  if (is.null(attr(.data, "vars")) && is.null(attr(.data, "groups"))){
+    
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
     if (class(substitute(splitby)) == "name"){
@@ -50,85 +52,100 @@ tableF = function(.data, x, n = 20, splitby = NULL){
       splitby_ = factor(1, labels = paste(.call[3]))
     }
   } else {
-    message("Using a grouped data frame: default using the grouping variables and not splitby")
-    if (length(attr(.data, "vars")) == 1){
-      splitby_ = droplevels(as.factor(.data[attr(.data, "vars")][[1]]))
+    ## Working around different versions of dplyr with group_by()
+    ## Older (0.7.6) uses "vars": produces the grouping name
+    ## Developmental one (0.7.9.9000) uses "groups" but it produces a nested table
+    groups <- attr(.data, "vars")
+    if (is.null(groups))
+      groups <- attr(.data, "groups") %>% names(.)
+    if (groups[length(groups)] == ".rows")
+      groups <- groups[-length(groups)]
+    
+    message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
+    
+    if (length(groups) == 1){
+      splitby_ <- factor(.data[[groups]])
     } else {
-      interacts = interaction(.data[attr(.data, "vars")], sep = "_")
-      splitby_ = interacts
+      interacts <- interaction(.data[groups], sep = "_")
+      splitby_ <- factor(interacts)
     }
   }
   
   if(any(is.na(splitby_))){
-    splitby_ = factor(ifelse(is.na(splitby_),"Missing", splitby_))
+    splitby_ <- factor(ifelse(is.na(splitby_),"Missing", splitby_))
   }
   
   ## Error catch for all missing
   if(all(is.na(x))){
-    warn = paste0("All values for ",  .call[3], " are missing.")
+    warn <- paste0("All values for ",  .call[3], " are missing.")
     warning(warn)
-    return("NA")
+    return(NULL)
   }
   
-  splitby_ = factor(splitby_)
+  splitby_ <- factor(splitby_)
   
-  final_list = list()
+  final_list <- list()
   for(i in levels(splitby_)){
-    x1=x[splitby_==i & !is.na(splitby_)]
+    
+    x1 <- x[splitby_ == i & !is.na(splitby_)]
+    
     ## Summary statistics
-    Freq     = table(x1, useNA="ifany")
-    CumFreq  = round(cumsum(table(x1, useNA="ifany")))
-    Percent  = suppressWarnings(formatC(100*(prop.table(table(x1, useNA="ifany"))), 
-                                        format = "f", digits = 2, big.mark = ","))
-    CumPerc  = suppressWarnings(formatC(100*cumsum(prop.table(table(x1, useNA="ifany"))), 
-                                        format = "f", digits = 2, big.mark = ","))
-    Valid    = suppressWarnings(formatC(100*(prop.table(table(x1, useNA="no"))), 
-                                        format = "f", digits = 2, big.mark = ","))
-    CumValid = suppressWarnings(formatC(100*cumsum(prop.table(table(x1, useNA="no"))), 
-                                        format = "f", digits = 2, big.mark = ","))
+    Freq     <- table(x1, useNA="ifany")
+    CumFreq  <- round(cumsum(table(x1, useNA="ifany")))
+    Percent  <- suppressWarnings(formatC(100*(prop.table(table(x1, useNA="ifany"))), 
+                                         format = "f", digits = 2, big.mark = ","))
+    CumPerc  <- suppressWarnings(formatC(100*cumsum(prop.table(table(x1, useNA="ifany"))), 
+                                         format = "f", digits = 2, big.mark = ","))
+    Valid    <- suppressWarnings(formatC(100*(prop.table(table(x1, useNA="no"))), 
+                                         format = "f", digits = 2, big.mark = ","))
+    CumValid <- suppressWarnings(formatC(100*cumsum(prop.table(table(x1, useNA="no"))), 
+                                         format = "f", digits = 2, big.mark = ","))
     
     ## If there is missing, add a blank line below the valids
     if (any(is.na(x1))){
-      names(Freq)[length(names(Freq))] = "Missing"
-      names(CumFreq)[length(names(CumFreq))] = "Missing"
-      final = data.frame("Var"     = names(Freq),
+      names(Freq)[length(names(Freq))] <- "Missing"
+      names(CumFreq)[length(names(CumFreq))] <- "Missing"
+      final <- data.frame("Var"     = names(Freq),
                          "Freq"    = as.character(Freq), 
                          "CumFreq" = as.character(CumFreq),  
                          "Percent" = paste0(Percent, "%"), 
                          "CumPerc" = paste0(CumPerc, "%"),
                          "Valid"   = c(paste0(Valid, "%"), ""),
                          "CumValid" = c(paste0(CumValid, "%"), ""))
-      names(final)[1] = paste(i)
-      final[]=lapply(final,as.character)
+      names(final)[1] <- paste(i)
+      final[] <- lapply(final,as.character)
+      
       if (dim(final)[1] > n){
-        final1 = final[c(1:(n/2)),]
-        final2 = final[c((dim(final)[1] - n/2):(dim(final)[1])),]
-        final1 = rbind(final1, "...")
-        final = rbind(final1, final2)
+        final1 <- final[c(1:(n/2)),]
+        final2 <- final[c((dim(final)[1] - n/2):(dim(final)[1])),]
+        final1 <- rbind(final1, "...")
+        final  <- rbind(final1, final2)
         row.names(final) =  ifelse(final$Freq=="...", "...", row.names(final))
       }
+      
     } else {
-      final = data.frame("Var"     = names(Freq),
-                         "Freq"    = as.character(Freq), 
-                         "CumFreq" = as.character(CumFreq), 
-                         "Percent" = paste0(Percent, "%"), 
-                         "CumPerc" = paste0(CumPerc, "%"))
-      names(final)[1] = paste(i)
-      final[]=lapply(final,as.character)
+      final <- data.frame("Var"     = names(Freq),
+                          "Freq"    = as.character(Freq), 
+                          "CumFreq" = as.character(CumFreq), 
+                          "Percent" = paste0(Percent, "%"), 
+                          "CumPerc" = paste0(CumPerc, "%"))
+      names(final)[1] <- paste(i)
+      final[] <- lapply(final,as.character)
+      
       if (dim(final)[1] > n){
-        final1 = final[c(1:(n/2)),]
-        final2 = final[c((dim(final)[1] - n/2):(dim(final)[1])),]
-        final1 = rbind(final1, "...")
-        final = rbind(final1, final2)
-        row.names(final) =  ifelse(final$Freq=="...", "...", row.names(final))
+        final1 <- final[c(1:(n/2)),]
+        final2 <- final[c((dim(final)[1] - n/2):(dim(final)[1])),]
+        final1 <- rbind(final1, "...")
+        final  <- rbind(final1, final2)
+        row.names(final) <- ifelse(final$Freq=="...", "...", row.names(final))
       }}
     
-    final_list[[i]] = final  
+    final_list[[i]] <- final  
   }
   
   ## Output
-  class(final_list) = c("tableF", "list")
-  attr(final_list, "variable") = paste(.call[3])
+  class(final_list) <- c("tableF", "list")
+  attr(final_list, "variable") <- paste(.call[3])
   final_list
 }
 

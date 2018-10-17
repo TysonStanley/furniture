@@ -19,100 +19,104 @@
 #' @importFrom knitr kable
 #' 
 #' @export
-tableC = function(.data, 
-                  ..., 
-                  cor_type = "pearson",
-                  na.rm = FALSE,
-                  rounding = 3,
-                  output = "text",
-                  booktabs = TRUE, 
-                  caption = NULL, 
-                  align = NULL,
-                  float = "htb"){
+tableC <- function(.data, 
+                   ..., 
+                   cor_type = "pearson",
+                   na.rm = FALSE,
+                   rounding = 3,
+                   output = "text",
+                   booktabs = TRUE, 
+                   caption = NULL, 
+                   align = NULL,
+                   float = "htb"){
   
   ## Preprocessing ##
-  .call = match.call()
-  data = selecting(d_=.data, ...)
-  d = as.data.frame(data)
+  .call <- match.call()
+  data <- selecting(d_=.data, ...)
+  d <- as.data.frame(data)
   
   ## NA ##
   if (na.rm){
-    use1 = "complete.obs"
-    n = sum(complete.cases(d))
+    use1 <- "complete.obs"
+    n <- sum(complete.cases(d))
   } else {
-    use1 = "everything"
-    n = length(d[[1]])
+    use1 <- "everything"
+    n <- length(d[[1]])
   }
   
   ## Correlations ##
-  cors = cor(d, 
-              method = cor_type,
-              use = use1)
+  cors <- stats::cor(d, 
+                     method = cor_type,
+                     use = use1)
   ## Significance ##
   if (cor_type == "pearson"){
-    tvalues = cors/sqrt((1 - cors^2)/(n-2))
+    tvalues <- cors/sqrt((1 - cors^2)/(n-2))
   } else if (cor_type == "spearman"){
-    tvalues = cors * sqrt((n-2)/(1 - cors^2))
+    tvalues <- cors * sqrt((n-2)/(1 - cors^2))
   } else {
     stop(paste(cor_type, "is not a possible correlation type with this function."))
   }
 
-  pvalues = 2*pt(abs(tvalues), n-2, lower.tail = FALSE)
+  pvalues <- 2*pt(abs(tvalues), n-2, lower.tail = FALSE)
   
   ## Formatting Names and Rownames
-  cors = as.data.frame(cors)
-  pvalues = as.data.frame(pvalues)
-  dims = dim(cors)
+  cors <- as.data.frame(cors)
+  pvalues <- as.data.frame(pvalues)
+  dims <- dim(cors)
+  
   if (output == "latex2"){
-    row.names(cors) = paste0("{[", 1:dims[1], "]}", row.names(cors))
+    row.names(cors) <- paste0("{[", 1:dims[1], "]}", row.names(cors))
   } else {
-    row.names(cors) = paste0("[", 1:dims[1], "]", row.names(cors))
+    row.names(cors) <- paste0("[", 1:dims[1], "]", row.names(cors))
   }
   
-  names(cors) = paste0("[", 1:dims[1], "]")
+  names(cors) <- paste0("[", 1:dims[1], "]")
   
   ## Combine
-  final = matrix(nrow = dims[1], ncol = dims[2])
+  final <- matrix(nrow = dims[1], ncol = dims[2])
   for (i in 1:dims[1]){
     for (j in 1:dims[2]){
-      final[i,j] = paste0(ifelse(cors[i,j] == 1, "1.00", round(cors[i,j], rounding)), 
-                          " ", 
-                          ifelse(cors[i,j] == 1, "",
-                          ifelse(pvalues[i,j] < .001, "(<.001)", 
-                                 paste0("(", 
-                                        round(pvalues[i,j], rounding), ")"))))
+      final[i,j] <- paste0(ifelse(cors[i,j] == 1, "1.00", round(cors[i,j], rounding)), 
+                           " ", 
+                           ifelse(cors[i,j] == 1, "",
+                           ifelse(pvalues[i,j] < .001, "(<.001)", 
+                                  paste0("(", 
+                                         round(pvalues[i,j], rounding), ")"))))
     }
   }
   final[upper.tri(final)] <- " "
-  final = as.data.frame(final)
-  row.names(final) = row.names(cors)
-  final = data.frame(" " = row.names(final), final)
-  names(final) = c(" ", names(cors))
+  final <- as.data.frame(final)
+  row.names(final) <- row.names(cors)
+  final <- data.frame(" " = row.names(final), final)
+  names(final) <- c(" ", names(cors))
   
   ## Output ##
   message("N = ", n, "\n",
           "Note: ", cor_type, " correlation (p-value).")
+  
   if (output != "text"){
     if (output == "latex2"){
       if (is.null(align)){
-        l1 = dim(final)[2]
-        align = c("l", rep("c", (l1-1)))
+        l1 <- dim(final)[2]
+        align <- c("l", rep("c", (l1-1)))
       }
-      tab = to_latex(final, caption, align, len = dim(final)[2] - 1, splitby = NA, float, booktabs, cor_type)
+      tab <- to_latex(final, caption, align, len = dim(final)[2] - 1, splitby = NA, float, booktabs, cor_type)
       return(tab)
+      
     } else {
-      kab = knitr::kable(final, format=output,
-                         booktabs = booktabs,
-                         caption = caption,
-                         align = align,
-                         row.names = FALSE)
+      kab <- knitr::kable(final, format=output,
+                          booktabs = booktabs,
+                          caption = caption,
+                          align = align,
+                          row.names = FALSE)
       return(kab)
     }
   } else {
-    final = list("Table1" = final)
-    class(final) = c("table1", "list")
-    attr(final, "splitby") = NULL
-    attr(final, "output") = NULL
+    
+    final <- list("Table1" = final)
+    class(final) <- c("table1", "list")
+    attr(final, "splitby") <- NULL
+    attr(final, "output") <- NULL
     return(final)
   }
 }
