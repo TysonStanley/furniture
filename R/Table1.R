@@ -37,7 +37,6 @@
 #'
 #' @examples 
 #' 
-#' \dontrun{
 #' ## Ficticious Data ##
 #' library(furniture)
 #' library(tidyverse)
@@ -63,8 +62,8 @@
 #' ## With Piping
 #' df %>%
 #'   table1(x, y, z, 
-#'          splitby = ~a) %>%
-#'   summarise(count = n())
+#'          splitby = ~a) 
+#'          
 #' df %>%
 #'   group_by(a) %>%
 #'   table1(x, y, z)
@@ -72,7 +71,6 @@
 #' ## Adjust variables within function and assign name
 #' table1(df, 
 #'        x2 = ifelse(x > 0, 1, 0), z = z)
-#' }        
 #'
 #' @export
 #' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test

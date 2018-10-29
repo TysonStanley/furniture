@@ -75,7 +75,6 @@ In defining \code{type}, 1. options are "pvalues" that display the p-values of t
 }
 \examples{
 
-\dontrun{
 ## Ficticious Data ##
 library(furniture)
 library(tidyverse)
@@ -101,8 +100,8 @@ table1(df, x, y, z,
 ## With Piping
 df \%>\%
   table1(x, y, z, 
-         splitby = ~a) \%>\%
-  summarise(count = n())
+         splitby = ~a) 
+         
 df \%>\%
   group_by(a) \%>\%
   table1(x, y, z)
@@ -110,6 +109,5 @@ df \%>\%
 ## Adjust variables within function and assign name
 table1(df, 
        x2 = ifelse(x > 0, 1, 0), z = z)
-}        
 
 }

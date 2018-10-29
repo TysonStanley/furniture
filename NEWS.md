@@ -1,10 +1,10 @@
-# Version 1.8.3
+# Version 1.8.4
 
-A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was also adjusted.
+A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made.
 
 # Version 1.8.0
 
-* When piping with `table1()`, it no longer returns the data set. This feature caused too many unexpected issues.
+* When piping with `table1()`, it no longer returns the data frame. This feature caused too many unexpected issues. Instead, it returns the table.
 * The class of `table1` is now no longer tied to the `data.frame`, for printing purposes. It is still possible to coerce to a `data.frame` using `as.data.frame()`.
 * Using the `var_names` argument is now deprecated. In its place, it is recommended to name the variable in place (e.g., `"General Health" = gen_health` will produce the label `General Health` in the table instead of the variable name of `gen_health`).
 * Fixed issue of having an underscore in a variable name in `output = "latex2"`.
