@@ -37,6 +37,13 @@
   }
 }
 
+## More than one value per variable warning
+.more_than_one_value <- function(data){
+  lapply(data, function(x) length(unique(x)) > 1) %>%
+    unlist() %>%
+    all()
+}
+
 
 ## Observations and Header Labels
 .obs_header = function(d, f1, format_output, test, output, header_labels){

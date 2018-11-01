@@ -116,7 +116,7 @@ nhanes_2010 %>%
 
 The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as `library(dplyr)`, `library(tidyr)`, and `library(ggplot2)` with `library(furniture)` to accomplish this.
 
-The most important function--`table1`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonstanley.github.io](https://tysonstanley.github.io/) for several examples of its use. Also see our paper in the [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
+The most important function--`table1`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for several examples of its use. Also see our paper in the [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
 
 
 

@@ -158,5 +158,16 @@ test_that("table1 produces table1", {
                          output = "text2",
                          header_labels = c(" ", "P-Val"),
                          second = c("a", "c")), "table1")
+  
+  ## Variables with no variability
+  expect_warning(df %>%
+                   mutate(x = 1) %>%
+                   group_by(b) %>%
+                   table1(x,
+                          test=FALSE, 
+                          output = "text2",
+                          header_labels = c(" ", "P-Val"),
+                          second = c("a", "c")))
+  
 })
 

@@ -1,6 +1,6 @@
-# Version 1.8.4
+# Version 1.8.5
 
-A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made.
+A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made. Finally, a warning is produced if any of the variables have no variability since this causes problems with tests and other formatting.
 
 # Version 1.8.0
 

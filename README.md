@@ -63,7 +63,7 @@ library(furniture)
 ```
 
     #> Loading furniture
-    #> ── furniture 1.8.4 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+    #> ── furniture 1.8.5 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
     #> ✔ furniture attached
     #> ✔ No potential conflicts found
 
@@ -73,6 +73,11 @@ data("nhanes_2010")
 table1(nhanes_2010,
        age, marijuana, illicit, rehab,
        splitby=~asthma)
+#> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
+#> 
+#>             -- type = 'condense' will not work
+#> 
+#>             -- test = TRUE will not work
 #> 
 #> ───────────────────────────────────
 #>                   asthma 
@@ -97,6 +102,11 @@ table1(nhanes_2010,
        age, marijuana, illicit, rehab,
        splitby=~asthma, 
        output = "text2")
+#> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
+#> 
+#>             -- type = 'condense' will not work
+#> 
+#>             -- test = TRUE will not work
 #> 
 #> ───────────────────────────────────
 #>                   asthma 
@@ -237,6 +247,6 @@ using packages such as `library(dplyr)`, `library(tidyr)`, and
 
 The most important function–`table1`–is simply built for both
 exploratory descriptive analysis and communication of findings. See
-vignettes or [tysonstanley.github.io](https://tysonstanley.github.io/)
-for several examples of its use. Also see our paper in the [R
+vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for
+several examples of its use. Also see our paper in the [R
 Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).

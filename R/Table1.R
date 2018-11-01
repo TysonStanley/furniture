@@ -266,6 +266,13 @@ table1.data.frame = function(.data,
     test <- FALSE
   }
   
+  ## Does each variable have at least two levels?
+  if (! .more_than_one_value(d)){
+    warning("Not all variables have at least 2 unique values. Functionality of the following will be limited:\n
+            -- type = 'condense' will not work\n
+            -- test = TRUE will not work")
+  }
+  
   ####################################
   ## Observations and Header Labels ##
   ####################################
@@ -418,6 +425,7 @@ as.data.frame.table1 <- function(x, row.names = NULL, optional = FALSE, ...,
                                  cut.names = FALSE, col.names = names(x), fix.empty.names = TRUE,
                                  stringsAsFactors = default.stringsAsFactors()){
   
-  as.data.frame.list(x)
+  as.data.frame.list(x) %>%
+    setNames(., gsub("Table1\\.", "", names(.)))
   
 }

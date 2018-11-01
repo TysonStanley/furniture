@@ -11,6 +11,3 @@ Currently, there is one downstream dependency for this package (`MarginalMediati
 This package has been checked with no errors, warnings, or notes resulting from the changes
 to the `furniture` package.
 
-## Resubmission
-An error that impacted a few edge cases was found and fixed. An additional unit 
-test was included to catch these edge cases.
