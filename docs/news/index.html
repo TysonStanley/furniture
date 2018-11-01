@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.8.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.8.5</span>
       </span>
     </div>
 
@@ -111,18 +111,18 @@
       
     </div>
 
-    <div id="version-1-8-3" class="section level1">
+    <div id="version-1-8-5" class="section level1">
 <h1 class="page-header">
-<a href="#version-1-8-3" class="anchor"></a>Version 1.8.3<small> Unreleased </small>
+<a href="#version-1-8-5" class="anchor"></a>Version 1.8.5<small> Unreleased </small>
 </h1>
-<p>A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was also adjusted.</p>
+<p>A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made. Finally, a warning is produced if any of the variables have no variability since this causes problems with tests and other formatting.</p>
 </div>
     <div id="version-1-8-0" class="section level1">
 <h1 class="page-header">
 <a href="#version-1-8-0" class="anchor"></a>Version 1.8.0<small> 2018-09-19 </small>
 </h1>
 <ul>
-<li>When piping with <code><a href="../reference/table1.html">table1()</a></code>, it no longer returns the data set. This feature caused too many unexpected issues.</li>
+<li>When piping with <code><a href="../reference/table1.html">table1()</a></code>, it no longer returns the data frame. This feature caused too many unexpected issues. Instead, it returns the table.</li>
 <li>The class of <code>table1</code> is now no longer tied to the <code>data.frame</code>, for printing purposes. It is still possible to coerce to a <code>data.frame</code> using <code>as.data.frame()</code>.</li>
 <li>Using the <code>var_names</code> argument is now deprecated. In its place, it is recommended to name the variable in place (e.g., <code>"General Health" = gen_health</code> will produce the label <code>General Health</code> in the table instead of the variable name of <code>gen_health</code>).</li>
 <li>Fixed issue of having an underscore in a variable name in <code>output = "latex2"</code>.</li>
@@ -290,7 +290,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-1-8-3">1.8.3</a></li>
+        <li><a href="#version-1-8-5">1.8.5</a></li>
         <li><a href="#version-1-8-0">1.8.0</a></li>
         <li><a href="#version-1-7-9">1.7.9</a></li>
         <li><a href="#version-1-7-6">1.7.6</a></li>
