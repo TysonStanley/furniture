@@ -245,7 +245,7 @@ data cleaned/tidied and start exploratory data analysis. I recommend
 using packages such as `library(dplyr)`, `library(tidyr)`, and
 `library(ggplot2)` with `library(furniture)` to accomplish this.
 
-The most important function–`table1`–is simply built for both
+The most important function–`table1()`–is simply built for both
 exploratory descriptive analysis and communication of findings. See
 vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for
 several examples of its use. Also see our paper in the [R
