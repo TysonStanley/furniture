@@ -181,8 +181,8 @@ search_conflicts <- function(){
 }
 
 ## Pipe
-#' @importFrom magrittr %>%
 `%>%` <- magrittr::`%>%`
+
 ## Group by
 group_by <- dplyr::group_by
 
