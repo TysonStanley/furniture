@@ -50,14 +50,9 @@ install_github("tysonstanley/furniture")
 
 The main functions are the `table_()` functions (e.g., `table1()`, `tableC()`, `tableF()`).
 
-```{r, eval = FALSE}
+```{r}
 library(furniture)
 ```
-
-```{r, echo = FALSE}
-devtools::load_all()
-```
-
 
 ```{r}
 data("nhanes_2010")
