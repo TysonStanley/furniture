@@ -157,7 +157,7 @@ table1.data.frame = function(.data,
   }
   ## Not yet deprecated
   #if (!is.null(splitby))
-  #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue through furniture 1.8.0")
+  #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue until furniture 2.0.0")
   
   ## Missing values in categorical variables
   if (isTRUE(na.rm)){ 

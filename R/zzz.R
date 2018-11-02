@@ -7,6 +7,8 @@
     .[(!grepl("^%", rownames(.))) &
         (!grepl("::", rownames(.))) &
         (!grepl("group_by", rownames(.))) &
+        (!grepl("pt", rownames(.))) &
+        (!grepl("?", rownames(.))) &
         (.$rowname != ".GlobalEnv"),] %>%
     data.frame
   
