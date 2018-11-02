@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.8.5 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.8.7 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -60,12 +60,10 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
+#> ── furniture 1.8.7 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ✔ furniture attached
+#> ✔ No potential conflicts found
 ```
-
-    #> Loading furniture
-    #> ── furniture 1.8.5 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
-    #> ✔ furniture attached
-    #> ✔ No potential conflicts found
 
 ``` r
 data("nhanes_2010")
@@ -74,9 +72,7 @@ table1(nhanes_2010,
        age, marijuana, illicit, rehab,
        splitby=~asthma)
 #> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
-#> 
 #>             -- type = 'condense' will not work
-#> 
 #>             -- test = TRUE will not work
 #> 
 #> ───────────────────────────────────
@@ -103,9 +99,7 @@ table1(nhanes_2010,
        splitby=~asthma, 
        output = "text2")
 #> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
-#> 
 #>             -- type = 'condense' will not work
-#> 
 #>             -- test = TRUE will not work
 #> 
 #> ───────────────────────────────────
