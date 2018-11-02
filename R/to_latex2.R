@@ -13,7 +13,7 @@
 #' @param label latex label option
 #' 
 #' @export
-#' @import utils
+#' @importFrom utils capture.output
 #' 
 
 to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, cor_type=NULL){

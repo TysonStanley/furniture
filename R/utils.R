@@ -155,10 +155,10 @@ furniture_version <- function(x) {
   crayon::italic(paste0(version, collapse = "."))
 }
 
-search_conflicts <- function(path = search()){
+search_conflicts <- function(){
   
   ## Search for conflicts
-  confs <- conflicts(path,TRUE)
+  confs <- conflicts(detail = TRUE)
   ## Grab those with the furniture package
   furniture_conflicts <- confs$`package:furniture`
   

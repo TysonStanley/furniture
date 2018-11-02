@@ -8,8 +8,8 @@
         (!grepl("::", rownames(.))) &
         (!grepl("group_by", rownames(.))) &
         (!grepl("pt", rownames(.))) &
-        (!grepl("?", rownames(.))) &
-        (.$rowname != ".GlobalEnv"),] %>%
+        (!grepl("\\?", rownames(.))) &
+        (! .$rowname %in% c(".GlobalEnv", "package:utils", "package:stats", "package:base")),] %>%
     data.frame
   
   confs$objects <- gsub("\\.[0-9]*$", "", rownames(confs))
@@ -19,11 +19,10 @@
     confs <- confs[conflict_type == "function", ]
   }
   
-  if (dim(confs)[1] == 0){
+  if (nrow(confs) == 0){
     confs_msg <- text_col(paste0(crayon::green(cli::symbol$tick), " No potential conflicts found"))
     helper_msg <- ""
   } else {
-    rownames(confs)
     confs_msg <- text_col(paste0(crayon::yellow(cli::symbol$cross),
                                  " The furniture::", confs$objects, "() function has the same name as ", 
                                  gsub("package:", "", confs$rowname), "::", confs$objects, " (", 
