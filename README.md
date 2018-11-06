@@ -60,7 +60,7 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.8.7 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.8.7 ───────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 ```
@@ -70,26 +70,27 @@ data("nhanes_2010")
 
 table1(nhanes_2010,
        age, marijuana, illicit, rehab,
-       splitby=~asthma)
-#> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
-#>             -- type = 'condense' will not work
-#>             -- test = TRUE will not work
+       splitby=~asthma,
+       na.rm = FALSE)
 #> 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>            n = 131     n = 583    
+#>             n = 251    n = 1164   
 #>  age                              
-#>            23.2 (3.7)  23.2 (3.9) 
+#>            23.0 (3.9)  23.4 (4.0) 
 #>  marijuana                        
-#>     Yes    131 (100%)  583 (100%) 
-#>     No     0 (0%)      0 (0%)     
+#>     Yes    131 (52.2%) 584 (50.2%)
+#>     No     97 (38.6%)  434 (37.3%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  illicit                          
-#>     Yes    23 (17.6%)  117 (20.1%)
-#>     No     108 (82.4%) 466 (79.9%)
+#>     Yes    23 (9.2%)   117 (10.1%)
+#>     No     205 (81.7%) 901 (77.4%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  rehab                            
-#>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 546 (93.7%)
+#>     Yes    10 (4%)     37 (3.2%)  
+#>     No     121 (48.2%) 547 (47%)  
+#>     NA     120 (47.8%) 580 (49.8%)
 #> ───────────────────────────────────
 ```
 
@@ -97,27 +98,28 @@ table1(nhanes_2010,
 table1(nhanes_2010,
        age, marijuana, illicit, rehab,
        splitby=~asthma, 
-       output = "text2")
-#> Warning in table1.data.frame(nhanes_2010, age, marijuana, illicit, rehab, : Not all variables have at least 2 unique values. Functionality of the following will be limited:
-#>             -- type = 'condense' will not work
-#>             -- test = TRUE will not work
+       output = "text2",
+       na.rm = FALSE)
 #> 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>            n = 131     n = 583    
+#>             n = 251    n = 1164   
 #>  --------- ----------- -----------
 #>  age                              
-#>            23.2 (3.7)  23.2 (3.9) 
+#>            23.0 (3.9)  23.4 (4.0) 
 #>  marijuana                        
-#>     Yes    131 (100%)  583 (100%) 
-#>     No     0 (0%)      0 (0%)     
+#>     Yes    131 (52.2%) 584 (50.2%)
+#>     No     97 (38.6%)  434 (37.3%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  illicit                          
-#>     Yes    23 (17.6%)  117 (20.1%)
-#>     No     108 (82.4%) 466 (79.9%)
+#>     Yes    23 (9.2%)   117 (10.1%)
+#>     No     205 (81.7%) 901 (77.4%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  rehab                            
-#>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 546 (93.7%)
+#>     Yes    10 (4%)     37 (3.2%)  
+#>     No     121 (48.2%) 547 (47%)  
+#>     NA     120 (47.8%) 580 (49.8%)
 #> ───────────────────────────────────
 ```
 
@@ -126,25 +128,84 @@ library(tidyverse)
 nhanes_2010 %>%
   group_by(asthma) %>%
   table1(age, marijuana, illicit, rehab,
-         output = "text2")
+         output = "text2",
+         na.rm = FALSE)
 #> 
 #> ───────────────────────────────────
 #>                   asthma 
 #>            Yes         No         
-#>            n = 131     n = 583    
+#>             n = 251    n = 1164   
 #>  --------- ----------- -----------
 #>  age                              
-#>            23.2 (3.7)  23.2 (3.9) 
+#>            23.0 (3.9)  23.4 (4.0) 
 #>  marijuana                        
-#>     Yes    131 (100%)  583 (100%) 
-#>     No     0 (0%)      0 (0%)     
+#>     Yes    131 (52.2%) 584 (50.2%)
+#>     No     97 (38.6%)  434 (37.3%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  illicit                          
-#>     Yes    23 (17.6%)  117 (20.1%)
-#>     No     108 (82.4%) 466 (79.9%)
+#>     Yes    23 (9.2%)   117 (10.1%)
+#>     No     205 (81.7%) 901 (77.4%)
+#>     NA     23 (9.2%)   146 (12.5%)
 #>  rehab                            
-#>     Yes    10 (7.6%)   37 (6.3%)  
-#>     No     121 (92.4%) 546 (93.7%)
+#>     Yes    10 (4%)     37 (3.2%)  
+#>     No     121 (48.2%) 547 (47%)  
+#>     NA     120 (47.8%) 580 (49.8%)
 #> ───────────────────────────────────
+```
+
+`table1()` can do bivariate significance tests as well.
+
+``` r
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE)
+#> 
+#> ───────────────────────────────────────────
+#>                       asthma 
+#>            Yes         No          P-Value
+#>             n = 251    n = 1164           
+#>  --------- ----------- ----------- -----  
+#>  age                               0.196  
+#>            23.0 (3.9)  23.4 (4.0)         
+#>  marijuana                         1      
+#>     Yes    131 (52.2%) 584 (50.2%)        
+#>     No     97 (38.6%)  434 (37.3%)        
+#>     NA     23 (9.2%)   146 (12.5%)        
+#>  illicit                           0.623  
+#>     Yes    23 (9.2%)   117 (10.1%)        
+#>     No     205 (81.7%) 901 (77.4%)        
+#>     NA     23 (9.2%)   146 (12.5%)        
+#>  rehab                             0.729  
+#>     Yes    10 (4%)     37 (3.2%)          
+#>     No     121 (48.2%) 547 (47%)          
+#>     NA     120 (47.8%) 580 (49.8%)        
+#> ───────────────────────────────────────────
+```
+
+``` r
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         type = "condense")
+#> 
+#> ───────────────────────────────────────────────
+#>                           asthma 
+#>                Yes         No          P-Value
+#>                 n = 251    n = 1164           
+#>  ------------- ----------- ----------- -----  
+#>  age           23.0 (3.9)  23.4 (4.0)  0.196  
+#>  marijuana: No 97 (38.6%)  434 (37.3%) 1      
+#>  illicit: No   205 (81.7%) 901 (77.4%) 0.623  
+#>  rehab: No     121 (48.2%) 547 (47%)   0.729  
+#> ───────────────────────────────────────────────
 ```
 
 `table1()` can be outputted directly to other formats. All
@@ -210,7 +271,7 @@ nhanes_2010 %>%
 #>  8        120         NA        120        120
 #>  9         NA         NA        NaN          0
 #> 10         NA         NA        NaN          0
-#> # … with 1,407 more rows
+#> # ... with 1,407 more rows
 ```
 
 ``` r
@@ -229,7 +290,7 @@ nhanes_2010 %>%
 #>  8         NA        120         NA
 #>  9         NA         NA         NA
 #> 10         NA         NA         NA
-#> # … with 1,407 more rows
+#> # ... with 1,407 more rows
 ```
 
 ## Notes

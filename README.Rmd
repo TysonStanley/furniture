@@ -59,14 +59,16 @@ data("nhanes_2010")
 
 table1(nhanes_2010,
        age, marijuana, illicit, rehab,
-       splitby=~asthma)
+       splitby=~asthma,
+       na.rm = FALSE)
 ```
 
 ```{r}
 table1(nhanes_2010,
        age, marijuana, illicit, rehab,
        splitby=~asthma, 
-       output = "text2")
+       output = "text2",
+       na.rm = FALSE)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -74,7 +76,31 @@ library(tidyverse)
 nhanes_2010 %>%
   group_by(asthma) %>%
   table1(age, marijuana, illicit, rehab,
-         output = "text2")
+         output = "text2",
+         na.rm = FALSE)
+```
+
+`table1()` can do bivariate significance tests as well.
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         type = "condense")
 ```
 
 `table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
