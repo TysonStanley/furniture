@@ -23,7 +23,7 @@ library(furniture)
 ```
 
 
-We will first make a ficticious data set:
+We will first make a fictitious data set:
 ```{r data}
 df <- data.frame(a = rnorm(1000, 1.5, 2), 
                  b = seq(1, 1000, 1), 
@@ -138,7 +138,7 @@ table1(df, a, b, d, "new var" = ifelse(a > 1, 1, 0),
 
 ## Table C
 
-This function is to create simple, beautiful correlation tables. The syntax is just like `table1()` in most respects. Below we include all the numberic variables to see their correlations. Since there are missing values in `d` we will use the natural `na.rm=TRUE`.
+This function is to create simple, beautiful correlation tables. The syntax is just like `table1()` in most respects. Below we include all the numeric variables to see their correlations. Since there are missing values in `d` we will use the natural `na.rm=TRUE`.
 
 ```{r tableC.1}
 tableC(df, 
@@ -178,7 +178,7 @@ df %>%
 
 ## Table X
 
-Lastly, `tableX()` is a pipable two-way version of `table()` with a similar syntax to that of the rest of the `furniture` functions.
+Lastly, `tableX()` is a pipe-able two-way version of `table()` with a similar syntax to that of the rest of the `furniture` functions.
 
 ```{r tableX.1}
 df %>%

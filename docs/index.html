@@ -127,7 +127,7 @@
 <a href="#using-furniture" class="anchor"></a>Using furniture</h1>
 <p>The main functions are the <code>table_()</code> functions (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(furniture)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; ── furniture 1.8.7 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; ── furniture 1.8.7 ───────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; ✔ furniture attached</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; ✔ No potential conflicts found</span></a></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">data</span>(<span class="st">"nhanes_2010"</span>)</a>
@@ -223,7 +223,7 @@
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;            Yes         No          P-Value</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;             n = 251    n = 1164           </span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;  --------- ----------- ----------- -----  </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  age                               0.196  </span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  age                               0.201  </span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt;            23.0 (3.9)  23.4 (4.0)         </span></a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt;  marijuana                         1      </span></a>
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)        </span></a>
@@ -252,7 +252,7 @@
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;                Yes         No          P-Value</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;                 n = 251    n = 1164           </span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  ------------- ----------- ----------- -----  </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  age           23.0 (3.9)  23.4 (4.0)  0.196  </span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  age           23.0 (3.9)  23.4 (4.0)  0.201  </span></a>
 <a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;  marijuana: No 97 (38.6%)  434 (37.3%) 1      </span></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;  illicit: No   205 (81.7%) 901 (77.4%) 0.623  </span></a>
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  rehab: No     121 (48.2%) 547 (47%)   0.729  </span></a>
@@ -306,7 +306,7 @@
 <a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;  8        120         NA        120        120</span></a>
 <a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt;  9         NA         NA        NaN          0</span></a>
 <a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; 10         NA         NA        NaN          0</span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; # … with 1,407 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; # ... with 1,407 more rows</span></a></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">nhanes_<span class="dv">2010</span> <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/mutate_rowmeans.html">mutate_rowmeans</a></span>(<span class="st">"avg_active"</span>, mod_active<span class="op">:</span>vig_active)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; # A tibble: 1,417 x 3</span></a>
@@ -322,7 +322,7 @@
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  8         NA        120         NA</span></a>
 <a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;  9         NA         NA         NA</span></a>
 <a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 10         NA         NA         NA</span></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; # … with 1,407 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; # ... with 1,407 more rows</span></a></code></pre></div>
 <div id="notes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#notes" class="anchor"></a>Notes</h2>

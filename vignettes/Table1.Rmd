@@ -40,13 +40,13 @@ It contains several useful features for summarizing your data:
 7. Table has multiple formatting options to fit various needs using `output`, `format_output`, `simple` and `condense`.
 8. The table can be exported to a CSV with `export = "file_name"`.
 
-To illustrate, we'll walk through the main arguments with an example on some ficticious data.
+To illustrate, we'll walk through the main arguments with an example on some fictitious data.
 
 ## Example
 
 ```{r data}
 set.seed(84332)
-## Create Ficticious Data containing several types of variables
+## Create Fictitious Data containing several types of variables
 df <- data.frame(a = sample(1:10000, 10000, replace = TRUE),
                  b = runif(10000) + rnorm(10000),
                  c = factor(sample(c(1,2,3,4,NA), 10000, replace=TRUE)),
