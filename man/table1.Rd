@@ -75,9 +75,9 @@ In defining \code{type}, 1. options are "pvalues" that display the p-values of t
 }
 \examples{
 
-## Ficticious Data ##
+## Fictitious Data ##
 library(furniture)
-library(tidyverse)
+library(dplyr)
 
 x  <- runif(1000)
 y  <- rnorm(1000)

@@ -37,9 +37,9 @@
 #'
 #' @examples 
 #' 
-#' ## Ficticious Data ##
+#' ## Fictitious Data ##
 #' library(furniture)
-#' library(tidyverse)
+#' library(dplyr)
 #' 
 #' x  <- runif(1000)
 #' y  <- rnorm(1000)
