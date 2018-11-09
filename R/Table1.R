@@ -7,7 +7,7 @@
 #' 
 #' @param .data the data.frame that is to be summarized
 #' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.
-#' @param splitby the categorical variable to stratify (in formula form  \code{splitby = ~gender}), quoted \code{splitby = "gender"}, or bare \code{splitby = gender}); instead, \code{dplyr::group_by(...)} can be used
+#' @param splitby the categorical variable to stratify (in formula form \code{splitby = ~gender}) or quoted \code{splitby = "gender"}; instead, \code{dplyr::group_by(...)} can be used within a pipe (this is the default when the data object is a grouped data frame from \code{dplyr::group_by(...)}).
 #' @param FUN the function to be applied to summarize the numeric data; default is to report the means and standard deviations
 #' @param FUN2 a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles
 #' @param second a vector or list of quoted continuous variables for which the \code{FUN2} should be applied
@@ -56,8 +56,6 @@
 #'        splitby = ~ a)
 #' table1(df, x, y, z,
 #'        splitby = "a")
-#' table1(df, x, y, z,
-#'        splitby = a)
 #' 
 #' ## With Piping
 #' df %>%

@@ -50,8 +50,7 @@
 #' Furniture for Quantitative Scientists
 #'
 #' Provides several functions, mainly tables, that can be used for exploring and reporting
-#' data analysis.
-#' 
+#' data analysis. 
 #'
 #' @docType package
 #' @name furniture

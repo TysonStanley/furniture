@@ -17,7 +17,7 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 
 \item{...}{variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.}
 
-\item{splitby}{the categorical variable to stratify (in formula form  \code{splitby = ~gender}), quoted \code{splitby = "gender"}, or bare \code{splitby = gender}); instead, \code{dplyr::group_by(...)} can be used}
+\item{splitby}{the categorical variable to stratify (in formula form \code{splitby = ~gender}) or quoted \code{splitby = "gender"}; instead, \code{dplyr::group_by(...)} can be used within a pipe (this is the default when the data object is a grouped data frame from \code{dplyr::group_by(...)}).}
 
 \item{FUN}{the function to be applied to summarize the numeric data; default is to report the means and standard deviations}
 
@@ -94,8 +94,6 @@ table1(df, x, y, z,
        splitby = ~ a)
 table1(df, x, y, z,
        splitby = "a")
-table1(df, x, y, z,
-       splitby = a)
 
 ## With Piping
 df \%>\%
