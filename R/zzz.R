@@ -9,7 +9,7 @@
         (!grepl("group_by", rownames(.))) &
         (!grepl("pt", rownames(.))) &
         (!grepl("\\?", rownames(.))) &
-        (! .$rowname %in% c(".GlobalEnv", "package:utils", "package:stats", "package:base")),] %>%
+        (! .$rowname %in% c("devtools_shims", "Autoloads", ".GlobalEnv", "package:utils", "package:stats", "package:base")),] %>%
     data.frame
   
   confs$objects <- gsub("\\.[0-9]*$", "", rownames(confs))

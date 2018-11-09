@@ -111,7 +111,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
         if (lt<0.05){
           ## Performs an approximate method of Welch (1951)
           tests[[i]] <- oneway.test(d[[i]] ~ d$split, var.equal=FALSE)
-          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests variances are not equal\n (var.equal = FALSE for oneway.test) for", nam[i]))
+          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in oneway.test() for: ", nam[i]))
         } else {
           ## Performs a simple one-way ANOVA
           tests[[i]] <- oneway.test(d[[i]] ~ d$split, var.equal=TRUE)
@@ -125,7 +125,7 @@ table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAke
         if (lt<0.05){
           ## Performs an approximate method of Welch (1951)
           tests[[i]] <- t.test(d[[i]] ~ d$split, var.equal=FALSE)
-          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests variances are not equal\n (var.equal = FALSE for t.test) for", nam[i]))
+          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: ", nam[i]))
         } else {
           ## Performs a simple one-way ANOVA
           tests[[i]] <- t.test(d[[i]] ~ d$split, var.equal=TRUE)
