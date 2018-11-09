@@ -9,7 +9,7 @@
         (!grepl("group_by", rownames(.))) &
         (!grepl("pt", rownames(.))) &
         (!grepl("\\?", rownames(.))) &
-        (! .$rowname %in% c("devtools_shims", "Autoloads", ".GlobalEnv", "package:utils", "package:stats", "package:base")) &
+        (! .$rowname %in% c("package:utils", "package:stats", "package:base")) &
         (grepl("package:", .$rowname)),] %>%
     data.frame
   
