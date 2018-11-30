@@ -1,3 +1,7 @@
+# Version 1.8.8
+
+Small bug where a warning message was printed too often was fixed.
+
 # Version 1.8.7
 
 A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made. Also, a warning is produced if any of the variables have no variability since this causes problems with tests and other formatting. Finally, a message is printed for `test = TRUE` when the variances are assumed to be unequal (based on a test). This is communicated in the documentation.

@@ -214,7 +214,7 @@ table1.data.frame = function(.data,
     }
     ## Remove any redundant grouping vars
     if (length(which(names(d) %in% splitby_)) != 0){
-      d <- d[, -which(names(d) %in% splitby_)]
+      d <- d[, -which(names(d) %in% splitby_), drop = FALSE]
     }
 
   } else {
@@ -244,17 +244,16 @@ table1.data.frame = function(.data,
     }
     ## Remove any redundant grouping vars
     if (length(which(names(d) %in% groups)) != 0){
-      d <- d[, -which(names(d) %in% groups)]
+      d <- d[, -which(names(d) %in% groups), drop = FALSE]
     }
   }
 
   
   ## Remove missing values?
-  if (isTRUE(na.rm)) {
-    d <- d[complete.cases(d), ]
-    if (nrow(d) == 0)
-      stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
-  }
+  if (isTRUE(na.rm))
+    d <- d[complete.cases(d), , drop = FALSE]
+  if (nrow(d) == 0)
+    stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
 
   
   ## Splitby variable needs to have more than one level when test = TRUE
@@ -266,7 +265,8 @@ table1.data.frame = function(.data,
   
   ## Does each variable have at least two levels?
   if (! .more_than_one_value(d)){
-    warning("Not all variables have at least 2 unique values. Functionality of the following will be limited:\n -- type = 'condense' will not work\n -- test = TRUE will not work")
+    warning("Not all variables have at least 2 unique values. Functionality of the following will be limited:\n -- type = 'condense' will not work\n -- test = TRUE will not work", 
+            call. = FALSE)
   }
   
   ####################################

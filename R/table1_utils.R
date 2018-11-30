@@ -18,7 +18,7 @@ selecting <- function(d_, ...) {
     return(d_)
   ## If input are indices
   if (length(listed) == 1 & any(grepl("^c\\(.*\\)$", listed) & length(listed[[1]]) != length(d_[[1]]))){
-    return(d_[, eval(listed[[1]])])
+    return(d_[, eval(listed[[1]]), drop = FALSE])
   } else if (length(listed) >= 1){
     ## Data Frame
     df <- lapply(seq_along(listed), 
@@ -63,7 +63,7 @@ to_name <- function(listed, names1, i) {
 
 
 ## Does the summary of table1
-table1_summarizing = function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){
+table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){
   ## Summarizing The Data
   d <- data.frame(d)
   tab = tab2 = tests = tests2 = nams = list()

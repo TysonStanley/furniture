@@ -168,6 +168,12 @@ test_that("table1 produces table1", {
                           output = "text2",
                           header_labels = c(" ", "P-Val"),
                           second = c("a", "c")))
+  expect_failure(expect_warning(df %>%
+                                  table1(x,
+                                         test=FALSE, 
+                                         output = "text2",
+                                         header_labels = c(" ", "P-Val"),
+                                         second = c("a", "c"))))
   
 })
 
