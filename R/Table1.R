@@ -314,6 +314,7 @@ table1.data.frame = function(.data,
   final_l <- list("Table1" = final)
   attr(final_l, "splitby") <- splitting
   attr(final_l, "output") <- output
+  attr(final_l, "tested") <- test
   
   ## Export Option
   if (!is.null(export)){
@@ -382,6 +383,9 @@ print.table1 <- function(x, ...){
   }
   tot_width <- sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
     dim(x2)[2] - 1
+  
+  if (isTRUE(attr(x, "test")))
+    max_col_width[[length(max_col_width)]] <- 7
   
   ## Print top border
   cat("\n\u2500")
