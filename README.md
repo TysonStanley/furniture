@@ -60,7 +60,7 @@ The main functions are the `table_()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.8.7 ───────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.8.7 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 ```
@@ -271,7 +271,7 @@ nhanes_2010 %>%
 #>  8        120         NA        120        120
 #>  9         NA         NA        NaN          0
 #> 10         NA         NA        NaN          0
-#> # ... with 1,407 more rows
+#> # … with 1,407 more rows
 ```
 
 ``` r
@@ -290,7 +290,7 @@ nhanes_2010 %>%
 #>  8         NA        120         NA
 #>  9         NA         NA         NA
 #> 10         NA         NA         NA
-#> # ... with 1,407 more rows
+#> # … with 1,407 more rows
 ```
 
 ## Notes

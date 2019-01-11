@@ -148,9 +148,10 @@ table1.data.frame = function(.data,
   ## checks
   .header_labels(header_labels, format_output)
   
-  ## Deprecation
+  ## Deprecation (drop in furniture 2.0.0)
   if (!is.null(NAkeep)){
-    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.")
+    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.", 
+            call. = FALSE)
     na.rm <- !NAkeep
   }
   ## Not yet deprecated
@@ -265,7 +266,10 @@ table1.data.frame = function(.data,
   
   ## Does each variable have at least two levels?
   if (! .more_than_one_value(d)){
-    warning("Not all variables have at least 2 unique values. Functionality of the following will be limited:\n -- type = 'condense' will not work\n -- test = TRUE will not work", 
+    warning(paste("Not all variables have at least 2 unique values.",
+                  "Functionality of the following will be limited:\n",
+                  " -- `type = 'condense'` will not work\n",
+                  " -- `test = TRUE` will not work"), 
             call. = FALSE)
   }
   

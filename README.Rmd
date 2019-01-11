@@ -48,7 +48,7 @@ install_github("tysonstanley/furniture")
 
 # Using furniture
 
-The main functions are the `table_()` functions (e.g., `table1()`, `tableC()`, `tableF()`).
+The main functions are the `table*()` functions (e.g., `table1()`, `tableC()`, `tableF()`).
 
 ```{r}
 library(furniture)

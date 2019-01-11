@@ -3,5 +3,10 @@ bibentry(bibtype = "Article",
          author = c(person("Tyson S.", "Barrett"),
                     person("Emily", "Brignone")),
          year = "2017",
-         journal = "R Journal",
-         volume = "9")
+         journal = "The R Journal",
+         volume = "9",
+         number = "2",
+         doi = "10.32614/RJ-2017-037",
+         url = "https://doi.org/10.32614/RJ-2017-037",
+         key = "RJ-2017-037",
+         pages = "142--148")

@@ -39,7 +39,7 @@
 
 ## More than one value per variable warning
 .more_than_one_value <- function(data){
-  subset(data, select=-c(split)) %>%
+  subset(data, select=-split) %>%
     lapply(function(x) length(unique(x)) > 1) %>%
     unlist() %>%
     all()
