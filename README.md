@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.8.7 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.8.9 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -55,12 +55,12 @@ install_github("tysonstanley/furniture")
 
 # Using furniture
 
-The main functions are the `table_()` functions (e.g., `table1()`,
+The main functions are the `table*()` functions (e.g., `table1()`,
 `tableC()`, `tableF()`).
 
 ``` r
 library(furniture)
-#> ── furniture 1.8.7 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.8.9 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 ```
@@ -169,7 +169,7 @@ nhanes_2010 %>%
 #>            Yes         No          P-Value
 #>             n = 251    n = 1164           
 #>  --------- ----------- ----------- -----  
-#>  age                               0.196  
+#>  age                               0.201  
 #>            23.0 (3.9)  23.4 (4.0)         
 #>  marijuana                         1      
 #>     Yes    131 (52.2%) 584 (50.2%)        
@@ -201,7 +201,7 @@ nhanes_2010 %>%
 #>                Yes         No          P-Value
 #>                 n = 251    n = 1164           
 #>  ------------- ----------- ----------- -----  
-#>  age           23.0 (3.9)  23.4 (4.0)  0.196  
+#>  age           23.0 (3.9)  23.4 (4.0)  0.201  
 #>  marijuana: No 97 (38.6%)  434 (37.3%) 1      
 #>  illicit: No   205 (81.7%) 901 (77.4%) 0.623  
 #>  rehab: No     121 (48.2%) 547 (47%)   0.729  
