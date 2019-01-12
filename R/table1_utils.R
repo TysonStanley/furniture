@@ -63,7 +63,7 @@ to_name <- function(listed, names1, i) {
 
 
 ## Does the summary of table1
-table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAkeep){
+table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAkeep, total){
   ## Summarizing The Data
   d <- data.frame(d)
   tab = tab2 = tests = tests2 = nams = list()
@@ -78,11 +78,29 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAk
     
     ## Factor ##
     if (is.factor(d[,i])){
-      tab[[i]] <- tapply(d[[i]], d$split, table, useNA=NAkeep)
+      ## if total is TRUE, add it to the split statistics
+      if(isTRUE(total)) { 
+        tab[[i]] <- c(list("Total" = table(d[[i]], useNA=NAkeep)), tapply(d[[i]], d$split, table, useNA=NAkeep))
+      } else { 
+        tab[[i]] <- tapply(d[[i]], d$split, table, useNA=NAkeep)
+      }
+     
       if (!row_wise){
-        tab2[[i]] <- tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
+        if(isTRUE(total)) { 
+          tab2[[i]] <- c(list("Total" = table(d[[i]], useNA=NAkeep)/sum(table(d[[i]], useNA=NAkeep))), 
+                         tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep))))
+        } else { 
+          tab2[[i]] <- tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/sum(table(x, useNA=NAkeep)))
+        }
+        
       } else if (row_wise){
-        tab2[[i]] <- tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
+        if(isTRUE(total)) { 
+          tab2[[i]] <- c(list("Total" = table(d[[i]], useNA=NAkeep)/table(d[,i], useNA=NAkeep)), 
+                         tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep)))
+        } else { 
+          tab2[[i]] <- tapply(d[[i]], d$split, function(x) table(x, useNA=NAkeep)/table(d[,i], useNA=NAkeep))
+        }
+        
       } else {
         stop("'rowwise' argument must be TRUE or FALSE", call. = FALSE)
       }
@@ -93,10 +111,20 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAk
     } else if (is.numeric(d[[i]])){
       ## Function 1
       if (!nams[[i]] %in% second){
-        tab[[i]] <- tapply(d[[i]], d$split, num_fun)
+        if(isTRUE(total)) { 
+          tab[[i]] <- c(list("Total" = num_fun(d[[i]])), tapply(d[[i]], d$split, num_fun))
+        } else { 
+          tab[[i]] <- tapply(d[[i]], d$split, num_fun)
+        }
+
         ## Function 2
       } else if (nams[[i]] %in% second){
-        tab[[i]] <- tapply(d[[i]], d$split, num_fun2)
+        if(isTRUE(total)) { 
+          tab[[i]] <- c(list("Total" = num_fun(d[[i]])), tapply(d[[i]], d$split, num_fun2))
+        } else { 
+          tab[[i]] <- tapply(d[[i]], d$split, num_fun2)
+        }
+        
       } else {
         stop("variable(s) in 'second' not found", call. = FALSE)
       }
@@ -141,15 +169,24 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAk
 }
 
 ## Formatting of table1 with no condense
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
+table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total){
   d <- as.data.frame(d)
+  
+  if (isTRUE(total)){
+    tot <- 1
+    nams <- c(" ", "Total", levels(d$split))
+  } else {
+    tot <- 0
+    nams <- c(" ", levels(d$split))
+  }
+  
   if (test){
     if (grepl("f|F", format_output))
-      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3))
+      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+3+tot))
     else if (grepl("p|P", format_output) | grepl("s|S", format_output))
-      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
+      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2+tot))
   } else {
-    tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
+    tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1+tot))
   }
   
   for (j in 1:length(tab)){
@@ -166,7 +203,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
     }
     
     ## Factor
-    for (i in 1:length(levels(d$split))){
+    len <- length(levels(d$split)) + tot
+    for (i in 1:len){
       if (is.factor(d[,j])){
         if (!simple){
           tabX <- data.frame(tabX, 
@@ -188,56 +226,56 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
     ## If test == TRUE, tests of comparisons by split ##
     if (test & grepl("f|F", format_output)){
       if (is.factor(d[,j])){
-        n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+        n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
                          paste("Chi Square:", round(tests[[j]]$statistic,2)), 
                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
       } else if (is.numeric(d[,j])){
         if (length(levels(d$split))>2){
-          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
                            paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
         } else {
-          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
                            paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
         }
       }
       tabX <- data.frame(tabX, "", "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "Test", "P-Value")
+      names(tabZ) = names(tabX) = names(n3) = c(nams, "Test", "P-Value")
       tabW <- rbind(n3, tabX)
       tabZ <- rbind(tabZ, tabW)
       
     } else if (test & grepl("p|P", format_output)){
       if (is.factor(d[,j])){
-        n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
+        n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1),
                          paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
       } else if (is.numeric(d[,j])){
         if (length(levels(d$split))>2){
-          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
         } else {
-          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1), 
+          n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
         }
       }
       tabX <- data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), "P-Value")
+      names(tabZ) = names(tabX) = names(n3) = c(nams, "P-Value")
       tabW <- rbind(n3, tabX)
       tabZ <- rbind(tabZ, tabW)
       
     } else if (test & grepl("s|S", format_output)){
-      n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1),
+      n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1),
                        paste( ifelse(tests[[j]]$p.value < 0.001, "***", 
                               ifelse(tests[[j]]$p.value < 0.01,  "**", 
                               ifelse(tests[[j]]$p.value < 0.05,  "*", "")))))
       tabX <- data.frame(tabX, "")
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split), " ")
+      names(tabZ) = names(tabX) = names(n3) = nams
       tabW <- rbind(n3, tabX)
       tabZ <- rbind(tabZ, tabW)
       
     } else {
-      n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split)), nrow=1))
-      names(tabZ) = names(tabX) = names(n3) = c(" ", levels(d$split))
+      n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1))
+      names(tabZ) = names(tabX) = names(n3) = nams
       tabW <- rbind(n3, tabX)
       tabZ <- rbind(tabZ, tabW)
     }
@@ -246,13 +284,22 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 }
 
 ## Formatting of table1 with condense
-table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1){
+table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total){
   d <- as.data.frame(d)
+  
+  if (isTRUE(total)){
+    tot <- 1
+    nams <- c(" ", "Total", levels(d$split))
+  } else {
+    tot <- 0
+    nams <- c(" ", levels(d$split))
+  }
+  
   if (test){
     if (grepl("p|P", format_output) | grepl("s|S", format_output))
-      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2))
+      tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+2+tot))
   } else {
-    tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1))
+    tabZ <- data.frame(matrix(nrow=0, ncol=length(levels(d$split))+1+tot))
   }
   
   for (j in 1:length(tab)){
@@ -277,7 +324,8 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
     }
     
     ## Counts and Percentages or Just Percentages
-    for (i in 1:length(levels(d$split))){
+    len <- length(levels(d$split)) + tot
+    for (i in 1:len){
       if (is.factor(d[,j])){
         ## Just percentages
         if (simple){
@@ -316,7 +364,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
           tabX <- n3
         } else {
           blankX <- data.frame(names(d)[j], 
-                               matrix(" ", ncol=(length(levels(d$split))), nrow = 1),
+                               matrix(" ", ncol=(length(levels(d$split))+tot), nrow = 1),
                                paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
           n3 <- data.frame(tabX, " ")
           names(blankX) <- names(n3)
@@ -333,7 +381,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
           tabX <- n3
         }
       }
-      names(tabZ) = names(tabX) = c(" ", levels(d$split), "P-Value")
+      names(tabZ) = names(tabX) = c(nams, "P-Value")
       tabZ <- rbind(tabZ, tabX)
       
     } else if (!test){
@@ -341,7 +389,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
         if (length(levels(d[,j])) == 2){
           ## Nothing
         } else {
-          blankX <- data.frame(names(d)[j], matrix(" ", ncol=(length(levels(d$split))), nrow = 1))
+          blankX <- data.frame(names(d)[j], matrix(" ", ncol=(length(levels(d$split))+tot), nrow = 1))
           n3 <- data.frame(tabX)
           names(blankX) <- names(n3)
           tabX <- rbind(blankX, n3)
@@ -353,7 +401,8 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
           ## Nothing
         }
       }
-      names(tabZ) = names(tabX) = c(" ", levels(d$split))
+      
+      names(tabZ) = names(tabX) = nams
       tabZ <- rbind(tabZ, tabX)
     }
   }

@@ -5,7 +5,7 @@
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  second = NULL, row_wise = FALSE, test = FALSE,
+  total = FALSE, second = NULL, row_wise = FALSE, test = FALSE,
   header_labels = NULL, type = "pvalues", output = "text",
   rounding_perc = 1, digits = 1, var_names = NULL,
   format_number = FALSE, NAkeep = NULL, na.rm = TRUE,
@@ -22,6 +22,8 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \item{FUN}{the function to be applied to summarize the numeric data; default is to report the means and standard deviations}
 
 \item{FUN2}{a secondary function to be applied to summarize the numeric data; default is to report the medians and 25\% and 75\% quartiles}
+
+\item{total}{whether a total (not stratified with the \code{splitby} or \code{group_by()}) should also be reported in the table}
 
 \item{second}{a vector or list of quoted continuous variables for which the \code{FUN2} should be applied}
 

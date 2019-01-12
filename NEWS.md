@@ -1,3 +1,7 @@
+# Version 1.9.0
+
+Added the option to have a total column in `table1()` even when using a grouping variable (`total = TRUE` will activate this option).
+
 # Version 1.8.8
 
 Small bug where a warning message was printed too often was fixed.

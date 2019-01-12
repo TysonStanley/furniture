@@ -158,6 +158,36 @@ test_that("table1 produces table1", {
                          output = "text2",
                          header_labels = c(" ", "P-Val"),
                          second = c("a", "c")), "table1")
+  ## Total
+  expect_s3_class(df %>%
+                    group_by(b) %>%
+                    table1(x,
+                           test=FALSE, 
+                           output = "text2",
+                           header_labels = c(" ", "P-Val"),
+                           second = c("a", "c"),
+                           total = TRUE), "table1")
+  expect_s3_class(df %>%
+                    group_by(b) %>%
+                    table1(x,
+                           test=TRUE, 
+                           output = "text2",
+                           header_labels = c(" ", "P-Val"),
+                           second = c("a", "c"),
+                           total = TRUE), "table1")
+  expect_s3_class(df %>%
+                    group_by(b) %>%
+                    table1(x,
+                           test=FALSE, 
+                           output = "text2",
+                           header_labels = c(" ", "P-Val"),
+                           total = TRUE), "table1")
+  expect_s3_class(df %>%
+                    group_by(b) %>%
+                    table1(x,
+                           test=FALSE, 
+                           second = c("a", "c"),
+                           total = TRUE), "table1")
   
   ## Variables with no variability
   expect_warning(df %>%
