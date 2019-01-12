@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.8.9 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.9.0 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -60,7 +60,7 @@ The main functions are the `table*()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.8.9 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.9.0 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 ```
@@ -168,7 +168,7 @@ nhanes_2010 %>%
 #>                       asthma 
 #>            Yes         No          P-Value
 #>             n = 251    n = 1164           
-#>  --------- ----------- ----------- -----  
+#>  --------- ----------- ----------- -------
 #>  age                               0.201  
 #>            23.0 (3.9)  23.4 (4.0)         
 #>  marijuana                         1      
@@ -200,12 +200,37 @@ nhanes_2010 %>%
 #>                           asthma 
 #>                Yes         No          P-Value
 #>                 n = 251    n = 1164           
-#>  ------------- ----------- ----------- -----  
+#>  ------------- ----------- ----------- -------
 #>  age           23.0 (3.9)  23.4 (4.0)  0.201  
 #>  marijuana: No 97 (38.6%)  434 (37.3%) 1      
 #>  illicit: No   205 (81.7%) 901 (77.4%) 0.623  
 #>  rehab: No     121 (48.2%) 547 (47%)   0.729  
 #> ───────────────────────────────────────────────
+```
+
+It can also do a total column with the stratified columns (new with
+`v 1.9.0`) with the `total = TRUE` argument.
+
+``` r
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         type = "condense",
+         total = TRUE)
+#> 
+#> ────────────────────────────────────────────────────────────
+#>                                 asthma 
+#>                Total        Yes         No          P-Value
+#>                n = 1417      n = 251    n = 1164           
+#>  ------------- ------------ ----------- ----------- -------
+#>  age           23.3 (4.0)   23.0 (3.9)  23.4 (4.0)  0.201  
+#>  marijuana: No 532 (37.5%)  97 (38.6%)  434 (37.3%) 1      
+#>  illicit: No   1107 (78.1%) 205 (81.7%) 901 (77.4%) 0.623  
+#>  rehab: No     668 (47.1%)  121 (48.2%) 547 (47%)   0.729  
+#> ────────────────────────────────────────────────────────────
 ```
 
 `table1()` can be outputted directly to other formats. All

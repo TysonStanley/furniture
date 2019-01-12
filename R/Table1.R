@@ -326,6 +326,7 @@ table1.data.frame = function(.data,
   attr(final_l, "splitby") <- splitting
   attr(final_l, "output") <- output
   attr(final_l, "tested") <- test
+  attr(final_l, "total") <- total
   
   ## Export Option
   if (!is.null(export)){
@@ -366,37 +367,53 @@ table1.data.frame = function(.data,
 
 #' @export
 print.table1 <- function(x, ...){
-  max_col_width = max_col_width2 = list()
+  max_col_width = max_col_width2 = max_col_width3 = list()
   ## Extract data set
   x2 <- as.data.frame(x[[1]])
   
-  ## Splitby Name and Location
-  if (!is.null(attr(x, "splitby"))){
-    x3 <- as.data.frame(x[[1]])
-    x4 <- x3[,-1]
-    x5 <- x3[, 1]
-    x4[] <- sapply(x4, as.character)
-    x5[] <- sapply(x5, as.character)
-    for (i in 1:ncol(x4)){
-      max_col_width2[[i]] <- max(sapply(x4[[i]], nchar, type="width"))
-    }
-    max_col_width3 <- max(sapply(x5, nchar, type="width"))
-    var_width <- sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 
-      dim(x4)[2] - 1
-    first_width <- sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
+  if (isTRUE(attr(x, "total"))){
+    first_part <- c(1,2)
+  } else {
+    first_part <- c(1)
   }
-
+  
+  if (isTRUE(attr(x, "tested"))){
+    last_part <- ncol(x2)
+  } else {
+    last_part <- NULL
+  }
+  
   x2[] <- sapply(x2, as.character)
-
+  
   ## Get width of table for lines
   for (i in 1:dim(x2)[2]){
-    max_col_width[[i]] = max(sapply(x2[[i]], nchar, type="width"))
+    max_col_width[[i]] <- max(sapply(x2[[i]], nchar, type="width"))
   }
   tot_width <- sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
     dim(x2)[2] - 1
   
   if (isTRUE(attr(x, "test")))
     max_col_width[[length(max_col_width)]] <- 7
+  
+  
+  ## Splitby Name and Location
+  if (!is.null(attr(x, "splitby"))){
+    x3 <- as.data.frame(x[[1]])
+    x4 <- x3[, -c(first_part, last_part), drop = FALSE]
+    x5 <- x3[, first_part, drop = FALSE]
+    x4[] <- sapply(x4, as.character)
+    x5[] <- sapply(x5, as.character)
+    for (i in 1:ncol(x4)){
+      max_col_width2[[i]] <- max(sapply(x4[[i]], nchar, type="width"))
+    }
+    for (i in 1:ncol(x5)){
+      max_col_width3[[i]] <- max(sapply(x5[[i]], nchar, type="width"))
+    }
+    var_width <- sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 
+      dim(x4)[2] - 1
+    first_width <- sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
+  }
+
   
   ## Print top border
   cat("\n\u2500")
@@ -406,8 +423,8 @@ print.table1 <- function(x, ...){
   cat("\u2500\n") 
   ## Print splitby name
   if (!is.null(attr(x, "splitby"))){
-    len1 = nchar(gsub("`", "", attr(x, "splitby")))
-    for (i in 1:round(var_width/2 + first_width - len1/2)){
+    len1 <- nchar(gsub("`", "", attr(x, "splitby")))
+    for (i in 1:round(first_width + var_width/2 - len1/2)){
       cat(" ")
     }
     cat(gsub("`", "", attr(x, "splitby")), "\n")

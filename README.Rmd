@@ -103,6 +103,19 @@ nhanes_2010 %>%
          type = "condense")
 ```
 
+It can also do a total column with the stratified columns (new with `v 1.9.0`) with the `total = TRUE` argument.
+
+```{r, warning=FALSE, message=FALSE}
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         type = "condense",
+         total = TRUE)
+```
+
 `table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
 
 ```{r}

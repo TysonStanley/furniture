@@ -64,16 +64,18 @@
   
   N   <- c("Total" = tot, tapply(d[[1]], d$split, length))
   N[] <- sapply(N, function(x) as.character(paste("n =", x)))
-  N   <- suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f"))
-  N   <- t(N)
+  N   <- suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f")) %>%
+    sapply(trimws, which = "left") %>%
+    t(.)
+  
   ## Formatting the N line
   if (grepl("f|F", format_output) & test){
     if (is.null(header_labels)){
       header_labels <- c(nams, "Test", "P-Value")
-      N <- data.frame(" ", N, "", "")
+      N <- data.frame("", N, "", "")
       names(N) <- header_labels
     } else {
-      N <- data.frame(" ", N, "", "")
+      N <- data.frame("", N, "", "")
       names(N) <- c(header_labels[1], levels(d$split), header_labels[2:length(header_labels)])
     }
   } else if ((grepl("p|P", format_output) | grepl("s|S", format_output)) & test){
@@ -97,10 +99,10 @@
   } else {
     if (is.null(header_labels)){
       header_labels <- nams
-      N <- data.frame(" ", N)
+      N <- data.frame("", N)
       names(N) <- header_labels
     } else {
-      N <- data.frame(" ", N)
+      N <- data.frame("", N)
       names(N) <- c(header_labels[1], levels(d$split))
     }
 
