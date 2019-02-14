@@ -1,6 +1,6 @@
 # Version 1.9.0
 
-Added the option to have a total column in `table1()` even when using a grouping variable (`total = TRUE` will activate this option).
+Added the option to have a total column in `table1()` even when using a grouping variable (`total = TRUE` will activate this option). The resulting tests (if `test = TRUE`) will give results of just the bivariate comparisons (grouping variable with the specified variable).
 
 # Version 1.8.8
 
