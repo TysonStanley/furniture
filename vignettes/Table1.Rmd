@@ -204,23 +204,15 @@ table1(df,
 This is particularly useful when you adjust a variable within the function:
 
 ```{r, warning=FALSE, message=FALSE}
-table1(df,
-       "A" = factor(ifelse(a > 1, 1, 0)), b, c,
-       splitby = ~d,
-       test = TRUE)
+df %>% 
+  group_by(d) %>% 
+  table1("A" = factor(ifelse(a > 1, 1, 0)), b, c,
+         test = TRUE)
 ```
 
 Here we changed `a` to a factor within the function. In order for the name to look better, we can assign a new name, otherwise it would be named something like `factor.ifelse.a...`.
 
 
-For more complex naming (e.g., using spacing, brackets, or other values not allowed as name in a data.frame), use the `var_names` argument.
-```{r, warning=FALSE, message=FALSE}
-table1(df,
-       factor(ifelse(a > 1, 1, 0)), b, c,
-       splitby = ~d,
-       test = TRUE,
-       var_names = c("A New Variable", "B Variable", "C Variable"))
-```
 
 ## Final Note
 
