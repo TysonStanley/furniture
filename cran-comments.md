@@ -9,6 +9,9 @@
 ## R CMD check results
 There were no ERRORs, WARNINGs, or NOTEs.
 
+This fixes an issue that just appeared regarding R underdevelopment that Kurt Hornik contacted me about.
+This fix also works for the current R versions.
+
 ## Downstream Dependencies
 Currently, there is one downstream dependency for this package (`MarginalMediation`). 
 This package has been checked with no errors, warnings, or notes resulting from the changes
