@@ -122,16 +122,16 @@ table1(df, a, b, d, ifelse(a > 1, 1, 0),
 This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of `knitr::kable`). Below shows how to do a latex table (not using `kable` however, but a built-in function that provides the variable name at the top of the table):
 ```{r table1.7}
 table1(df, a, b, d, "new var" = ifelse(a > 1, 1, 0),
-       splitby=~factor(c), 
-       test=TRUE,
+       splitby = ~factor(c), 
+       test = TRUE,
        output = "latex2")
 ```
 
 Last item to show you regarding `table1()` is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.
 ```{r simple_table1.1}
 table1(df, a, b, d, "new var" = ifelse(a > 1, 1, 0),
-       splitby=~factor(c), 
-       test=TRUE,
+       splitby = ~factor(c), 
+       test = TRUE,
        type = c("simple", "condensed"))
 ```
 

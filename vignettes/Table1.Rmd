@@ -206,7 +206,7 @@ This is particularly useful when you adjust a variable within the function:
 ```{r, warning=FALSE, message=FALSE}
 df %>% 
   group_by(d) %>% 
-  table1("A" = factor(ifelse(a > 1, 1, 0)), b, c,
+  table1("A" = factor(ifelse(a > 500, 1, 0)), b, c,
          test = TRUE)
 ```
 
@@ -218,10 +218,10 @@ Here we changed `a` to a factor within the function. In order for the name to lo
 
 As a final note, the `"table1"` object can be coerced to a `data.frame` very easily:
 ```{r dataframe}
-tab1 = table1(df,
-              a, b, c,
-              splitby = ~d,
-              test = TRUE)
+tab1 <- table1(df,
+               a, b, c,
+               splitby = ~d,
+               test = TRUE)
 as.data.frame(tab1)
 ```
 

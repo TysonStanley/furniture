@@ -10,8 +10,8 @@ Authors@R: c(person("Tyson S.", "Barrett",
  	         person("Emily", "Brignone", role="aut"),
  	         person("Daniel J.", "Laxman", role="aut"))
 Maintainer: Tyson S. Barrett <t.barrett@aggiemail.usu.edu>
-Description: Contains three main functions (i.e., three pieces of furniture):
-    table1() which produces a well-formatted table of descriptives common as Table 1
+Description: Contains four main functions (i.e., four pieces of furniture):
+    table1() which produces a well-formatted table of descriptive statistics common as Table 1
     in research articles, tableC() which produces a well-formatted table of correlations,
     tableF() which provides frequency counts, and washer() which 
     is helpful in cleaning up the data. These furniture-themed functions are designed 
