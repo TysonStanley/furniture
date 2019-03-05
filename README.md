@@ -60,7 +60,7 @@ The main functions are the `table*()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.9.0 ────────────────────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
+#> ── furniture 1.9.0 ─────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
 #> ✔ furniture attached
 #> ✔ No potential conflicts found
 ```
@@ -238,6 +238,8 @@ nhanes_2010 %>%
 option `"latex2"` which provides a publication ready table in Latex
 documents.
 
+The `tableC()` function gives a well-formatted correlation table.
+
 ``` r
 tableC(nhanes_2010, 
        age, active, vig_active, 
@@ -252,6 +254,8 @@ tableC(nhanes_2010,
 #>  [3]vig_active -0.083 (0.141) 0.828 (<.001) 1.00 
 #> ──────────────────────────────────────────────────
 ```
+
+The `tableF()` function gives a table of frequencies.
 
 ``` r
 tableF(nhanes_2010, age)

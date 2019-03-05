@@ -118,11 +118,15 @@ nhanes_2010 %>%
 
 `table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
 
+The `tableC()` function gives a well-formatted correlation table.
+
 ```{r}
 tableC(nhanes_2010, 
        age, active, vig_active, 
        na.rm=TRUE)
 ```
+
+The `tableF()` function gives a table of frequencies.
 
 ```{r}
 tableF(nhanes_2010, age)
