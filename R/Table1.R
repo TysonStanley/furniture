@@ -273,7 +273,7 @@ table1.data.frame = function(.data,
   ## Does each variable have at least two levels?
   if ((! .more_than_one_value(d)) & test){
     test = FALSE
-    warning("Not all variables have at least 2 unique values. Cannot test...", 
+    warning("Not all variables have at least 2 unique values. Cannot do tests...", 
             call. = FALSE)
   }
   

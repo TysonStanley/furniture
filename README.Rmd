@@ -94,7 +94,7 @@ nhanes_2010 %>%
          test = TRUE)
 ```
 
-By default it does the appropriate parametric tests. However, you can change that by setting `param = FALSE`.
+By default it does the appropriate parametric tests. However, you can change that by setting `param = FALSE` (new with `v 1.9.1`).
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -130,7 +130,6 @@ nhanes_2010 %>%
          output = "text2",
          na.rm = FALSE,
          test = TRUE,
-         param = FALSE,
          total = TRUE,
          type = "full")
 ```

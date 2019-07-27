@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.9.1 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.9.2 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -184,7 +184,7 @@ nhanes_2010 %>%
 ```
 
 By default it does the appropriate parametric tests. However, you can
-change that by setting `param = FALSE`.
+change that by setting `param = FALSE` (new with `v 1.9.1`).
 
 ``` r
 library(tidyverse)
@@ -243,47 +243,29 @@ nhanes_2010 %>%
          output = "text2",
          na.rm = FALSE,
          test = TRUE,
-         param = FALSE,
          total = TRUE,
          type = "full")
 #> 
-#> ─────────────────────────────────────────────────────────────────────────────
-#>                                         asthma 
-#>            Total        Yes         No          Test                
-#>            n = 1417     n = 251     n = 1164                        
-#>  --------- ------------ ----------- ----------- --------------------
-#>  age                                            Kruskal-Wallis: 1.41
-#>            23.3 (4.0)   23.0 (3.9)  23.4 (4.0)                      
-#>  marijuana                                      Chi Square: 0       
-#>     Yes    716 (50.5%)  131 (52.2%) 584 (50.2%)                     
-#>     No     532 (37.5%)  97 (38.6%)  434 (37.3%)                     
-#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                     
-#>  illicit                                        Chi Square: 0.24    
-#>     Yes    141 (10%)    23 (9.2%)   117 (10.1%)                     
-#>     No     1107 (78.1%) 205 (81.7%) 901 (77.4%)                     
-#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                     
-#>  rehab                                          Chi Square: 0.12    
-#>     Yes    48 (3.4%)    10 (4%)     37 (3.2%)                       
-#>     No     668 (47.1%)  121 (48.2%) 547 (47%)                       
-#>     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                     
-#>  P-Value
-#>         
-#>  -------
-#>  0.235  
-#>         
-#>  1      
-#>         
-#>         
-#>         
-#>  0.623  
-#>         
-#>         
-#>         
-#>  0.729  
-#>         
-#>         
-#>         
-#> ─────────────────────────────────────────────────────────────────────────────
+#> ─────────────────────────────────────────────────────────────────────────
+#>                                       asthma 
+#>            Total        Yes         No          Test             P-Value
+#>            n = 1417     n = 251     n = 1164                            
+#>  --------- ------------ ----------- ----------- ---------------- -------
+#>  age                                            T-Test: -1.28    0.201  
+#>            23.3 (4.0)   23.0 (3.9)  23.4 (4.0)                          
+#>  marijuana                                      Chi Square: 0    1      
+#>     Yes    716 (50.5%)  131 (52.2%) 584 (50.2%)                         
+#>     No     532 (37.5%)  97 (38.6%)  434 (37.3%)                         
+#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         
+#>  illicit                                        Chi Square: 0.24 0.623  
+#>     Yes    141 (10%)    23 (9.2%)   117 (10.1%)                         
+#>     No     1107 (78.1%) 205 (81.7%) 901 (77.4%)                         
+#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         
+#>  rehab                                          Chi Square: 0.12 0.729  
+#>     Yes    48 (3.4%)    10 (4%)     37 (3.2%)                           
+#>     No     668 (47.1%)  121 (48.2%) 547 (47%)                           
+#>     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                         
+#> ─────────────────────────────────────────────────────────────────────────
 ```
 
 `table1()` can be outputted directly to other formats. All
