@@ -45,7 +45,6 @@
     all()
 }
 
-
 ## Observations and Header Labels
 .obs_header = function(d, f1, format_output, test, output, header_labels, total){
   

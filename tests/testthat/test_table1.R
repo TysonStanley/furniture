@@ -194,10 +194,10 @@ test_that("table1 produces table1", {
                    mutate(x = 1) %>%
                    group_by(b) %>%
                    table1(x,
-                          test=FALSE, 
                           output = "text2",
                           header_labels = c(" ", "P-Val"),
-                          second = c("a", "c")))
+                          second = c("a", "c"),
+                          test = TRUE))
   expect_failure(expect_warning(df %>%
                                   table1(x,
                                          test=FALSE, 
