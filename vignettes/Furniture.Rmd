@@ -82,6 +82,16 @@ df %>%
 ```
 In this case, we used the `group_by()` function from `dplyr` (within the `tidyverse`) and `table1()` knows to use that as the grouping variable in place of the `splitby` argument.
 
+If the parametric tests (default) are not appropriate, you can set `param = FALSE`.
+```{r table1.3.3, message=FALSE, warning=FALSE}
+df %>%
+  group_by(c) %>%
+  table1(a, b, d, ifelse(a > 1, 1, 0), 
+        test=TRUE,
+        param=FALSE)
+```
+
+
 Finally, you can polish it quite a bit using a few other options. For example, you can do the following:
 ```{r table1.4}
 table1(df, a, b, d, ifelse(a > 1, 1, 0),

@@ -1,3 +1,9 @@
+# Version 1.9.1
+
+`table1()` now can do the non-parametric Kruskal-Wallis Rank Sum test (when `param = FALSE`). 
+
+Also fixed a small issue with `mutate_rowmeans()` and `mutate_rowsums()`.
+
 # Version 1.9.0
 
 Added the option to have a total column in `table1()` even when using a grouping variable (`total = TRUE` will activate this option). The resulting tests (if `test = TRUE`) will give results of just the bivariate comparisons (grouping variable with the specified variable).

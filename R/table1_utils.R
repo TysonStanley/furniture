@@ -45,6 +45,8 @@ selecting <- function(d_, ...) {
   df
 }
 
+
+
 ## Used in the selecting function
 to_name <- function(listed, names1, i) {
   if (is.null(names1)) {
@@ -63,7 +65,7 @@ to_name <- function(listed, names1, i) {
 
 
 ## Does the summary of table1
-table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAkeep, total){
+table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, param, NAkeep, total){
   ## Summarizing The Data
   d <- data.frame(d)
   tab = tab2 = tests = tests2 = nams = list()
@@ -107,6 +109,7 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAk
       if (test)
         tests[[i]] <- chisq.test(d$split, d[[i]])
     
+    
     ## Numeric ##
     } else if (is.numeric(d[[i]])){
       ## Function 1
@@ -129,47 +132,60 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, NAk
         stop("variable(s) in 'second' not found", call. = FALSE)
       }
       
-      ## For splitby vars with more than 2 levels
-      if (length(levels(d$split))>2 & test){
+      if (test){
         ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
         comp   <- complete.cases(d[[i]], d$split)
         resids <- resid(lm(d[comp,i] ~ d$split[comp]))^2
         r2     <- summary(lm(resids ~ d$split[comp]))$r.squared
         lt     <- dchisq(length(resids)*r2, df = length(levels(d$split)))
-        if (lt<0.05){
-          ## Performs an approximate method of Welch (1951)
-          tests[[i]] <- oneway.test(d[[i]] ~ d$split, var.equal=FALSE)
-          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in oneway.test() for: ", nam[i]))
-        } else {
-          ## Performs a simple one-way ANOVA
-          tests[[i]] <- oneway.test(d[[i]] ~ d$split, var.equal=TRUE)
-        }
-      } else if (test){
-        ## Breusch-Pagan Test of Heteroskedasticity (equality of variances)
-        comp   <- complete.cases(d[[i]], d$split)
-        resids <- resid(lm(d[comp,i] ~ d$split[comp]))^2
-        r2     <- summary(lm(resids ~ d$split[comp]))$r.squared
-        lt     <- dchisq(length(resids)*r2, df = length(levels(d$split)))
-        if (lt<0.05){
-          ## Performs an approximate method of Welch (1951)
-          tests[[i]] <- t.test(d[[i]] ~ d$split, var.equal=FALSE)
-          message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: ", nam[i]))
-        } else {
-          ## Performs a simple one-way ANOVA
-          tests[[i]] <- t.test(d[[i]] ~ d$split, var.equal=TRUE)
-        }    
       }
       
-    } else {
-      stop("Variables need to be either factor, character or numeric.", call. = FALSE)
+      ## Parametric or Non-parametric
+      if (param){
+        tests[[i]] <- parametric(d[[i]] ~ d$split, d$split, lt, test, nam, i)
+      } else {
+        tests[[i]] <- nonparametric(d[[i]] ~ d$split)
+      }
     }
   }
   
   invisible(list(tab, tab2, tests, nams))
 }
 
+
+parametric <- function(formula, split, lt, test, nam, i){
+  
+  ## For splitby vars with more than 2 levels
+  if (length(levels(split))>2 & test){
+    if (lt<0.05){
+      message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in oneway.test() for: ", nam[i]))
+      ## Performs an approximate method of Welch (1951)
+      oneway.test(formula, var.equal=FALSE)
+    } else {
+      ## Performs a simple one-way ANOVA
+      oneway.test(formula, var.equal=TRUE)
+    }
+    
+  } else if (test){
+    if (lt<0.05){
+      message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: ", nam[i]))
+      ## Performs an approximate method of Welch (1951)
+      t.test(formula, var.equal=FALSE)
+    } else {
+      ## Performs a simple one-way ANOVA
+      t.test(formula, var.equal=TRUE)
+    }    
+  }
+  
+}
+
+nonparametric <- function(formula){
+  kruskal.test(formula)
+}
+
+
 ## Formatting of table1 with no condense
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total){
+table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total, param){
   d <- as.data.frame(d)
   
   if (isTRUE(total)){
@@ -223,6 +239,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
       }
     }
     
+    the_test_label <- ifelse(rep(param, 2), c("F-Value:", "T-Test:"), c("Kruskal-Wallis:", "Kruskal-Wallis:"))
+    
     ## If test == TRUE, tests of comparisons by split ##
     if (test & grepl("f|F", format_output)){
       if (is.factor(d[,j])){
@@ -232,11 +250,11 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
       } else if (is.numeric(d[,j])){
         if (length(levels(d$split))>2){
           n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
-                           paste("F-Value:", round(tests[[j]]$statistic[[1]],2)), 
+                           paste(the_test_label[1], round(tests[[j]]$statistic[[1]],2)), 
                            paste(ifelse(tests[[j]]$p.value[1] < .001, "<.001", round(tests[[j]]$p.value[1],3))))
         } else {
           n3 <- data.frame(names(d)[j], matrix(" ", ncol=length(levels(d$split))+tot, nrow=1), 
-                           paste("T-Test:", round(tests[[j]]$statistic[[1]],2)), 
+                           paste(the_test_label[2], round(tests[[j]]$statistic[[1]],2)), 
                            paste(ifelse(tests[[j]]$p.value < .001, "<.001", round(tests[[j]]$p.value,3))))
         }
       }

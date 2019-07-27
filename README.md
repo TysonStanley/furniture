@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.9.0 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.9.1 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -60,9 +60,6 @@ The main functions are the `table*()` functions (e.g., `table1()`,
 
 ``` r
 library(furniture)
-#> ── furniture 1.9.0 ─────────────────────────────────────────────────────────────── learn more at tysonbarrett.com ──
-#> ✔ furniture attached
-#> ✔ No potential conflicts found
 ```
 
 ``` r
@@ -186,6 +183,9 @@ nhanes_2010 %>%
 #> ───────────────────────────────────────────
 ```
 
+By default it does the appropriate parametric tests. However, you can
+change that by setting `param = FALSE`.
+
 ``` r
 library(tidyverse)
 nhanes_2010 %>%
@@ -194,6 +194,7 @@ nhanes_2010 %>%
          output = "text2",
          na.rm = FALSE,
          test = TRUE,
+         param = FALSE,
          type = "condense")
 #> 
 #> ───────────────────────────────────────────────
@@ -201,7 +202,7 @@ nhanes_2010 %>%
 #>                Yes         No          P-Value
 #>                n = 251     n = 1164           
 #>  ------------- ----------- ----------- -------
-#>  age           23.0 (3.9)  23.4 (4.0)  0.201  
+#>  age           23.0 (3.9)  23.4 (4.0)  0.235  
 #>  marijuana: No 97 (38.6%)  434 (37.3%) 1      
 #>  illicit: No   205 (81.7%) 901 (77.4%) 0.623  
 #>  rehab: No     121 (48.2%) 547 (47%)   0.729  
@@ -231,6 +232,58 @@ nhanes_2010 %>%
 #>  illicit: No   1107 (78.1%) 205 (81.7%) 901 (77.4%) 0.623  
 #>  rehab: No     668 (47.1%)  121 (48.2%) 547 (47%)   0.729  
 #> ────────────────────────────────────────────────────────────
+```
+
+It can also report the statistics in addition to the p-values.
+
+``` r
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         param = FALSE,
+         total = TRUE,
+         type = "full")
+#> 
+#> ─────────────────────────────────────────────────────────────────────────────
+#>                                         asthma 
+#>            Total        Yes         No          Test                
+#>            n = 1417     n = 251     n = 1164                        
+#>  --------- ------------ ----------- ----------- --------------------
+#>  age                                            Kruskal-Wallis: 1.41
+#>            23.3 (4.0)   23.0 (3.9)  23.4 (4.0)                      
+#>  marijuana                                      Chi Square: 0       
+#>     Yes    716 (50.5%)  131 (52.2%) 584 (50.2%)                     
+#>     No     532 (37.5%)  97 (38.6%)  434 (37.3%)                     
+#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                     
+#>  illicit                                        Chi Square: 0.24    
+#>     Yes    141 (10%)    23 (9.2%)   117 (10.1%)                     
+#>     No     1107 (78.1%) 205 (81.7%) 901 (77.4%)                     
+#>     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                     
+#>  rehab                                          Chi Square: 0.12    
+#>     Yes    48 (3.4%)    10 (4%)     37 (3.2%)                       
+#>     No     668 (47.1%)  121 (48.2%) 547 (47%)                       
+#>     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                     
+#>  P-Value
+#>         
+#>  -------
+#>  0.235  
+#>         
+#>  1      
+#>         
+#>         
+#>         
+#>  0.623  
+#>         
+#>         
+#>         
+#>  0.729  
+#>         
+#>         
+#>         
+#> ─────────────────────────────────────────────────────────────────────────────
 ```
 
 `table1()` can be outputted directly to other formats. All
@@ -305,21 +358,16 @@ nhanes_2010 %>%
 
 ``` r
 nhanes_2010 %>%
-  mutate_rowmeans("avg_active", mod_active:vig_active)
-#> # A tibble: 1,417 x 3
-#>    mod_active vig_active avg_active
-#>         <dbl>      <dbl>      <dbl>
-#>  1         NA         30         NA
-#>  2        180        180        180
-#>  3         NA         NA         NA
-#>  4         70         20         45
-#>  5         NA        120         NA
-#>  6         NA         NA         NA
-#>  7        120         NA         NA
-#>  8         NA        120         NA
-#>  9         NA         NA         NA
-#> 10         NA         NA         NA
-#> # … with 1,407 more rows
+  mutate_rowmeans("avg_active", mod_active:vig_active) %>% 
+  select(id, avg_active) %>% 
+  head()
+#>      id avg_active
+#> 1 73568         NA
+#> 2 73578        180
+#> 3 73582         NA
+#> 4 73585         45
+#> 5 73592         NA
+#> 6 73594         NA
 ```
 
 ## Notes

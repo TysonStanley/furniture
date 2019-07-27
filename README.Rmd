@@ -4,12 +4,13 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
 )
+devtools::load_all()
 ```
 
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.org/package=furniture)
@@ -17,6 +18,7 @@ knitr::opts_chunk$set(
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
 # furniture: `r packageVersion("furniture")` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+
 
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`), exploratory data analysis and reporting (e.g., `table1()`, `tableC()`, `tableF()`). It currently contains eight main functions:
@@ -92,6 +94,8 @@ nhanes_2010 %>%
          test = TRUE)
 ```
 
+By default it does the appropriate parametric tests. However, you can change that by setting `param = FALSE`.
+
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
 nhanes_2010 %>%
@@ -100,6 +104,7 @@ nhanes_2010 %>%
          output = "text2",
          na.rm = FALSE,
          test = TRUE,
+         param = FALSE,
          type = "condense")
 ```
 
@@ -114,6 +119,20 @@ nhanes_2010 %>%
          test = TRUE,
          type = "condense",
          total = TRUE)
+```
+
+It can also report the statistics in addition to the p-values.
+
+```{r, warning=FALSE, message=FALSE}
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab,
+         output = "text2",
+         na.rm = FALSE,
+         test = TRUE,
+         param = FALSE,
+         total = TRUE,
+         type = "full")
 ```
 
 `table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
@@ -147,7 +166,9 @@ nhanes_2010 %>%
 
 ```{r}
 nhanes_2010 %>%
-  mutate_rowmeans("avg_active", mod_active:vig_active)
+  mutate_rowmeans("avg_active", mod_active:vig_active) %>% 
+  select(id, avg_active) %>% 
+  head()
 ```
 
 ## Notes

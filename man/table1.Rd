@@ -6,8 +6,8 @@
 \usage{
 table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
   total = FALSE, second = NULL, row_wise = FALSE, test = FALSE,
-  header_labels = NULL, type = "pvalues", output = "text",
-  rounding_perc = 1, digits = 1, var_names = NULL,
+  param = TRUE, header_labels = NULL, type = "pvalues",
+  output = "text", rounding_perc = 1, digits = 1, var_names = NULL,
   format_number = FALSE, NAkeep = NULL, na.rm = TRUE,
   booktabs = TRUE, caption = NULL, align = NULL, float = "ht",
   export = NULL, label = NULL)
@@ -30,6 +30,8 @@ table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
 \item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.}
+
+\item{param}{logical; if set to \code{TRUE} then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to \code{FALSE}, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.}
 
 \item{header_labels}{a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).}
 

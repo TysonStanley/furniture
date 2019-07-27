@@ -69,9 +69,11 @@ rowmeans = function(..., na.rm=FALSE){
 #' @importFrom dplyr mutate
 #' @export
 mutate_rowmeans = function(data, new_var, ..., na.rm=FALSE){
-  data %>%
-    dplyr::select(...) %>%
-    dplyr::mutate(!!new_var := rowMeans(., na.rm = na.rm))
+  means <- data %>%
+    dplyr::select(...) %>% 
+    dplyr::mutate(!!new_var := rowMeans(., na.rm = na.rm)) %>% 
+    dplyr::select(!!new_var)
+  cbind(data, means)
 }
 
 
@@ -150,9 +152,11 @@ rowsums = function(..., na.rm=FALSE){
 #' @importFrom dplyr mutate
 #' @export
 mutate_rowsums = function(data, new_var, ..., na.rm=FALSE){
-  data %>%
-    dplyr::select(...) %>%
-    dplyr::mutate(!!new_var := rowSums(., na.rm = na.rm))
+  sums <- data %>%
+    dplyr::select(...) %>% 
+    dplyr::mutate(!!new_var := rowSums(., na.rm = na.rm)) %>% 
+    dplyr::select(!!new_var)
+  cbind(data, sums)
 }
 
 

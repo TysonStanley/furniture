@@ -14,6 +14,7 @@
 #' @param second a vector or list of quoted continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
 #' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.
+#' @param param logical; if set to \code{TRUE} then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to \code{FALSE}, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.
 #' @param header_labels a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).
 #' @param type what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.
 #' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc"). A new option, \code{'latex2'}, although more limited, allows the variable name to show and has an overall better appearance.
@@ -72,7 +73,7 @@
 #'        x2 = ifelse(x > 0, 1, 0), z = z)
 #'
 #' @export
-#' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test
+#' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test kruskal.test
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
 #' @importFrom dplyr group_by
@@ -86,6 +87,7 @@ table1 = function(.data,
                    second = NULL,
                    row_wise = FALSE, 
                    test = FALSE, 
+                   param = TRUE,
                    header_labels = NULL,
                    type = "pvalues",
                    output = "text",
@@ -119,6 +121,7 @@ table1.data.frame = function(.data,
                   second = NULL,
                   row_wise = FALSE, 
                   test = FALSE, 
+                  param = TRUE,
                   header_labels = NULL,
                   type = "pvalues",
                   output = "text",
@@ -292,7 +295,7 @@ table1.data.frame = function(.data,
   ######################
   ## Summarizing Data ##
   ######################
-  summed <- table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, NAkeep, total)
+  summed <- table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, param, NAkeep, total)
   tab    <- summed[[1]]
   tab2   <- summed[[2]]
   tests  <- summed[[3]]
@@ -304,7 +307,7 @@ table1.data.frame = function(.data,
   ## Not Condensed or Condensed
   if (!condense){
     tabZ <- table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                     format_output, second, nams, simple, output, f1, total)
+                                     format_output, second, nams, simple, output, f1, total, param)
   } else if (condense){
     tabZ <- table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
                                    format_output, second, nams, simple, output, f1, total)
