@@ -20,7 +20,6 @@ devtools::load_all()
 # furniture: `r packageVersion("furniture")` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 
-
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`), exploratory data analysis and reporting (e.g., `table1()`, `tableC()`, `tableF()`). It currently contains eight main functions:
 
 1. `table1()` -- gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, `table1()` now works with `dplyr::group_by()`.

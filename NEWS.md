@@ -1,4 +1,9 @@
-# Version 1.9.1
+# Version 1.9.3
+
+Added `rowmeans.n()` and `rowsums.n()` for row means and sums allowing `n` missing values across the row.
+
+
+# Version 1.9.2
 
 `table1()` now can do the non-parametric Kruskal-Wallis Rank Sum test (when `param = FALSE`). 
 
