@@ -1,8 +1,8 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.9.3
-Date: 2019-07-25
+Version: 1.9.4
+Date: 2019-11-16
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett@aggiemail.usu.edu", 
@@ -30,11 +30,8 @@ Imports:
     forcats
 Suggests:
     pkgload,
-    tidyverse,
     rmarkdown,
-    testthat,
-    MASS,
-    sjmisc
+    testthat
 LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8
