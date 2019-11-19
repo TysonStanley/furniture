@@ -42,7 +42,7 @@ There are four functions that we'll demonstrate here:
 
 `washer` is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.
 ```{r washer, message=FALSE, warning=FALSE}
-library(tidyverse)
+library(dplyr)
 
 df <- df %>%
   mutate(d = washer(d, -99),  ## changes the placeholder -99 to NA

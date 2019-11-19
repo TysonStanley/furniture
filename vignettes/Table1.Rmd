@@ -171,7 +171,7 @@ Here we do not have any missingness but it shows up as zeros to show that there 
 Finally, and very importantly, to make it easier to implement in the tidyverse of packages, a piping option is available. This option can use a `grouped_df` object output by `dplyr::group_by()` and use the groups indicated there as shown below.
 
 ```{r tidyverse, fig.width=5, message=FALSE, warning=FALSE}
-library(tidyverse)
+library(dplyr)
 
 df %>%
   filter(f == 1) %>%
