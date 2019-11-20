@@ -227,7 +227,7 @@ table1.data.frame = function(.data,
     if (length(groups) == 1){
       d$split <- factor(.data[[groups]])
     } else {
-      interacts <- interaction(.data[groups], sep = "_")
+      interacts <- interaction(.data[groups], sep = "-")
       d$split <- factor(interacts)
     }
     ## For print method
