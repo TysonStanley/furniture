@@ -46,9 +46,6 @@
 #' x = washer(x, 7, 8, 9)
 #' x = washer(x, is.na, value=0)
 #' 
-#' ## Crosstabs Operator
-#' f1 %xt% f2
-#' 
 #' }
 #' 
 #' @docType package

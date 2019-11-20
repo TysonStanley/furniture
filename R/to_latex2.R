@@ -14,8 +14,6 @@
 #' 
 #' @export
 #' @importFrom utils capture.output
-#' 
-
 to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
     splitby <- "Total"

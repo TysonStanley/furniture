@@ -73,46 +73,12 @@
 #'        x2 = ifelse(x > 0, 1, 0), z = z)
 #'
 #' @export
-#' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test kruskal.test
+#' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test kruskal.test chisq.test
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
 #' @importFrom dplyr group_by
 #' @importFrom dplyr mutate
 table1 = function(.data, 
-                   ..., 
-                   splitby = NULL, 
-                   FUN = NULL,
-                   FUN2 = NULL,
-                   total = FALSE,
-                   second = NULL,
-                   row_wise = FALSE, 
-                   test = FALSE, 
-                   param = TRUE,
-                   header_labels = NULL,
-                   type = "pvalues",
-                   output = "text",
-                   rounding_perc = 1,
-                   digits = 1,
-                   var_names = NULL, 
-                   format_number = FALSE,
-                   NAkeep = NULL, 
-                   na.rm = TRUE,
-                   booktabs = TRUE, 
-                   caption = NULL, 
-                   align = NULL,
-                   float = "ht",
-                   export = NULL,
-                   label = NULL){
-  UseMethod("table1", .data)
-}
-
-
-#' @export
-#' @importFrom utils write.csv
-#' @importFrom knitr kable
-#' @importFrom forcats fct_drop
-#' @importFrom dplyr filter
-table1.data.frame = function(.data, 
                   ..., 
                   splitby = NULL, 
                   FUN = NULL,
@@ -137,6 +103,39 @@ table1.data.frame = function(.data,
                   float = "ht",
                   export = NULL,
                   label = NULL){
+  UseMethod("table1", .data)
+}
+
+
+#' @export
+#' @importFrom utils write.csv
+#' @importFrom knitr kable
+#' @importFrom dplyr filter
+table1.data.frame = function(.data, 
+                             ..., 
+                             splitby = NULL, 
+                             FUN = NULL,
+                             FUN2 = NULL,
+                             total = FALSE,
+                             second = NULL,
+                             row_wise = FALSE, 
+                             test = FALSE, 
+                             param = TRUE,
+                             header_labels = NULL,
+                             type = "pvalues",
+                             output = "text",
+                             rounding_perc = 1,
+                             digits = 1,
+                             var_names = NULL, 
+                             format_number = FALSE,
+                             NAkeep = NULL, 
+                             na.rm = TRUE,
+                             booktabs = TRUE, 
+                             caption = NULL, 
+                             align = NULL,
+                             float = "ht",
+                             export = NULL,
+                             label = NULL){
   
   ###################
   ## Preprocessing ##
@@ -183,7 +182,7 @@ table1.data.frame = function(.data,
   ## Functions
   num_fun  <- .summary_functions1(FUN, format_number, digits)
   num_fun2 <- .summary_functions2(FUN2, format_number, digits)
-
+  
   ########################
   ## Variable Selecting ##
   ########################
@@ -223,7 +222,7 @@ table1.data.frame = function(.data,
     if (length(which(names(d) %in% splitby_)) != 0){
       d <- d[, -which(names(d) %in% splitby_), drop = FALSE]
     }
-
+    
   } else {
     
     ## Working around different versions of dplyr with group_by()
@@ -254,14 +253,14 @@ table1.data.frame = function(.data,
       d <- d[, -which(names(d) %in% groups), drop = FALSE]
     }
   }
-
+  
   
   ## Remove missing values?
   if (isTRUE(na.rm))
     d <- d[complete.cases(d), , drop = FALSE]
   if (nrow(d) == 0)
     stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
-
+  
   
   ## Splitby variable needs to have more than one level when test = TRUE
   if (test & length(levels(d$split))>1){
@@ -289,7 +288,7 @@ table1.data.frame = function(.data,
   ## Observations and Header Labels ##
   ####################################
   N <- .obs_header(d, f1, format_output, test, output, header_labels, total)
-
+  
   ######################
   ## Summarizing Data ##
   ######################
@@ -342,8 +341,8 @@ table1.data.frame = function(.data,
     class(final_l) <- c("table1")
     cat("\n", caption)
     return(final_l)
-
-  ## Custom Latex Output
+    
+    ## Custom Latex Output
   } else if (output %in% "latex2"){
     if (is.null(align)){
       l1 <- dim(final)[2]
@@ -351,13 +350,13 @@ table1.data.frame = function(.data,
     }
     tab <- to_latex(final, caption, align, len = length(levels(d$split)), splitting, float, booktabs, label)
     tab
-  ## Output from kable  
+    ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
     kab <- knitr::kable(final, format=output,
-                 booktabs = booktabs,
-                 caption = caption,
-                 align = align,
-                 row.names = FALSE)
+                        booktabs = booktabs,
+                        caption = caption,
+                        align = align,
+                        row.names = FALSE)
     return(kab)
   } else {
     stop(paste("Output of type", output, "not recognized"))
@@ -414,7 +413,7 @@ print.table1 <- function(x, ...){
       dim(x4)[2] - 1
     first_width <- sum(ifelse(unlist(max_col_width3) > nchar("  "), unlist(max_col_width3), nchar("  ")))
   }
-
+  
   
   ## Print top border
   cat("\n\u2500")
@@ -435,8 +434,8 @@ print.table1 <- function(x, ...){
     if (attr(x, "output") == "text2"){
       ## Special "text2" formatting
       x4 <- rbind(x[[1]][1,],
-                 sapply(max_col_width, function(x) paste0(rep("-", times = x), collapse = "")),
-                 x[[1]][2:dim(x[[1]])[1], ])
+                  sapply(max_col_width, function(x) paste0(rep("-", times = x), collapse = "")),
+                  x[[1]][2:dim(x[[1]])[1], ])
       print(x4, ..., row.names = FALSE, right = FALSE)
     } else {
       print(x[[1]], ..., row.names = FALSE, right = FALSE)

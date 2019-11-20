@@ -1,15 +1,4 @@
-#' Selecting Function
-#' 
-#' For internal use in \code{table1()} and \code{tableC()} to extract the right data. 
-#' Can also be used much like \code{dplyr::select()}, although I'd recommend
-#' one to use \code{dplyr::select()} in general.
-#' 
-#' @param d_ the data.frame
-#' @param ... the variables
-#' 
-#' @return The data.frame with the selected variables
-#'
-#' @export
+# Selecting Function
 selecting <- function(d_, ...) {
   listed <- eval(substitute(alist(...)))
   
@@ -40,7 +29,7 @@ selecting <- function(d_, ...) {
   } else {
     attr(df, "empty_rows") <- empty_rows
   }
-
+  
   ## Returned data.frame
   df
 }
@@ -86,7 +75,7 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
       } else { 
         tab[[i]] <- tapply(d[[i]], d$split, table, useNA=NAkeep)
       }
-     
+      
       if (!row_wise){
         if(isTRUE(total)) { 
           tab2[[i]] <- c(list("Total" = table(d[[i]], useNA=NAkeep)/sum(table(d[[i]], useNA=NAkeep))), 
@@ -108,9 +97,9 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
       }
       if (test)
         tests[[i]] <- chisq.test(d$split, d[[i]])
-    
-    
-    ## Numeric ##
+      
+      
+      ## Numeric ##
     } else if (is.numeric(d[[i]])){
       ## Function 1
       if (!nams[[i]] %in% second){
@@ -119,7 +108,7 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
         } else { 
           tab[[i]] <- tapply(d[[i]], d$split, num_fun)
         }
-
+        
         ## Function 2
       } else if (nams[[i]] %in% second){
         if(isTRUE(total)) { 
@@ -185,7 +174,8 @@ nonparametric <- function(formula){
 
 
 ## Formatting of table1 with no condense
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total, param){
+table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                    format_output, second, nams, simple, output, f1, total, param){
   d <- as.data.frame(d)
   
   if (isTRUE(total)){
@@ -302,7 +292,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 }
 
 ## Formatting of table1 with condense
-table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, format_output, second, nams, simple, output, f1, total){
+table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
+                                  format_output, second, nams, simple, output, f1, total){
   d <- as.data.frame(d)
   
   if (isTRUE(total)){

@@ -1,3 +1,7 @@
+# Version 1.9.4
+
+Cleaned up the suggests and imports (removed `tidyverse` and a few others that were not necessary for the package to function).
+
 # Version 1.9.3
 
 Added `rowmeans.n()` and `rowsums.n()` for row means and sums allowing `n` missing values across the row.

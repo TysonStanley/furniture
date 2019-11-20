@@ -24,12 +24,10 @@ Imports:
     magrittr,
     cli,
     crayon,
-    dplyr,
+    dplyr (>= 0.8.0),
     rstudioapi,
-    tibble,
-    forcats
+    tibble
 Suggests:
-    pkgload,
     rmarkdown,
     testthat
 LazyData: true
