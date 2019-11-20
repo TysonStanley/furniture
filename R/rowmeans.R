@@ -61,8 +61,8 @@ rowmeans = function(..., na.rm=FALSE){
 #'
 #' @export
 rowmeans.n <- function(..., n){
-  ifelse(rowmeans(!is.na(cbind(...)) >= n),
-         rowmeans(..., na.rm = FALSE),
+  ifelse(rowmeans(is.na(cbind(...)) <= n),
+         rowmeans(..., na.rm = TRUE),
          NA)
 }
 
@@ -102,6 +102,7 @@ rowmeans.n <- function(..., n){
 #' @importFrom dplyr mutate
 #' @export
 mutate_rowmeans = function(data, new_var, ..., na.rm=FALSE){
+  warning("This function is being removed in the next update.", call. = FALSE)
   means <- data %>%
     dplyr::select(...) %>% 
     dplyr::mutate(!!new_var := rowMeans(., na.rm = na.rm)) %>% 
@@ -176,8 +177,8 @@ rowsums = function(..., na.rm=FALSE){
 #'
 #' @export
 rowsums.n <- function(..., n){
-  ifelse(rowsums(!is.na(cbind(...)) >= n),
-         rowsums(..., na.rm = FALSE),
+  ifelse(rowsums(is.na(cbind(...)) <= n),
+         rowsums(..., na.rm = TRUE),
          NA)
 }
 
@@ -218,6 +219,7 @@ rowsums.n <- function(..., n){
 #' @importFrom dplyr mutate
 #' @export
 mutate_rowsums = function(data, new_var, ..., na.rm=FALSE){
+  warning("This function is being removed in the next update.", call. = FALSE)
   sums <- data %>%
     dplyr::select(...) %>% 
     dplyr::mutate(!!new_var := rowSums(., na.rm = na.rm)) %>% 

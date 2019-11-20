@@ -29,10 +29,12 @@ exploratory data analysis and reporting (e.g., `table1()`, `tableC()`,
 6.  `wide()` – also a wrapper of `stats::reshape()`, takes the data from
     long to wide, and like `long()`, works well with the tidyverse and
     can handle unbalanced multilevel data.
-7.  `rowmeans()` and `mutate_rowmeans()` – tidyverse friendly versions
-    of `rowMeans()`
-8.  `rowsums()` and `mutate_rowsums()` – tidyverse friendly versions of
-    `rowSums()`
+7.  `rowmeans()` and `rowmeans.n()` – tidyverse friendly versions of
+    `rowMeans()`, where the `rowmeans.n()` function allows `n` number of
+    missing
+8.  `rowsums()` and `rowsums.n()` – tidyverse friendly versions of
+    `rowSums()`, where the `rowsums.n()` function allows `n` number of
+    missing
 
 In conjunction with many other tidy tools, the package should be useful
 for health, behavioral, and social scientists working on quantitative
@@ -321,35 +323,35 @@ the tidyverse’s `mutate()`.
 nhanes_2010 %>%
   select(vig_active, mod_active) %>%
   mutate(avg_active = rowmeans(vig_active, mod_active, na.rm=TRUE)) %>%
-  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE))
-#> # A tibble: 1,417 x 4
-#>    vig_active mod_active avg_active sum_active
-#>         <dbl>      <dbl>      <dbl>      <dbl>
-#>  1         30         NA         30         30
-#>  2        180        180        180        360
-#>  3         NA         NA        NaN          0
-#>  4         20         70         45         90
-#>  5        120         NA        120        120
-#>  6         NA         NA        NaN          0
-#>  7         NA        120        120        120
-#>  8        120         NA        120        120
-#>  9         NA         NA        NaN          0
-#> 10         NA         NA        NaN          0
-#> # … with 1,407 more rows
+  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE)) %>% 
+  head()
+#>   vig_active mod_active avg_active sum_active
+#> 1         30         NA         30         30
+#> 2        180        180        180        360
+#> 3         NA         NA        NaN          0
+#> 4         20         70         45         90
+#> 5        120         NA        120        120
+#> 6         NA         NA        NaN          0
 ```
 
+The `rowmeans.n()` and `rowsums.n()` allow `n` missing values while
+still calculating the mean or sum.
+
 ``` r
-nhanes_2010 %>%
-  mutate_rowmeans("avg_active", mod_active:vig_active) %>% 
-  select(id, avg_active) %>% 
-  head()
-#>      id avg_active
-#> 1 73568         NA
-#> 2 73578        180
-#> 3 73582         NA
-#> 4 73585         45
-#> 5 73592         NA
-#> 6 73594         NA
+df <- data.frame(
+  x = c(NA, 1:5),
+  y = c(1:5, NA)
+)
+
+df %>%
+  mutate(avg = rowmeans.n(x, y, n = 1))
+#>    x  y avg
+#> 1 NA  1 1.0
+#> 2  1  2 1.5
+#> 3  2  3 2.5
+#> 4  3  4 3.5
+#> 5  4  5 4.5
+#> 6  5 NA 5.0
 ```
 
 ## Notes
@@ -359,8 +361,8 @@ data cleaned/tidied and start exploratory data analysis. I recommend
 using packages such as `library(dplyr)`, `library(tidyr)`, and
 `library(ggplot2)` with `library(furniture)` to accomplish this.
 
-The most important function–`table1()`–is simply built for both
-exploratory descriptive analysis and communication of findings. See
-vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for
-several examples of its use. Also see our paper in the [R
+The original function–`table1()`–is simply built for both exploratory
+descriptive analysis and communication of findings. See vignettes or
+[tysonbarrett.com](https://tysonstanley.github.io/) for several examples
+of its use. Also see our paper in the [R
 Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).

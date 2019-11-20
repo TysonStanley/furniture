@@ -1,6 +1,6 @@
 # Version 1.9.4
 
-Cleaned up the suggests and imports (removed `tidyverse` and a few others that were not necessary for the package to function).
+Cleaned up the suggests and imports (removed `tidyverse` and a few others that were not necessary for the package to function). The message printed upon attachment is no longer displayed.
 
 # Version 1.9.3
 

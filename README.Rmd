@@ -28,8 +28,8 @@ The furniture R package contains functions to help with data cleaning/tidying (e
 4. `washer()` -- changes several values in a variable (very useful for changing place holder values to missing).
 5. `long()` -- is a wrapper of `stats::reshape()`, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.
 6. `wide()` -- also a wrapper of `stats::reshape()`, takes the data from long to wide, and like `long()`, works well with the tidyverse and can handle unbalanced multilevel data.
-7. `rowmeans()` and `mutate_rowmeans()` -- tidyverse friendly versions of `rowMeans()`
-8. `rowsums()` and `mutate_rowsums()` -- tidyverse friendly versions of `rowSums()`
+7. `rowmeans()` and `rowmeans.n()` -- tidyverse friendly versions of `rowMeans()`, where the `rowmeans.n()` function allows `n` number of missing
+8. `rowsums()` and `rowsums.n()` -- tidyverse friendly versions of `rowSums()`, where the `rowsums.n()` function allows `n` number of missing
 
 In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.
 
@@ -151,29 +151,31 @@ tableF(nhanes_2010, age)
 
 In addition, the `rowmeans()` and `rowsums()` functions offer a simplified use of `rowMeans()` and `rowSums()`, particularly when using the tidyverse's `mutate()`.
 
-```{r, echo=FALSE}
-nhanes_2010 = tibble::as_tibble(nhanes_2010)
-```
-
 ```{r}
 nhanes_2010 %>%
   select(vig_active, mod_active) %>%
   mutate(avg_active = rowmeans(vig_active, mod_active, na.rm=TRUE)) %>%
-  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE))
+  mutate(sum_active = rowsums(vig_active, mod_active, na.rm=TRUE)) %>% 
+  head()
 ```
 
+The `rowmeans.n()` and `rowsums.n()` allow `n` missing values while still calculating the mean or sum.
+
 ```{r}
-nhanes_2010 %>%
-  mutate_rowmeans("avg_active", mod_active:vig_active) %>% 
-  select(id, avg_active) %>% 
-  head()
+df <- data.frame(
+  x = c(NA, 1:5),
+  y = c(1:5, NA)
+)
+
+df %>%
+  mutate(avg = rowmeans.n(x, y, n = 1))
 ```
 
 ## Notes
 
 The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as `library(dplyr)`, `library(tidyr)`, and `library(ggplot2)` with `library(furniture)` to accomplish this.
 
-The most important function--`table1()`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for several examples of its use. Also see our paper in the [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
+The original function--`table1()`--is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or [tysonbarrett.com](https://tysonstanley.github.io/) for several examples of its use. Also see our paper in the [R Journal](https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf).
 
 
 

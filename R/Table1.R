@@ -153,12 +153,6 @@ table1.data.frame = function(.data,
   ## checks
   .header_labels(header_labels, format_output)
   
-  ## Deprecation (drop in furniture 2.0.0)
-  if (!is.null(NAkeep)){
-    warning("NAkeep is deprecated. Please use na.rm instead.\nNote that {NAkeep = TRUE} == {na.rm = FALSE}.", 
-            call. = FALSE)
-    na.rm <- !NAkeep
-  }
   ## Not yet deprecated
   #if (!is.null(splitby))
   #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue until furniture 2.0.0")
@@ -197,7 +191,7 @@ table1.data.frame = function(.data,
   }
   
   ## Splitby or group_by
-  if (is.null(attr(.data, "vars")) && is.null(attr(.data, "groups"))){
+  if (is.null(attr(.data, "groups"))){
     
     ### Splitby Variable (adds the variable to d as "split")
     if (!is.null(splitby))
@@ -225,14 +219,8 @@ table1.data.frame = function(.data,
     
   } else {
     
-    ## Working around different versions of dplyr with group_by()
-    ## Older (0.7.6) uses "vars": produces the grouping name
-    ## Developmental one (0.7.9.9000) uses "groups" but it produces a nested table
-    groups <- attr(.data, "vars")
-    if (is.null(groups))
-      groups <- attr(.data, "groups") %>% names(.)
-    if (groups[length(groups)] == ".rows")
-      groups <- groups[-length(groups)]
+    groups <- attr(.data, "groups") %>% names(.)
+    groups <- groups[-length(groups)]
     
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
     
@@ -352,7 +340,8 @@ table1.data.frame = function(.data,
     tab
     ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
-    kab <- knitr::kable(final, format=output,
+    kab <- knitr::kable(final, 
+                        format=output,
                         booktabs = booktabs,
                         caption = caption,
                         align = align,

@@ -22,11 +22,10 @@ Depends:
 Imports:
     knitr,
     magrittr,
-    cli,
-    crayon,
     dplyr (>= 0.8.0),
     rstudioapi,
-    tibble
+    tibble,
+    crayon
 Suggests:
     rmarkdown,
     testthat

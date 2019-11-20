@@ -104,7 +104,8 @@ tableC <- function(.data,
       return(tab)
       
     } else {
-      kab <- knitr::kable(final, format=output,
+      kab <- knitr::kable(final, 
+                          format=output,
                           booktabs = booktabs,
                           caption = caption,
                           align = align,
