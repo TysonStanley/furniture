@@ -22,24 +22,3 @@ the row means included within the data.frame
 Does what \code{rowMeans()} does can be used one its own without dplyr::mutate() 
 within a pipe.
 }
-\examples{
-
-\dontrun{
-
-library(furniture)
-library(tidyverse)
-
-data <- data.frame(
-  x = sample(c(1,2,3,4), 100, replace=TRUE),
-  y = rnorm(100),
-  z = rnorm(100)
-)
-
-data2 <- data \%>\%
-  mutate_rowmeans("y_z_mean", y, z))
-data2 <- data \%>\%
-  mutate_rowmeans("y_z_mean", y, z, na.rm=TRUE))
-
-}
-
-}

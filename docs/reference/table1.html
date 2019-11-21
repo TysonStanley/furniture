@@ -8,21 +8,25 @@
 
 <title>Table 1 for Simple and Stratified Descriptive Statistics — table1 • furniture</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,13 +34,14 @@
 
 
 
-<meta property="og:title" content="Table 1 for Simple and Stratified Descriptive Statistics — table1" />
 
+<meta property="og:title" content="Table 1 for Simple and Stratified Descriptive Statistics — table1" />
 <meta property="og:description" content="Produces a descriptive table, stratified by an optional categorical variable, 
 providing means/frequencies and standard deviations/percentages. 
 It is well-formatted for easy transition to academic article or report. 
 Can be used within the piping framework [see library(magrittr)]." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,6 +53,7 @@ Can be used within the piping framework [see library(magrittr)]." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -66,7 +72,7 @@ Can be used within the piping framework [see library(magrittr)]." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
       </span>
     </div>
 
@@ -74,7 +80,7 @@ Can be used within the piping framework [see library(magrittr)]." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +106,6 @@ Can be used within the piping framework [see library(magrittr)]." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -110,6 +115,7 @@ Can be used within the piping framework [see library(magrittr)]." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,22 +127,20 @@ Can be used within the piping framework [see library(magrittr)]." />
     </div>
 
     <div class="ref-description">
-    
     <p>Produces a descriptive table, stratified by an optional categorical variable, 
 providing means/frequencies and standard deviations/percentages. 
 It is well-formatted for easy transition to academic article or report. 
 Can be used within the piping framework [see library(magrittr)].</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>table1</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>second</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_wise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>header_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"pvalues"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>,
-  <span class='kw'>rounding_perc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>param</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"pvalues"</span>,
+  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>rounding_perc</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>format_number</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>NAkeep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>booktabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>float</span> <span class='kw'>=</span> <span class='st'>"ht"</span>,
   <span class='kw'>export</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -177,6 +181,10 @@ Can be used within the piping framework [see library(magrittr)].</p>
       <td><p>logical; if set to <code>TRUE</code> then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.</p></td>
     </tr>
     <tr>
+      <th>param</th>
+      <td><p>logical; if set to <code>TRUE</code> then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to <code>FALSE</code>, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.</p></td>
+    </tr>
+    <tr>
       <th>header_labels</th>
       <td><p>a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).</p></td>
     </tr>
@@ -214,15 +222,15 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </tr>
     <tr>
       <th>booktabs</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
+      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://rdrr.io/pkg/knitr/man/kable.html'>knitr::kable</a></code></p></td>
     </tr>
     <tr>
       <th>caption</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
+      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://rdrr.io/pkg/knitr/man/kable.html'>knitr::kable</a></code></p></td>
     </tr>
     <tr>
       <th>align</th>
-      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://www.rdocumentation.org/packages/knitr/topics/kable'>knitr::kable</a></code></p></td>
+      <td><p>when <code>output != "text"</code>; option is passed to <code><a href='https://rdrr.io/pkg/knitr/man/kable.html'>knitr::kable</a></code></p></td>
     </tr>
     <tr>
       <th>float</th>
@@ -237,35 +245,31 @@ Can be used within the piping framework [see library(magrittr)].</p>
       <td><p>for <code>output == "latex2"</code>, this provides a table reference label for latex</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a <code>table1</code> class object with a print method. Can be printed in <code>LaTex</code> form.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In defining <code>type</code>, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** &lt; .001 ** .01 * .05; and
 2. "simple" then only percentages are shown for categorical variable and
 "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## Fictitious Data ##</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>furniture</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>furniture</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
-<span class='no'>x</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>1000</span>)
-<span class='no'>y</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='no'>z</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='fl'>1000</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
-<span class='no'>a</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>), <span class='fl'>1000</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)
+<span class='no'>x</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>1000</span>)
+<span class='no'>y</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1000</span>)
+<span class='no'>z</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='fl'>1000</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
+<span class='no'>a</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>), <span class='fl'>1000</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)
 
 <span class='co'>## Simple</span>
 <span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
@@ -277,85 +281,83 @@ Can be used within the piping framework [see library(magrittr)].</p>
 #&gt;  y                     
 #&gt;       0.1 (1.0)        
 #&gt;  z                     
-#&gt;     0 510 (51%)        
-#&gt;     1 490 (49%)        
+#&gt;     0 500 (50%)        
+#&gt;     1 500 (50%)        
 #&gt;  a                     
-#&gt;     1 525 (52.5%)      
-#&gt;     2 475 (47.5%)      
+#&gt;     1 478 (47.8%)      
+#&gt;     2 522 (52.2%)      
 #&gt; ────────────────────────</div><div class='input'>
 <span class='co'>## Stratified</span>
 <span class='co'>## all three below are the same</span>
 <span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
        <span class='kw'>splitby</span> <span class='kw'>=</span> ~ <span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
-#&gt; ────────────────────────────
-#&gt;               a 
-#&gt;       1         2          
-#&gt;       n = 525   n = 475    
-#&gt;  x                         
-#&gt;       0.5 (0.3) 0.5 (0.3)  
-#&gt;  y                         
-#&gt;       0.0 (1.0) 0.1 (1.0)  
-#&gt;  z                         
-#&gt;     0 257 (49%) 253 (53.3%)
-#&gt;     1 268 (51%) 222 (46.7%)
-#&gt; ────────────────────────────</div><div class='input'><span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
+#&gt; ──────────────────────────────
+#&gt;                a 
+#&gt;       1           2          
+#&gt;       n = 478     n = 522    
+#&gt;  x                           
+#&gt;       0.5 (0.3)   0.5 (0.3)  
+#&gt;  y                           
+#&gt;       0.1 (1.0)   0.1 (1.0)  
+#&gt;  z                           
+#&gt;     0 247 (51.7%) 253 (48.5%)
+#&gt;     1 231 (48.3%) 269 (51.5%)
+#&gt; ──────────────────────────────</div><div class='input'><span class='fu'>table1</span>(<span class='no'>df</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
        <span class='kw'>splitby</span> <span class='kw'>=</span> <span class='st'>"a"</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
-#&gt; ────────────────────────────
-#&gt;               a 
-#&gt;       1         2          
-#&gt;       n = 525   n = 475    
-#&gt;  x                         
-#&gt;       0.5 (0.3) 0.5 (0.3)  
-#&gt;  y                         
-#&gt;       0.0 (1.0) 0.1 (1.0)  
-#&gt;  z                         
-#&gt;     0 257 (49%) 253 (53.3%)
-#&gt;     1 268 (51%) 222 (46.7%)
-#&gt; ────────────────────────────</div><div class='input'>
+#&gt; ──────────────────────────────
+#&gt;                a 
+#&gt;       1           2          
+#&gt;       n = 478     n = 522    
+#&gt;  x                           
+#&gt;       0.5 (0.3)   0.5 (0.3)  
+#&gt;  y                           
+#&gt;       0.1 (1.0)   0.1 (1.0)  
+#&gt;  z                           
+#&gt;     0 247 (51.7%) 253 (48.5%)
+#&gt;     1 231 (48.3%) 269 (51.5%)
+#&gt; ──────────────────────────────</div><div class='input'>
 <span class='co'>## With Piping</span>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>,
          <span class='kw'>splitby</span> <span class='kw'>=</span> ~<span class='no'>a</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
-#&gt; ────────────────────────────
-#&gt;               a 
-#&gt;       1         2          
-#&gt;       n = 525   n = 475    
-#&gt;  x                         
-#&gt;       0.5 (0.3) 0.5 (0.3)  
-#&gt;  y                         
-#&gt;       0.0 (1.0) 0.1 (1.0)  
-#&gt;  z                         
-#&gt;     0 257 (49%) 253 (53.3%)
-#&gt;     1 268 (51%) 222 (46.7%)
-#&gt; ────────────────────────────</div><div class='input'>
+#&gt; ──────────────────────────────
+#&gt;                a 
+#&gt;       1           2          
+#&gt;       n = 478     n = 522    
+#&gt;  x                           
+#&gt;       0.5 (0.3)   0.5 (0.3)  
+#&gt;  y                           
+#&gt;       0.1 (1.0)   0.1 (1.0)  
+#&gt;  z                           
+#&gt;     0 247 (51.7%) 253 (48.5%)
+#&gt;     1 231 (48.3%) 269 (51.5%)
+#&gt; ──────────────────────────────</div><div class='input'>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>a</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>table1</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>)</div><div class='output co'>#&gt; <span class='message'>Using dplyr::group_by() groups: a</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
-#&gt; ────────────────────────────
-#&gt;               a 
-#&gt;       1         2          
-#&gt;       n = 525   n = 475    
-#&gt;  x                         
-#&gt;       0.5 (0.3) 0.5 (0.3)  
-#&gt;  y                         
-#&gt;       0.0 (1.0) 0.1 (1.0)  
-#&gt;  z                         
-#&gt;     0 257 (49%) 253 (53.3%)
-#&gt;     1 268 (51%) 222 (46.7%)
-#&gt; ────────────────────────────</div><div class='input'>
+#&gt; ──────────────────────────────
+#&gt;                a 
+#&gt;       1           2          
+#&gt;       n = 478     n = 522    
+#&gt;  x                           
+#&gt;       0.5 (0.3)   0.5 (0.3)  
+#&gt;  y                           
+#&gt;       0.1 (1.0)   0.1 (1.0)  
+#&gt;  z                           
+#&gt;     0 247 (51.7%) 253 (48.5%)
+#&gt;     1 231 (48.3%) 269 (51.5%)
+#&gt; ──────────────────────────────</div><div class='input'>
 <span class='co'>## Adjust variables within function and assign name</span>
 <span class='fu'>table1</span>(<span class='no'>df</span>,
-       <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ifelse'>ifelse</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Not all variables have at least 2 unique values. Functionality of the following will be limited:</span>
-#&gt; <span class='warning'>  -- `type = 'condense'` will not work</span>
-#&gt; <span class='warning'>  -- `test = TRUE` will not work</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
+       <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; 
 #&gt; ────────────────────────
 #&gt;       Mean/Count (SD/%)
 #&gt;       n = 1000         
 #&gt;  x2                    
 #&gt;       1.0 (0.0)        
 #&gt;  z                     
-#&gt;     0 510 (51%)        
-#&gt;     1 490 (49%)        
+#&gt;     0 500 (50%)        
+#&gt;     1 500 (50%)        
 #&gt; ────────────────────────</div><div class='input'>
 </div></pre>
   </div>
@@ -363,16 +365,14 @@ Can be used within the piping framework [see library(magrittr)].</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -380,13 +380,16 @@ Can be used within the piping framework [see library(magrittr)].</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

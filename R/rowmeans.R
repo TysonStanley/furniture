@@ -77,26 +77,6 @@ rowmeans.n <- function(..., n){
 #' @param na.rm should the missing values be ignored? default is FALSE
 #' 
 #' @return the row means included within the data.frame
-#' 
-#' @examples 
-#' 
-#' \dontrun{
-#' 
-#' library(furniture)
-#' library(tidyverse)
-#' 
-#' data <- data.frame(
-#'   x = sample(c(1,2,3,4), 100, replace=TRUE),
-#'   y = rnorm(100),
-#'   z = rnorm(100)
-#' )
-#' 
-#' data2 <- data %>%
-#'   mutate_rowmeans("y_z_mean", y, z))
-#' data2 <- data %>%
-#'   mutate_rowmeans("y_z_mean", y, z, na.rm=TRUE))
-#' 
-#' }
 #'
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
@@ -194,26 +174,6 @@ rowsums.n <- function(..., n){
 #' @param na.rm should the missing values be ignored? default is FALSE
 #' 
 #' @return the row means included within the data.frame
-#' 
-#' @examples 
-#' 
-#' \dontrun{
-#' 
-#' library(furniture)
-#' library(tidyverse)
-#' 
-#' data <- data.frame(
-#'   x = sample(c(1,2,3,4), 100, replace=TRUE),
-#'   y = rnorm(100),
-#'   z = rnorm(100)
-#' )
-#' 
-#' data2 <- data %>%
-#'   mutate_rowsums("y_z_sums", y, z))
-#' data2 <- data %>%
-#'   mutate_rowsums("y_z_sums", y, z, na.rm=TRUE))
-#' 
-#' }
 #'
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
