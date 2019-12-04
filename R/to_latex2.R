@@ -41,7 +41,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
     cat(" & \\multicolumn{", paste0(len), "}{c}{", ifelse(is.null(splitby), "Total", splitby), "}\\\\ \n")
     
     if (is.null(cor_type)){
-      cat(paste(names(tab), collapse = " & "), "\\\\", "\n")
+      cat(paste(gsub("%", "\\%", names(tab), fixed = TRUE), collapse = " & "), "\\\\", "\n")
       cat(paste(tab[1, ], collapse = " & "), "\\\\ \n", hrule('mid', booktabs))
       
       cat(
