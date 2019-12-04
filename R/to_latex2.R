@@ -11,10 +11,11 @@
 #' @param cor_type optional argument regarding the correlation type (for tableC)
 #' @param booktabs add booktabs to latex table
 #' @param label latex label option
+#' @param total is there a total column (from Table 1) to be printed?
 #' 
 #' @export
 #' @importFrom utils capture.output
-to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, cor_type=NULL){
+to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, total=FALSE, cor_type=NULL){
   if (is.null(cor_type) & is.null(splitby)){
     splitby <- "Total"
   } else if (!is.null(cor_type)){
@@ -24,6 +25,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
   } else if (is.null(cor_type) & !is.null(splitby)) {
     splitby <- gsub("`", "", paste(splitby))
     splitby <- gsub("%", "\\%", splitby)
+    if (total) tot_column <- " & " else tot_column <- ""
   }
   
   ## Fix problematic latex characters
@@ -38,7 +40,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, c
     cat("\\caption{", caption, "}", "\\label{", ifelse(is.null(label), "", label), "}\n", sep = "")
     cat("\\begin{tabular}{", align, "}\n")
     cat(hrule('top', booktabs))
-    cat(" & \\multicolumn{", paste0(len), "}{c}{", ifelse(is.null(splitby), "Total", splitby), "}\\\\ \n")
+    cat(" & ", tot_column, "\\multicolumn{", paste0(len), "}{c}{", ifelse(is.null(splitby), "Total", splitby), "}\\\\ \n")
     
     if (is.null(cor_type)){
       cat(paste(gsub("%", "\\%", names(tab), fixed = TRUE), collapse = " & "), "\\\\", "\n")

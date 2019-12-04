@@ -5,7 +5,7 @@
 \title{From Table 1 to Latex 2}
 \usage{
 to_latex(tab, caption, align, len, splitby, float, booktabs, label,
-  cor_type = NULL)
+  total = FALSE, cor_type = NULL)
 }
 \arguments{
 \item{tab}{the table1 object}
@@ -23,6 +23,8 @@ to_latex(tab, caption, align, len, splitby, float, booktabs, label,
 \item{booktabs}{add booktabs to latex table}
 
 \item{label}{latex label option}
+
+\item{total}{is there a total column (from Table 1) to be printed?}
 
 \item{cor_type}{optional argument regarding the correlation type (for tableC)}
 }
