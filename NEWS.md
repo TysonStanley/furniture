@@ -1,3 +1,8 @@
+# Version 1.9.5
+
+- Removed `tidyverse` as a dependency (changed to `dplyr` since many other package in the `tidyverse` were not needed)
+- Fixed printing bugs with `output = "latex2"`
+
 # Version 1.9.4
 
 Cleaned up the suggests and imports (removed `tidyverse` and a few others that were not necessary for the package to function). The message printed upon attachment is no longer displayed.
