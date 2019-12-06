@@ -2,7 +2,7 @@ Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
 Version: 1.9.5
-Date: 2019-11-16
+Date: 2019-12-05
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett@aggiemail.usu.edu", 
