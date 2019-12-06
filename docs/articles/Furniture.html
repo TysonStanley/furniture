@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
     <div class="page-header toc-ignore">
       <h1>Furniture</h1>
             
-            <h4 class="date">2019-11-21</h4>
+            <h4 class="date">2019-12-05</h4>
       
       
       <div class="hidden name"><code>Furniture.Rmd</code></div>
@@ -89,17 +89,17 @@
 
     
     
-<p>This vignette is current as of <code>furniture</code> 1.9.4.</p>
+<p>This vignette is current as of <code>furniture</code> 1.9.5.</p>
 <div id="using-furniture" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-furniture" class="anchor"></a>Using <code>furniture</code>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(furniture)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(furniture)</a></code></pre></div>
 <p>We will first make a fictitious data set:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">1000</span>, <span class="fl">1.5</span>, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">                 <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">                 <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"control"</span>, <span class="dv">400</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Other"</span>, <span class="dv">70</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"treatment"</span>, <span class="dv">500</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"None"</span>, <span class="dv">30</span>)),</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">                 <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="dv">900</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">100</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">1000</span>, <span class="fl">1.5</span>, <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb2-2" title="2">                 <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb2-3" title="3">                 <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"control"</span>, <span class="dv">400</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Other"</span>, <span class="dv">70</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"treatment"</span>, <span class="dv">500</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"None"</span>, <span class="dv">30</span>)),</a>
+<a class="sourceLine" id="cb2-4" title="4">                 <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="dv">900</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">100</span>)))</a></code></pre></div>
 <p>There are four functions that we’ll demonstrate here:</p>
 <ol style="list-style-type: decimal">
 <li><code>washer</code></li>
@@ -112,172 +112,172 @@
 <h2 class="hasAnchor">
 <a href="#washer" class="anchor"></a>Washer</h2>
 <p><code>washer</code> is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">d =</span> <span class="kw"><a href="../reference/washer.html">washer</a></span>(d, <span class="dv">-99</span>),  <span class="co">## changes the placeholder -99 to NA</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">         <span class="dt">c =</span> <span class="kw"><a href="../reference/washer.html">washer</a></span>(c, <span class="st">"Other"</span>, <span class="st">"None"</span>, <span class="dt">value =</span> <span class="st">"control"</span>)) <span class="co">## changes "Other" and "None" to "Control"</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">d =</span> <span class="kw"><a href="../reference/washer.html">washer</a></span>(d, <span class="dv">-99</span>),  <span class="co">## changes the placeholder -99 to NA</span></a>
+<a class="sourceLine" id="cb3-5" title="5">         <span class="dt">c =</span> <span class="kw"><a href="../reference/washer.html">washer</a></span>(c, <span class="st">"Other"</span>, <span class="st">"None"</span>, <span class="dt">value =</span> <span class="st">"control"</span>)) <span class="co">## changes "Other" and "None" to "Control"</span></a></code></pre></div>
 </div>
 <div id="table1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#table1" class="anchor"></a>Table1</h2>
 <p>Now that the data is “washed” we can start exploring and reporting.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, <span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), d)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, <span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), d)</a></code></pre></div>
 <pre><code>## 
 ## ────────────────────────────────
 ##               Mean/Count (SD/%)
 ##               n = 900          
 ##  a                             
-##               1.6 (2.0)        
+##               1.5 (2.0)        
 ##  b                             
 ##               450.5 (260.0)    
 ##  factor(c)                     
 ##     control   470 (52.2%)      
 ##     treatment 430 (47.8%)      
 ##  d                             
-##               498.0 (297.4)    
+##               495.4 (285.9)    
 ## ────────────────────────────────</code></pre>
 <p>The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., <code><a href="https://rdrr.io/r/base/factor.html">factor(c)</a></code>). This can be extended to making a whole new variable in the function as well.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>## 
 ## ───────────────────────────────────────
 ##                      Mean/Count (SD/%)
 ##                      n = 900          
 ##  a                                    
-##                      1.6 (2.0)        
+##                      1.5 (2.0)        
 ##  b                                    
 ##                      450.5 (260.0)    
 ##  d                                    
-##                      498.0 (297.4)    
+##                      495.4 (285.9)    
 ##  ifelse(a &gt; 1, 1, 0)                  
 ##                      0.6 (0.5)        
 ## ───────────────────────────────────────</code></pre>
 <p>This is just the beginning though. Two powerful things the function can do are shown below:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">       <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb8-2" title="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb8-3" title="3">       <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────────
 ##                             factor(c) 
 ##                      control       treatment     P-Value
 ##                      n = 470       n = 430              
-##  a                                               0.965  
-##                      1.6 (2.0)     1.6 (2.0)            
+##  a                                               0.623  
+##                      1.5 (2.0)     1.6 (2.0)            
 ##  b                                               &lt;.001  
 ##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.873  
-##                      499.5 (295.9) 496.4 (299.5)        
-##  ifelse(a &gt; 1, 1, 0)                             0.264  
+##  d                                               0.12   
+##                      509.6 (290.2) 479.9 (280.7)        
+##  ifelse(a &gt; 1, 1, 0)                             0.556  
 ##                      0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────────────────</code></pre>
 <p>The <code>splitby = ~factor(c)</code> stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using <code>test=TRUE</code>.</p>
 <p>We can also use it intuitively within the pipe (for more about this, see the “Table 1” vignette):</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">        <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
+<a class="sourceLine" id="cb11-4" title="4">        <span class="dt">test=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────────
 ##                                 c 
 ##                      control       treatment     P-Value
 ##                      n = 470       n = 430              
-##  a                                               0.965  
-##                      1.6 (2.0)     1.6 (2.0)            
+##  a                                               0.623  
+##                      1.5 (2.0)     1.6 (2.0)            
 ##  b                                               &lt;.001  
 ##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.873  
-##                      499.5 (295.9) 496.4 (299.5)        
-##  ifelse(a &gt; 1, 1, 0)                             0.264  
+##  d                                               0.12   
+##                      509.6 (290.2) 479.9 (280.7)        
+##  ifelse(a &gt; 1, 1, 0)                             0.556  
 ##                      0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────────────────</code></pre>
 <p>In this case, we used the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function from <code>dplyr</code> (within the <code>tidyverse</code>) and <code><a href="../reference/table1.html">table1()</a></code> knows to use that as the grouping variable in place of the <code>splitby</code> argument.</p>
 <p>If the parametric tests (default) are not appropriate, you can set <code>param = FALSE</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">        <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">        <span class="dt">param=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/table1.html">table1</a></span>(a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), </a>
+<a class="sourceLine" id="cb13-4" title="4">        <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb13-5" title="5">        <span class="dt">param=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────────
 ##                                 c 
 ##                      control       treatment     P-Value
 ##                      n = 470       n = 430              
-##  a                                               0.791  
-##                      1.6 (2.0)     1.6 (2.0)            
+##  a                                               0.64   
+##                      1.5 (2.0)     1.6 (2.0)            
 ##  b                                               &lt;.001  
 ##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.842  
-##                      499.5 (295.9) 496.4 (299.5)        
-##  ifelse(a &gt; 1, 1, 0)                             0.264  
+##  d                                               0.117  
+##                      509.6 (290.2) 479.9 (280.7)        
+##  ifelse(a &gt; 1, 1, 0)                             0.555  
 ##                      0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────────────────</code></pre>
 <p>Finally, you can polish it quite a bit using a few other options. For example, you can do the following:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb15-2" title="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb15-3" title="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb15-4" title="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
+<a class="sourceLine" id="cb15-5" title="5">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────
 ##                 factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  A       1.6 (2.0)     1.6 (2.0)     0.965  
+##  A       1.5 (2.0)     1.6 (2.0)     0.623  
 ##  B       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D       499.5 (295.9) 496.4 (299.5) 0.873  
-##  New Var 0.6 (0.5)     0.6 (0.5)     0.264  
+##  D       509.6 (290.2) 479.9 (280.7) 0.12   
+##  New Var 0.6 (0.5)     0.6 (0.5)     0.556  
 ## ─────────────────────────────────────────────</code></pre>
 <p>Note that <code>var_names</code> can be used for more complex naming (e.g., with spaces, brackets) that otherwise cannot be used with data frames. Alternatively, for more simple naming, we can name them directly.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, <span class="dt">A =</span> a, <span class="dt">B =</span> b, <span class="dt">D =</span> d, <span class="dt">A2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, <span class="dt">A =</span> a, <span class="dt">B =</span> b, <span class="dt">D =</span> d, <span class="dt">A2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb18-2" title="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb18-3" title="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb18-4" title="4">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
 <pre><code>## 
 ## ────────────────────────────────────────
 ##            factor(c) 
 ##     control       treatment     P-Value
 ##     n = 470       n = 430              
-##  A  1.6 (2.0)     1.6 (2.0)     0.965  
+##  A  1.5 (2.0)     1.6 (2.0)     0.623  
 ##  B  235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D  499.5 (295.9) 496.4 (299.5) 0.873  
-##  A2 0.6 (0.5)     0.6 (0.5)     0.264  
+##  D  509.6 (290.2) 479.9 (280.7) 0.12   
+##  A2 0.6 (0.5)     0.6 (0.5)     0.556  
 ## ────────────────────────────────────────</code></pre>
 <p>You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">       <span class="dt">format_number =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb21-2" title="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb21-3" title="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb21-4" title="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
+<a class="sourceLine" id="cb21-5" title="5">       <span class="dt">format_number =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────
 ##                 factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  A                                   0.965  
-##          1.6 (2.0)     1.6 (2.0)            
+##  A                                   0.623  
+##          1.5 (2.0)     1.6 (2.0)            
 ##  B                                   &lt;.001  
 ##          235.5 (135.8) 685.5 (124.3)        
-##  D                                   0.873  
-##          499.5 (295.9) 496.4 (299.5)        
-##  New Var                             0.264  
+##  D                                   0.12   
+##          509.6 (290.2) 479.9 (280.7)        
+##  New Var                             0.556  
 ##          0.6 (0.5)     0.6 (0.5)            
 ## ─────────────────────────────────────────────</code></pre>
 <p>The table can be exported directly to a folder in the working directory called “Table1”. Using <code>export</code>, we provide it with a string that will be the name of the CSV containing the formatted table.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">       <span class="dt">format_number =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">       <span class="dt">export =</span> <span class="st">"example_table1"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb24-2" title="2">       <span class="dt">splitby=</span><span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb24-3" title="3">       <span class="dt">test=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb24-4" title="4">       <span class="dt">var_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span>),</a>
+<a class="sourceLine" id="cb24-5" title="5">       <span class="dt">format_number =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb24-6" title="6">       <span class="dt">export =</span> <span class="st">"example_table1"</span>)</a></code></pre></div>
 <p>This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable</a></code>). Below shows how to do a latex table (not using <code>kable</code> however, but a built-in function that provides the variable name at the top of the table):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="st">"new var"</span> =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">       <span class="dt">splitby =</span> <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">       <span class="dt">test =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">       <span class="dt">output =</span> <span class="st">"latex2"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="st">"new var"</span> =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb25-2" title="2">       <span class="dt">splitby =</span> <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb25-3" title="3">       <span class="dt">test =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb25-4" title="4">       <span class="dt">output =</span> <span class="st">"latex2"</span>)</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
 <pre><code>## \begin{table}[ ht ] 
 ## \centering 
@@ -288,56 +288,56 @@
 ##   &amp; control &amp; treatment &amp; P-Value \\ 
 ##   &amp; n = 470 &amp; n = 430 &amp;   \\ 
 ##  \midrule
-## a &amp;   &amp;   &amp; 0.965\\ 
-## \hspace{6pt}   &amp; 1.6 (2.0) &amp; 1.6 (2.0) &amp; \\ 
+## a &amp;   &amp;   &amp; 0.623\\ 
+## \hspace{6pt}   &amp; 1.5 (2.0) &amp; 1.6 (2.0) &amp; \\ 
 ## b &amp;   &amp;   &amp; &lt;.001\\ 
 ## \hspace{6pt}   &amp; 235.5 (135.8) &amp; 685.5 (124.3) &amp; \\ 
-## d &amp;   &amp;   &amp; 0.873\\ 
-## \hspace{6pt}   &amp; 499.5 (295.9) &amp; 496.4 (299.5) &amp; \\ 
-## new var &amp;   &amp;   &amp; 0.264\\ 
+## d &amp;   &amp;   &amp; 0.12\\ 
+## \hspace{6pt}   &amp; 509.6 (290.2) &amp; 479.9 (280.7) &amp; \\ 
+## new var &amp;   &amp;   &amp; 0.556\\ 
 ## \hspace{6pt}   &amp; 0.6 (0.5) &amp; 0.6 (0.5) &amp; \\ 
 ## \bottomrule
 ## 
 ## \end{tabular}
 ## \end{table}</code></pre>
 <p>Last item to show you regarding <code><a href="../reference/table1.html">table1()</a></code> is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="st">"new var"</span> =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">       <span class="dt">splitby =</span> <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">       <span class="dt">test =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="../reference/table1.html">table1</a></span>(df, a, b, d, <span class="st">"new var"</span> =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(a <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb28-2" title="2">       <span class="dt">splitby =</span> <span class="op">~</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(c), </a>
+<a class="sourceLine" id="cb28-3" title="3">       <span class="dt">test =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb28-4" title="4">       <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"simple"</span>, <span class="st">"condensed"</span>))</a></code></pre></div>
 <pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────
 ##                 factor(c) 
 ##          control       treatment     P-Value
 ##          n = 470       n = 430              
-##  a       1.6 (2.0)     1.6 (2.0)     0.965  
+##  a       1.5 (2.0)     1.6 (2.0)     0.623  
 ##  b       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  d       499.5 (295.9) 496.4 (299.5) 0.873  
-##  new var 0.6 (0.5)     0.6 (0.5)     0.264  
+##  d       509.6 (290.2) 479.9 (280.7) 0.12   
+##  new var 0.6 (0.5)     0.6 (0.5)     0.556  
 ## ─────────────────────────────────────────────</code></pre>
 </div>
 <div id="table-c" class="section level2">
 <h2 class="hasAnchor">
 <a href="#table-c" class="anchor"></a>Table C</h2>
 <p>This function is to create simple, beautiful correlation tables. The syntax is just like <code><a href="../reference/table1.html">table1()</a></code> in most respects. Below we include all the numeric variables to see their correlations. Since there are missing values in <code>d</code> we will use the natural <code>na.rm=TRUE</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="../reference/tableC.html">tableC</a></span>(df, </a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">       a, b, d,</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw"><a href="../reference/tableC.html">tableC</a></span>(df, </a>
+<a class="sourceLine" id="cb31-2" title="2">       a, b, d,</a>
+<a class="sourceLine" id="cb31-3" title="3">       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## N = 900
 ## Note: pearson correlation (p-value).</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────
 ##       [1]            [2]           [3]  
 ##  [1]a 1.00                              
-##  [2]b 0.032 (0.343)  1.00               
-##  [3]d -0.057 (0.086) 0.037 (0.265) 1.00 
+##  [2]b 0.009 (0.782)  1.00               
+##  [3]d -0.063 (0.059) -0.056 (0.09) 1.00 
 ## ─────────────────────────────────────────</code></pre>
 <p>All the adjustments that you can make in <code><a href="../reference/table1.html">table1()</a></code> can be done here as well. For example,</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="../reference/tableC.html">tableC</a></span>(df, </a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">       <span class="st">"A"</span> =<span class="st"> </span>a, <span class="st">"B"</span> =<span class="st"> </span>b, <span class="st">"D"</span> =<span class="st"> </span>d,</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">       <span class="dt">output =</span> <span class="st">"html"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw"><a href="../reference/tableC.html">tableC</a></span>(df, </a>
+<a class="sourceLine" id="cb34-2" title="2">       <span class="st">"A"</span> =<span class="st"> </span>a, <span class="st">"B"</span> =<span class="st"> </span>b, <span class="st">"D"</span> =<span class="st"> </span>d,</a>
+<a class="sourceLine" id="cb34-3" title="3">       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb34-4" title="4">       <span class="dt">output =</span> <span class="st">"html"</span>)</a></code></pre></div>
 <pre><code>## N = 900
 ## Note: pearson correlation (p-value).</code></pre>
 <table class="table">
@@ -372,7 +372,7 @@
 [2]B
 </td>
 <td>
-0.032 (0.343)
+0.009 (0.782)
 </td>
 <td>
 1.00
@@ -385,10 +385,10 @@
 [3]D
 </td>
 <td>
--0.057 (0.086)
+-0.063 (0.059)
 </td>
 <td>
-0.037 (0.265)
+-0.056 (0.09)
 </td>
 <td>
 1.00
@@ -401,143 +401,143 @@
 <h2 class="hasAnchor">
 <a href="#table-f" class="anchor"></a>Table F</h2>
 <p>This function is to create simple frequency tables. The syntax is just like <code><a href="../reference/table1.html">table1()</a></code> and <code><a href="../reference/tableC.html">tableC()</a></code> in most respects, except that it uses only one variable instead of many.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(df, a)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(df, a)</a></code></pre></div>
 <pre><code>## 
 ## ────────────────────────────────────────────────
 ##  a                 Freq CumFreq Percent CumPerc
-##  -4.90468097086927 1    1       0.10%   0.10%  
-##  -4.47077405337834 1    2       0.10%   0.20%  
-##  -4.41672327207768 1    3       0.10%   0.30%  
-##  -4.38948726729318 1    4       0.10%   0.40%  
-##  -4.16229893404583 1    5       0.10%   0.50%  
-##  -3.78678508461555 1    6       0.10%   0.60%  
-##  -3.70905014604126 1    7       0.10%   0.70%  
-##  -3.54160075782269 1    8       0.10%   0.80%  
-##  -3.4582935117548  1    9       0.10%   0.90%  
-##  -3.32255162856407 1    10      0.10%   1.00%  
+##  -6.35038713410245 1    1       0.10%   0.10%  
+##  -5.79659717370451 1    2       0.10%   0.20%  
+##  -4.54543151924712 1    3       0.10%   0.30%  
+##  -4.06002184934239 1    4       0.10%   0.40%  
+##  -3.92620743825908 1    5       0.10%   0.50%  
+##  -3.67065374358455 1    6       0.10%   0.60%  
+##  -3.65016558008854 1    7       0.10%   0.70%  
+##  -3.51860959167266 1    8       0.10%   0.80%  
+##  -3.31171752002221 1    9       0.10%   0.90%  
+##  -3.28247397526134 1    10      0.10%   1.00%  
 ##  ...               ...  ...     ...     ...    
-##  6.04915664034042  1    990     0.10%   99.00% 
-##  6.09451562209857  1    991     0.10%   99.10% 
-##  6.1253469150892   1    992     0.10%   99.20% 
-##  6.21202342121715  1    993     0.10%   99.30% 
-##  6.41309166484487  1    994     0.10%   99.40% 
-##  6.50737210372034  1    995     0.10%   99.50% 
-##  6.54799611327443  1    996     0.10%   99.60% 
-##  7.01733345992955  1    997     0.10%   99.70% 
-##  7.04023773136228  1    998     0.10%   99.80% 
-##  7.44550829723592  1    999     0.10%   99.90% 
-##  8.02603573135867  1    1000    0.10%   100.00%
+##  6.34385714374449  1    990     0.10%   99.00% 
+##  6.39634320232396  1    991     0.10%   99.10% 
+##  6.40624638775132  1    992     0.10%   99.20% 
+##  6.42032981970829  1    993     0.10%   99.30% 
+##  6.54627607482696  1    994     0.10%   99.40% 
+##  6.57127510194817  1    995     0.10%   99.50% 
+##  6.62051710418506  1    996     0.10%   99.60% 
+##  6.63636691190263  1    997     0.10%   99.70% 
+##  6.94795530401766  1    998     0.10%   99.80% 
+##  7.04451787780877  1    999     0.10%   99.90% 
+##  9.57505155772625  1    1000    0.10%   100.00%
 ## ────────────────────────────────────────────────</code></pre>
 <p>Similarly to <code><a href="../reference/table1.html">table1()</a></code> we can use a <code>splitby</code> argument (or <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(df, d, <span class="dt">splitby =</span> c)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(df, d, <span class="dt">splitby =</span> c)</a></code></pre></div>
 <pre><code>## Variable:d</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────
 ##  control Freq CumFreq Percent CumPerc Valid CumValid
-##  3       1    1       0.20%   0.20%   0.21% 0.21%   
-##  8       1    2       0.20%   0.40%   0.21% 0.43%   
-##  10      1    3       0.20%   0.60%   0.21% 0.64%   
-##  12      3    6       0.60%   1.20%   0.64% 1.28%   
-##  13      1    7       0.20%   1.40%   0.21% 1.49%   
-##  16      1    8       0.20%   1.60%   0.21% 1.70%   
-##  21      1    9       0.20%   1.80%   0.21% 1.91%   
-##  23      1    10      0.20%   2.00%   0.21% 2.13%   
-##  24      1    11      0.20%   2.20%   0.21% 2.34%   
-##  27      1    12      0.20%   2.40%   0.21% 2.55%   
+##  2       1    1       0.20%   0.20%   0.21% 0.21%   
+##  6       1    2       0.20%   0.40%   0.21% 0.43%   
+##  15      1    3       0.20%   0.60%   0.21% 0.64%   
+##  18      1    4       0.20%   0.80%   0.21% 0.85%   
+##  19      1    5       0.20%   1.00%   0.21% 1.06%   
+##  22      2    7       0.40%   1.40%   0.43% 1.49%   
+##  25      1    8       0.20%   1.60%   0.21% 1.70%   
+##  26      1    9       0.20%   1.80%   0.21% 1.91%   
+##  27      1    10      0.20%   2.00%   0.21% 2.13%   
+##  29      1    11      0.20%   2.20%   0.21% 2.34%   
 ##  ...     ...  ...     ...     ...     ...   ...     
-##  979     2    453     0.40%   90.60%  0.43% 96.38%  
-##  982     1    454     0.20%   90.80%  0.21% 96.60%  
-##  983     2    456     0.40%   91.20%  0.43% 97.02%  
-##  984     2    458     0.40%   91.60%  0.43% 97.45%  
-##  986     2    460     0.40%   92.00%  0.43% 97.87%  
-##  988     2    462     0.40%   92.40%  0.43% 98.30%  
-##  992     1    463     0.20%   92.60%  0.21% 98.51%  
-##  993     1    464     0.20%   92.80%  0.21% 98.72%  
-##  995     4    468     0.80%   93.60%  0.85% 99.57%  
-##  996     2    470     0.40%   94.00%  0.43% 100.00% 
+##  981     3    459     0.60%   91.80%  0.64% 97.66%  
+##  984     1    460     0.20%   92.00%  0.21% 97.87%  
+##  985     1    461     0.20%   92.20%  0.21% 98.09%  
+##  986     2    463     0.40%   92.60%  0.43% 98.51%  
+##  988     2    465     0.40%   93.00%  0.43% 98.94%  
+##  989     1    466     0.20%   93.20%  0.21% 99.15%  
+##  991     1    467     0.20%   93.40%  0.21% 99.36%  
+##  993     1    468     0.20%   93.60%  0.21% 99.57%  
+##  995     1    469     0.20%   93.80%  0.21% 99.79%  
+##  998     1    470     0.20%   94.00%  0.21% 100.00% 
 ##  Missing 30   500     6.00%   100.00%               
 ## ─────────────────────────────────────────────────────
 ## 
 ## ───────────────────────────────────────────────────────
 ##  treatment Freq CumFreq Percent CumPerc Valid CumValid
-##  3         1    1       0.20%   0.20%   0.23% 0.23%   
-##  4         1    2       0.20%   0.40%   0.23% 0.47%   
-##  7         1    3       0.20%   0.60%   0.23% 0.70%   
-##  8         1    4       0.20%   0.80%   0.23% 0.93%   
-##  10        1    5       0.20%   1.00%   0.23% 1.16%   
+##  1         1    1       0.20%   0.20%   0.23% 0.23%   
+##  5         2    3       0.40%   0.60%   0.47% 0.70%   
+##  6         1    4       0.20%   0.80%   0.23% 0.93%   
+##  8         1    5       0.20%   1.00%   0.23% 1.16%   
 ##  11        1    6       0.20%   1.20%   0.23% 1.40%   
-##  13        1    7       0.20%   1.40%   0.23% 1.63%   
-##  14        1    8       0.20%   1.60%   0.23% 1.86%   
-##  17        1    9       0.20%   1.80%   0.23% 2.09%   
-##  21        1    10      0.20%   2.00%   0.23% 2.33%   
+##  15        1    7       0.20%   1.40%   0.23% 1.63%   
+##  17        1    8       0.20%   1.60%   0.23% 1.86%   
+##  18        2    10      0.40%   2.00%   0.47% 2.33%   
+##  20        1    11      0.20%   2.20%   0.23% 2.56%   
+##  23        1    12      0.20%   2.40%   0.23% 2.79%   
 ##  ...       ...  ...     ...     ...     ...   ...     
-##  983       1    420     0.20%   84.00%  0.23% 97.67%  
-##  984       1    421     0.20%   84.20%  0.23% 97.91%  
-##  985       1    422     0.20%   84.40%  0.23% 98.14%  
-##  986       1    423     0.20%   84.60%  0.23% 98.37%  
-##  987       2    425     0.40%   85.00%  0.47% 98.84%  
-##  988       1    426     0.20%   85.20%  0.23% 99.07%  
-##  991       1    427     0.20%   85.40%  0.23% 99.30%  
-##  995       1    428     0.20%   85.60%  0.23% 99.53%  
-##  999       1    429     0.20%   85.80%  0.23% 99.77%  
-##  1000      1    430     0.20%   86.00%  0.23% 100.00% 
+##  970       1    418     0.20%   83.60%  0.23% 97.21%  
+##  972       1    419     0.20%   83.80%  0.23% 97.44%  
+##  975       2    421     0.40%   84.20%  0.47% 97.91%  
+##  983       1    422     0.20%   84.40%  0.23% 98.14%  
+##  986       2    424     0.40%   84.80%  0.47% 98.60%  
+##  990       1    425     0.20%   85.00%  0.23% 98.84%  
+##  995       2    427     0.40%   85.40%  0.47% 99.30%  
+##  996       1    428     0.20%   85.60%  0.23% 99.53%  
+##  998       1    429     0.20%   85.80%  0.23% 99.77%  
+##  999       1    430     0.20%   86.00%  0.23% 100.00% 
 ##  Missing   70   500     14.00%  100.00%               
 ## ───────────────────────────────────────────────────────</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(d)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/tableF.html">tableF</a></span>(d)</a></code></pre></div>
 <pre><code>## Using dplyr::group_by() groups: c</code></pre>
 <pre><code>## Variable:d</code></pre>
 <pre><code>## 
 ## ─────────────────────────────────────────────────────
 ##  control Freq CumFreq Percent CumPerc Valid CumValid
-##  3       1    1       0.20%   0.20%   0.21% 0.21%   
-##  8       1    2       0.20%   0.40%   0.21% 0.43%   
-##  10      1    3       0.20%   0.60%   0.21% 0.64%   
-##  12      3    6       0.60%   1.20%   0.64% 1.28%   
-##  13      1    7       0.20%   1.40%   0.21% 1.49%   
-##  16      1    8       0.20%   1.60%   0.21% 1.70%   
-##  21      1    9       0.20%   1.80%   0.21% 1.91%   
-##  23      1    10      0.20%   2.00%   0.21% 2.13%   
-##  24      1    11      0.20%   2.20%   0.21% 2.34%   
-##  27      1    12      0.20%   2.40%   0.21% 2.55%   
+##  2       1    1       0.20%   0.20%   0.21% 0.21%   
+##  6       1    2       0.20%   0.40%   0.21% 0.43%   
+##  15      1    3       0.20%   0.60%   0.21% 0.64%   
+##  18      1    4       0.20%   0.80%   0.21% 0.85%   
+##  19      1    5       0.20%   1.00%   0.21% 1.06%   
+##  22      2    7       0.40%   1.40%   0.43% 1.49%   
+##  25      1    8       0.20%   1.60%   0.21% 1.70%   
+##  26      1    9       0.20%   1.80%   0.21% 1.91%   
+##  27      1    10      0.20%   2.00%   0.21% 2.13%   
+##  29      1    11      0.20%   2.20%   0.21% 2.34%   
 ##  ...     ...  ...     ...     ...     ...   ...     
-##  979     2    453     0.40%   90.60%  0.43% 96.38%  
-##  982     1    454     0.20%   90.80%  0.21% 96.60%  
-##  983     2    456     0.40%   91.20%  0.43% 97.02%  
-##  984     2    458     0.40%   91.60%  0.43% 97.45%  
-##  986     2    460     0.40%   92.00%  0.43% 97.87%  
-##  988     2    462     0.40%   92.40%  0.43% 98.30%  
-##  992     1    463     0.20%   92.60%  0.21% 98.51%  
-##  993     1    464     0.20%   92.80%  0.21% 98.72%  
-##  995     4    468     0.80%   93.60%  0.85% 99.57%  
-##  996     2    470     0.40%   94.00%  0.43% 100.00% 
+##  981     3    459     0.60%   91.80%  0.64% 97.66%  
+##  984     1    460     0.20%   92.00%  0.21% 97.87%  
+##  985     1    461     0.20%   92.20%  0.21% 98.09%  
+##  986     2    463     0.40%   92.60%  0.43% 98.51%  
+##  988     2    465     0.40%   93.00%  0.43% 98.94%  
+##  989     1    466     0.20%   93.20%  0.21% 99.15%  
+##  991     1    467     0.20%   93.40%  0.21% 99.36%  
+##  993     1    468     0.20%   93.60%  0.21% 99.57%  
+##  995     1    469     0.20%   93.80%  0.21% 99.79%  
+##  998     1    470     0.20%   94.00%  0.21% 100.00% 
 ##  Missing 30   500     6.00%   100.00%               
 ## ─────────────────────────────────────────────────────
 ## 
 ## ───────────────────────────────────────────────────────
 ##  treatment Freq CumFreq Percent CumPerc Valid CumValid
-##  3         1    1       0.20%   0.20%   0.23% 0.23%   
-##  4         1    2       0.20%   0.40%   0.23% 0.47%   
-##  7         1    3       0.20%   0.60%   0.23% 0.70%   
-##  8         1    4       0.20%   0.80%   0.23% 0.93%   
-##  10        1    5       0.20%   1.00%   0.23% 1.16%   
+##  1         1    1       0.20%   0.20%   0.23% 0.23%   
+##  5         2    3       0.40%   0.60%   0.47% 0.70%   
+##  6         1    4       0.20%   0.80%   0.23% 0.93%   
+##  8         1    5       0.20%   1.00%   0.23% 1.16%   
 ##  11        1    6       0.20%   1.20%   0.23% 1.40%   
-##  13        1    7       0.20%   1.40%   0.23% 1.63%   
-##  14        1    8       0.20%   1.60%   0.23% 1.86%   
-##  17        1    9       0.20%   1.80%   0.23% 2.09%   
-##  21        1    10      0.20%   2.00%   0.23% 2.33%   
+##  15        1    7       0.20%   1.40%   0.23% 1.63%   
+##  17        1    8       0.20%   1.60%   0.23% 1.86%   
+##  18        2    10      0.40%   2.00%   0.47% 2.33%   
+##  20        1    11      0.20%   2.20%   0.23% 2.56%   
+##  23        1    12      0.20%   2.40%   0.23% 2.79%   
 ##  ...       ...  ...     ...     ...     ...   ...     
-##  983       1    420     0.20%   84.00%  0.23% 97.67%  
-##  984       1    421     0.20%   84.20%  0.23% 97.91%  
-##  985       1    422     0.20%   84.40%  0.23% 98.14%  
-##  986       1    423     0.20%   84.60%  0.23% 98.37%  
-##  987       2    425     0.40%   85.00%  0.47% 98.84%  
-##  988       1    426     0.20%   85.20%  0.23% 99.07%  
-##  991       1    427     0.20%   85.40%  0.23% 99.30%  
-##  995       1    428     0.20%   85.60%  0.23% 99.53%  
-##  999       1    429     0.20%   85.80%  0.23% 99.77%  
-##  1000      1    430     0.20%   86.00%  0.23% 100.00% 
+##  970       1    418     0.20%   83.60%  0.23% 97.21%  
+##  972       1    419     0.20%   83.80%  0.23% 97.44%  
+##  975       2    421     0.40%   84.20%  0.47% 97.91%  
+##  983       1    422     0.20%   84.40%  0.23% 98.14%  
+##  986       2    424     0.40%   84.80%  0.47% 98.60%  
+##  990       1    425     0.20%   85.00%  0.23% 98.84%  
+##  995       2    427     0.40%   85.40%  0.47% 99.30%  
+##  996       1    428     0.20%   85.60%  0.23% 99.53%  
+##  998       1    429     0.20%   85.80%  0.23% 99.77%  
+##  999       1    430     0.20%   86.00%  0.23% 100.00% 
 ##  Missing   70   500     14.00%  100.00%               
 ## ───────────────────────────────────────────────────────</code></pre>
 </div>
@@ -545,13 +545,13 @@
 <h2 class="hasAnchor">
 <a href="#table-x" class="anchor"></a>Table X</h2>
 <p>Lastly, <code><a href="../reference/tableX.html">tableX()</a></code> is a pipe-able two-way version of <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> with a similar syntax to that of the rest of the <code>furniture</code> functions.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/tableX.html">tableX</a></span>(c, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(d <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/tableX.html">tableX</a></span>(c, <span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(d <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>##            ifelse(d &gt; 500, 1, 0)
 ## c           0   1   Missing Total
-##   control   242 228 30      500  
-##   treatment 217 213 70      500  
-##   Total     459 441 100     1000</code></pre>
+##   control   227 243 30      500  
+##   treatment 226 204 70      500  
+##   Total     453 447 100     1000</code></pre>
 <p>By default, it provides the total counts for the rows and columns with flexibility as to what is displayed and where.</p>
 </div>
 <div id="conclusion" class="section level2">
