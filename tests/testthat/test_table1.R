@@ -188,6 +188,23 @@ test_that("table1 produces table1", {
                            test=FALSE, 
                            second = c("a", "c"),
                            total = TRUE), "table1")
+  expect_identical(
+    capture.output(
+     df %>%
+       group_by(b) %>%
+       table1(x,
+              test=FALSE, 
+              total = TRUE,
+              output = "latex2"))[1], 
+     c("\\begin{table}[ ht ] "))
+  expect_identical(
+    capture.output(
+      df %>%
+        table1(x,
+               test=FALSE, 
+               total = TRUE,
+               output = "latex2"))[1], 
+    c("\\begin{table}[ ht ] "))
   
   ## Variables with no variability
   expect_warning(df %>%
