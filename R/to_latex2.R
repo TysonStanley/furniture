@@ -25,8 +25,8 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, t
   } else if (is.null(cor_type) & !is.null(splitby)) {
     splitby <- gsub("`", "", paste(splitby))
     splitby <- gsub("%", "\\%", splitby)
-    if (total) tot_column <- " & " else tot_column <- ""
   }
+  if (total) tot_column <- " & " else tot_column <- ""
   
   ## Fix problematic latex characters
   tab[] <- lapply(tab, function(x) gsub("%", "\\%", x, fixed = TRUE))
