@@ -152,7 +152,7 @@ parametric <- function(formula, split, lt, test, nam, i){
       tryCatch(
         oneway.test(formula, var.equal=FALSE),
         error = function(cond){
-          message(cond)
+          message(cond, "\n")
           return(NA)
         }
       )
@@ -161,8 +161,9 @@ parametric <- function(formula, split, lt, test, nam, i){
       tryCatch(
         oneway.test(formula, var.equal=TRUE),
         error = function(cond){
-          message(cond)
-          return(NA)
+          message(cond, "\n")
+          return(list(statistic = NA,
+                      p.value = NA))
         }
       )
     }
@@ -174,8 +175,9 @@ parametric <- function(formula, split, lt, test, nam, i){
       tryCatch(
         t.test(formula, var.equal=FALSE),
         error = function(cond){
-          message(cond)
-          return(NA)
+          message(cond, "\n")
+          return(list(statistic = NA,
+                      p.value = NA))
         }
       )
     } else {
@@ -183,8 +185,9 @@ parametric <- function(formula, split, lt, test, nam, i){
       tryCatch(
         t.test(formula, var.equal=TRUE),
         error = function(cond){
-          message(cond)
-          return(NA)
+          message(cond, "\n")
+          return(list(statistic = NA,
+                      p.value = NA))
         }
       )
     }    
@@ -197,7 +200,8 @@ nonparametric <- function(formula){
     kruskal.test(formula),
     error = function(cond){
       message(cond)
-      return(NA)
+      return(list(statistic = NA,
+                  p.value = NA))
     }
   )
 }
