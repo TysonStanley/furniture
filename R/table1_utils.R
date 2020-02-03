@@ -149,27 +149,57 @@ parametric <- function(formula, split, lt, test, nam, i){
     if (lt<0.05){
       message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in oneway.test() for: ", nam[i]))
       ## Performs an approximate method of Welch (1951)
-      oneway.test(formula, var.equal=FALSE)
+      tryCatch(
+        oneway.test(formula, var.equal=FALSE),
+        error = function(cond){
+          message(cond)
+          return(NA)
+        }
+      )
     } else {
       ## Performs a simple one-way ANOVA
-      oneway.test(formula, var.equal=TRUE)
+      tryCatch(
+        oneway.test(formula, var.equal=TRUE),
+        error = function(cond){
+          message(cond)
+          return(NA)
+        }
+      )
     }
     
   } else if (test){
     if (lt<0.05){
       message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: ", nam[i]))
       ## Performs an approximate method of Welch (1951)
-      t.test(formula, var.equal=FALSE)
+      tryCatch(
+        t.test(formula, var.equal=FALSE),
+        error = function(cond){
+          message(cond)
+          return(NA)
+        }
+      )
     } else {
       ## Performs a simple one-way ANOVA
-      t.test(formula, var.equal=TRUE)
+      tryCatch(
+        t.test(formula, var.equal=TRUE),
+        error = function(cond){
+          message(cond)
+          return(NA)
+        }
+      )
     }    
   }
   
 }
 
 nonparametric <- function(formula){
-  kruskal.test(formula)
+  tryCatch(
+    kruskal.test(formula),
+    error = function(cond){
+      message(cond)
+      return(NA)
+    }
+  )
 }
 
 
