@@ -111,7 +111,8 @@ tableF <- function(.data, x, n = 20, splitby = NULL){
                          "Percent" = paste0(Percent, "%"), 
                          "CumPerc" = paste0(CumPerc, "%"),
                          "Valid"   = c(paste0(Valid, "%"), ""),
-                         "CumValid" = c(paste0(CumValid, "%"), ""))
+                         "CumValid" = c(paste0(CumValid, "%"), ""), 
+                         stringsAsFactors = TRUE)
       names(final)[1] <- paste(i)
       final[] <- lapply(final,as.character)
       
@@ -128,7 +129,8 @@ tableF <- function(.data, x, n = 20, splitby = NULL){
                           "Freq"    = as.character(Freq), 
                           "CumFreq" = as.character(CumFreq), 
                           "Percent" = paste0(Percent, "%"), 
-                          "CumPerc" = paste0(CumPerc, "%"))
+                          "CumPerc" = paste0(CumPerc, "%"), 
+                          stringsAsFactors = TRUE)
       names(final)[1] <- paste(i)
       final[] <- lapply(final,as.character)
       
@@ -159,7 +161,7 @@ print.tableF <- function(x, ...){
   }
   
   for (i in 1:len){
-    x2 = as.data.frame(x[[i]])
+    x2 = as.data.frame(x[[i]], stringsAsFactors = TRUE)
     x2[] = sapply(x2, as.character)
     
     ## Get width of table for lines

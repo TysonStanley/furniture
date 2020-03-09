@@ -21,7 +21,7 @@ wide <- function(data, v.names, timevar, id=NULL){
 #' @importFrom stats reshape
 #' @export
 wide.tibble <- function(data, v.names=NULL, timevar, id=NULL){
-  data = as.data.frame(data)
+  data = as.data.frame(data, stringsAsFactors = TRUE)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
@@ -34,7 +34,7 @@ wide.tibble <- function(data, v.names=NULL, timevar, id=NULL){
 #' @importFrom stats reshape
 #' @export
 wide.tbl_df <- function(data, v.names=NULL, timevar, id=NULL){
-  data = as.data.frame(data)
+  data = as.data.frame(data, stringsAsFactors = TRUE)
   if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
@@ -137,7 +137,7 @@ long.tibble <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
   if (is.null(times)){
     times = seq_along(varying[[1]])
   }
-  data = as.data.frame(data)
+  data = as.data.frame(data, stringsAsFactors = TRUE)
   data$miss = NA
   ids = 1:NROW(data)
   newd = stats::reshape(data, varying, v.names, timevar = timevar,
@@ -168,7 +168,7 @@ long.tbl_df <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
   if (is.null(times)){
     times = seq_along(varying[[1]])
   }
-  data = as.data.frame(data)
+  data = as.data.frame(data, stringsAsFactors = TRUE)
   data$miss = NA
   ids = 1:NROW(data)
   newd = stats::reshape(data, varying, v.names, timevar = timevar,

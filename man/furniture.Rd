@@ -3,7 +3,6 @@
 \docType{package}
 \name{furniture}
 \alias{furniture}
-\alias{furniture-package}
 \title{furniture}
 \description{
 The furniture package offers simple functions (i.e. pieces of furniture) and an 
@@ -29,7 +28,7 @@ your data when you have a stratifying variable. For example, if you are explorin
 the means of several demographic and behavioral characteristics are related to a health condition,
 the health condition (i.e. "yes" or "no"; "low", "mid", or "high"; or a list of conditions) as
 the stratifying variable. With little code, you can test for associations and check means or 
-counts by the stratifying variable. See the vignette for more information.
+counts by the stratifying variable. See the vignette for more information. 
 
 Note: furniture is meant to make life more comfortable and beautiful. In like manner, this package
 is designed to be "furniture" for quantitative research.

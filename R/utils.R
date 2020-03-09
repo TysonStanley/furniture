@@ -71,14 +71,14 @@
   if (grepl("f|F", format_output) & test){
     if (is.null(header_labels)){
       header_labels <- c(nams, "Test", "P-Value")
-      N <- data.frame("", N, "", "")
+      N <- data.frame("", N, "", "", stringsAsFactors = TRUE)
       names(N) <- header_labels
     } else {
-      N <- data.frame("", N, "", "")
+      N <- data.frame("", N, "", "", stringsAsFactors = TRUE)
       names(N) <- c(header_labels[1], levels(d$split), header_labels[2:length(header_labels)])
     }
   } else if ((grepl("p|P", format_output) | grepl("s|S", format_output)) & test){
-    N <- data.frame(" ", N, " ") 
+    N <- data.frame(" ", N, " ", stringsAsFactors = TRUE) 
     if (grepl("p|P", format_output)){
       if (is.null(header_labels)){
         header_labels <- c(nams, "P-Value")
@@ -98,10 +98,10 @@
   } else {
     if (is.null(header_labels)){
       header_labels <- nams
-      N <- data.frame("", N)
+      N <- data.frame("", N, stringsAsFactors = TRUE)
       names(N) <- header_labels
     } else {
-      N <- data.frame("", N)
+      N <- data.frame("", N, stringsAsFactors = TRUE)
       names(N) <- c(header_labels[1], levels(d$split))
     }
 
@@ -150,52 +150,6 @@
   return(num_fun2)
 }
 
-## From tidyverse package
-text_col <- function(x) {
-  # If RStudio not available, messages already printed in black
-  if (!rstudioapi::isAvailable()) {
-    return(x)
-  }
-  
-  if (!rstudioapi::hasFun("getThemeInfo")) {
-    return(x)
-  }
-  
-  theme <- rstudioapi::getThemeInfo()
-  
-  if (isTRUE(theme$dark)) crayon::white(x) else crayon::black(x)
-  
-}
-
-furniture_version <- function(x) {
-  version <- as.character(unclass(utils::packageVersion(x))[[1]])
-  crayon::italic(paste0(version, collapse = "."))
-}
-
-search_conflicts <- function(){
-  
-  ## Search for conflicts
-  confs <- conflicts(detail = TRUE)
-  ## Grab those with the furniture package
-  furniture_conflicts <- confs$`package:furniture`
-  
-  ## Find which packages have those functions that are conflicted
-  if (length(furniture_conflicts) != 0){
-    other_conflicts <- list()
-    for (i in furniture_conflicts){
-      other_conflicts[[i]] <- lapply(confs, function(x) any(grepl(i, x))) %>%
-        do.call("rbind", .) %>%
-        data.frame %>%
-        setNames(c("conflicted")) %>%
-        tibble::rownames_to_column() %>%
-        .[.$conflicted == TRUE & 
-            .$rowname != "package:furniture",]
-    }
-  } else {
-    other_conflicts <- data.frame()
-  }
-  other_conflicts
-}
 
 ## Pipe
 `%>%` <- magrittr::`%>%`

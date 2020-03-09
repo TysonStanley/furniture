@@ -110,7 +110,6 @@ table1 = function(.data,
 #' @export
 #' @importFrom utils write.csv
 #' @importFrom knitr kable
-#' @importFrom dplyr filter
 table1.data.frame = function(.data, 
                              ..., 
                              splitby = NULL, 
@@ -181,7 +180,7 @@ table1.data.frame = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using selecting()
-  d <- selecting(data.frame(.data), ...) %>%
+  d <- selecting(data.frame(.data, stringsAsFactors = TRUE), ...) %>%
     setNames(gsub("\\.", " ", names(.)))
   
   ### Naming of variables
@@ -359,7 +358,7 @@ table1.data.frame = function(.data,
 print.table1 <- function(x, ...){
   max_col_width = max_col_width2 = max_col_width3 = list()
   ## Extract data set
-  x2 <- as.data.frame(x[[1]])
+  x2 <- as.data.frame(x[[1]], stringsAsFactors = TRUE)
   
   if (isTRUE(attr(x, "total"))){
     first_part <- c(1,2)
@@ -388,7 +387,7 @@ print.table1 <- function(x, ...){
   
   ## Splitby Name and Location
   if (!is.null(attr(x, "splitby"))){
-    x3 <- as.data.frame(x[[1]])
+    x3 <- as.data.frame(x[[1]], stringsAsFactors = TRUE)
     x4 <- x3[, -c(first_part, last_part), drop = FALSE]
     x5 <- x3[, first_part, drop = FALSE]
     x4[] <- sapply(x4, as.character)

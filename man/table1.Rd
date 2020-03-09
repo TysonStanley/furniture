@@ -4,13 +4,33 @@
 \alias{table1}
 \title{Table 1 for Simple and Stratified Descriptive Statistics}
 \usage{
-table1(.data, ..., splitby = NULL, FUN = NULL, FUN2 = NULL,
-  total = FALSE, second = NULL, row_wise = FALSE, test = FALSE,
-  param = TRUE, header_labels = NULL, type = "pvalues",
-  output = "text", rounding_perc = 1, digits = 1, var_names = NULL,
-  format_number = FALSE, NAkeep = NULL, na.rm = TRUE,
-  booktabs = TRUE, caption = NULL, align = NULL, float = "ht",
-  export = NULL, label = NULL)
+table1(
+  .data,
+  ...,
+  splitby = NULL,
+  FUN = NULL,
+  FUN2 = NULL,
+  total = FALSE,
+  second = NULL,
+  row_wise = FALSE,
+  test = FALSE,
+  param = TRUE,
+  header_labels = NULL,
+  type = "pvalues",
+  output = "text",
+  rounding_perc = 1,
+  digits = 1,
+  var_names = NULL,
+  format_number = FALSE,
+  NAkeep = NULL,
+  na.rm = TRUE,
+  booktabs = TRUE,
+  caption = NULL,
+  align = NULL,
+  float = "ht",
+  export = NULL,
+  label = NULL
+)
 }
 \arguments{
 \item{.data}{the data.frame that is to be summarized}

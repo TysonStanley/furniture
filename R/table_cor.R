@@ -33,7 +33,7 @@ tableC <- function(.data,
   ## Preprocessing ##
   .call <- match.call()
   data <- selecting(d_=.data, ...)
-  d <- as.data.frame(data)
+  d <- as.data.frame(data, stringsAsFactors = TRUE)
   
   ## NA ##
   if (na.rm){
@@ -60,8 +60,8 @@ tableC <- function(.data,
   pvalues <- 2*pt(abs(tvalues), n-2, lower.tail = FALSE)
   
   ## Formatting Names and Rownames
-  cors <- as.data.frame(cors)
-  pvalues <- as.data.frame(pvalues)
+  cors <- as.data.frame(cors, stringsAsFactors = TRUE)
+  pvalues <- as.data.frame(pvalues, stringsAsFactors = TRUE)
   dims <- dim(cors)
   
   if (output == "latex2"){
@@ -85,9 +85,9 @@ tableC <- function(.data,
     }
   }
   final[upper.tri(final)] <- " "
-  final <- as.data.frame(final)
+  final <- as.data.frame(final, stringsAsFactors = TRUE)
   row.names(final) <- row.names(cors)
-  final <- data.frame(" " = row.names(final), final)
+  final <- data.frame(" " = row.names(final), final, stringsAsFactors = TRUE)
   names(final) <- c(" ", names(cors))
   
   ## Output ##

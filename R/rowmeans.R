@@ -66,32 +66,6 @@ rowmeans.n <- function(..., n){
          NA)
 }
 
-#' Get Row Means within a Pipe
-#' 
-#' Does what \code{rowMeans()} does can be used one its own without dplyr::mutate() 
-#' within a pipe.
-#' 
-#' @param data the dataframe that contains the variables to get the row means from
-#' @param new_var the name of the new variable for which you'll put the row means in quotes
-#' @param ... the variables (unquoted) to be included in the row means
-#' @param na.rm should the missing values be ignored? default is FALSE
-#' 
-#' @return the row means included within the data.frame
-#'
-#' @importFrom dplyr select
-#' @importFrom dplyr mutate
-#' @export
-mutate_rowmeans = function(data, new_var, ..., na.rm=FALSE){
-  warning("This function is being removed in the next update.", call. = FALSE)
-  means <- data %>%
-    dplyr::select(...) %>% 
-    dplyr::mutate(!!new_var := rowMeans(., na.rm = na.rm)) %>% 
-    dplyr::select(!!new_var)
-  cbind(data, means)
-}
-
-
-
 #' Get Row Sums
 #' 
 #' Does what \code{rowSums()} does but without having to cbind the variables. Makes it easier to use
@@ -162,29 +136,5 @@ rowsums.n <- function(..., n){
          NA)
 }
 
-
-#' Get Row Sums within a Pipe
-#' 
-#' Does what \code{rowSums()} does can be used one its own without dplyr::mutate() 
-#' within a pipe.
-#' 
-#' @param data the dataframe that contains the variables to get the row means from
-#' @param new_var the name of the new variable for which you'll put the row means in quotes
-#' @param ... the variables (unquoted) to be included in the row means
-#' @param na.rm should the missing values be ignored? default is FALSE
-#' 
-#' @return the row means included within the data.frame
-#'
-#' @importFrom dplyr select
-#' @importFrom dplyr mutate
-#' @export
-mutate_rowsums = function(data, new_var, ..., na.rm=FALSE){
-  warning("This function is being removed in the next update.", call. = FALSE)
-  sums <- data %>%
-    dplyr::select(...) %>% 
-    dplyr::mutate(!!new_var := rowSums(., na.rm = na.rm)) %>% 
-    dplyr::select(!!new_var)
-  cbind(data, sums)
-}
 
 

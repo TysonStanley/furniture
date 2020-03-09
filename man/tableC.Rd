@@ -4,9 +4,18 @@
 \alias{tableC}
 \title{Correlation Table}
 \usage{
-tableC(.data, ..., cor_type = "pearson", na.rm = FALSE, rounding = 3,
-  output = "text", booktabs = TRUE, caption = NULL, align = NULL,
-  float = "htb")
+tableC(
+  .data,
+  ...,
+  cor_type = "pearson",
+  na.rm = FALSE,
+  rounding = 3,
+  output = "text",
+  booktabs = TRUE,
+  caption = NULL,
+  align = NULL,
+  float = "htb"
+)
 }
 \arguments{
 \item{.data}{the data frame containing the variables}

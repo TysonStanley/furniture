@@ -1,3 +1,8 @@
+# Version 1.9.7
+
+- Removed `crayon`, `rstudioapi`, and `tibble` as dependencies (they were part of the attachment message that has been discontinued)
+- All calls to `data.frame()` or `as.data.frame()` have `stringsAsFactors = TRUE` for backward compatibility when R changes that default
+
 # Version 1.9.5
 
 - Removed `tidyverse` as a dependency (changed to `dplyr` since many other package in the `tidyverse` were not needed)

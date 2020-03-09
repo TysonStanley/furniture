@@ -4,8 +4,18 @@
 \alias{to_latex}
 \title{From Table 1 to Latex 2}
 \usage{
-to_latex(tab, caption, align, len, splitby, float, booktabs, label,
-  total = FALSE, cor_type = NULL)
+to_latex(
+  tab,
+  caption,
+  align,
+  len,
+  splitby,
+  float,
+  booktabs,
+  label,
+  total = FALSE,
+  cor_type = NULL
+)
 }
 \arguments{
 \item{tab}{the table1 object}

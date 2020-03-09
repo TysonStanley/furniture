@@ -4,8 +4,7 @@
 \alias{tableX}
 \title{Table X (for Cross-Tabs)}
 \usage{
-tableX(.data, x1, x2, type = "count", na.rm = FALSE,
-  format_number = FALSE)
+tableX(.data, x1, x2, type = "count", na.rm = FALSE, format_number = FALSE)
 }
 \arguments{
 \item{.data}{the data frame containing the variables}
