@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.7</span>
       </span>
     </div>
 
@@ -127,8 +127,18 @@
     <p>Internal <code><a href='table1.html'>table1()</a></code> and <code><a href='tableC.html'>tableC()</a></code> function for providing output = "latex2"</p>
     </div>
 
-    <pre class="usage"><span class='fu'>to_latex</span>(<span class='no'>tab</span>, <span class='no'>caption</span>, <span class='no'>align</span>, <span class='no'>len</span>, <span class='no'>splitby</span>, <span class='no'>float</span>, <span class='no'>booktabs</span>, <span class='no'>label</span>,
-  <span class='kw'>cor_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>to_latex</span>(
+  <span class='no'>tab</span>,
+  <span class='no'>caption</span>,
+  <span class='no'>align</span>,
+  <span class='no'>len</span>,
+  <span class='no'>splitby</span>,
+  <span class='no'>float</span>,
+  <span class='no'>booktabs</span>,
+  <span class='no'>label</span>,
+  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cor_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +174,10 @@
     <tr>
       <th>label</th>
       <td><p>latex label option</p></td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td><p>is there a total column (from Table 1) to be printed?</p></td>
     </tr>
     <tr>
       <th>cor_type</th>
