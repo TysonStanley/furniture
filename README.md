@@ -7,7 +7,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
 
-# furniture: 1.9.6 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: 1.9.7 <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
@@ -51,8 +51,7 @@ install.packages("furniture")
 You can download the developmental version via:
 
 ``` r
-library(devtools)
-install_github("tysonstanley/furniture")
+remotes::install_github("tysonstanley/furniture")
 ```
 
 # Using furniture

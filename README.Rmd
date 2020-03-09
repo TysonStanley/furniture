@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.org/package=furniture)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
 [![Build Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
@@ -40,11 +39,11 @@ The latest stable build of the package can be downloaded from CRAN via:
 ```{r, eval = FALSE}
 install.packages("furniture")
 ```
+
 You can download the developmental version via:
 
 ```{r, eval = FALSE}
-library(devtools)
-install_github("tysonstanley/furniture")
+remotes::install_github("tysonstanley/furniture")
 ```
 
 # Using furniture
