@@ -23,6 +23,7 @@ Imports:
     knitr,
     dplyr (>= 0.8.0)
 Suggests:
+    magrittr,
     rmarkdown,
     testthat
 LazyData: true
