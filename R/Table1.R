@@ -444,7 +444,7 @@ print.table1 <- function(x, ...){
 #' @export
 as.data.frame.table1 <- function(x, row.names = NULL, optional = FALSE, ...,
                                  cut.names = FALSE, col.names = names(x), fix.empty.names = TRUE,
-                                 stringsAsFactors = default.stringsAsFactors()){
+                                 stringsAsFactors = FALSE){
   
   as.data.frame.list(x) %>%
     setNames(., gsub("Table1\\.", "", names(.)))
