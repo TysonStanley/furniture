@@ -4,7 +4,8 @@
 \name{nhanes_2010}
 \alias{nhanes_2010}
 \title{NHANES 2009-2010}
-\format{A data frame with 1417 rows and 24 variables:
+\format{
+A data frame with 1417 rows and 24 variables:
 \describe{
   \item{id}{individual ID}
   \item{gen_health}{general health indicator with five levels}
@@ -30,7 +31,8 @@
   \item{dead}{rating of whether the individual has wished he/she was dead}
   \item{difficulty}{rating of whether the individual has felt difficulty from the previous conditions}
   \item{active}{minutes of vigorous or moderate activity}
-}}
+}
+}
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2009}
 }
