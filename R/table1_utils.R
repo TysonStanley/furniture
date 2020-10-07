@@ -112,7 +112,7 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
         ## Function 2
       } else if (nams[[i]] %in% second){
         if(isTRUE(total)) { 
-          tab[[i]] <- c(list("Total" = num_fun(d[[i]])), tapply(d[[i]], d$split, num_fun2))
+          tab[[i]] <- c(list("Total" = num_fun2(d[[i]])), tapply(d[[i]], d$split, num_fun2))
         } else { 
           tab[[i]] <- tapply(d[[i]], d$split, num_fun2)
         }
