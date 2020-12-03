@@ -180,8 +180,8 @@ table1.data.frame = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using selecting()
-  d <- selecting(data.frame(.data, stringsAsFactors = TRUE), ...) %>%
-    setNames(gsub("\\.", " ", names(.)))
+  d <- selecting(data.frame(.data, stringsAsFactors = TRUE), ...)
+  d <- setNames(d, gsub("\\.", " ", names(.)))
   
   ### Naming of variables
   if (!is.null(var_names)){
