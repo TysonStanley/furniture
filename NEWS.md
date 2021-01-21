@@ -1,3 +1,7 @@
+# Version 1.9.9
+
+- Fix bug related to updated `magrittr` package.
+
 # Version 1.9.8
 
 - Very minor adjustment for `as.data.frame.table1()` to longer use `default.stringsAsFactors()` for r version >= 4.1.0

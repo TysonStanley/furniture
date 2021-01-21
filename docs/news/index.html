@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.9</span>
       </span>
     </div>
 
@@ -75,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,12 +120,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       
     </div>
 
+    <div id="version-199" class="section level1">
+<h1 class="page-header" data-toc-text="1.9.9">
+<a href="#version-199" class="anchor"></a>Version 1.9.9<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fix bug related to updated <code>magrittr</code> package.</li>
+</ul>
+</div>
     <div id="version-198" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.8">
 <a href="#version-198" class="anchor"></a>Version 1.9.8<small> Unreleased </small>
 </h1>
 <ul>
@@ -129,7 +141,7 @@
 </ul>
 </div>
     <div id="version-197" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.7">
 <a href="#version-197" class="anchor"></a>Version 1.9.7<small> 2020-03-09 </small>
 </h1>
 <ul>
@@ -138,7 +150,7 @@
 </ul>
 </div>
     <div id="version-195" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.5">
 <a href="#version-195" class="anchor"></a>Version 1.9.5<small> 2019-12-06 </small>
 </h1>
 <ul>
@@ -148,44 +160,44 @@
 </ul>
 </div>
     <div id="version-194" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.4">
 <a href="#version-194" class="anchor"></a>Version 1.9.4<small> Unreleased </small>
 </h1>
 <p>Cleaned up the suggests and imports (removed <code>tidyverse</code> and a few others that were not necessary for the package to function). The message printed upon attachment is no longer displayed.</p>
 </div>
     <div id="version-193" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.3">
 <a href="#version-193" class="anchor"></a>Version 1.9.3<small> Unreleased </small>
 </h1>
 <p>Added <code><a href="../reference/rowmeans.n.html">rowmeans.n()</a></code> and <code><a href="../reference/rowsums.n.html">rowsums.n()</a></code> for row means and sums allowing <code>n</code> missing values across the row.</p>
 </div>
     <div id="version-192" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.2">
 <a href="#version-192" class="anchor"></a>Version 1.9.2<small> Unreleased </small>
 </h1>
 <p><code><a href="../reference/table1.html">table1()</a></code> now can do the non-parametric Kruskal-Wallis Rank Sum test (when <code>param = FALSE</code>).</p>
 <p>Also fixed a small issue with <code>mutate_rowmeans()</code> and <code>mutate_rowsums()</code>.</p>
 </div>
     <div id="version-190" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.9.0">
 <a href="#version-190" class="anchor"></a>Version 1.9.0<small> 2019-03-07 </small>
 </h1>
 <p>Added the option to have a total column in <code><a href="../reference/table1.html">table1()</a></code> even when using a grouping variable (<code>total = TRUE</code> will activate this option). The resulting tests (if <code>test = TRUE</code>) will give results of just the bivariate comparisons (grouping variable with the specified variable).</p>
 </div>
     <div id="version-188" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.8.8">
 <a href="#version-188" class="anchor"></a>Version 1.8.8<small> Unreleased </small>
 </h1>
 <p>Small bug where a warning message was printed too often was fixed.</p>
 </div>
     <div id="version-187" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.8.7">
 <a href="#version-187" class="anchor"></a>Version 1.8.7<small> 2018-11-10 </small>
 </h1>
 <p>A minor update to fix an error that occurred when only a single variable was being summarized. Some code formatting under the hood was adjusted and some minor adjustments to the documentations were also made. Also, a warning is produced if any of the variables have no variability since this causes problems with tests and other formatting. Finally, a message is printed for <code>test = TRUE</code> when the variances are assumed to be unequal (based on a test). This is communicated in the documentation.</p>
 </div>
     <div id="version-180" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.8.0">
 <a href="#version-180" class="anchor"></a>Version 1.8.0<small> 2018-09-19 </small>
 </h1>
 <ul>
@@ -198,13 +210,13 @@
 </ul>
 </div>
     <div id="version-179" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.7.9">
 <a href="#version-179" class="anchor"></a>Version 1.7.9<small> 2018-06-01 </small>
 </h1>
-<p>Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the nâs in really messy data. We also now re-export the pipe from <code>magrittr</code>.</p>
+<p>Mainly bug fixes, including the removal of any empty rows. This allows for more accurate counts for the n’s in really messy data. We also now re-export the pipe from <code>magrittr</code>.</p>
 </div>
     <div id="version-176" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.7.6">
 <a href="#version-176" class="anchor"></a>Version 1.7.6<small> 2018-04-06 </small>
 </h1>
 <p>Updates to the <code>"latex2"</code> output option for <code><a href="../reference/table1.html">table1()</a></code> and <code><a href="../reference/tableC.html">tableC()</a></code> where it now produces a character vector of the output and then uses a print method to produce the Latex ready code. This means you can access the object and make changes to the table before having it print. It also outputs <code>\emph{Missing}</code> when <code>na.rm=FALSE</code>. Thanks to <a href="https://github.com/jpritikin">Joshua Pritikin</a> for the ideas and the pull requests leading to these improvements.</p>
@@ -212,7 +224,7 @@
 <p><code>%xt%</code> is now deprecated. <code><a href="../reference/tableF.html">tableF()</a></code> and <code><a href="../reference/tableX.html">tableX()</a></code> effectively do what <code>%xt%</code> was designed to do, but with better and more thorough output.</p>
 </div>
     <div id="version-173" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.7.3">
 <a href="#version-173" class="anchor"></a>Version 1.7.3<small> 2018-01-17 </small>
 </h1>
 <p>Minor changes and two new functions:</p>
@@ -226,15 +238,15 @@
 </ol>
 </div>
     <div id="version-172" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.7.2">
 <a href="#version-172" class="anchor"></a>Version 1.7.2<small> 2017-11-10 </small>
 </h1>
 <p>Several new features were added:</p>
 <ol>
 <li>
-<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverseâs <code>group_by()</code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
+<code><a href="../reference/table1.html">table1()</a></code> can take a <code>grouped_df</code> from the tidyverse’s <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>. This also means <code><a href="../reference/table1.html">table1()</a></code> can take on any number of stratifying variables in a clean way.</li>
 <li>
-<code><a href="../reference/table1.html">table1()</a></code> also has a new âlatex2â output option. This is not dependent on <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code> and is better suited for this situation. Should provide better latex tables than before.</li>
+<code><a href="../reference/table1.html">table1()</a></code> also has a new ‘latex2’ output option. This is not dependent on <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code> and is better suited for this situation. Should provide better latex tables than before.</li>
 <li>
 <code><a href="../reference/tableF.html">tableF()</a></code> is a new function that provides frequency tables (potentially by a grouping variable).</li>
 <li>General formatting was improved.</li>
@@ -242,7 +254,7 @@
 </ol>
 </div>
     <div id="version-160" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.6.0">
 <a href="#version-160" class="anchor"></a>Version 1.6.0<small> 2017-09-16 </small>
 </h1>
 <p>A new function was added: <code><a href="../reference/tableC.html">tableC()</a></code>, which, like <code><a href="../reference/table1.html">table1()</a></code> provides a nicely formatted table. However, <code><a href="../reference/tableC.html">tableC()</a></code> provides correlations instead of the descriptive statistics that <code><a href="../reference/table1.html">table1()</a></code> focuses on.</p>
@@ -250,18 +262,18 @@
 <p>Other small bug fixes.</p>
 </div>
     <div id="version-154" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.5.4">
 <a href="#version-154" class="anchor"></a>Version 1.5.4<small> 2017-07-08 </small>
 </h1>
 <p>There are three notable changes in this update:</p>
 <ol>
 <li>Small bug fix when using piping and ask for one of the kable output options. This has now been fixed. Additionally, better error catching and improved function tests.</li>
-<li>The <code><a href="../reference/long.html">long()</a></code> function has been added to the package. It is a wrapper of the <code><a href="https://rdrr.io/r/stats/reshape.html">stats::reshape()</a></code> function with a direction set to âlongâ, but has added benefits, including a bit cleaner syntax, the ability to handle unbalanced data, and works well with the tidyverse.</li>
-<li>The <code><a href="../reference/wide.html">wide()</a></code> function has been added as well. It, like <code><a href="../reference/long.html">long()</a></code>, is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html">reshape()</a></code> but with a set direction of âwideâ and has added benefits as well.</li>
+<li>The <code><a href="../reference/long.html">long()</a></code> function has been added to the package. It is a wrapper of the <code><a href="https://rdrr.io/r/stats/reshape.html">stats::reshape()</a></code> function with a direction set to “long”, but has added benefits, including a bit cleaner syntax, the ability to handle unbalanced data, and works well with the tidyverse.</li>
+<li>The <code><a href="../reference/wide.html">wide()</a></code> function has been added as well. It, like <code><a href="../reference/long.html">long()</a></code>, is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html">reshape()</a></code> but with a set direction of “wide” and has added benefits as well.</li>
 </ol>
 </div>
     <div id="version-150" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.5.0">
 <a href="#version-150" class="anchor"></a>Version 1.5.0<small> 2017-03-17 </small>
 </h1>
 <p><code><a href="../reference/table1.html">table1()</a></code> now has the ability to apply any function to numeric variables that the user supplies (all functions that work with <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> should work with <code><a href="../reference/table1.html">table1()</a></code>. Other than that, the changes are mainly internal changes in <code><a href="../reference/table1.html">table1()</a></code> that have bearing on a few arguments.</p>
@@ -282,7 +294,7 @@
 <p>Thanks!</p>
 </div>
     <div id="version-141" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.4.1">
 <a href="#version-141" class="anchor"></a>Version 1.4.1<small> 2016-12-13 </small>
 </h1>
 <p>Three big changes:</p>
@@ -290,20 +302,20 @@
 <li>
 <code>simple_table1</code> is no longer with us. The functionality has been integrated into <code>table1</code>.</li>
 <li>
-<code>table1</code> has a âcondensedâ version that leaves less white space and is more in line with some academic journals.</li>
-<li>The âsimpleâ option has been added to <code>table1</code> which allows only the percentages (instead of counts and percentages) for categorical variables.</li>
+<code>table1</code> has a “condensed” version that leaves less white space and is more in line with some academic journals.</li>
+<li>The “simple” option has been added to <code>table1</code> which allows only the percentages (instead of counts and percentages) for categorical variables.</li>
 <li>
-<code>tableM</code> is a new function that can analyze a missing data by putting a variable with missingness in the âmissing_varâ argument.</li>
+<code>tableM</code> is a new function that can analyze a missing data by putting a variable with missingness in the “missing_var” argument.</li>
 </ol>
 <p>Enjoy!</p>
 </div>
     <div id="version-130" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.0">
 <a href="#version-130" class="anchor"></a>Version 1.3.0<small> Unreleased </small>
 </h1>
 <p>Three notable changes:</p>
 <ol>
-<li>A new functionâ<code>tableM</code>âhas been added to the package. It produces a table much like <code>table1</code> but analyzes a variable with missingness.</li>
+<li>A new function–<code>tableM</code>–has been added to the package. It produces a table much like <code>table1</code> but analyzes a variable with missingness.</li>
 <li>
 <code>table1</code> (and its related functions such as <code>simple_table1</code> and <code>tableM</code>) now has better formatting and has an additional option <code>output_type = "text2"</code> which provides lines to separate the header from the rest of the table.</li>
 <li>
@@ -312,24 +324,24 @@
 <p>Also, a bug fix:</p>
 <ol>
 <li>
-<code>table1</code> was rounding the percentages at the tenâs place instead of the tenthâs place. It now is fixed.</li>
+<code>table1</code> was rounding the percentages at the ten’s place instead of the tenth’s place. It now is fixed.</li>
 </ol>
 <p>Thanks!</p>
 </div>
     <div id="version-123" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.3">
 <a href="#version-123" class="anchor"></a>Version 1.2.3<small> Unreleased </small>
 </h1>
 <p>A bug that rounded the percentages to the nearest tenth place was found and fixed for both <code>table1</code> and <code>simple_table1</code>.</p>
 </div>
     <div id="version-122" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.2">
 <a href="#version-122" class="anchor"></a>Version 1.2.2<small> 2016-11-15 </small>
 </h1>
 <p>An error was found when using <code>table1</code> with a splitby factor with more than 2 levels. This has been fixed in version 1.2.2.</p>
 <p>There were also two notable inclusions:</p>
 <ol>
-<li>In <code>table1</code> you can now format the numbers in the output with a comma for large numbers (e.g., 20,000 vs.Â 20000).</li>
+<li>In <code>table1</code> you can now format the numbers in the output with a comma for large numbers (e.g., 20,000 vs. 20000).</li>
 <li>In <code>table1</code> you can also calculate percentages of factor variables across rows instead of within groups.</li>
 <li>A version of <code>table1</code> known as <code>simple_table1</code> that reports the percentages of factors instead of counts and percentages.</li>
 <li>A new vignette all about <code>table1</code> is included.</li>
@@ -338,49 +350,25 @@
 <p>Thanks.</p>
 </div>
     <div id="version-120" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.0">
 <a href="#version-120" class="anchor"></a>Version 1.2.0<small> 2016-10-21 </small>
 </h1>
 <p>We are excited to announce that we are updating our <code>furniture</code> package from 1.0.1 to 1.2.0. We included a new operator (<code>%xt%</code>) for simple cross tabulations that includes a chi-square test and some data from NHANES 2005-2010. Although these additions are nice, most of the updates were to <code>table1</code>. These included:</p>
 <ol>
 <li>Bug fixes (the function got confused if there was an object in the global environment that had the same name as a variable in the data frame you were analyzing)</li>
 <li>Fewer dependencies (this will allow the package to be more stable across platforms with different package versions loaded without having to worry about packrat)</li>
-<li>Additional functionality in the splitby argument (the splitby argument can now have a formula [e.g.Â ~var] or can be a string [e.g.Â âvarâ])</li>
-<li>Additional functionality in the output_type argument (can now do any type of output that <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable</a></code> can do plus the regular âtextâ option)</li>
+<li>Additional functionality in the splitby argument (the splitby argument can now have a formula [e.g. ~var] or can be a string [e.g. “var”])</li>
+<li>Additional functionality in the output_type argument (can now do any type of output that <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable</a></code> can do plus the regular “text” option)</li>
 </ol>
 <p>None of these changes will break programs already in place using this package. Instead, there are additional uses of the functions as shown in points 3 and 4.</p>
 <p>Thanks.</p>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-198">1.9.8</a></li>
-        <li><a href="#version-197">1.9.7</a></li>
-        <li><a href="#version-195">1.9.5</a></li>
-        <li><a href="#version-194">1.9.4</a></li>
-        <li><a href="#version-193">1.9.3</a></li>
-        <li><a href="#version-192">1.9.2</a></li>
-        <li><a href="#version-190">1.9.0</a></li>
-        <li><a href="#version-188">1.8.8</a></li>
-        <li><a href="#version-187">1.8.7</a></li>
-        <li><a href="#version-180">1.8.0</a></li>
-        <li><a href="#version-179">1.7.9</a></li>
-        <li><a href="#version-176">1.7.6</a></li>
-        <li><a href="#version-173">1.7.3</a></li>
-        <li><a href="#version-172">1.7.2</a></li>
-        <li><a href="#version-160">1.6.0</a></li>
-        <li><a href="#version-154">1.5.4</a></li>
-        <li><a href="#version-150">1.5.0</a></li>
-        <li><a href="#version-141">1.4.1</a></li>
-        <li><a href="#version-130">1.3.0</a></li>
-        <li><a href="#version-123">1.2.3</a></li>
-        <li><a href="#version-122">1.2.2</a></li>
-        <li><a href="#version-120">1.2.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -392,7 +380,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

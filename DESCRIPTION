@@ -1,7 +1,7 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.9.8
+Version: 1.9.9
 Date: 2020-03-09
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
@@ -30,4 +30,4 @@ LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-3
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
