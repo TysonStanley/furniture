@@ -1,6 +1,7 @@
-# Version 1.9.9
+# Version 1.9.10
 
 - Fix bug related to updated `magrittr` package.
+- Upgraded to GitHub actions for continuous integration.
 
 # Version 1.9.8
 

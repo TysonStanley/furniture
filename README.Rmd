@@ -19,7 +19,7 @@ devtools::load_all()
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.org/package=furniture)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
   
-  <!-- badges: end -->
+<!-- badges: end -->
 
 
 
