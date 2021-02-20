@@ -1,13 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start --> [![R build
+status](https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg)](https://github.com/TysonStanley/furniture/actions)
 [![CRAN Status
 Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.org/package=furniture)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
 [![Build
 Status](https://travis-ci.org/TysonStanley/furniture.svg?branch=master)](https://travis-ci.org/TysonStanley/furniture)
+<!-- badges: end -->
 
-# furniture: `v1.9.9` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: `v1.9.10` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
