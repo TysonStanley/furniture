@@ -14,11 +14,9 @@ devtools::load_all()
 ```
 
 <!-- badges: start -->
-
-[![R build status](https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg)](https://github.com/TysonStanley/furniture/actions)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.org/package=furniture)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/furniture)
-  
+[![R-CMD-check](https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg)](https://github.com/TysonStanley/furniture/actions)
 <!-- badges: end -->
 
 
