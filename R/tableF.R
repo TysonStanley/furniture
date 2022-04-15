@@ -42,11 +42,11 @@ tableF <- function(.data, x, n = 20, splitby = NULL){
     
     ### Splitby Variable (adds the variable to d as "split")
     splitby = substitute(splitby)
-    if (class(substitute(splitby)) == "name"){
+    if (inherits(substitute(splitby), "name")){
       splitby_ = eval(substitute(splitby), .data)
-    } else if (class(substitute(splitby)) == "call"){
+    } else if (inherits(substitute(splitby), "call")){
       splitby_ = model.frame(splitby, .data, na.action = "na.pass")[[1]]
-    } else if (class(substitute(splitby)) == "character"){
+    } else if (inherits(substitute(splitby), "character")){
       splitby_ = .data[[splitby]]
     } else if(is.null(splitby)){
       splitby_ = factor(1, labels = paste(.call[3]))

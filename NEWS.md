@@ -1,3 +1,7 @@
+# Version 1.9.12
+
+- Updated maintainer email address and update package site.
+
 # Version 1.9.10
 
 - Fix bug related to updated `magrittr` package.

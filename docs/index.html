@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.12</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -85,50 +81,76 @@
   <div class="contents col-md-9">
 
 
-<!-- badges: end -->
-<div id="furniture-v1-9-10" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#furniture-v1-9-10" class="anchor"></a>furniture: <code>v1.9.10</code> <img src="reference/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%">
+<div class="section level1">
+<div class="page-header"><h1 id="furniture-v1912-">furniture: <code>v1.9.12</code>
+<img src="reference/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%"><a class="anchor" aria-label="anchor" href="#furniture-v1912-"></a>
 </h1></div>
-<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code><a href="reference/washer.html">washer()</a></code>, <code><a href="reference/rowmeans.html">rowmeans()</a></code>, <code><a href="reference/rowsums.html">rowsums()</a></code>), exploratory data analysis and reporting (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>). It currently contains eight main functions:</p>
-<ol>
+<p>The furniture R package contains functions to help with data
+cleaning/tidying (e.g., <code><a href="reference/washer.html">washer()</a></code>, <code><a href="reference/rowmeans.html">rowmeans()</a></code>,
+<code><a href="reference/rowsums.html">rowsums()</a></code>), exploratory data analysis and reporting (e.g.,
+<code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>). It
+currently contains eight main functions:</p>
+<ol style="list-style-type: decimal">
 <li>
-<code><a href="reference/table1.html">table1()</a></code> : gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by()</a></code>.</li>
+<code><a href="reference/table1.html">table1()</a></code> : gives a well-formatted table for academic
+publication of descriptive statistics. Very useful for quick analyses as
+well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with
+<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>.</li>
 <li>
-<code><a href="reference/tableC.html">tableC()</a></code> : gives a well-formatted table of correlations.</li>
+<code><a href="reference/tableC.html">tableC()</a></code> : gives a well-formatted table of
+correlations.</li>
 <li>
-<code><a href="reference/tableF.html">tableF()</a></code> : provides a thorough frequency table for quick checks of the levels of a variable.</li>
+<code><a href="reference/tableF.html">tableF()</a></code> : provides a thorough frequency table for
+quick checks of the levels of a variable.</li>
 <li>
-<code><a href="reference/washer.html">washer()</a></code> : changes several values in a variable (very useful for changing place holder values to missing).</li>
+<code><a href="reference/washer.html">washer()</a></code> : changes several values in a variable (very
+useful for changing place holder values to missing).</li>
 <li>
-<code><a href="reference/long.html">long()</a></code> : is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html">stats::reshape()</a></code>, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.</li>
+<code><a href="reference/long.html">long()</a></code> : is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>,
+takes the data from wide to long format (long is often the tidy version
+of the data), works well with the tidyverse, and can handle unbalanced
+multilevel data.</li>
 <li>
-<code><a href="reference/wide.html">wide()</a></code> : also a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html">stats::reshape()</a></code>, takes the data from long to wide, and like <code><a href="reference/long.html">long()</a></code>, works well with the tidyverse and can handle unbalanced multilevel data.</li>
+<code><a href="reference/wide.html">wide()</a></code> : also a wrapper of
+<code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>, takes the data from long to wide, and
+like <code><a href="reference/long.html">long()</a></code>, works well with the tidyverse and can handle
+unbalanced multilevel data.</li>
 <li>
-<code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> : tidyverse friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html">rowMeans()</a></code>, where the <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> function allows <code>n</code> number of missing</li>
+<code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> : tidyverse
+friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code>, where the
+<code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> function allows <code>n</code> number of
+missing</li>
 <li>
-<code><a href="reference/rowsums.html">rowsums()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> : tidyverse friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code>, where the <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> function allows <code>n</code> number of missing</li>
+<code><a href="reference/rowsums.html">rowsums()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> : tidyverse
+friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, where the
+<code><a href="reference/rowsums.n.html">rowsums.n()</a></code> function allows <code>n</code> number of
+missing</li>
 </ol>
-<p>In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.</p>
+<p>In conjunction with many other tidy tools, the package should be
+useful for health, behavioral, and social scientists working on
+quantitative research.</p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<p>The latest stable build of the package can be downloaded from CRAN via:</p>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>The latest stable build of the package can be downloaded from CRAN
+via:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"furniture"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"furniture"</span><span class="op">)</span></code></pre></div>
 <p>You can download the developmental version via:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"tysonstanley/furniture"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tysonstanley/furniture"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="using-furniture" class="section level1">
-<h1 class="hasAnchor">
-<a href="#using-furniture" class="anchor"></a>Using furniture</h1>
-<p>The main functions are the <code>table*()</code> functions (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>).</p>
+<div class="section level1">
+<h1 id="using-furniture">Using furniture<a class="anchor" aria-label="anchor" href="#using-furniture"></a>
+</h1>
+<p>The main functions are the <code>table*()</code> functions (e.g.,
+<code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>,
+<code><a href="reference/tableF.html">tableF()</a></code>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"nhanes_2010"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"nhanes_2010"</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">nhanes_2010</span>,
        <span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
@@ -182,9 +204,9 @@
 <span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span>
 <span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
          output <span class="op">=</span> <span class="st">"text2"</span>,
          na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -209,11 +231,12 @@
 <span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span>
 <span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span>
 <span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
-<p><code><a href="reference/table1.html">table1()</a></code> can do bivariate significance tests as well.</p>
+<p><code><a href="reference/table1.html">table1()</a></code> can do bivariate significance tests as
+well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
          output <span class="op">=</span> <span class="st">"text2"</span>,
          na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -239,11 +262,13 @@
 <span class="co">#&gt;     No     121 (48.2%) 547 (47%)          </span>
 <span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)        </span>
 <span class="co">#&gt; ───────────────────────────────────────────</span></code></pre></div>
-<p>By default it does the appropriate parametric tests. However, you can change that by setting <code>param = FALSE</code> (new with <code>v 1.9.1</code>).</p>
+<p>By default it does the appropriate parametric tests. However, you can
+change that by setting <code>param = FALSE</code> (new with
+<code>v 1.9.1</code>).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
          output <span class="op">=</span> <span class="st">"text2"</span>,
          na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -261,10 +286,11 @@
 <span class="co">#&gt;  illicit: No   205 (81.7%) 901 (77.4%) 0.623  </span>
 <span class="co">#&gt;  rehab: No     121 (48.2%) 547 (47%)   0.729  </span>
 <span class="co">#&gt; ───────────────────────────────────────────────</span></code></pre></div>
-<p>It can also do a total column with the stratified columns (new with <code>v 1.9.0</code>) with the <code>total = TRUE</code> argument.</p>
+<p>It can also do a total column with the stratified columns (new with
+<code>v 1.9.0</code>) with the <code>total = TRUE</code> argument.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
          output <span class="op">=</span> <span class="st">"text2"</span>,
          na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -284,8 +310,8 @@
 <span class="co">#&gt; ────────────────────────────────────────────────────────────</span></code></pre></div>
 <p>It can also report the statistics in addition to the p-values.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
          output <span class="op">=</span> <span class="st">"text2"</span>,
          na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -313,8 +339,12 @@
 <span class="co">#&gt;     No     668 (47.1%)  121 (48.2%) 547 (47%)                           </span>
 <span class="co">#&gt;     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                         </span>
 <span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────</span></code></pre></div>
-<p><code><a href="reference/table1.html">table1()</a></code> can be outputted directly to other formats. All <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code> options are available for this and there is an extra option <code>"latex2"</code> which provides a publication ready table in Latex documents.</p>
-<p>The <code><a href="reference/tableC.html">tableC()</a></code> function gives a well-formatted correlation table.</p>
+<p><code><a href="reference/table1.html">table1()</a></code> can be outputted directly to other formats. All
+<code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> options are available for this and there is
+an extra option <code>"latex2"</code> which provides a publication ready
+table in Latex documents.</p>
+<p>The <code><a href="reference/tableC.html">tableC()</a></code> function gives a well-formatted correlation
+table.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/tableC.html">tableC</a></span><span class="op">(</span><span class="va">nhanes_2010</span>, 
        <span class="va">age</span>, <span class="va">active</span>, <span class="va">vig_active</span>, 
@@ -348,13 +378,16 @@
 <span class="co">#&gt;  29  86   1300    6.07%   91.74% </span>
 <span class="co">#&gt;  30  117  1417    8.26%   100.00%</span>
 <span class="co">#&gt; ──────────────────────────────────</span></code></pre></div>
-<p>In addition, the <code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowsums.html">rowsums()</a></code> functions offer a simplified use of <code><a href="https://rdrr.io/r/base/colSums.html">rowMeans()</a></code> and <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code>, particularly when using the tidyverse’s <code>mutate()</code>.</p>
+<p>In addition, the <code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowsums.html">rowsums()</a></code>
+functions offer a simplified use of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code> and
+<code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, particularly when using the tidyverse’s
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op">%&gt;%</span>
-  <span class="fu">select</span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>avg_active <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.html">rowmeans</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>sum_active <span class="op">=</span> <span class="fu"><a href="reference/rowsums.html">rowsums</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg_active <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.html">rowmeans</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sum_active <span class="op">=</span> <span class="fu"><a href="reference/rowsums.html">rowsums</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   vig_active mod_active avg_active sum_active</span>
 <span class="co">#&gt; 1         30         NA         30         30</span>
 <span class="co">#&gt; 2        180        180        180        360</span>
@@ -362,15 +395,17 @@
 <span class="co">#&gt; 4         20         70         45         90</span>
 <span class="co">#&gt; 5        120         NA        120        120</span>
 <span class="co">#&gt; 6         NA         NA        NaN          0</span></code></pre></div>
-<p>The <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> allow <code>n</code> missing values while still calculating the mean or sum.</p>
+<p>The <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> allow
+<code>n</code> missing values while still calculating the mean or
+sum.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.n.html">rowmeans.n</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.n.html">rowmeans.n</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    x  y avg</span>
 <span class="co">#&gt; 1 NA  1 1.0</span>
 <span class="co">#&gt; 2  1  2 1.5</span>
@@ -378,11 +413,19 @@
 <span class="co">#&gt; 4  3  4 3.5</span>
 <span class="co">#&gt; 5  4  5 4.5</span>
 <span class="co">#&gt; 6  5 NA 5.0</span></code></pre></div>
-<div id="notes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h2>
-<p>The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as <code><a href="https://dplyr.tidyverse.org">library(dplyr)</a></code>, <code><a href="https://tidyr.tidyverse.org">library(tidyr)</a></code>, and <code><a href="https://ggplot2.tidyverse.org">library(ggplot2)</a></code> with <code><a href="https://rdrr.io/r/base/library.html">library(furniture)</a></code> to accomplish this.</p>
-<p>The original function–<code><a href="reference/table1.html">table1()</a></code>–is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or <a href="https://tysonstanley.github.io/">tysonbarrett.com</a> for several examples of its use. Also see our paper in the <a href="https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf">R Journal</a>.</p>
+<div class="section level2">
+<h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
+</h2>
+<p>The package is most useful in conjunction with other tidy tools to
+get data cleaned/tidied and start exploratory data analysis. I recommend
+using packages such as <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code>,
+<code><a href="https://tidyr.tidyverse.org" class="external-link">library(tidyr)</a></code>, and <code><a href="https://ggplot2.tidyverse.org" class="external-link">library(ggplot2)</a></code> with
+<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(furniture)</a></code> to accomplish this.</p>
+<p>The original function–<code><a href="reference/table1.html">table1()</a></code>–is simply built for both
+exploratory descriptive analysis and communication of findings. See
+vignettes or <a href="https://tysonstanley.github.io/" class="external-link">tysonbarrett.com</a> for several
+examples of its use. Also see our paper in the <a href="https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf" class="external-link">R
+Journal</a>.</p>
 </div>
 </div>
 
@@ -390,50 +433,57 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=furniture">https://​cloud.r-project.org/​package=furniture</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=furniture" class="external-link">View on CRAN</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing furniture</a></li>
+<li><a href="authors.html#citation">Citing furniture</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Tyson S. Barrett <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2137-1391" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Tyson S. Barrett <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2137-1391" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Emily Brignone <br><small class="roles"> Author </small>  </li>
 <li>Daniel J. Laxman <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/TysonStanley/furniture/actions"><img src="https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://cran.r-project.org/package=furniture"><img src="https://www.r-pkg.org/badges/version/furniture" alt="CRAN Status Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=furniture" class="external-link"><img src="https://www.r-pkg.org/badges/version/furniture" alt="CRAN Status Badge"></a></li>
+<li><a href="https://github.com/TysonStanley/furniture/actions" class="external-link"><img src="https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
+  <p></p>
+<p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
@@ -441,6 +491,8 @@
 
   
 
+
+  
 
   </body>
 </html>

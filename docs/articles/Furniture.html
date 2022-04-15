@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.12</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -80,7 +76,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Furniture</h1>
             
-            <h4 class="date">2021-02-20</h4>
+            <h4 data-toc-skip class="date">2022-04-14</h4>
       
       
       <div class="hidden name"><code>Furniture.Rmd</code></div>
@@ -89,19 +85,18 @@
 
     
     
-<p>This vignette is current as of <code>furniture</code> 1.9.10.</p>
-<div id="using-furniture" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-furniture" class="anchor"></a>Using <code>furniture</code>
+<p>This vignette is current as of <code>furniture</code> 1.9.12.</p>
+<div class="section level2">
+<h2 id="using-furniture">Using <code>furniture</code><a class="anchor" aria-label="anchor" href="#using-furniture"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></code></pre></div>
 <p>We will first make a fictitious data set:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1.5</span>, <span class="fl">2</span><span class="op">)</span>, 
-                 b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span>, 
-                 c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="fl">400</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Other"</span>, <span class="fl">70</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="fl">500</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span>,
-                 d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">900</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="fl">99</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1.5</span>, <span class="fl">2</span><span class="op">)</span>, 
+                 b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span>, 
+                 c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="fl">400</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Other"</span>, <span class="fl">70</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="fl">500</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span>,
+                 d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">900</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="op">-</span><span class="fl">99</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>There are four functions that we’ll demonstrate here:</p>
 <ol style="list-style-type: decimal">
 <li><code>washer</code></li>
@@ -110,252 +105,287 @@
 <li><code>tableF</code></li>
 </ol>
 </div>
-<div id="washer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#washer" class="anchor"></a>Washer</h2>
-<p><code>washer</code> is a great function for quick data cleaning. In situations where there are placeholders, extra levels in a factor, or several values need to be changed to another.</p>
+<div class="section level2">
+<h2 id="washer">Washer<a class="anchor" aria-label="anchor" href="#washer"></a>
+</h2>
+<p><code>washer</code> is a great function for quick data cleaning. In
+situations where there are placeholders, extra levels in a factor, or
+several values need to be changed to another.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fu"><a href="../reference/washer.html">washer</a></span><span class="op">(</span><span class="va">d</span>, <span class="op">-</span><span class="fl">99</span><span class="op">)</span>,  <span class="co">## changes the placeholder -99 to NA</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fu"><a href="../reference/washer.html">washer</a></span><span class="op">(</span><span class="va">d</span>, <span class="op">-</span><span class="fl">99</span><span class="op">)</span>,  <span class="co">## changes the placeholder -99 to NA</span>
          c <span class="op">=</span> <span class="fu"><a href="../reference/washer.html">washer</a></span><span class="op">(</span><span class="va">c</span>, <span class="st">"Other"</span>, <span class="st">"None"</span>, value <span class="op">=</span> <span class="st">"control"</span><span class="op">)</span><span class="op">)</span> <span class="co">## changes "Other" and "None" to "Control"</span></code></pre></div>
 </div>
-<div id="table1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table1" class="anchor"></a>Table1</h2>
-<p>Now that the data is “washed” we can start exploring and reporting.</p>
+<div class="section level2">
+<h2 id="table1">Table1<a class="anchor" aria-label="anchor" href="#table1"></a>
+</h2>
+<p>Now that the data is “washed” we can start exploring and
+reporting.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, <span class="va">d</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## ────────────────────────────────
-##               Mean/Count (SD/%)
-##               n = 900          
-##  a                             
-##               1.5 (2.0)        
-##  b                             
-##               450.5 (260.0)    
-##  factor(c)                     
-##     control   470 (52.2%)      
-##     treatment 430 (47.8%)      
-##  d                             
-##               493.0 (283.9)    
-## ────────────────────────────────</code></pre>
-<p>The variables must be numeric or factor. Since we use a special type of evaluation (i.e. Non-Standard Evaluation) we can change the variables in the function (e.g., <code><a href="https://rdrr.io/r/base/factor.html">factor(c)</a></code>). This can be extended to making a whole new variable in the function as well.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, <span class="va">d</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## ────────────────────────────────</span>
+<span class="co">##               Mean/Count (SD/%)</span>
+<span class="co">##               n = 900          </span>
+<span class="co">##  a                             </span>
+<span class="co">##               1.5 (2.0)        </span>
+<span class="co">##  b                             </span>
+<span class="co">##               450.5 (260.0)    </span>
+<span class="co">##  factor(c)                     </span>
+<span class="co">##     control   470 (52.2%)      </span>
+<span class="co">##     treatment 430 (47.8%)      </span>
+<span class="co">##  d                             </span>
+<span class="co">##               515.5 (291.5)    </span>
+<span class="co">## ────────────────────────────────</span></code></pre>
+<p>The variables must be numeric or factor. Since we use a special type
+of evaluation (i.e. Non-Standard Evaluation) we can change the variables
+in the function (e.g., <code>factor(c)</code>). This can be extended to
+making a whole new variable in the function as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## ───────────────────────────────────────
-##                      Mean/Count (SD/%)
-##                      n = 900          
-##  a                                    
-##                      1.5 (2.0)        
-##  b                                    
-##                      450.5 (260.0)    
-##  d                                    
-##                      493.0 (283.9)    
-##  ifelse(a &gt; 1, 1, 0)                  
-##                      0.6 (0.5)        
-## ───────────────────────────────────────</code></pre>
-<p>This is just the beginning though. Two powerful things the function can do are shown below:</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## ───────────────────────────────────────</span>
+<span class="co">##                      Mean/Count (SD/%)</span>
+<span class="co">##                      n = 900          </span>
+<span class="co">##  a                                    </span>
+<span class="co">##                      1.5 (2.0)        </span>
+<span class="co">##  b                                    </span>
+<span class="co">##                      450.5 (260.0)    </span>
+<span class="co">##  d                                    </span>
+<span class="co">##                      515.5 (291.5)    </span>
+<span class="co">##  ifelse(a &gt; 1, 1, 0)                  </span>
+<span class="co">##                      0.6 (0.5)        </span>
+<span class="co">## ───────────────────────────────────────</span></code></pre>
+<p>This is just the beginning though. Two powerful things the function
+can do are shown below:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────────────────
-##                             factor(c) 
-##                      control       treatment     P-Value
-##                      n = 470       n = 430              
-##  a                                               0.121  
-##                      1.6 (2.0)     1.4 (1.9)            
-##  b                                               &lt;.001  
-##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.065  
-##                      476.4 (282.0) 511.3 (285.2)        
-##  ifelse(a &gt; 1, 1, 0)                             0.226  
-##                      0.6 (0.5)     0.6 (0.5)            
-## ─────────────────────────────────────────────────────────</code></pre>
-<p>The <code>splitby = ~factor(c)</code> stratifies the means and counts by a factor variable (in this case either control or treatment). When we use this we can also automatically compute tests of significance using <code>test=TRUE</code>.</p>
-<p>We can also use it intuitively within the pipe (for more about this, see the “Table 1” vignette):</p>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span>
+<span class="co">##                             factor(c) </span>
+<span class="co">##                      control       treatment     P-Value</span>
+<span class="co">##                      n = 470       n = 430              </span>
+<span class="co">##  a                                               0.289  </span>
+<span class="co">##                      1.4 (1.9)     1.6 (2.0)            </span>
+<span class="co">##  b                                               &lt;.001  </span>
+<span class="co">##                      235.5 (135.8) 685.5 (124.3)        </span>
+<span class="co">##  d                                               0.181  </span>
+<span class="co">##                      503.0 (294.6) 529.1 (287.7)        </span>
+<span class="co">##  ifelse(a &gt; 1, 1, 0)                             0.696  </span>
+<span class="co">##                      0.6 (0.5)     0.6 (0.5)            </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span></code></pre>
+<p>The <code>splitby = ~factor(c)</code> stratifies the means and counts
+by a factor variable (in this case either control or treatment). When we
+use this we can also automatically compute tests of significance using
+<code>test=TRUE</code>.</p>
+<p>We can also use it intuitively within the pipe (for more about this,
+see the “Table 1” vignette):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, 
         test<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## ─────────────────────────────────────────────────────────
-##                                 c 
-##                      control       treatment     P-Value
-##                      n = 470       n = 430              
-##  a                                               0.121  
-##                      1.6 (2.0)     1.4 (1.9)            
-##  b                                               &lt;.001  
-##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.065  
-##                      476.4 (282.0) 511.3 (285.2)        
-##  ifelse(a &gt; 1, 1, 0)                             0.226  
-##                      0.6 (0.5)     0.6 (0.5)            
-## ─────────────────────────────────────────────────────────</code></pre>
-<p>In this case, we used the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function from <code>dplyr</code> (within the <code>tidyverse</code>) and <code><a href="../reference/table1.html">table1()</a></code> knows to use that as the grouping variable in place of the <code>splitby</code> argument.</p>
-<p>If the parametric tests (default) are not appropriate, you can set <code>param = FALSE</code>.</p>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span>
+<span class="co">##                                 c </span>
+<span class="co">##                      control       treatment     P-Value</span>
+<span class="co">##                      n = 470       n = 430              </span>
+<span class="co">##  a                                               0.289  </span>
+<span class="co">##                      1.4 (1.9)     1.6 (2.0)            </span>
+<span class="co">##  b                                               &lt;.001  </span>
+<span class="co">##                      235.5 (135.8) 685.5 (124.3)        </span>
+<span class="co">##  d                                               0.181  </span>
+<span class="co">##                      503.0 (294.6) 529.1 (287.7)        </span>
+<span class="co">##  ifelse(a &gt; 1, 1, 0)                             0.696  </span>
+<span class="co">##                      0.6 (0.5)     0.6 (0.5)            </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span></code></pre>
+<p>In this case, we used the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> function from
+<code>dplyr</code> (within the <code>tidyverse</code>) and
+<code><a href="../reference/table1.html">table1()</a></code> knows to use that as the grouping variable in
+place of the <code>splitby</code> argument.</p>
+<p>If the parametric tests (default) are not appropriate, you can set
+<code>param = FALSE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, 
         test<span class="op">=</span><span class="cn">TRUE</span>,
         param<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## ─────────────────────────────────────────────────────────
-##                                 c 
-##                      control       treatment     P-Value
-##                      n = 470       n = 430              
-##  a                                               0.074  
-##                      1.6 (2.0)     1.4 (1.9)            
-##  b                                               &lt;.001  
-##                      235.5 (135.8) 685.5 (124.3)        
-##  d                                               0.069  
-##                      476.4 (282.0) 511.3 (285.2)        
-##  ifelse(a &gt; 1, 1, 0)                             0.226  
-##                      0.6 (0.5)     0.6 (0.5)            
-## ─────────────────────────────────────────────────────────</code></pre>
-<p>Finally, you can polish it quite a bit using a few other options. For example, you can do the following:</p>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span>
+<span class="co">##                                 c </span>
+<span class="co">##                      control       treatment     P-Value</span>
+<span class="co">##                      n = 470       n = 430              </span>
+<span class="co">##  a                                               0.509  </span>
+<span class="co">##                      1.4 (1.9)     1.6 (2.0)            </span>
+<span class="co">##  b                                               &lt;.001  </span>
+<span class="co">##                      235.5 (135.8) 685.5 (124.3)        </span>
+<span class="co">##  d                                               0.173  </span>
+<span class="co">##                      503.0 (294.6) 529.1 (287.7)        </span>
+<span class="co">##  ifelse(a &gt; 1, 1, 0)                             0.696  </span>
+<span class="co">##                      0.6 (0.5)     0.6 (0.5)            </span>
+<span class="co">## ─────────────────────────────────────────────────────────</span></code></pre>
+<p>Finally, you can polish it quite a bit using a few other options. For
+example, you can do the following:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test<span class="op">=</span><span class="cn">TRUE</span>,
-       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
-       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────
-##                 factor(c) 
-##          control       treatment     P-Value
-##          n = 470       n = 430              
-##  A       1.6 (2.0)     1.4 (1.9)     0.121  
-##  B       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D       476.4 (282.0) 511.3 (285.2) 0.065  
-##  New Var 0.6 (0.5)     0.6 (0.5)     0.226  
-## ─────────────────────────────────────────────</code></pre>
-<p>Note that <code>var_names</code> can be used for more complex naming (e.g., with spaces, brackets) that otherwise cannot be used with data frames. Alternatively, for more simple naming, we can name them directly.</p>
+       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
+       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────</span>
+<span class="co">##                 factor(c) </span>
+<span class="co">##          control       treatment     P-Value</span>
+<span class="co">##          n = 470       n = 430              </span>
+<span class="co">##  A       1.4 (1.9)     1.6 (2.0)     0.289  </span>
+<span class="co">##  B       235.5 (135.8) 685.5 (124.3) &lt;.001  </span>
+<span class="co">##  D       503.0 (294.6) 529.1 (287.7) 0.181  </span>
+<span class="co">##  New Var 0.6 (0.5)     0.6 (0.5)     0.696  </span>
+<span class="co">## ─────────────────────────────────────────────</span></code></pre>
+<p>Note that <code>var_names</code> can be used for more complex naming
+(e.g., with spaces, brackets) that otherwise cannot be used with data
+frames. Alternatively, for more simple naming, we can name them
+directly.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, A <span class="op">=</span> <span class="va">a</span>, B <span class="op">=</span> <span class="va">b</span>, D <span class="op">=</span> <span class="va">d</span>, A2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, A <span class="op">=</span> <span class="va">a</span>, B <span class="op">=</span> <span class="va">b</span>, D <span class="op">=</span> <span class="va">d</span>, A2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test<span class="op">=</span><span class="cn">TRUE</span>,
-       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
-<pre><code>## 
-## ────────────────────────────────────────
-##            factor(c) 
-##     control       treatment     P-Value
-##     n = 470       n = 430              
-##  A  1.6 (2.0)     1.4 (1.9)     0.121  
-##  B  235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  D  476.4 (282.0) 511.3 (285.2) 0.065  
-##  A2 0.6 (0.5)     0.6 (0.5)     0.226  
-## ────────────────────────────────────────</code></pre>
-<p>You can also format the numbers (adding a comma for big numbers such as in 20,000 instead of 20000):</p>
+       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ────────────────────────────────────────</span>
+<span class="co">##            factor(c) </span>
+<span class="co">##     control       treatment     P-Value</span>
+<span class="co">##     n = 470       n = 430              </span>
+<span class="co">##  A  1.4 (1.9)     1.6 (2.0)     0.289  </span>
+<span class="co">##  B  235.5 (135.8) 685.5 (124.3) &lt;.001  </span>
+<span class="co">##  D  503.0 (294.6) 529.1 (287.7) 0.181  </span>
+<span class="co">##  A2 0.6 (0.5)     0.6 (0.5)     0.696  </span>
+<span class="co">## ────────────────────────────────────────</span></code></pre>
+<p>You can also format the numbers (adding a comma for big numbers such
+as in 20,000 instead of 20000):</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test<span class="op">=</span><span class="cn">TRUE</span>,
-       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
+       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
        format_number <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────
-##                 factor(c) 
-##          control       treatment     P-Value
-##          n = 470       n = 430              
-##  A                                   0.121  
-##          1.6 (2.0)     1.4 (1.9)            
-##  B                                   &lt;.001  
-##          235.5 (135.8) 685.5 (124.3)        
-##  D                                   0.065  
-##          476.4 (282.0) 511.3 (285.2)        
-##  New Var                             0.226  
-##          0.6 (0.5)     0.6 (0.5)            
-## ─────────────────────────────────────────────</code></pre>
-<p>The table can be exported directly to a folder in the working directory called “Table1”. Using <code>export</code>, we provide it with a string that will be the name of the CSV containing the formatted table.</p>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: B</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────</span>
+<span class="co">##                 factor(c) </span>
+<span class="co">##          control       treatment     P-Value</span>
+<span class="co">##          n = 470       n = 430              </span>
+<span class="co">##  A                                   0.289  </span>
+<span class="co">##          1.4 (1.9)     1.6 (2.0)            </span>
+<span class="co">##  B                                   &lt;.001  </span>
+<span class="co">##          235.5 (135.8) 685.5 (124.3)        </span>
+<span class="co">##  D                                   0.181  </span>
+<span class="co">##          503.0 (294.6) 529.1 (287.7)        </span>
+<span class="co">##  New Var                             0.696  </span>
+<span class="co">##          0.6 (0.5)     0.6 (0.5)            </span>
+<span class="co">## ─────────────────────────────────────────────</span></code></pre>
+<p>The table can be exported directly to a folder in the working
+directory called “Table1”. Using <code>export</code>, we provide it with
+a string that will be the name of the CSV containing the formatted
+table.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test<span class="op">=</span><span class="cn">TRUE</span>,
-       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
+       var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>, <span class="st">"New Var"</span><span class="op">)</span>,
        format_number <span class="op">=</span> <span class="cn">TRUE</span>,
        export <span class="op">=</span> <span class="st">"example_table1"</span><span class="op">)</span></code></pre></div>
-<p>This can also be outputted as a latex, markdown, or pandoc table (matching all the output types of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable</a></code>). Below shows how to do a latex table (not using <code>kable</code> however, but a built-in function that provides the variable name at the top of the table):</p>
+<p>This can also be outputted as a latex, markdown, or pandoc table
+(matching all the output types of <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable</a></code>). Below
+shows how to do a latex table (not using <code>kable</code> however, but
+a built-in function that provides the variable name at the top of the
+table):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="st">"new var"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="st">"new var"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test <span class="op">=</span> <span class="cn">TRUE</span>,
        output <span class="op">=</span> <span class="st">"latex2"</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
-<pre><code>## \begin{table}[ ht ] 
-## \centering 
-## \caption{}\label{}
-## \begin{tabular}{ l c c c }
-## \toprule
-##  &amp;   \multicolumn{ 2 }{c}{ factor(c) }\\ 
-##   &amp; control &amp; treatment &amp; P-Value \\ 
-##   &amp; n = 470 &amp; n = 430 &amp;   \\ 
-##  \midrule
-## a &amp;   &amp;   &amp; 0.121\\ 
-## \hspace{6pt}   &amp; 1.6 (2.0) &amp; 1.4 (1.9) &amp; \\ 
-## b &amp;   &amp;   &amp; &lt;.001\\ 
-## \hspace{6pt}   &amp; 235.5 (135.8) &amp; 685.5 (124.3) &amp; \\ 
-## d &amp;   &amp;   &amp; 0.065\\ 
-## \hspace{6pt}   &amp; 476.4 (282.0) &amp; 511.3 (285.2) &amp; \\ 
-## new var &amp;   &amp;   &amp; 0.226\\ 
-## \hspace{6pt}   &amp; 0.6 (0.5) &amp; 0.6 (0.5) &amp; \\ 
-## \bottomrule
-## 
-## \end{tabular}
-## \end{table}</code></pre>
-<p>Last item to show you regarding <code><a href="../reference/table1.html">table1()</a></code> is that it can be printed in a simplified and condensed form. This instead of reporting counts and percentages for categorical variables, it reports only percentages and the table has much less white space.</p>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</span></code></pre>
+<pre><code><span class="co">## \begin{table}[ ht ] </span>
+<span class="co">## \centering </span>
+<span class="co">## \caption{}\label{}</span>
+<span class="co">## \begin{tabular}{ l c c c }</span>
+<span class="co">## \toprule</span>
+<span class="co">##  &amp;   \multicolumn{ 2 }{c}{ factor(c) }\\ </span>
+<span class="co">##   &amp; control &amp; treatment &amp; P-Value \\ </span>
+<span class="co">##   &amp; n = 470 &amp; n = 430 &amp;   \\ </span>
+<span class="co">##  \midrule</span>
+<span class="co">## a &amp;   &amp;   &amp; 0.289\\ </span>
+<span class="co">## \hspace{6pt}   &amp; 1.4 (1.9) &amp; 1.6 (2.0) &amp; \\ </span>
+<span class="co">## b &amp;   &amp;   &amp; &lt;.001\\ </span>
+<span class="co">## \hspace{6pt}   &amp; 235.5 (135.8) &amp; 685.5 (124.3) &amp; \\ </span>
+<span class="co">## d &amp;   &amp;   &amp; 0.181\\ </span>
+<span class="co">## \hspace{6pt}   &amp; 503.0 (294.6) &amp; 529.1 (287.7) &amp; \\ </span>
+<span class="co">## new var &amp;   &amp;   &amp; 0.696\\ </span>
+<span class="co">## \hspace{6pt}   &amp; 0.6 (0.5) &amp; 0.6 (0.5) &amp; \\ </span>
+<span class="co">## \bottomrule</span>
+<span class="co">## </span>
+<span class="co">## \end{tabular}</span>
+<span class="co">## \end{table}</span></code></pre>
+<p>Last item to show you regarding <code><a href="../reference/table1.html">table1()</a></code> is that it can
+be printed in a simplified and condensed form. This instead of reporting
+counts and percentages for categorical variables, it reports only
+percentages and the table has much less white space.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="st">"new var"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
-       splitby <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/table1.html">table1</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>, <span class="st">"new var"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+       splitby <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, 
        test <span class="op">=</span> <span class="cn">TRUE</span>,
-       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────
-##                 factor(c) 
-##          control       treatment     P-Value
-##          n = 470       n = 430              
-##  a       1.6 (2.0)     1.4 (1.9)     0.121  
-##  b       235.5 (135.8) 685.5 (124.3) &lt;.001  
-##  d       476.4 (282.0) 511.3 (285.2) 0.065  
-##  new var 0.6 (0.5)     0.6 (0.5)     0.226  
-## ─────────────────────────────────────────────</code></pre>
+       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"condensed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: b</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────</span>
+<span class="co">##                 factor(c) </span>
+<span class="co">##          control       treatment     P-Value</span>
+<span class="co">##          n = 470       n = 430              </span>
+<span class="co">##  a       1.4 (1.9)     1.6 (2.0)     0.289  </span>
+<span class="co">##  b       235.5 (135.8) 685.5 (124.3) &lt;.001  </span>
+<span class="co">##  d       503.0 (294.6) 529.1 (287.7) 0.181  </span>
+<span class="co">##  new var 0.6 (0.5)     0.6 (0.5)     0.696  </span>
+<span class="co">## ─────────────────────────────────────────────</span></code></pre>
 </div>
-<div id="table-c" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table-c" class="anchor"></a>Table C</h2>
-<p>This function is to create simple, beautiful correlation tables. The syntax is just like <code><a href="../reference/table1.html">table1()</a></code> in most respects. Below we include all the numeric variables to see their correlations. Since there are missing values in <code>d</code> we will use the natural <code>na.rm=TRUE</code>.</p>
+<div class="section level2">
+<h2 id="table-c">Table C<a class="anchor" aria-label="anchor" href="#table-c"></a>
+</h2>
+<p>This function is to create simple, beautiful correlation tables. The
+syntax is just like <code><a href="../reference/table1.html">table1()</a></code> in most respects. Below we
+include all the numeric variables to see their correlations. Since there
+are missing values in <code>d</code> we will use the natural
+<code>na.rm=TRUE</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tableC.html">tableC</a></span><span class="op">(</span><span class="va">df</span>, 
        <span class="va">a</span>, <span class="va">b</span>, <span class="va">d</span>,
        na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## N = 900
-## Note: pearson correlation (p-value).</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────
-##       [1]            [2]           [3]  
-##  [1]a 1.00                              
-##  [2]b -0.058 (0.083) 1.00               
-##  [3]d -0.014 (0.678) 0.049 (0.138) 1.00 
-## ─────────────────────────────────────────</code></pre>
-<p>All the adjustments that you can make in <code><a href="../reference/table1.html">table1()</a></code> can be done here as well. For example,</p>
+<pre><code><span class="co">## N = 900</span>
+<span class="co">## Note: pearson correlation (p-value).</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ────────────────────────────────────────</span>
+<span class="co">##       [1]            [2]          [3]  </span>
+<span class="co">##  [1]a 1.00                             </span>
+<span class="co">##  [2]b 0.052 (0.116)  1.00              </span>
+<span class="co">##  [3]d -0.049 (0.144) 0.02 (0.554) 1.00 </span>
+<span class="co">## ────────────────────────────────────────</span></code></pre>
+<p>All the adjustments that you can make in <code><a href="../reference/table1.html">table1()</a></code> can be
+done here as well. For example,</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tableC.html">tableC</a></span><span class="op">(</span><span class="va">df</span>, 
        <span class="st">"A"</span> <span class="op">=</span> <span class="va">a</span>, <span class="st">"B"</span> <span class="op">=</span> <span class="va">b</span>, <span class="st">"D"</span> <span class="op">=</span> <span class="va">d</span>,
        na.rm <span class="op">=</span> <span class="cn">TRUE</span>,
        output <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></code></pre></div>
-<pre><code>## N = 900
-## Note: pearson correlation (p-value).</code></pre>
+<pre><code><span class="co">## N = 900</span>
+<span class="co">## Note: pearson correlation (p-value).</span></code></pre>
 <table class="table">
 <thead><tr>
 <th>
@@ -388,7 +418,7 @@
 [2]B
 </td>
 <td>
--0.058 (0.083)
+0.052 (0.116)
 </td>
 <td>
 1.00
@@ -401,10 +431,10 @@
 [3]D
 </td>
 <td>
--0.014 (0.678)
+-0.049 (0.144)
 </td>
 <td>
-0.049 (0.138)
+0.02 (0.554)
 </td>
 <td>
 1.00
@@ -413,171 +443,180 @@
 </tbody>
 </table>
 </div>
-<div id="table-f" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table-f" class="anchor"></a>Table F</h2>
-<p>This function is to create simple frequency tables. The syntax is just like <code><a href="../reference/table1.html">table1()</a></code> and <code><a href="../reference/tableC.html">tableC()</a></code> in most respects, except that it uses only one variable instead of many.</p>
+<div class="section level2">
+<h2 id="table-f">Table F<a class="anchor" aria-label="anchor" href="#table-f"></a>
+</h2>
+<p>This function is to create simple frequency tables. The syntax is
+just like <code><a href="../reference/table1.html">table1()</a></code> and <code><a href="../reference/tableC.html">tableC()</a></code> in most
+respects, except that it uses only one variable instead of many.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tableF.html">tableF</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">a</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## ────────────────────────────────────────────────
-##  a                 Freq CumFreq Percent CumPerc
-##  -3.50961531977369 1    1       0.10%   0.10%  
-##  -3.48621381783825 1    2       0.10%   0.20%  
-##  -3.41469318237203 1    3       0.10%   0.30%  
-##  -3.35679315269648 1    4       0.10%   0.40%  
-##  -3.26945264276756 1    5       0.10%   0.50%  
-##  -3.23059640783198 1    6       0.10%   0.60%  
-##  -2.97722604215201 1    7       0.10%   0.70%  
-##  -2.92163460355412 1    8       0.10%   0.80%  
-##  -2.86453297458724 1    9       0.10%   0.90%  
-##  -2.85345227016497 1    10      0.10%   1.00%  
-##  ...               ...  ...     ...     ...    
-##  6.09649304576323  1    990     0.10%   99.00% 
-##  6.12667134699394  1    991     0.10%   99.10% 
-##  6.223806132005    1    992     0.10%   99.20% 
-##  6.26023030234671  1    993     0.10%   99.30% 
-##  6.43253740171349  1    994     0.10%   99.40% 
-##  6.82503094114015  1    995     0.10%   99.50% 
-##  6.84140554571486  1    996     0.10%   99.60% 
-##  6.88693228968728  1    997     0.10%   99.70% 
-##  7.66894749972925  1    998     0.10%   99.80% 
-##  7.78149925073625  1    999     0.10%   99.90% 
-##  7.91040104209703  1    1000    0.10%   100.00%
-## ────────────────────────────────────────────────</code></pre>
-<p>Similarly to <code><a href="../reference/table1.html">table1()</a></code> we can use a <code>splitby</code> argument (or <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>).</p>
+<pre><code><span class="co">## </span>
+<span class="co">## ────────────────────────────────────────────────</span>
+<span class="co">##  a                 Freq CumFreq Percent CumPerc</span>
+<span class="co">##  -5.30695759554064 1    1       0.10%   0.10%  </span>
+<span class="co">##  -4.25112040975252 1    2       0.10%   0.20%  </span>
+<span class="co">##  -4.22053764154757 1    3       0.10%   0.30%  </span>
+<span class="co">##  -3.98687028249072 1    4       0.10%   0.40%  </span>
+<span class="co">##  -3.68376829433206 1    5       0.10%   0.50%  </span>
+<span class="co">##  -3.58809422114143 1    6       0.10%   0.60%  </span>
+<span class="co">##  -3.50434994842026 1    7       0.10%   0.70%  </span>
+<span class="co">##  -3.42911475485511 1    8       0.10%   0.80%  </span>
+<span class="co">##  -3.25787759420917 1    9       0.10%   0.90%  </span>
+<span class="co">##  -3.1379798598096  1    10      0.10%   1.00%  </span>
+<span class="co">##  ...               ...  ...     ...     ...    </span>
+<span class="co">##  6.13527496499455  1    990     0.10%   99.00% </span>
+<span class="co">##  6.24879121326446  1    991     0.10%   99.10% </span>
+<span class="co">##  6.38777791872609  1    992     0.10%   99.20% </span>
+<span class="co">##  6.38921656267541  1    993     0.10%   99.30% </span>
+<span class="co">##  6.57235796808265  1    994     0.10%   99.40% </span>
+<span class="co">##  6.58689290773498  1    995     0.10%   99.50% </span>
+<span class="co">##  6.65458798639225  1    996     0.10%   99.60% </span>
+<span class="co">##  6.87451288914709  1    997     0.10%   99.70% </span>
+<span class="co">##  7.04118417489984  1    998     0.10%   99.80% </span>
+<span class="co">##  7.8713546569196   1    999     0.10%   99.90% </span>
+<span class="co">##  8.46491088639497  1    1000    0.10%   100.00%</span>
+<span class="co">## ────────────────────────────────────────────────</span></code></pre>
+<p>Similarly to <code><a href="../reference/table1.html">table1()</a></code> we can use a <code>splitby</code>
+argument (or <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>).</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tableF.html">tableF</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">d</span>, splitby <span class="op">=</span> <span class="va">c</span><span class="op">)</span></code></pre></div>
-<pre><code>## Variable:d</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────────────
-##  control Freq CumFreq Percent CumPerc Valid CumValid
-##  1       1    1       0.20%   0.20%   0.21% 0.21%   
-##  5       1    2       0.20%   0.40%   0.21% 0.43%   
-##  6       1    3       0.20%   0.60%   0.21% 0.64%   
-##  7       1    4       0.20%   0.80%   0.21% 0.85%   
-##  10      1    5       0.20%   1.00%   0.21% 1.06%   
-##  12      1    6       0.20%   1.20%   0.21% 1.28%   
-##  17      1    7       0.20%   1.40%   0.21% 1.49%   
-##  18      1    8       0.20%   1.60%   0.21% 1.70%   
-##  20      1    9       0.20%   1.80%   0.21% 1.91%   
-##  22      1    10      0.20%   2.00%   0.21% 2.13%   
-##  ...     ...  ...     ...     ...     ...   ...     
-##  970     1    461     0.20%   92.20%  0.21% 98.09%  
-##  972     1    462     0.20%   92.40%  0.21% 98.30%  
-##  976     1    463     0.20%   92.60%  0.21% 98.51%  
-##  981     1    464     0.20%   92.80%  0.21% 98.72%  
-##  982     1    465     0.20%   93.00%  0.21% 98.94%  
-##  987     1    466     0.20%   93.20%  0.21% 99.15%  
-##  988     1    467     0.20%   93.40%  0.21% 99.36%  
-##  990     1    468     0.20%   93.60%  0.21% 99.57%  
-##  995     1    469     0.20%   93.80%  0.21% 99.79%  
-##  999     1    470     0.20%   94.00%  0.21% 100.00% 
-##  Missing 30   500     6.00%   100.00%               
-## ─────────────────────────────────────────────────────
-## 
-## ───────────────────────────────────────────────────────
-##  treatment Freq CumFreq Percent CumPerc Valid CumValid
-##  15        1    1       0.20%   0.20%   0.23% 0.23%   
-##  16        1    2       0.20%   0.40%   0.23% 0.47%   
-##  17        1    3       0.20%   0.60%   0.23% 0.70%   
-##  21        1    4       0.20%   0.80%   0.23% 0.93%   
-##  25        1    5       0.20%   1.00%   0.23% 1.16%   
-##  27        1    6       0.20%   1.20%   0.23% 1.40%   
-##  28        1    7       0.20%   1.40%   0.23% 1.63%   
-##  31        2    9       0.40%   1.80%   0.47% 2.09%   
-##  32        1    10      0.20%   2.00%   0.23% 2.33%   
-##  37        1    11      0.20%   2.20%   0.23% 2.56%   
-##  ...       ...  ...     ...     ...     ...   ...     
-##  972       2    420     0.40%   84.00%  0.47% 97.67%  
-##  977       1    421     0.20%   84.20%  0.23% 97.91%  
-##  981       1    422     0.20%   84.40%  0.23% 98.14%  
-##  982       1    423     0.20%   84.60%  0.23% 98.37%  
-##  983       1    424     0.20%   84.80%  0.23% 98.60%  
-##  985       2    426     0.40%   85.20%  0.47% 99.07%  
-##  988       1    427     0.20%   85.40%  0.23% 99.30%  
-##  991       1    428     0.20%   85.60%  0.23% 99.53%  
-##  995       1    429     0.20%   85.80%  0.23% 99.77%  
-##  997       1    430     0.20%   86.00%  0.23% 100.00% 
-##  Missing   70   500     14.00%  100.00%               
-## ───────────────────────────────────────────────────────</code></pre>
+<pre><code><span class="co">## Variable:d</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────────────</span>
+<span class="co">##  control Freq CumFreq Percent CumPerc Valid CumValid</span>
+<span class="co">##  7       1    1       0.20%   0.20%   0.21% 0.21%   </span>
+<span class="co">##  10      1    2       0.20%   0.40%   0.21% 0.43%   </span>
+<span class="co">##  11      2    4       0.40%   0.80%   0.43% 0.85%   </span>
+<span class="co">##  12      1    5       0.20%   1.00%   0.21% 1.06%   </span>
+<span class="co">##  13      1    6       0.20%   1.20%   0.21% 1.28%   </span>
+<span class="co">##  14      1    7       0.20%   1.40%   0.21% 1.49%   </span>
+<span class="co">##  15      1    8       0.20%   1.60%   0.21% 1.70%   </span>
+<span class="co">##  19      1    9       0.20%   1.80%   0.21% 1.91%   </span>
+<span class="co">##  20      1    10      0.20%   2.00%   0.21% 2.13%   </span>
+<span class="co">##  24      1    11      0.20%   2.20%   0.21% 2.34%   </span>
+<span class="co">##  ...     ...  ...     ...     ...     ...   ...     </span>
+<span class="co">##  981     1    458     0.20%   91.60%  0.21% 97.45%  </span>
+<span class="co">##  982     1    459     0.20%   91.80%  0.21% 97.66%  </span>
+<span class="co">##  986     1    460     0.20%   92.00%  0.21% 97.87%  </span>
+<span class="co">##  989     1    461     0.20%   92.20%  0.21% 98.09%  </span>
+<span class="co">##  991     1    462     0.20%   92.40%  0.21% 98.30%  </span>
+<span class="co">##  993     2    464     0.40%   92.80%  0.43% 98.72%  </span>
+<span class="co">##  995     3    467     0.60%   93.40%  0.64% 99.36%  </span>
+<span class="co">##  996     1    468     0.20%   93.60%  0.21% 99.57%  </span>
+<span class="co">##  998     1    469     0.20%   93.80%  0.21% 99.79%  </span>
+<span class="co">##  1000    1    470     0.20%   94.00%  0.21% 100.00% </span>
+<span class="co">##  Missing 30   500     6.00%   100.00%               </span>
+<span class="co">## ─────────────────────────────────────────────────────</span>
+<span class="co">## </span>
+<span class="co">## ───────────────────────────────────────────────────────</span>
+<span class="co">##  treatment Freq CumFreq Percent CumPerc Valid CumValid</span>
+<span class="co">##  1         1    1       0.20%   0.20%   0.23% 0.23%   </span>
+<span class="co">##  7         1    2       0.20%   0.40%   0.23% 0.47%   </span>
+<span class="co">##  9         1    3       0.20%   0.60%   0.23% 0.70%   </span>
+<span class="co">##  10        1    4       0.20%   0.80%   0.23% 0.93%   </span>
+<span class="co">##  12        1    5       0.20%   1.00%   0.23% 1.16%   </span>
+<span class="co">##  14        2    7       0.40%   1.40%   0.47% 1.63%   </span>
+<span class="co">##  18        1    8       0.20%   1.60%   0.23% 1.86%   </span>
+<span class="co">##  33        2    10      0.40%   2.00%   0.47% 2.33%   </span>
+<span class="co">##  36        1    11      0.20%   2.20%   0.23% 2.56%   </span>
+<span class="co">##  37        1    12      0.20%   2.40%   0.23% 2.79%   </span>
+<span class="co">##  ...       ...  ...     ...     ...     ...   ...     </span>
+<span class="co">##  978       1    418     0.20%   83.60%  0.23% 97.21%  </span>
+<span class="co">##  979       1    419     0.20%   83.80%  0.23% 97.44%  </span>
+<span class="co">##  981       1    420     0.20%   84.00%  0.23% 97.67%  </span>
+<span class="co">##  982       1    421     0.20%   84.20%  0.23% 97.91%  </span>
+<span class="co">##  986       3    424     0.60%   84.80%  0.70% 98.60%  </span>
+<span class="co">##  987       1    425     0.20%   85.00%  0.23% 98.84%  </span>
+<span class="co">##  988       2    427     0.40%   85.40%  0.47% 99.30%  </span>
+<span class="co">##  990       1    428     0.20%   85.60%  0.23% 99.53%  </span>
+<span class="co">##  991       1    429     0.20%   85.80%  0.23% 99.77%  </span>
+<span class="co">##  992       1    430     0.20%   86.00%  0.23% 100.00% </span>
+<span class="co">##  Missing   70   500     14.00%  100.00%               </span>
+<span class="co">## ───────────────────────────────────────────────────────</span></code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/tableF.html">tableF</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using dplyr::group_by() groups: c</code></pre>
-<pre><code>## Variable:d</code></pre>
-<pre><code>## 
-## ─────────────────────────────────────────────────────
-##  control Freq CumFreq Percent CumPerc Valid CumValid
-##  1       1    1       0.20%   0.20%   0.21% 0.21%   
-##  5       1    2       0.20%   0.40%   0.21% 0.43%   
-##  6       1    3       0.20%   0.60%   0.21% 0.64%   
-##  7       1    4       0.20%   0.80%   0.21% 0.85%   
-##  10      1    5       0.20%   1.00%   0.21% 1.06%   
-##  12      1    6       0.20%   1.20%   0.21% 1.28%   
-##  17      1    7       0.20%   1.40%   0.21% 1.49%   
-##  18      1    8       0.20%   1.60%   0.21% 1.70%   
-##  20      1    9       0.20%   1.80%   0.21% 1.91%   
-##  22      1    10      0.20%   2.00%   0.21% 2.13%   
-##  ...     ...  ...     ...     ...     ...   ...     
-##  970     1    461     0.20%   92.20%  0.21% 98.09%  
-##  972     1    462     0.20%   92.40%  0.21% 98.30%  
-##  976     1    463     0.20%   92.60%  0.21% 98.51%  
-##  981     1    464     0.20%   92.80%  0.21% 98.72%  
-##  982     1    465     0.20%   93.00%  0.21% 98.94%  
-##  987     1    466     0.20%   93.20%  0.21% 99.15%  
-##  988     1    467     0.20%   93.40%  0.21% 99.36%  
-##  990     1    468     0.20%   93.60%  0.21% 99.57%  
-##  995     1    469     0.20%   93.80%  0.21% 99.79%  
-##  999     1    470     0.20%   94.00%  0.21% 100.00% 
-##  Missing 30   500     6.00%   100.00%               
-## ─────────────────────────────────────────────────────
-## 
-## ───────────────────────────────────────────────────────
-##  treatment Freq CumFreq Percent CumPerc Valid CumValid
-##  15        1    1       0.20%   0.20%   0.23% 0.23%   
-##  16        1    2       0.20%   0.40%   0.23% 0.47%   
-##  17        1    3       0.20%   0.60%   0.23% 0.70%   
-##  21        1    4       0.20%   0.80%   0.23% 0.93%   
-##  25        1    5       0.20%   1.00%   0.23% 1.16%   
-##  27        1    6       0.20%   1.20%   0.23% 1.40%   
-##  28        1    7       0.20%   1.40%   0.23% 1.63%   
-##  31        2    9       0.40%   1.80%   0.47% 2.09%   
-##  32        1    10      0.20%   2.00%   0.23% 2.33%   
-##  37        1    11      0.20%   2.20%   0.23% 2.56%   
-##  ...       ...  ...     ...     ...     ...   ...     
-##  972       2    420     0.40%   84.00%  0.47% 97.67%  
-##  977       1    421     0.20%   84.20%  0.23% 97.91%  
-##  981       1    422     0.20%   84.40%  0.23% 98.14%  
-##  982       1    423     0.20%   84.60%  0.23% 98.37%  
-##  983       1    424     0.20%   84.80%  0.23% 98.60%  
-##  985       2    426     0.40%   85.20%  0.47% 99.07%  
-##  988       1    427     0.20%   85.40%  0.23% 99.30%  
-##  991       1    428     0.20%   85.60%  0.23% 99.53%  
-##  995       1    429     0.20%   85.80%  0.23% 99.77%  
-##  997       1    430     0.20%   86.00%  0.23% 100.00% 
-##  Missing   70   500     14.00%  100.00%               
-## ───────────────────────────────────────────────────────</code></pre>
+<pre><code><span class="co">## Using dplyr::group_by() groups: c</span></code></pre>
+<pre><code><span class="co">## Variable:d</span></code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## ─────────────────────────────────────────────────────</span>
+<span class="co">##  control Freq CumFreq Percent CumPerc Valid CumValid</span>
+<span class="co">##  7       1    1       0.20%   0.20%   0.21% 0.21%   </span>
+<span class="co">##  10      1    2       0.20%   0.40%   0.21% 0.43%   </span>
+<span class="co">##  11      2    4       0.40%   0.80%   0.43% 0.85%   </span>
+<span class="co">##  12      1    5       0.20%   1.00%   0.21% 1.06%   </span>
+<span class="co">##  13      1    6       0.20%   1.20%   0.21% 1.28%   </span>
+<span class="co">##  14      1    7       0.20%   1.40%   0.21% 1.49%   </span>
+<span class="co">##  15      1    8       0.20%   1.60%   0.21% 1.70%   </span>
+<span class="co">##  19      1    9       0.20%   1.80%   0.21% 1.91%   </span>
+<span class="co">##  20      1    10      0.20%   2.00%   0.21% 2.13%   </span>
+<span class="co">##  24      1    11      0.20%   2.20%   0.21% 2.34%   </span>
+<span class="co">##  ...     ...  ...     ...     ...     ...   ...     </span>
+<span class="co">##  981     1    458     0.20%   91.60%  0.21% 97.45%  </span>
+<span class="co">##  982     1    459     0.20%   91.80%  0.21% 97.66%  </span>
+<span class="co">##  986     1    460     0.20%   92.00%  0.21% 97.87%  </span>
+<span class="co">##  989     1    461     0.20%   92.20%  0.21% 98.09%  </span>
+<span class="co">##  991     1    462     0.20%   92.40%  0.21% 98.30%  </span>
+<span class="co">##  993     2    464     0.40%   92.80%  0.43% 98.72%  </span>
+<span class="co">##  995     3    467     0.60%   93.40%  0.64% 99.36%  </span>
+<span class="co">##  996     1    468     0.20%   93.60%  0.21% 99.57%  </span>
+<span class="co">##  998     1    469     0.20%   93.80%  0.21% 99.79%  </span>
+<span class="co">##  1000    1    470     0.20%   94.00%  0.21% 100.00% </span>
+<span class="co">##  Missing 30   500     6.00%   100.00%               </span>
+<span class="co">## ─────────────────────────────────────────────────────</span>
+<span class="co">## </span>
+<span class="co">## ───────────────────────────────────────────────────────</span>
+<span class="co">##  treatment Freq CumFreq Percent CumPerc Valid CumValid</span>
+<span class="co">##  1         1    1       0.20%   0.20%   0.23% 0.23%   </span>
+<span class="co">##  7         1    2       0.20%   0.40%   0.23% 0.47%   </span>
+<span class="co">##  9         1    3       0.20%   0.60%   0.23% 0.70%   </span>
+<span class="co">##  10        1    4       0.20%   0.80%   0.23% 0.93%   </span>
+<span class="co">##  12        1    5       0.20%   1.00%   0.23% 1.16%   </span>
+<span class="co">##  14        2    7       0.40%   1.40%   0.47% 1.63%   </span>
+<span class="co">##  18        1    8       0.20%   1.60%   0.23% 1.86%   </span>
+<span class="co">##  33        2    10      0.40%   2.00%   0.47% 2.33%   </span>
+<span class="co">##  36        1    11      0.20%   2.20%   0.23% 2.56%   </span>
+<span class="co">##  37        1    12      0.20%   2.40%   0.23% 2.79%   </span>
+<span class="co">##  ...       ...  ...     ...     ...     ...   ...     </span>
+<span class="co">##  978       1    418     0.20%   83.60%  0.23% 97.21%  </span>
+<span class="co">##  979       1    419     0.20%   83.80%  0.23% 97.44%  </span>
+<span class="co">##  981       1    420     0.20%   84.00%  0.23% 97.67%  </span>
+<span class="co">##  982       1    421     0.20%   84.20%  0.23% 97.91%  </span>
+<span class="co">##  986       3    424     0.60%   84.80%  0.70% 98.60%  </span>
+<span class="co">##  987       1    425     0.20%   85.00%  0.23% 98.84%  </span>
+<span class="co">##  988       2    427     0.40%   85.40%  0.47% 99.30%  </span>
+<span class="co">##  990       1    428     0.20%   85.60%  0.23% 99.53%  </span>
+<span class="co">##  991       1    429     0.20%   85.80%  0.23% 99.77%  </span>
+<span class="co">##  992       1    430     0.20%   86.00%  0.23% 100.00% </span>
+<span class="co">##  Missing   70   500     14.00%  100.00%               </span>
+<span class="co">## ───────────────────────────────────────────────────────</span></code></pre>
 </div>
-<div id="table-x" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table-x" class="anchor"></a>Table X</h2>
-<p>Lastly, <code><a href="../reference/tableX.html">tableX()</a></code> is a pipe-able two-way version of <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> with a similar syntax to that of the rest of the <code>furniture</code> functions.</p>
+<div class="section level2">
+<h2 id="table-x">Table X<a class="anchor" aria-label="anchor" href="#table-x"></a>
+</h2>
+<p>Lastly, <code><a href="../reference/tableX.html">tableX()</a></code> is a pipe-able two-way version of
+<code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code> with a similar syntax to that of the rest of the
+<code>furniture</code> functions.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tableX.html">tableX</a></span><span class="op">(</span><span class="va">c</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">d</span> <span class="op">&gt;</span> <span class="fl">500</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##            ifelse(d &gt; 500, 1, 0)
-## c           0   1   Missing Total
-##   control   252 218 30      500  
-##   treatment 207 223 70      500  
-##   Total     459 441 100     1000</code></pre>
-<p>By default, it provides the total counts for the rows and columns with flexibility as to what is displayed and where.</p>
+<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tableX.html">tableX</a></span><span class="op">(</span><span class="va">c</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">d</span> <span class="op">&gt;</span> <span class="fl">500</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##            ifelse(d &gt; 500, 1, 0)</span>
+<span class="co">## c           0   1   Missing Total</span>
+<span class="co">##   control   235 235 30      500  </span>
+<span class="co">##   treatment 202 228 70      500  </span>
+<span class="co">##   Total     437 463 100     1000</span></code></pre>
+<p>By default, it provides the total counts for the rows and columns
+with flexibility as to what is displayed and where.</p>
 </div>
-<div id="conclusion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conclusion" class="anchor"></a>Conclusion</h2>
-<p>The four functions: <code><a href="../reference/table1.html">table1()</a></code>, <code><a href="../reference/tableC.html">tableC()</a></code>, <code><a href="../reference/tableF.html">tableF()</a></code>, and <code><a href="../reference/washer.html">washer()</a></code> add simplicity to cleaning up and understanding your data. Use these pieces of furniture to make your quantitative life a bit easier.</p>
+<div class="section level2">
+<h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
+</h2>
+<p>The four functions: <code><a href="../reference/table1.html">table1()</a></code>, <code><a href="../reference/tableC.html">tableC()</a></code>,
+<code><a href="../reference/tableF.html">tableF()</a></code>, and <code><a href="../reference/washer.html">washer()</a></code> add simplicity to
+cleaning up and understanding your data. Use these pieces of furniture
+to make your quantitative life a bit easier.</p>
 </div>
   </div>
 
@@ -592,11 +631,14 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
+  <p></p>
+<p>Developed by Tyson S. Barrett, Emily Brignone, Daniel J. Laxman.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
@@ -604,6 +646,8 @@
 
   
 
+
+  
 
   </body>
 </html>
