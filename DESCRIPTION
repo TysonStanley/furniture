@@ -1,7 +1,7 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.9.12
+Version: 1.9.13
 Date: 2022-04-14
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 

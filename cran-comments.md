@@ -1,15 +1,13 @@
 ## Test environments
-* local OS X install, R 4.1.0
-* ubuntu 20.04 (GitHub Actions), R, R dev
+* local OS X install, R 4.3.1
+* ubuntu (GitHub Actions), R, R dev
 * windows (GitHub Actions)
-* Ubuntu Linux 20.04.1 LTS, R-release, GCC
-* Fedora Linux, R-devel, clang, gfortran
 * win-builder R release, R dev
 
 ## R CMD check results
 There were no ERRORs, WARNINGs, or NOTEs.
 
-This update is only to update the maintainer email address.
+This update is only to fix a documentation issue.
 
 ## Downstream Dependencies
 Currently, there is one downstream dependency for this package (`MarginalMediation`). 
