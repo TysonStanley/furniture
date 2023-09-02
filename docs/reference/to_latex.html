@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.13</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -60,42 +60,61 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">to_latex</span><span class="op">(</span>
-  <span class="va">tab</span>,
-  <span class="va">caption</span>,
-  <span class="va">align</span>,
-  <span class="va">len</span>,
-  <span class="va">splitby</span>,
-  <span class="va">float</span>,
-  <span class="va">booktabs</span>,
-  <span class="va">label</span>,
-  total <span class="op">=</span> <span class="cn">FALSE</span>,
-  cor_type <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">to_latex</span><span class="op">(</span></span>
+<span>  <span class="va">tab</span>,</span>
+<span>  <span class="va">caption</span>,</span>
+<span>  <span class="va">align</span>,</span>
+<span>  <span class="va">len</span>,</span>
+<span>  <span class="va">splitby</span>,</span>
+<span>  <span class="va">float</span>,</span>
+<span>  <span class="va">booktabs</span>,</span>
+<span>  <span class="va">label</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cor_type <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>tab</dt>
 <dd><p>the table1 object</p></dd>
+
+
 <dt>caption</dt>
 <dd><p>caption character vector</p></dd>
+
+
 <dt>align</dt>
 <dd><p>align character vector</p></dd>
+
+
 <dt>len</dt>
 <dd><p>the number of levels of the grouping factor</p></dd>
+
+
 <dt>splitby</dt>
 <dd><p>the name of the grouping factor</p></dd>
+
+
 <dt>float</dt>
 <dd><p>argument for latex formatting</p></dd>
+
+
 <dt>booktabs</dt>
 <dd><p>add booktabs to latex table</p></dd>
+
+
 <dt>label</dt>
 <dd><p>latex label option</p></dd>
+
+
 <dt>total</dt>
 <dd><p>is there a total column (from Table 1) to be printed?</p></dd>
+
+
 <dt>cor_type</dt>
 <dd><p>optional argument regarding the correlation type (for tableC)</p></dd>
+
 </dl></div>
 
   </div>
@@ -110,8 +129,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

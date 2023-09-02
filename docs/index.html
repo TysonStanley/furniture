@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.13</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -82,350 +82,301 @@
 
 
 <div class="section level1">
-<div class="page-header"><h1 id="furniture-v1912-">furniture: <code>v1.9.12</code>
-<img src="reference/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%"><a class="anchor" aria-label="anchor" href="#furniture-v1912-"></a>
+<div class="page-header"><h1 id="furniture-v1913-">furniture: <code>v1.9.13</code> <img src="reference/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%"><a class="anchor" aria-label="anchor" href="#furniture-v1913-"></a>
 </h1></div>
-<p>The furniture R package contains functions to help with data
-cleaning/tidying (e.g., <code><a href="reference/washer.html">washer()</a></code>, <code><a href="reference/rowmeans.html">rowmeans()</a></code>,
-<code><a href="reference/rowsums.html">rowsums()</a></code>), exploratory data analysis and reporting (e.g.,
-<code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>). It
-currently contains eight main functions:</p>
+<p>The furniture R package contains functions to help with data cleaning/tidying (e.g., <code><a href="reference/washer.html">washer()</a></code>, <code><a href="reference/rowmeans.html">rowmeans()</a></code>, <code><a href="reference/rowsums.html">rowsums()</a></code>), exploratory data analysis and reporting (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>). It currently contains eight main functions:</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="reference/table1.html">table1()</a></code> : gives a well-formatted table for academic
-publication of descriptive statistics. Very useful for quick analyses as
-well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with
-<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>.</li>
+<code><a href="reference/table1.html">table1()</a></code> : gives a well-formatted table for academic publication of descriptive statistics. Very useful for quick analyses as well. Notably, <code><a href="reference/table1.html">table1()</a></code> now works with <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>.</li>
 <li>
-<code><a href="reference/tableC.html">tableC()</a></code> : gives a well-formatted table of
-correlations.</li>
+<code><a href="reference/tableC.html">tableC()</a></code> : gives a well-formatted table of correlations.</li>
 <li>
-<code><a href="reference/tableF.html">tableF()</a></code> : provides a thorough frequency table for
-quick checks of the levels of a variable.</li>
+<code><a href="reference/tableF.html">tableF()</a></code> : provides a thorough frequency table for quick checks of the levels of a variable.</li>
 <li>
-<code><a href="reference/washer.html">washer()</a></code> : changes several values in a variable (very
-useful for changing place holder values to missing).</li>
+<code><a href="reference/washer.html">washer()</a></code> : changes several values in a variable (very useful for changing place holder values to missing).</li>
 <li>
-<code><a href="reference/long.html">long()</a></code> : is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>,
-takes the data from wide to long format (long is often the tidy version
-of the data), works well with the tidyverse, and can handle unbalanced
-multilevel data.</li>
+<code><a href="reference/long.html">long()</a></code> : is a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>, takes the data from wide to long format (long is often the tidy version of the data), works well with the tidyverse, and can handle unbalanced multilevel data.</li>
 <li>
-<code><a href="reference/wide.html">wide()</a></code> : also a wrapper of
-<code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>, takes the data from long to wide, and
-like <code><a href="reference/long.html">long()</a></code>, works well with the tidyverse and can handle
-unbalanced multilevel data.</li>
+<code><a href="reference/wide.html">wide()</a></code> : also a wrapper of <code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">stats::reshape()</a></code>, takes the data from long to wide, and like <code><a href="reference/long.html">long()</a></code>, works well with the tidyverse and can handle unbalanced multilevel data.</li>
 <li>
-<code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> : tidyverse
-friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code>, where the
-<code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> function allows <code>n</code> number of
-missing</li>
+<code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> : tidyverse friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code>, where the <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> function allows <code>n</code> number of missing</li>
 <li>
-<code><a href="reference/rowsums.html">rowsums()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> : tidyverse
-friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, where the
-<code><a href="reference/rowsums.n.html">rowsums.n()</a></code> function allows <code>n</code> number of
-missing</li>
+<code><a href="reference/rowsums.html">rowsums()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> : tidyverse friendly versions of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, where the <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> function allows <code>n</code> number of missing</li>
 </ol>
-<p>In conjunction with many other tidy tools, the package should be
-useful for health, behavioral, and social scientists working on
-quantitative research.</p>
+<p>In conjunction with many other tidy tools, the package should be useful for health, behavioral, and social scientists working on quantitative research.</p>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
-<p>The latest stable build of the package can be downloaded from CRAN
-via:</p>
+<p>The latest stable build of the package can be downloaded from CRAN via:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"furniture"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"furniture"</span><span class="op">)</span></span></code></pre></div>
 <p>You can download the developmental version via:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tysonstanley/furniture"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tysonstanley/furniture"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
 <h1 id="using-furniture">Using furniture<a class="anchor" aria-label="anchor" href="#using-furniture"></a>
 </h1>
-<p>The main functions are the <code>table*()</code> functions (e.g.,
-<code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>,
-<code><a href="reference/tableF.html">tableF()</a></code>).</p>
+<p>The main functions are the <code>table*()</code> functions (e.g., <code><a href="reference/table1.html">table1()</a></code>, <code><a href="reference/tableC.html">tableC()</a></code>, <code><a href="reference/tableF.html">tableF()</a></code>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"nhanes_2010"</span><span class="op">)</span>
-
-<span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">nhanes_2010</span>,
-       <span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="va">asthma</span>,
-       na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ───────────────────────────────────</span>
-<span class="co">#&gt;                   asthma </span>
-<span class="co">#&gt;            Yes         No         </span>
-<span class="co">#&gt;            n = 251     n = 1164   </span>
-<span class="co">#&gt;  age                              </span>
-<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
-<span class="co">#&gt;  marijuana                        </span>
-<span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span>
-<span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  illicit                          </span>
-<span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span>
-<span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  rehab                            </span>
-<span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span>
-<span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span>
-<span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span>
-<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"nhanes_2010"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">nhanes_2010</span>,</span>
+<span>       <span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>       splitby<span class="op">=</span><span class="op">~</span><span class="va">asthma</span>,</span>
+<span>       na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span>
+<span><span class="co">#&gt;                   asthma </span></span>
+<span><span class="co">#&gt;            Yes         No         </span></span>
+<span><span class="co">#&gt;            n = 251     n = 1164   </span></span>
+<span><span class="co">#&gt;  age                              </span></span>
+<span><span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span></span>
+<span><span class="co">#&gt;  marijuana                        </span></span>
+<span><span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span></span>
+<span><span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  illicit                          </span></span>
+<span><span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span></span>
+<span><span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  rehab                            </span></span>
+<span><span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span></span>
+<span><span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span></span>
+<span><span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">nhanes_2010</span>,
-       <span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-       splitby<span class="op">=</span><span class="op">~</span><span class="va">asthma</span>, 
-       output <span class="op">=</span> <span class="st">"text2"</span>,
-       na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ───────────────────────────────────</span>
-<span class="co">#&gt;                   asthma </span>
-<span class="co">#&gt;            Yes         No         </span>
-<span class="co">#&gt;            n = 251     n = 1164   </span>
-<span class="co">#&gt;  --------- ----------- -----------</span>
-<span class="co">#&gt;  age                              </span>
-<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
-<span class="co">#&gt;  marijuana                        </span>
-<span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span>
-<span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  illicit                          </span>
-<span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span>
-<span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  rehab                            </span>
-<span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span>
-<span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span>
-<span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span>
-<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">nhanes_2010</span>,</span>
+<span>       <span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>       splitby<span class="op">=</span><span class="op">~</span><span class="va">asthma</span>, </span>
+<span>       output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>       na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span>
+<span><span class="co">#&gt;                   asthma </span></span>
+<span><span class="co">#&gt;            Yes         No         </span></span>
+<span><span class="co">#&gt;            n = 251     n = 1164   </span></span>
+<span><span class="co">#&gt;  --------- ----------- -----------</span></span>
+<span><span class="co">#&gt;  age                              </span></span>
+<span><span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span></span>
+<span><span class="co">#&gt;  marijuana                        </span></span>
+<span><span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span></span>
+<span><span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  illicit                          </span></span>
+<span><span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span></span>
+<span><span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  rehab                            </span></span>
+<span><span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span></span>
+<span><span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span></span>
+<span><span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-         output <span class="op">=</span> <span class="st">"text2"</span>,
-         na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ───────────────────────────────────</span>
-<span class="co">#&gt;                   asthma </span>
-<span class="co">#&gt;            Yes         No         </span>
-<span class="co">#&gt;            n = 251     n = 1164   </span>
-<span class="co">#&gt;  --------- ----------- -----------</span>
-<span class="co">#&gt;  age                              </span>
-<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span>
-<span class="co">#&gt;  marijuana                        </span>
-<span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span>
-<span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  illicit                          </span>
-<span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span>
-<span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span>
-<span class="co">#&gt;  rehab                            </span>
-<span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span>
-<span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span>
-<span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span>
-<span class="co">#&gt; ───────────────────────────────────</span></code></pre></div>
-<p><code><a href="reference/table1.html">table1()</a></code> can do bivariate significance tests as
-well.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>         output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>         na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span>
+<span><span class="co">#&gt;                   asthma </span></span>
+<span><span class="co">#&gt;            Yes         No         </span></span>
+<span><span class="co">#&gt;            n = 251     n = 1164   </span></span>
+<span><span class="co">#&gt;  --------- ----------- -----------</span></span>
+<span><span class="co">#&gt;  age                              </span></span>
+<span><span class="co">#&gt;            23.0 (3.9)  23.4 (4.0) </span></span>
+<span><span class="co">#&gt;  marijuana                        </span></span>
+<span><span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)</span></span>
+<span><span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  illicit                          </span></span>
+<span><span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)</span></span>
+<span><span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)</span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)</span></span>
+<span><span class="co">#&gt;  rehab                            </span></span>
+<span><span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)  </span></span>
+<span><span class="co">#&gt;     No     121 (48.2%) 547 (47%)  </span></span>
+<span><span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)</span></span>
+<span><span class="co">#&gt; ───────────────────────────────────</span></span></code></pre></div>
+<p><code><a href="reference/table1.html">table1()</a></code> can do bivariate significance tests as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-         output <span class="op">=</span> <span class="st">"text2"</span>,
-         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
-         test <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ───────────────────────────────────────────</span>
-<span class="co">#&gt;                   asthma </span>
-<span class="co">#&gt;            Yes         No          P-Value</span>
-<span class="co">#&gt;            n = 251     n = 1164           </span>
-<span class="co">#&gt;  --------- ----------- ----------- -------</span>
-<span class="co">#&gt;  age                               0.201  </span>
-<span class="co">#&gt;            23.0 (3.9)  23.4 (4.0)         </span>
-<span class="co">#&gt;  marijuana                         1      </span>
-<span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)        </span>
-<span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)        </span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)        </span>
-<span class="co">#&gt;  illicit                           0.623  </span>
-<span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)        </span>
-<span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)        </span>
-<span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)        </span>
-<span class="co">#&gt;  rehab                             0.729  </span>
-<span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)          </span>
-<span class="co">#&gt;     No     121 (48.2%) 547 (47%)          </span>
-<span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)        </span>
-<span class="co">#&gt; ───────────────────────────────────────────</span></code></pre></div>
-<p>By default it does the appropriate parametric tests. However, you can
-change that by setting <code>param = FALSE</code> (new with
-<code>v 1.9.1</code>).</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>         output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         test <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;                   asthma </span></span>
+<span><span class="co">#&gt;            Yes         No          P-Value</span></span>
+<span><span class="co">#&gt;            n = 251     n = 1164           </span></span>
+<span><span class="co">#&gt;  --------- ----------- ----------- -------</span></span>
+<span><span class="co">#&gt;  age                               0.201  </span></span>
+<span><span class="co">#&gt;            23.0 (3.9)  23.4 (4.0)         </span></span>
+<span><span class="co">#&gt;  marijuana                         1      </span></span>
+<span><span class="co">#&gt;     Yes    131 (52.2%) 584 (50.2%)        </span></span>
+<span><span class="co">#&gt;     No     97 (38.6%)  434 (37.3%)        </span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)        </span></span>
+<span><span class="co">#&gt;  illicit                           0.623  </span></span>
+<span><span class="co">#&gt;     Yes    23 (9.2%)   117 (10.1%)        </span></span>
+<span><span class="co">#&gt;     No     205 (81.7%) 901 (77.4%)        </span></span>
+<span><span class="co">#&gt;     NA     23 (9.2%)   146 (12.5%)        </span></span>
+<span><span class="co">#&gt;  rehab                             0.729  </span></span>
+<span><span class="co">#&gt;     Yes    10 (4%)     37 (3.2%)          </span></span>
+<span><span class="co">#&gt;     No     121 (48.2%) 547 (47%)          </span></span>
+<span><span class="co">#&gt;     NA     120 (47.8%) 580 (49.8%)        </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────────────</span></span></code></pre></div>
+<p>By default it does the appropriate parametric tests. However, you can change that by setting <code>param = FALSE</code> (new with <code>v 1.9.1</code>).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
-<span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-         output <span class="op">=</span> <span class="st">"text2"</span>,
-         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
-         test <span class="op">=</span> <span class="cn">TRUE</span>,
-         param <span class="op">=</span> <span class="cn">FALSE</span>,
-         type <span class="op">=</span> <span class="st">"condense"</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ───────────────────────────────────────────────</span>
-<span class="co">#&gt;                       asthma </span>
-<span class="co">#&gt;                Yes         No          P-Value</span>
-<span class="co">#&gt;                n = 251     n = 1164           </span>
-<span class="co">#&gt;  ------------- ----------- ----------- -------</span>
-<span class="co">#&gt;  age           23.0 (3.9)  23.4 (4.0)  0.235  </span>
-<span class="co">#&gt;  marijuana: No 97 (38.6%)  434 (37.3%) 1      </span>
-<span class="co">#&gt;  illicit: No   205 (81.7%) 901 (77.4%) 0.623  </span>
-<span class="co">#&gt;  rehab: No     121 (48.2%) 547 (47%)   0.729  </span>
-<span class="co">#&gt; ───────────────────────────────────────────────</span></code></pre></div>
-<p>It can also do a total column with the stratified columns (new with
-<code>v 1.9.0</code>) with the <code>total = TRUE</code> argument.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>         output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         test <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         param <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         type <span class="op">=</span> <span class="st">"condense"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;                       asthma </span></span>
+<span><span class="co">#&gt;                Yes         No          P-Value</span></span>
+<span><span class="co">#&gt;                n = 251     n = 1164           </span></span>
+<span><span class="co">#&gt;  ------------- ----------- ----------- -------</span></span>
+<span><span class="co">#&gt;  age           23.0 (3.9)  23.4 (4.0)  0.235  </span></span>
+<span><span class="co">#&gt;  marijuana: No 97 (38.6%)  434 (37.3%) 1      </span></span>
+<span><span class="co">#&gt;  illicit: No   205 (81.7%) 901 (77.4%) 0.623  </span></span>
+<span><span class="co">#&gt;  rehab: No     121 (48.2%) 547 (47%)   0.729  </span></span>
+<span><span class="co">#&gt; ───────────────────────────────────────────────</span></span></code></pre></div>
+<p>It can also do a total column with the stratified columns (new with <code>v 1.9.0</code>) with the <code>total = TRUE</code> argument.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-         output <span class="op">=</span> <span class="st">"text2"</span>,
-         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
-         test <span class="op">=</span> <span class="cn">TRUE</span>,
-         type <span class="op">=</span> <span class="st">"condense"</span>,
-         total <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt;                                   asthma </span>
-<span class="co">#&gt;                Total        Yes         No          P-Value</span>
-<span class="co">#&gt;                n = 1417     n = 251     n = 1164           </span>
-<span class="co">#&gt;  ------------- ------------ ----------- ----------- -------</span>
-<span class="co">#&gt;  age           23.3 (4.0)   23.0 (3.9)  23.4 (4.0)  0.201  </span>
-<span class="co">#&gt;  marijuana: No 532 (37.5%)  97 (38.6%)  434 (37.3%) 1      </span>
-<span class="co">#&gt;  illicit: No   1107 (78.1%) 205 (81.7%) 901 (77.4%) 0.623  </span>
-<span class="co">#&gt;  rehab: No     668 (47.1%)  121 (48.2%) 547 (47%)   0.729  </span>
-<span class="co">#&gt; ────────────────────────────────────────────────────────────</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>         output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         test <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         type <span class="op">=</span> <span class="st">"condense"</span>,</span>
+<span>         total <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;                                   asthma </span></span>
+<span><span class="co">#&gt;                Total        Yes         No          P-Value</span></span>
+<span><span class="co">#&gt;                n = 1417     n = 251     n = 1164           </span></span>
+<span><span class="co">#&gt;  ------------- ------------ ----------- ----------- -------</span></span>
+<span><span class="co">#&gt;  age           23.3 (4.0)   23.0 (3.9)  23.4 (4.0)  0.201  </span></span>
+<span><span class="co">#&gt;  marijuana: No 532 (37.5%)  97 (38.6%)  434 (37.3%) 1      </span></span>
+<span><span class="co">#&gt;  illicit: No   1107 (78.1%) 205 (81.7%) 901 (77.4%) 0.623  </span></span>
+<span><span class="co">#&gt;  rehab: No     668 (47.1%)  121 (48.2%) 547 (47%)   0.729  </span></span>
+<span><span class="co">#&gt; ────────────────────────────────────────────────────────────</span></span></code></pre></div>
 <p>It can also report the statistics in addition to the p-values.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,
-         output <span class="op">=</span> <span class="st">"text2"</span>,
-         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,
-         test <span class="op">=</span> <span class="cn">TRUE</span>,
-         total <span class="op">=</span> <span class="cn">TRUE</span>,
-         type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt;                                       asthma </span>
-<span class="co">#&gt;            Total        Yes         No          Test             P-Value</span>
-<span class="co">#&gt;            n = 1417     n = 251     n = 1164                            </span>
-<span class="co">#&gt;  --------- ------------ ----------- ----------- ---------------- -------</span>
-<span class="co">#&gt;  age                                            T-Test: -1.28    0.201  </span>
-<span class="co">#&gt;            23.3 (4.0)   23.0 (3.9)  23.4 (4.0)                          </span>
-<span class="co">#&gt;  marijuana                                      Chi Square: 0    1      </span>
-<span class="co">#&gt;     Yes    716 (50.5%)  131 (52.2%) 584 (50.2%)                         </span>
-<span class="co">#&gt;     No     532 (37.5%)  97 (38.6%)  434 (37.3%)                         </span>
-<span class="co">#&gt;     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         </span>
-<span class="co">#&gt;  illicit                                        Chi Square: 0.24 0.623  </span>
-<span class="co">#&gt;     Yes    141 (10%)    23 (9.2%)   117 (10.1%)                         </span>
-<span class="co">#&gt;     No     1107 (78.1%) 205 (81.7%) 901 (77.4%)                         </span>
-<span class="co">#&gt;     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         </span>
-<span class="co">#&gt;  rehab                                          Chi Square: 0.12 0.729  </span>
-<span class="co">#&gt;     Yes    48 (3.4%)    10 (4%)     37 (3.2%)                           </span>
-<span class="co">#&gt;     No     668 (47.1%)  121 (48.2%) 547 (47%)                           </span>
-<span class="co">#&gt;     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                         </span>
-<span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────</span></code></pre></div>
-<p><code><a href="reference/table1.html">table1()</a></code> can be outputted directly to other formats. All
-<code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> options are available for this and there is
-an extra option <code>"latex2"</code> which provides a publication ready
-table in Latex documents.</p>
-<p>The <code><a href="reference/tableC.html">tableC()</a></code> function gives a well-formatted correlation
-table.</p>
+<code class="sourceCode R"><span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">asthma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/table1.html">table1</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">marijuana</span>, <span class="va">illicit</span>, <span class="va">rehab</span>,</span>
+<span>         output <span class="op">=</span> <span class="st">"text2"</span>,</span>
+<span>         na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         test <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         total <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;                                       asthma </span></span>
+<span><span class="co">#&gt;            Total        Yes         No          Test             P-Value</span></span>
+<span><span class="co">#&gt;            n = 1417     n = 251     n = 1164                            </span></span>
+<span><span class="co">#&gt;  --------- ------------ ----------- ----------- ---------------- -------</span></span>
+<span><span class="co">#&gt;  age                                            T-Test: -1.28    0.201  </span></span>
+<span><span class="co">#&gt;            23.3 (4.0)   23.0 (3.9)  23.4 (4.0)                          </span></span>
+<span><span class="co">#&gt;  marijuana                                      Chi Square: 0    1      </span></span>
+<span><span class="co">#&gt;     Yes    716 (50.5%)  131 (52.2%) 584 (50.2%)                         </span></span>
+<span><span class="co">#&gt;     No     532 (37.5%)  97 (38.6%)  434 (37.3%)                         </span></span>
+<span><span class="co">#&gt;     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         </span></span>
+<span><span class="co">#&gt;  illicit                                        Chi Square: 0.24 0.623  </span></span>
+<span><span class="co">#&gt;     Yes    141 (10%)    23 (9.2%)   117 (10.1%)                         </span></span>
+<span><span class="co">#&gt;     No     1107 (78.1%) 205 (81.7%) 901 (77.4%)                         </span></span>
+<span><span class="co">#&gt;     NA     169 (11.9%)  23 (9.2%)   146 (12.5%)                         </span></span>
+<span><span class="co">#&gt;  rehab                                          Chi Square: 0.12 0.729  </span></span>
+<span><span class="co">#&gt;     Yes    48 (3.4%)    10 (4%)     37 (3.2%)                           </span></span>
+<span><span class="co">#&gt;     No     668 (47.1%)  121 (48.2%) 547 (47%)                           </span></span>
+<span><span class="co">#&gt;     NA     701 (49.5%)  120 (47.8%) 580 (49.8%)                         </span></span>
+<span><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────</span></span></code></pre></div>
+<p><code><a href="reference/table1.html">table1()</a></code> can be outputted directly to other formats. All <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code> options are available for this and there is an extra option <code>"latex2"</code> which provides a publication ready table in Latex documents.</p>
+<p>The <code><a href="reference/tableC.html">tableC()</a></code> function gives a well-formatted correlation table.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/tableC.html">tableC</a></span><span class="op">(</span><span class="va">nhanes_2010</span>, 
-       <span class="va">age</span>, <span class="va">active</span>, <span class="va">vig_active</span>, 
-       na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; N = 317</span>
-<span class="co">#&gt; Note: pearson correlation (p-value).</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ──────────────────────────────────────────────────</span>
-<span class="co">#&gt;                [1]            [2]           [3]  </span>
-<span class="co">#&gt;  [1]age        1.00                              </span>
-<span class="co">#&gt;  [2]active     -0.148 (0.008) 1.00               </span>
-<span class="co">#&gt;  [3]vig_active -0.083 (0.141) 0.828 (&lt;.001) 1.00 </span>
-<span class="co">#&gt; ──────────────────────────────────────────────────</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tableC.html">tableC</a></span><span class="op">(</span><span class="va">nhanes_2010</span>, </span>
+<span>       <span class="va">age</span>, <span class="va">active</span>, <span class="va">vig_active</span>, </span>
+<span>       na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; N = 317</span></span>
+<span><span class="co">#&gt; Note: pearson correlation (p-value).</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ──────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;                [1]            [2]           [3]  </span></span>
+<span><span class="co">#&gt;  [1]age        1.00                              </span></span>
+<span><span class="co">#&gt;  [2]active     -0.148 (0.008) 1.00               </span></span>
+<span><span class="co">#&gt;  [3]vig_active -0.083 (0.141) 0.828 (&lt;.001) 1.00 </span></span>
+<span><span class="co">#&gt; ──────────────────────────────────────────────────</span></span></code></pre></div>
 <p>The <code><a href="reference/tableF.html">tableF()</a></code> function gives a table of frequencies.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/tableF.html">tableF</a></span><span class="op">(</span><span class="va">nhanes_2010</span>, <span class="va">age</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ──────────────────────────────────</span>
-<span class="co">#&gt;  age Freq CumFreq Percent CumPerc</span>
-<span class="co">#&gt;  18  191  191     13.48%  13.48% </span>
-<span class="co">#&gt;  19  153  344     10.80%  24.28% </span>
-<span class="co">#&gt;  20  111  455     7.83%   32.11% </span>
-<span class="co">#&gt;  21  95   550     6.70%   38.81% </span>
-<span class="co">#&gt;  22  100  650     7.06%   45.87% </span>
-<span class="co">#&gt;  23  112  762     7.90%   53.78% </span>
-<span class="co">#&gt;  24  93   855     6.56%   60.34% </span>
-<span class="co">#&gt;  25  100  955     7.06%   67.40% </span>
-<span class="co">#&gt;  26  91   1046    6.42%   73.82% </span>
-<span class="co">#&gt;  27  77   1123    5.43%   79.25% </span>
-<span class="co">#&gt;  28  91   1214    6.42%   85.67% </span>
-<span class="co">#&gt;  29  86   1300    6.07%   91.74% </span>
-<span class="co">#&gt;  30  117  1417    8.26%   100.00%</span>
-<span class="co">#&gt; ──────────────────────────────────</span></code></pre></div>
-<p>In addition, the <code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowsums.html">rowsums()</a></code>
-functions offer a simplified use of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code> and
-<code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, particularly when using the tidyverse’s
-<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tableF.html">tableF</a></span><span class="op">(</span><span class="va">nhanes_2010</span>, <span class="va">age</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ──────────────────────────────────</span></span>
+<span><span class="co">#&gt;  age Freq CumFreq Percent CumPerc</span></span>
+<span><span class="co">#&gt;  18  191  191     13.48%  13.48% </span></span>
+<span><span class="co">#&gt;  19  153  344     10.80%  24.28% </span></span>
+<span><span class="co">#&gt;  20  111  455     7.83%   32.11% </span></span>
+<span><span class="co">#&gt;  21  95   550     6.70%   38.81% </span></span>
+<span><span class="co">#&gt;  22  100  650     7.06%   45.87% </span></span>
+<span><span class="co">#&gt;  23  112  762     7.90%   53.78% </span></span>
+<span><span class="co">#&gt;  24  93   855     6.56%   60.34% </span></span>
+<span><span class="co">#&gt;  25  100  955     7.06%   67.40% </span></span>
+<span><span class="co">#&gt;  26  91   1046    6.42%   73.82% </span></span>
+<span><span class="co">#&gt;  27  77   1123    5.43%   79.25% </span></span>
+<span><span class="co">#&gt;  28  91   1214    6.42%   85.67% </span></span>
+<span><span class="co">#&gt;  29  86   1300    6.07%   91.74% </span></span>
+<span><span class="co">#&gt;  30  117  1417    8.26%   100.00%</span></span>
+<span><span class="co">#&gt; ──────────────────────────────────</span></span></code></pre></div>
+<p>In addition, the <code><a href="reference/rowmeans.html">rowmeans()</a></code> and <code><a href="reference/rowsums.html">rowsums()</a></code> functions offer a simplified use of <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans()</a></code> and <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums()</a></code>, particularly when using the tidyverse’s <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg_active <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.html">rowmeans</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sum_active <span class="op">=</span> <span class="fu"><a href="reference/rowsums.html">rowsums</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;   vig_active mod_active avg_active sum_active</span>
-<span class="co">#&gt; 1         30         NA         30         30</span>
-<span class="co">#&gt; 2        180        180        180        360</span>
-<span class="co">#&gt; 3         NA         NA        NaN          0</span>
-<span class="co">#&gt; 4         20         70         45         90</span>
-<span class="co">#&gt; 5        120         NA        120        120</span>
-<span class="co">#&gt; 6         NA         NA        NaN          0</span></code></pre></div>
-<p>The <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> allow
-<code>n</code> missing values while still calculating the mean or
-sum.</p>
+<code class="sourceCode R"><span><span class="va">nhanes_2010</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg_active <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.html">rowmeans</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sum_active <span class="op">=</span> <span class="fu"><a href="reference/rowsums.html">rowsums</a></span><span class="op">(</span><span class="va">vig_active</span>, <span class="va">mod_active</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   vig_active mod_active avg_active sum_active</span></span>
+<span><span class="co">#&gt; 1         30         NA         30         30</span></span>
+<span><span class="co">#&gt; 2        180        180        180        360</span></span>
+<span><span class="co">#&gt; 3         NA         NA        NaN          0</span></span>
+<span><span class="co">#&gt; 4         20         70         45         90</span></span>
+<span><span class="co">#&gt; 5        120         NA        120        120</span></span>
+<span><span class="co">#&gt; 6         NA         NA        NaN          0</span></span></code></pre></div>
+<p>The <code><a href="reference/rowmeans.n.html">rowmeans.n()</a></code> and <code><a href="reference/rowsums.n.html">rowsums.n()</a></code> allow <code>n</code> missing values while still calculating the mean or sum.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.n.html">rowmeans.n</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;    x  y avg</span>
-<span class="co">#&gt; 1 NA  1 1.0</span>
-<span class="co">#&gt; 2  1  2 1.5</span>
-<span class="co">#&gt; 3  2  3 2.5</span>
-<span class="co">#&gt; 4  3  4 3.5</span>
-<span class="co">#&gt; 5  4  5 4.5</span>
-<span class="co">#&gt; 6  5 NA 5.0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="reference/rowmeans.n.html">rowmeans.n</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    x  y avg</span></span>
+<span><span class="co">#&gt; 1 NA  1 1.0</span></span>
+<span><span class="co">#&gt; 2  1  2 1.5</span></span>
+<span><span class="co">#&gt; 3  2  3 2.5</span></span>
+<span><span class="co">#&gt; 4  3  4 3.5</span></span>
+<span><span class="co">#&gt; 5  4  5 4.5</span></span>
+<span><span class="co">#&gt; 6  5 NA 5.0</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
-<p>The package is most useful in conjunction with other tidy tools to
-get data cleaned/tidied and start exploratory data analysis. I recommend
-using packages such as <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code>,
-<code><a href="https://tidyr.tidyverse.org" class="external-link">library(tidyr)</a></code>, and <code><a href="https://ggplot2.tidyverse.org" class="external-link">library(ggplot2)</a></code> with
-<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(furniture)</a></code> to accomplish this.</p>
-<p>The original function–<code><a href="reference/table1.html">table1()</a></code>–is simply built for both
-exploratory descriptive analysis and communication of findings. See
-vignettes or <a href="https://tysonstanley.github.io/" class="external-link">tysonbarrett.com</a> for several
-examples of its use. Also see our paper in the <a href="https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf" class="external-link">R
-Journal</a>.</p>
+<p>The package is most useful in conjunction with other tidy tools to get data cleaned/tidied and start exploratory data analysis. I recommend using packages such as <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code>, <code><a href="https://tidyr.tidyverse.org" class="external-link">library(tidyr)</a></code>, and <code><a href="https://ggplot2.tidyverse.org" class="external-link">library(ggplot2)</a></code> with <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(furniture)</a></code> to accomplish this.</p>
+<p>The original function–<code><a href="reference/table1.html">table1()</a></code>–is simply built for both exploratory descriptive analysis and communication of findings. See vignettes or <a href="https://tysonstanley.github.io/" class="external-link">tysonbarrett.com</a> for several examples of its use. Also see our paper in the <a href="https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf" class="external-link">R Journal</a>.</p>
 </div>
 </div>
 
@@ -467,7 +418,7 @@ Journal</a>.</p>
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=furniture" class="external-link"><img src="https://www.r-pkg.org/badges/version/furniture" alt="CRAN Status Badge"></a></li>
-<li><a href="https://github.com/TysonStanley/furniture/actions" class="external-link"><img src="https://github.com/TysonStanley/furniture/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/TysonStanley/furniture/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/TysonStanley/furniture/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -482,8 +433,7 @@ Journal</a>.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

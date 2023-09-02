@@ -20,7 +20,7 @@ Can be used within the piping framework [see library(magrittr)]."><!-- mathjax -
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">furniture</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.13</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ Can be used within the piping framework [see library(magrittr)]."><!-- mathjax -
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -66,91 +66,142 @@ Can be used within the piping framework [see library(magrittr)].</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">table1</span><span class="op">(</span>
-  <span class="va">.data</span>,
-  <span class="va">...</span>,
-  splitby <span class="op">=</span> <span class="cn">NULL</span>,
-  FUN <span class="op">=</span> <span class="cn">NULL</span>,
-  FUN2 <span class="op">=</span> <span class="cn">NULL</span>,
-  total <span class="op">=</span> <span class="cn">FALSE</span>,
-  second <span class="op">=</span> <span class="cn">NULL</span>,
-  row_wise <span class="op">=</span> <span class="cn">FALSE</span>,
-  test <span class="op">=</span> <span class="cn">FALSE</span>,
-  param <span class="op">=</span> <span class="cn">TRUE</span>,
-  header_labels <span class="op">=</span> <span class="cn">NULL</span>,
-  type <span class="op">=</span> <span class="st">"pvalues"</span>,
-  output <span class="op">=</span> <span class="st">"text"</span>,
-  rounding_perc <span class="op">=</span> <span class="fl">1</span>,
-  digits <span class="op">=</span> <span class="fl">1</span>,
-  var_names <span class="op">=</span> <span class="cn">NULL</span>,
-  format_number <span class="op">=</span> <span class="cn">FALSE</span>,
-  NAkeep <span class="op">=</span> <span class="cn">NULL</span>,
-  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,
-  booktabs <span class="op">=</span> <span class="cn">TRUE</span>,
-  caption <span class="op">=</span> <span class="cn">NULL</span>,
-  align <span class="op">=</span> <span class="cn">NULL</span>,
-  float <span class="op">=</span> <span class="st">"ht"</span>,
-  export <span class="op">=</span> <span class="cn">NULL</span>,
-  label <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">table1</span><span class="op">(</span></span>
+<span>  <span class="va">.data</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  splitby <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  FUN <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  FUN2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  second <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  row_wise <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  test <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  param <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  header_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"pvalues"</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>  rounding_perc <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  var_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  format_number <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  NAkeep <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  booktabs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  caption <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  align <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  float <span class="op">=</span> <span class="st">"ht"</span>,</span>
+<span>  export <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.data</dt>
 <dd><p>the data.frame that is to be summarized</p></dd>
+
+
 <dt>...</dt>
 <dd><p>variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.</p></dd>
+
+
 <dt>splitby</dt>
 <dd><p>the categorical variable to stratify (in formula form <code>splitby = ~gender</code>) or quoted <code>splitby = "gender"</code>; instead, <code>dplyr::group_by(...)</code> can be used within a pipe (this is the default when the data object is a grouped data frame from <code>dplyr::group_by(...)</code>).</p></dd>
+
+
 <dt>FUN</dt>
 <dd><p>the function to be applied to summarize the numeric data; default is to report the means and standard deviations</p></dd>
+
+
 <dt>FUN2</dt>
 <dd><p>a secondary function to be applied to summarize the numeric data; default is to report the medians and 25% and 75% quartiles</p></dd>
+
+
 <dt>total</dt>
 <dd><p>whether a total (not stratified with the <code>splitby</code> or <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>) should also be reported in the table</p></dd>
+
+
 <dt>second</dt>
 <dd><p>a vector or list of quoted continuous variables for which the <code>FUN2</code> should be applied</p></dd>
+
+
 <dt>row_wise</dt>
 <dd><p>how to calculate percentages for factor variables when <code>splitby != NULL</code>: if <code>FALSE</code> calculates percentages by variable within groups; if <code>TRUE</code> calculates percentages across groups for one level of the factor variable.</p></dd>
+
+
 <dt>test</dt>
 <dd><p>logical; if set to <code>TRUE</code> then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.</p></dd>
+
+
 <dt>param</dt>
 <dd><p>logical; if set to <code>TRUE</code> then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to <code>FALSE</code>, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.</p></dd>
+
+
 <dt>header_labels</dt>
 <dd><p>a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).</p></dd>
+
+
 <dt>type</dt>
 <dd><p>what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.</p></dd>
+
+
 <dt>output</dt>
 <dd><p>how the table is output; can be "text" or "text2" for regular console output or any of <code>kable()</code>'s options from <code>knitr</code> (e.g., "latex", "markdown", "pandoc"). A new option, <code>'latex2'</code>, although more limited, allows the variable name to show and has an overall better appearance.</p></dd>
+
+
 <dt>rounding_perc</dt>
 <dd><p>the number of digits after the decimal for percentages; default is 1</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>the number of significant digits for the numerical variables (if using default functions); default is 1.</p></dd>
+
+
 <dt>var_names</dt>
 <dd><p>custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.</p></dd>
+
+
 <dt>format_number</dt>
 <dd><p>default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)</p></dd>
+
+
 <dt>NAkeep</dt>
 <dd><p>when set to <code>TRUE</code> it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use <code>na.rm</code>)</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>when set to <code>FALSE</code> it also shows how many missing values are in the data for each categorical variable being summarized</p></dd>
+
+
 <dt>booktabs</dt>
 <dd><p>when <code>output != "text"</code>; option is passed to <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable</a></code></p></dd>
+
+
 <dt>caption</dt>
 <dd><p>when <code>output != "text"</code>; option is passed to <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable</a></code></p></dd>
+
+
 <dt>align</dt>
 <dd><p>when <code>output != "text"</code>; option is passed to <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable</a></code></p></dd>
+
+
 <dt>float</dt>
 <dd><p>the float applied to the table in Latex when output is <code>latex2</code>, default is "ht".</p></dd>
+
+
 <dt>export</dt>
 <dd><p>character; when given, it exports the table to a CSV file to folder named "table1" in the working directory with the name of the given string (e.g., "myfile" will save to "myfile.csv")</p></dd>
+
+
 <dt>label</dt>
 <dd><p>for <code>output == "latex2"</code>, this provides a table reference label for latex</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a <code>table1</code> class object with a print method. Can be printed in <code>LaTex</code> form.</p>
+    
+
+<p>A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a <code>table1</code> class object with a print method. Can be printed in <code>LaTex</code> form.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -161,10 +212,10 @@ Can be used within the piping framework [see library(magrittr)].</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## Fictitious Data ##</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Fictitious Data ##</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">furniture</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -173,15 +224,15 @@ Can be used within the piping framework [see library(magrittr)].</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">x</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">y</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">z</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, <span class="fl">1000</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">a</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, <span class="fl">1000</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, <span class="va">a</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Simple</span></span>
-<span class="r-in"><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, <span class="va">a</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">z</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, <span class="fl">1000</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">a</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, <span class="fl">1000</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, <span class="va">a</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Simple</span></span></span>
+<span class="r-in"><span><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, <span class="va">a</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────</span>
@@ -190,91 +241,91 @@ Can be used within the piping framework [see library(magrittr)].</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x                     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.5 (0.3)        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  y                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.1 (1.0)        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       -0.0 (1.0)       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 502 (50.2%)      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 498 (49.8%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 511 (51.1%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 489 (48.9%)      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  a                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 509 (50.9%)      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     2 491 (49.1%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 526 (52.6%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2 474 (47.4%)      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Stratified</span></span>
-<span class="r-in"><span class="co">## all three below are the same</span></span>
-<span class="r-in"><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>,</span>
-<span class="r-in">       splitby <span class="op">=</span> <span class="op">~</span> <span class="va">a</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Stratified</span></span></span>
+<span class="r-in"><span><span class="co">## all three below are the same</span></span></span>
+<span class="r-in"><span><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>,</span></span>
+<span class="r-in"><span>       splitby <span class="op">=</span> <span class="op">~</span> <span class="va">a</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1           2          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 509     n = 491    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 526     n = 474    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.5 (0.3)   0.5 (0.3)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  y                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   0.1 (1.0)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   -0.0 (1.0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 260 (51.1%) 242 (49.3%)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 249 (48.9%) 249 (50.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 261 (49.6%) 250 (52.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 265 (50.4%) 224 (47.3%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
-<span class="r-in"><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>,</span>
-<span class="r-in">       splitby <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>,</span></span>
+<span class="r-in"><span>       splitby <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1           2          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 509     n = 491    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 526     n = 474    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.5 (0.3)   0.5 (0.3)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  y                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   0.1 (1.0)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   -0.0 (1.0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 260 (51.1%) 242 (49.3%)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 249 (48.9%) 249 (50.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 261 (49.6%) 250 (52.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 265 (50.4%) 224 (47.3%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## With Piping</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">table1</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, </span>
-<span class="r-in">         splitby <span class="op">=</span> <span class="op">~</span><span class="va">a</span><span class="op">)</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## With Piping</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">table1</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, </span></span>
+<span class="r-in"><span>         splitby <span class="op">=</span> <span class="op">~</span><span class="va">a</span><span class="op">)</span> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1           2          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 509     n = 491    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 526     n = 474    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.5 (0.3)   0.5 (0.3)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  y                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   0.1 (1.0)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   -0.0 (1.0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 260 (51.1%) 242 (49.3%)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 249 (48.9%) 249 (50.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 261 (49.6%) 250 (52.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 265 (50.4%) 224 (47.3%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
-<span class="r-in">         </span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">table1</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span>
+<span class="r-in"><span>         </span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">table1</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using dplyr::group_by() groups: a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1           2          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 509     n = 491    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       n = 526     n = 474    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.5 (0.3)   0.5 (0.3)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  y                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   0.1 (1.0)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       0.0 (1.0)   -0.0 (1.0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 260 (51.1%) 242 (49.3%)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 249 (48.9%) 249 (50.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 261 (49.6%) 250 (52.7%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 265 (50.4%) 224 (47.3%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ──────────────────────────────</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Adjust variables within function and assign name</span></span>
-<span class="r-in"><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, </span>
-<span class="r-in">       x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Adjust variables within function and assign name</span></span></span>
+<span class="r-in"><span><span class="fu">table1</span><span class="op">(</span><span class="va">df</span>, </span></span>
+<span class="r-in"><span>       x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────</span>
@@ -283,10 +334,10 @@ Can be used within the piping framework [see library(magrittr)].</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  x2                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1.0 (0.0)        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  z                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     0 502 (50.2%)      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1 498 (49.8%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0 511 (51.1%)      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1 489 (48.9%)      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -301,8 +352,7 @@ Can be used within the piping framework [see library(magrittr)].</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
