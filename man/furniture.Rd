@@ -3,13 +3,16 @@
 \docType{package}
 \name{furniture}
 \alias{furniture}
+\alias{furniture-package}
 \title{furniture}
 \description{
 The furniture package offers simple functions (i.e. pieces of furniture) and an 
 operator that are aimed at helping applied researchers explore and communicate 
 their data as well as clean their data in a tidy way. The package follows similar 
-semantics to the "tidyverse" packages. It contains two main tools (along with an 
-operator):
+semantics to the "tidyverse" packages. It contains several table functions (\code{table1()})
+being the core one.
+}
+\details{
 \itemize{
   \item \code{table1} provides a well-formatted descriptive table often seen 
         as table 1 in academic journals (also a version that simplifies the output is 
@@ -19,8 +22,7 @@ operator):
   \item \code{\%xt\%} is an operator that takes two factor variables and creates a cross tabulation and
         tests for significance via a chi-square test.
 }
-}
-\details{
+
 Table 1 is the main function in furniture. It is useful in both data exploration 
 and data communication. With minimal cleaning, the outputted table can be put into 
 an academic, peer reviewed journal manuscript. As such, it is very useful in exploring
