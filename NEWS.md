@@ -1,6 +1,7 @@
-# Version 1.9.12
+# Version 1.9.14
 
 - Updated maintainer email address and update package site.
+- Fixed documentation issue resulting from a breaking change in `roxygen2`.
 
 # Version 1.9.10
 

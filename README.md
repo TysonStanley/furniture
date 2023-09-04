@@ -8,7 +8,7 @@ Badge](https://www.r-pkg.org/badges/version/furniture)](https://cran.r-project.o
 [![R-CMD-check](https://github.com/TysonStanley/furniture/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TysonStanley/furniture/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# furniture: `v1.9.13` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: `v1.9.14` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data
 cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`),
