@@ -11,3 +11,5 @@ README.Rmd
 ^\.Rproj\.user$
 ^\.github$
 ^CRAN-SUBMISSION$
+^CRAN-RELEASE$
+^\.dev
