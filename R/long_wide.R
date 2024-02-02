@@ -1,18 +1,19 @@
 #' @title Long to Wide Data Reshaping
 #' @author Tyson S. Barrett
-#' 
-#' @description \code{wide()} is a wrapper of \code{stats::reshape()} that takes the data 
-#' from a long format to a wide format. 
-#' 
+#'
+#' @description \code{wide()} is a wrapper of \code{stats::reshape()} that takes
+#' the data from a long format to a wide format. 
+#'
 #' @param data the data.frame containing the wide format data
-#' @param v.names the variable names in quotes of the measures to be separated into multiple columns based on the time variable
+#' @param v.names the variable names in quotes of the measures to be separated
+#' into multiple columns based on the time variable
 #' @param timevar the variable name in quotes of the time variable
 #' @param id the ID variable name in quotes
-#' 
+#'
 #' @seealso \code{stats::reshape()}, \code{tidyr::spread()}
-#' 
+#'
 #' @importFrom stats reshape
-#' 
+#'
 #' @export
 wide <- function(data, v.names, timevar, id=NULL){
   UseMethod("wide", data)
@@ -71,27 +72,32 @@ wide.matrix <- function(data, v.names=NULL, timevar, id=NULL){
 #' @title Wide to Long Data Reshaping
 #' @author Tyson S. Barrett
 #' 
-#' @description \code{long()} is a wrapper of \code{stats::reshape()} that takes the data 
-#' from a wide format to a long format. It can also handle unbalanced data (where some measures
-#' have different number of "time points").
+#' @description \code{long()} is a wrapper of \code{stats::reshape()} that takes
+#' the data from a wide format to a long format. It can also handle unbalanced
+#' data (where some measures have different number of "time points").
 #' 
 #' @param data the data.frame containing the wide format data
-#' @param ... the variables that are time-varying that are to be placed in long format, 
-#' needs to be in the format \code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is 
-#' unbalanced (e.g., there are three time points measured for one variable but only two for another),
-#' using the placeholder variable \code{miss}, helps fix this.
-#' @param v.names a vector of the names for the newly created variables (length same as number of vectors in \code{varying})
+#' @param ... the variables that are time-varying that are to be placed in 
+#' long format, needs to be in the format
+#' \code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is
+#' unbalanced (e.g., there are three time points measured for one variable but
+#' only two for another), using the placeholder variable \code{miss},
+#' helps fix this.
+#' @param v.names a vector of the names for the newly created variables (length
+#' same as number of vectors in \code{varying})
 #' @param id the ID variable in quotes
 #' @param timevar the column with the "time" labels
 #' @param times the labels of the \code{timevar} (default is numeric)
-#' @param sep the separating character between the wide format variable names (default is \code{""}); e.g. "x1" and "x2" would create the variable name of "x"; only applicable if \code{v.names}
-#' 
+#' @param sep the separating character between the wide format variable names
+#' (default is \code{""}); e.g. "x1" and "x2" would create the variable name of
+#' "x"; only applicable if \code{v.names}
+#'
 #' @seealso \code{stats::reshape()} and \code{sjmisc::to_long()}
 #'
 #' @importFrom stats reshape
-#' 
+#'
 #' @examples 
-#' 
+#'
 #' x1 <- runif(1000)
 #' x2 <- runif(1000)
 #' x3 <- runif(1000)
@@ -101,20 +107,19 @@ wide.matrix <- function(data, v.names=NULL, timevar, id=NULL){
 #' a  <- factor(sample(c(1,2), 1000, replace=TRUE))
 #' b  <- factor(sample(c(1,2,3,4), 1000, replace=TRUE))
 #' df  <- data.frame(x1, x2, x3, y1, y2, z, a, b)
-#' 
+#'
 #' ## "Balanced" Data
 #' ldf1 <- long(df, 
 #'              c("x1", "x2"), c("y1", "y2"),
 #'              v.names = c("x", "y"))
-#' 
+#'
 #' ## "Unbalanced" Data
 #' ldf2 = long(df, 
 #'             c("x1", "x2", "x3"), c("y1", "y2", "miss"),
 #'             v.names = c("x", "y"))
-#' 
-#' 
+#'
+#'
 #' @export
-
 long <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
   UseMethod("long", data)
 }
