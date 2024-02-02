@@ -1,8 +1,7 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.9.14
-Date: 2023-09-01
+Version: 1.10.0
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett88@gmail.com", 
@@ -21,7 +20,8 @@ Depends:
     R (>= 2.10)
 Imports:
     knitr,
-    dplyr (>= 0.8.0)
+    dplyr (>= 0.8.0),
+    gt
 Suggests:
     magrittr,
     rmarkdown,
@@ -30,4 +30,4 @@ LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-3
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0

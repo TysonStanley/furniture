@@ -57,3 +57,13 @@ x = washer(x, is.na, value=0)
 }
 
 }
+\author{
+\strong{Maintainer}: Tyson S. Barrett \email{t.barrett88@gmail.com} (\href{https://orcid.org/0000-0002-2137-1391}{ORCID})
+
+Authors:
+\itemize{
+  \item Emily Brignone
+  \item Daniel J. Laxman
+}
+
+}

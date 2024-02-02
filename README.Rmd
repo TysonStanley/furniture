@@ -21,7 +21,7 @@ devtools::load_all()
 
 
 
-# furniture: `v1.9.14` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
+# furniture: `v1.10.0` <img src="man/figures/furniture_hex_v2_full.png" align="right" width="40%" height="40%" />
 
 The furniture R package contains functions to help with data cleaning/tidying (e.g., `washer()`, `rowmeans()`, `rowsums()`), exploratory data analysis and reporting (e.g., `table1()`, `tableC()`, `tableF()`). It currently contains eight main functions:
 
@@ -137,6 +137,18 @@ nhanes_2010 %>%
 ```
 
 `table1()` can be outputted directly to other formats. All `knitr::kable()` options are available for this and there is an extra option `"latex2"` which provides a publication ready table in Latex documents.
+
+A new function `table1_gt()` integrates the fantastic `gt` package to make beautiful HTML tables for table1.
+
+```{r}
+nhanes_2010 %>% 
+  group_by(asthma) %>% 
+  table1(age, marijuana, illicit, rehab, na.rm = FALSE) %>% 
+  table1_gt()
+```
+
+
+
 
 The `tableC()` function gives a well-formatted correlation table.
 

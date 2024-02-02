@@ -49,7 +49,6 @@
 #' 
 #' }
 #' 
-#' @docType package
 #' @name furniture
 #' @aliases furniture-package
-NULL
+"_PACKAGE"
