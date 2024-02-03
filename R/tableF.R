@@ -165,7 +165,7 @@ print.tableF <- function(x, ...){
     x2[] = sapply(x2, as.character)
     
     ## Get width of table for lines
-    for (j in 1:dim(x2)[2]){
+    for (j in seq_len(dim(x2)[2])){
       max_col_width[[j]] = max(sapply(x2[[j]], nchar, type="width"))
     }
     tot_width = sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 

@@ -9,15 +9,16 @@ wide(data, v.names, timevar, id = NULL)
 \arguments{
 \item{data}{the data.frame containing the wide format data}
 
-\item{v.names}{the variable names in quotes of the measures to be separated into multiple columns based on the time variable}
+\item{v.names}{the variable names in quotes of the measures to be separated
+into multiple columns based on the time variable}
 
 \item{timevar}{the variable name in quotes of the time variable}
 
 \item{id}{the ID variable name in quotes}
 }
 \description{
-\code{wide()} is a wrapper of \code{stats::reshape()} that takes the data 
-from a long format to a wide format.
+\code{wide()} is a wrapper of \code{stats::reshape()} that takes
+the data from a long format to a wide format.
 }
 \seealso{
 \code{stats::reshape()}, \code{tidyr::spread()}

@@ -2,7 +2,7 @@
 #' @author Tyson S. Barrett
 #'
 #' @description \code{wide()} is a wrapper of \code{stats::reshape()} that takes
-#' the data from a long format to a wide format. 
+#' the data from a long format to a wide format.
 #'
 #' @param data the data.frame containing the wide format data
 #' @param v.names the variable names in quotes of the measures to be separated
@@ -15,15 +15,15 @@
 #' @importFrom stats reshape
 #'
 #' @export
-wide <- function(data, v.names, timevar, id=NULL){
+wide <- function(data, v.names, timevar, id = NULL){
   UseMethod("wide", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-wide.tibble <- function(data, v.names=NULL, timevar, id=NULL){
+wide.tibble <- function(data, v.names = NULL, timevar, id = NULL){
   data = as.data.frame(data, stringsAsFactors = TRUE)
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+  if (any(grepl("[i|I][d|D]", names(data))) && is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
   }
@@ -34,9 +34,9 @@ wide.tibble <- function(data, v.names=NULL, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.tbl_df <- function(data, v.names=NULL, timevar, id=NULL){
+wide.tbl_df <- function(data, v.names = NULL, timevar, id = NULL){
   data = as.data.frame(data, stringsAsFactors = TRUE)
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+  if (any(grepl("[i|I][d|D]", names(data))) && is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
   }
@@ -47,8 +47,8 @@ wide.tbl_df <- function(data, v.names=NULL, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.data.frame <- function(data, v.names=NULL, timevar, id=NULL){
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+wide.data.frame <- function(data, v.names = NULL, timevar, id = NULL){
+  if (any(grepl("[i|I][d|D]", names(data))) && is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
   }
@@ -59,8 +59,8 @@ wide.data.frame <- function(data, v.names=NULL, timevar, id=NULL){
 
 #' @importFrom stats reshape
 #' @export
-wide.matrix <- function(data, v.names=NULL, timevar, id=NULL){
-  if (any(grepl("[i|I][d|D]", names(data))) & is.null(id)){
+wide.matrix <- function(data, v.names = NULL, timevar, id = NULL){
+  if (any(grepl("[i|I][d|D]", names(data))) && is.null(id)){
     id = names(data)[grep("[i|I][d|D]", names(data))[1]]
     message(paste("id =", id))
   }
@@ -120,13 +120,15 @@ wide.matrix <- function(data, v.names=NULL, timevar, id=NULL){
 #'
 #'
 #' @export
-long <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long <- function(data, ..., v.names = NULL, id = NULL, timevar = NULL,
+                 times = NULL, sep = ""){
   UseMethod("long", data)
 }
 
 #' @importFrom stats reshape
 #' @export
-long.tibble <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.tibble <- function(data, ..., v.names = NULL, id = NULL, timevar = NULL,
+                        times = NULL, sep=""){
   varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
@@ -144,7 +146,7 @@ long.tibble <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
   }
   data = as.data.frame(data, stringsAsFactors = TRUE)
   data$miss = NA
-  ids = 1:NROW(data)
+  ids = seq_len(NROW(data))
   newd = stats::reshape(data, varying, v.names, timevar = timevar,
                         times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
@@ -157,7 +159,8 @@ long.tibble <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
 
 #' @importFrom stats reshape
 #' @export
-long.tbl_df <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.tbl_df <- function(data, ..., v.names = NULL, id = NULL, timevar = NULL,
+                        times = NULL, sep = ""){
   varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
@@ -175,7 +178,7 @@ long.tbl_df <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
   }
   data = as.data.frame(data, stringsAsFactors = TRUE)
   data$miss = NA
-  ids = 1:NROW(data)
+  ids = seq_len(NROW(data))
   newd = stats::reshape(data, varying, v.names, timevar = timevar,
                         times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
@@ -188,7 +191,8 @@ long.tbl_df <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
 
 #' @importFrom stats reshape
 #' @export
-long.data.frame <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.data.frame <- function(data, ..., v.names = NULL, id = NULL, 
+                            timevar = NULL, times = NULL, sep = ""){
   varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
@@ -205,7 +209,7 @@ long.data.frame <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, time
     times = seq_along(varying[[1]])
   }
   data$miss = NA
-  ids = 1:NROW(data)
+  ids = seq_len(NROW(data))
   newd = stats::reshape(data, varying, v.names, timevar = timevar,
                         times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
@@ -218,7 +222,8 @@ long.data.frame <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, time
 
 #' @importFrom stats reshape
 #' @export
-long.matrix <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NULL, sep=""){
+long.matrix <- function(data, ..., v.names = NULL, id = NULL, timevar = NULL,
+                        times = NULL, sep = ""){
   varying = list(...)
   if (is.null(id)){
     if (any(grepl("[i|I][d|D]", names(data)))){
@@ -235,7 +240,7 @@ long.matrix <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
     times = seq_along(varying[[1]])
   }
   data$miss = NA
-  ids = 1:NROW(data)
+  ids = seq_len(NROW(data))
   newd = stats::reshape(data, varying, v.names, timevar = timevar,
                         times = times, idvar = id, ids = ids, sep=sep,
                         direction = "long")
@@ -245,4 +250,3 @@ long.matrix <- function(data, ..., v.names=NULL, id=NULL, timevar=NULL, times=NU
   }
   return(newd)
 }
-

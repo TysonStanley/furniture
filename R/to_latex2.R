@@ -16,13 +16,13 @@
 #' @export
 #' @importFrom utils capture.output
 to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, total=FALSE, cor_type=NULL){
-  if (is.null(cor_type) & is.null(splitby)){
+  if (is.null(cor_type) && is.null(splitby)){
     splitby <- "Total"
   } else if (!is.null(cor_type)){
     cor_type2 <- paste(toupper(substr(cor_type, 1, 1)), substring(cor_type, 2),
                        sep = "")
     splitby <- paste(cor_type2, "Correlations")
-  } else if (is.null(cor_type) & !is.null(splitby)) {
+  } else if (is.null(cor_type) && !is.null(splitby)) {
     splitby <- gsub("`", "", paste(splitby))
     splitby <- gsub("%", "\\%", splitby)
   }
@@ -60,7 +60,7 @@ to_latex = function(tab, caption, align, len, splitby, float, booktabs, label, t
     } else {
       cat(paste(names(tab), collapse = " & "), "\\\\", paste0("\n",hrule('mid', booktabs)))
       cat(
-        for (i in 1:length(tab[[1]])){
+        for (i in seq_along(tab[[1]])){
           if (grepl("^ ", tab[i, 1])){
             cat("\\hspace{6pt}", paste(tab[i, ], collapse = " & "))
             cat("\\\\", "\n")

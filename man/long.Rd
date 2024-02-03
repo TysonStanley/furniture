@@ -17,12 +17,15 @@ long(
 \arguments{
 \item{data}{the data.frame containing the wide format data}
 
-\item{...}{the variables that are time-varying that are to be placed in long format, 
-needs to be in the format \code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is 
-unbalanced (e.g., there are three time points measured for one variable but only two for another),
-using the placeholder variable \code{miss}, helps fix this.}
+\item{...}{the variables that are time-varying that are to be placed in 
+long format, needs to be in the format
+\code{c("x1", "x2"), c("z1", "z2"), etc.}. If the data is
+unbalanced (e.g., there are three time points measured for one variable but
+only two for another), using the placeholder variable \code{miss},
+helps fix this.}
 
-\item{v.names}{a vector of the names for the newly created variables (length same as number of vectors in \code{varying})}
+\item{v.names}{a vector of the names for the newly created variables (length
+same as number of vectors in \code{varying})}
 
 \item{id}{the ID variable in quotes}
 
@@ -30,12 +33,14 @@ using the placeholder variable \code{miss}, helps fix this.}
 
 \item{times}{the labels of the \code{timevar} (default is numeric)}
 
-\item{sep}{the separating character between the wide format variable names (default is \code{""}); e.g. "x1" and "x2" would create the variable name of "x"; only applicable if \code{v.names}}
+\item{sep}{the separating character between the wide format variable names
+(default is \code{""}); e.g. "x1" and "x2" would create the variable name of
+"x"; only applicable if \code{v.names}}
 }
 \description{
-\code{long()} is a wrapper of \code{stats::reshape()} that takes the data 
-from a wide format to a long format. It can also handle unbalanced data (where some measures
-have different number of "time points").
+\code{long()} is a wrapper of \code{stats::reshape()} that takes
+the data from a wide format to a long format. It can also handle unbalanced
+data (where some measures have different number of "time points").
 }
 \examples{
 

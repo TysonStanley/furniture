@@ -139,7 +139,7 @@ table1.data.frame = function(.data,
   ###################
   ## Preprocessing ##
   ###################
-  .call <- match.call()
+  # .call <- match.call()
   ## Test output
   format_output <- type[which(type %in% c("pvalue", "pvalues", "pval", "pvals", "p",
                                           "full", "f",
@@ -163,7 +163,7 @@ table1.data.frame = function(.data,
     NAkeep <- "always"
   }
   ## Only pvalues are shown in simple or condensed versions
-  if (simple | condense){
+  if (simple || condense){
     format_output <- "pvalue"
   }
   ## Formatting default functions
@@ -250,14 +250,14 @@ table1.data.frame = function(.data,
   
   
   ## Splitby variable needs to have more than one level when test = TRUE
-  if (test & length(levels(d$split))>1){
+  if (test && length(levels(d$split))>1){
     test <- TRUE
   } else {
     test <- FALSE
   }
   
   ## Does each variable have at least two levels?
-  if ((! .more_than_one_value(d)) & test){
+  if ((! .more_than_one_value(d)) && test){
     test = FALSE
     warning("Not all variables have at least 2 unique values. Cannot do tests...", 
             call. = FALSE)
@@ -375,7 +375,7 @@ print.table1 <- function(x, ...){
   x2[] <- sapply(x2, as.character)
   
   ## Get width of table for lines
-  for (i in 1:dim(x2)[2]){
+  for (i in seq_len(dim(x2)[2])){
     max_col_width[[i]] <- max(sapply(x2[[i]], nchar, type="width"))
   }
   tot_width <- sum(ifelse(unlist(max_col_width) > nchar(names(x2)), unlist(max_col_width), nchar(names(x2)))) + 
@@ -392,10 +392,10 @@ print.table1 <- function(x, ...){
     x5 <- x3[, first_part, drop = FALSE]
     x4[] <- sapply(x4, as.character)
     x5[] <- sapply(x5, as.character)
-    for (i in 1:ncol(x4)){
+    for (i in seq_len(ncol(x4))){
       max_col_width2[[i]] <- max(sapply(x4[[i]], nchar, type="width"))
     }
-    for (i in 1:ncol(x5)){
+    for (i in seq_len(ncol(x5))){
       max_col_width3[[i]] <- max(sapply(x5[[i]], nchar, type="width"))
     }
     var_width <- sum(ifelse(unlist(max_col_width2) > nchar(names(x4)), unlist(max_col_width2), nchar(names(x4)))) + 

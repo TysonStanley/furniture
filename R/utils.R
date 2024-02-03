@@ -2,7 +2,7 @@
 
 ## Output type constructor
 .type_constructor = function(type){
-  if (any(grepl("simp", type)) & any(grepl("cond", type))){
+  if (any(grepl("simp", type)) && any(grepl("cond", type))){
     simple <- TRUE
     condense <- TRUE
   } else if (any(grepl("cond", type))){
@@ -77,7 +77,7 @@
       N <- data.frame("", N, "", "", stringsAsFactors = TRUE)
       names(N) <- c(header_labels[1], levels(d$split), header_labels[2:length(header_labels)])
     }
-  } else if ((grepl("p|P", format_output) | grepl("s|S", format_output)) & test){
+  } else if ((grepl("p|P", format_output) || grepl("s|S", format_output)) && test){
     N <- data.frame(" ", N, " ", stringsAsFactors = TRUE) 
     if (grepl("p|P", format_output)){
       if (is.null(header_labels)){

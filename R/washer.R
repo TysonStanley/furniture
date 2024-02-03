@@ -26,7 +26,7 @@ washer <- function(x, ..., value=NA){
   for (i in seq_along(c(...))){
     if (!is.function(c(...)[[i]])){
       j <- c(...)[i]
-      if (sum(x == j, na.rm=TRUE) > 0 & fct){
+      if (sum(x == j, na.rm=TRUE) > 0 && fct){
         x <- as.character(x)
       }
     } 
