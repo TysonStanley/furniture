@@ -30,6 +30,7 @@ table1_gt <- function(tab, spanner = NULL) {
   tab_df <- as.data.frame(tab)
   nams <- paste0(nams, tab_df[1, ])
   nams <- gsub("n =", ", n =", nams)
+  nams <- gsub("[[:space:]]*$","", nams)
   tab_df <- tab_df[-1, ]
   names(tab_df) <- nams
 
