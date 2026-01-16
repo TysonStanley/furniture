@@ -35,7 +35,9 @@
 #' 2. "simple" then only percentages are shown for categorical variable and
 #' "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.
 #' 
-#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form. For enhanced formatting, use \code{table1_gt()} for gt output or \code{table1_flextable()} for flextable output.
+#'
+#' @seealso \code{\link{table1_gt}}, \code{\link{table1_flextable}}
 #'
 #' @examples 
 #' 
@@ -83,6 +85,21 @@
 #'
 #' # Labels are automatically used in the table
 #' table1(df2, x, y, z, splitby = ~a)
+#' }
+#'
+#' ## Using enhanced formatting with gt or flextable
+#' \dontrun{
+#' # With gt
+#' df %>%
+#'   group_by(a) %>%
+#'   table1(x, y, z) %>%
+#'   table1_gt(spanner = "Group A")
+#'
+#' # With flextable
+#' df %>%
+#'   group_by(a) %>%
+#'   table1(x, y, z) %>%
+#'   table1_flextable(spanner = "Group A")
 #' }
 #'
 #' @export

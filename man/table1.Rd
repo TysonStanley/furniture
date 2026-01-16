@@ -84,7 +84,7 @@ table1(
 \item{label}{for \code{output == "latex2"}, this provides a table reference label for latex}
 }
 \value{
-A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form. For enhanced formatting, use \code{table1_gt()} for gt output or \code{table1_flextable()} for flextable output.
 }
 \description{
 Produces a descriptive table, stratified by an optional categorical variable, 
@@ -145,4 +145,22 @@ label(df2$a) <- "Binary Factor A"
 table1(df2, x, y, z, splitby = ~a)
 }
 
+## Using enhanced formatting with gt or flextable
+\dontrun{
+# With gt
+df \%>\%
+  group_by(a) \%>\%
+  table1(x, y, z) \%>\%
+  table1_gt(spanner = "Group A")
+
+# With flextable
+df \%>\%
+  group_by(a) \%>\%
+  table1(x, y, z) \%>\%
+  table1_flextable(spanner = "Group A")
+}
+
+}
+\seealso{
+\code{\link{table1_gt}}, \code{\link{table1_flextable}}
 }

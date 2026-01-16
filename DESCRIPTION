@@ -23,7 +23,8 @@ Depends:
 Imports:
     knitr,
     dplyr (>= 0.8.0),
-    gt
+    gt,
+    flextable
 Suggests:
     magrittr,
     rmarkdown,

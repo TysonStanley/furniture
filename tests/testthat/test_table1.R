@@ -217,10 +217,78 @@ test_that("table1 produces table1", {
                           test = TRUE))
   expect_failure(expect_warning(df %>%
                                   table1(x,
-                                         test=FALSE, 
+                                         test=FALSE,
                                          output = "text2",
                                          header_labels = c(" ", "P-Val"),
                                          second = c("a", "c"))))
-  
+
 })
+
+test_that("table1_gt produces gt_tbl", {
+  skip_if_not_installed("gt")
+
+  x  <- runif(100)
+  y  <- rnorm(100)
+  z  <- factor(sample(c(0,1), 100, replace=TRUE))
+  a  <- factor(sample(c(1,2), 100, replace=TRUE))
+  df <- data.frame(x, y, z, a)
+
+  # Basic table1_gt
+  tab1 <- df %>%
+    group_by(a) %>%
+    table1(x, y, z)
+
+  expect_s3_class(table1_gt(tab1), "gt_tbl")
+
+  # With spanner
+  expect_s3_class(table1_gt(tab1, spanner = "Group A"), "gt_tbl")
+
+  # Without grouping
+  tab2 <- df %>%
+    table1(x, y, z)
+
+  expect_s3_class(table1_gt(tab2), "gt_tbl")
+
+  # With tests
+  tab3 <- df %>%
+    group_by(a) %>%
+    table1(x, y, z, test = TRUE)
+
+  expect_s3_class(table1_gt(tab3), "gt_tbl")
+})
+
+test_that("table1_flextable produces flextable", {
+  skip_if_not_installed("flextable")
+
+  x  <- runif(100)
+  y  <- rnorm(100)
+  z  <- factor(sample(c(0,1), 100, replace=TRUE))
+  a  <- factor(sample(c(1,2), 100, replace=TRUE))
+  df <- data.frame(x, y, z, a)
+
+  # Basic table1_flextable
+  tab1 <- df %>%
+    group_by(a) %>%
+    table1(x, y, z)
+
+  expect_s3_class(table1_flextable(tab1), "flextable")
+
+  # With spanner
+  expect_s3_class(table1_flextable(tab1, spanner = "Group A"), "flextable")
+
+  # Without grouping
+  tab2 <- df %>%
+    table1(x, y, z)
+
+  expect_s3_class(table1_flextable(tab2), "flextable")
+
+  # With tests
+  tab3 <- df %>%
+    group_by(a) %>%
+    table1(x, y, z, test = TRUE)
+
+  expect_s3_class(table1_flextable(tab3), "flextable")
+})
+
+
 

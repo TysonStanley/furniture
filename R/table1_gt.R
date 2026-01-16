@@ -1,5 +1,4 @@
 #' @title gt output for table1
-#' @author Tyson S. Barrett
 #'
 #' @description This takes a table1 object and outputs a `gt` version.
 #'
@@ -24,7 +23,6 @@
 #'
 #' @export
 table1_gt <- function(tab, spanner = NULL) {
-  # save names and adjust table to include n's in header
   nams <- names(tab[[1]])
   nams[1] <- "Characteristic"
   tab_df <- as.data.frame(tab)

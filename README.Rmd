@@ -141,11 +141,20 @@ nhanes_2010 %>%
 A new function `table1_gt()` integrates the fantastic `gt` package to make beautiful HTML tables for table1.
 
 ```{r, results='asis'}
-nhanes_2010 %>% 
-  group_by(asthma) %>% 
-  table1(age, marijuana, illicit, rehab, na.rm = FALSE) %>% 
-  table1_gt() %>% 
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab, na.rm = FALSE) %>%
+  table1_gt() %>%
   print()
+```
+
+Alternatively, `table1_flextable()` integrates the `flextable` package for flexible and customizable table output (especially useful for Word documents).
+
+```{r, eval=FALSE}
+nhanes_2010 %>%
+  group_by(asthma) %>%
+  table1(age, marijuana, illicit, rehab, na.rm = FALSE) %>%
+  table1_flextable(spanner = "Asthma")
 ```
 
 
