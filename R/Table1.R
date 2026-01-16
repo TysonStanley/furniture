@@ -13,14 +13,14 @@
 #' @param total whether a total (not stratified with the \code{splitby} or \code{group_by()}) should also be reported in the table
 #' @param second a vector or list of quoted continuous variables for which the \code{FUN2} should be applied
 #' @param row_wise how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.
-#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.
+#' @param test logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A consolidated message is printed listing all continuous variables that do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity), and for those variables the argument `var.equal = FALSE` is used in the test.
 #' @param param logical; if set to \code{TRUE} then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to \code{FALSE}, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.
 #' @param header_labels a character vector that renames the header labels (e.g., the blank above the variables, the p-value label, and test value label).
 #' @param type what is displayed in the table; a string or a vector of strings. Two main sections can be inputted: 1. if test = TRUE, can write "pvalues", "full", or "stars" and 2. can state "simple" and/or "condense". These are discussed in more depth in the details section below.
 #' @param output how the table is output; can be "text" or "text2" for regular console output or any of \code{kable()}'s options from \code{knitr} (e.g., "latex", "markdown", "pandoc"). A new option, \code{'latex2'}, although more limited, allows the variable name to show and has an overall better appearance.
 #' @param rounding_perc the number of digits after the decimal for percentages; default is 1
 #' @param digits the number of significant digits for the numerical variables (if using default functions); default is 1.
-#' @param var_names custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.
+#' @param var_names custom variable names to be printed in the table. Variable names can be applied directly in the list of variables. Note: if variables have a "label" attribute (e.g., from Hmisc::label()), these labels will be used automatically unless var_names is explicitly provided.
 #' @param format_number default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)
 #' @param NAkeep when set to \code{TRUE} it also shows how many missing values are in the data for each categorical variable being summarized (deprecated; use \code{na.rm})
 #' @param na.rm when set to \code{FALSE} it also shows how many missing values are in the data for each categorical variable being summarized
@@ -35,7 +35,9 @@
 #' 2. "simple" then only percentages are shown for categorical variable and
 #' "condense" then continuous variables' means and SD's will be on the same line as the variable name and dichotomous variables only show counts and percentages for the reference category.
 #' 
-#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form.
+#' @return A table with the number of observations, means/frequencies and standard deviations/percentages is returned. The object is a \code{table1} class object with a print method. Can be printed in \code{LaTex} form. For enhanced formatting, use \code{table1_gt()} for gt output or \code{table1_flextable()} for flextable output.
+#'
+#' @seealso \code{\link{table1_gt}}, \code{\link{table1_flextable}}
 #'
 #' @examples 
 #' 
@@ -69,8 +71,36 @@
 #'   table1(x, y, z)
 #' 
 #' ## Adjust variables within function and assign name
-#' table1(df, 
+#' table1(df,
 #'        x2 = ifelse(x > 0, 1, 0), z = z)
+#'
+#' ## Using variable labels (e.g., with Hmisc)
+#' \dontrun{
+#' library(Hmisc)
+#' df2 <- df
+#' label(df2$x) <- "Continuous Variable X"
+#' label(df2$y) <- "Continuous Variable Y"
+#' label(df2$z) <- "Binary Factor Z"
+#' label(df2$a) <- "Binary Factor A"
+#'
+#' # Labels are automatically used in the table
+#' table1(df2, x, y, z, splitby = ~a)
+#' }
+#'
+#' ## Using enhanced formatting with gt or flextable
+#' \dontrun{
+#' # With gt
+#' df %>%
+#'   group_by(a) %>%
+#'   table1(x, y, z) %>%
+#'   table1_gt(spanner = "Group A")
+#'
+#' # With flextable
+#' df %>%
+#'   group_by(a) %>%
+#'   table1(x, y, z) %>%
+#'   table1_flextable(spanner = "Group A")
+#' }
 #'
 #' @export
 #' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test kruskal.test chisq.test
@@ -155,10 +185,17 @@ table1.data.frame = function(.data,
   ## Not yet deprecated
   #if (!is.null(splitby))
   #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue until furniture 2.0.0")
-  
+
+  ## NAkeep deprecation warning
+  if (!is.null(NAkeep)) {
+    warning("The `NAkeep` parameter is deprecated and will be removed in a future version.\n",
+            "  Please use `na.rm` instead (na.rm = TRUE removes missing, na.rm = FALSE shows missing).",
+            call. = FALSE)
+  }
+
   ## Missing values in categorical variables
-  if (isTRUE(na.rm)){ 
-    NAkeep <- "no" 
+  if (isTRUE(na.rm)){
+    NAkeep <- "no"
   } else {
     NAkeep <- "always"
   }
@@ -168,9 +205,9 @@ table1.data.frame = function(.data,
   }
   ## Formatting default functions
   if (format_number){
-    f1 <- ","
+    big_mark <- ","
   } else {
-    f1 <- ""
+    big_mark <- ""
   }
   ## Functions
   num_fun  <- .summary_functions1(FUN, format_number, digits)
@@ -180,133 +217,103 @@ table1.data.frame = function(.data,
   ## Variable Selecting ##
   ########################
   ## All Variables or Selected Variables using selecting()
-  d <- selecting(data.frame(.data, stringsAsFactors = TRUE), ...)
-  d <- setNames(d, gsub("\\.", " ", names(d)))
-  
-  ### Naming of variables
-  if (!is.null(var_names)){
-    stopifnot(length(var_names)==length(names(d)))
-    names(d) <- var_names
-  }
-  
+  data_selected <- selecting(data.frame(.data, stringsAsFactors = TRUE), ...)
+
   ## Splitby or group_by
-  if (is.null(attr(.data, "groups"))){
-    
-    ### Splitby Variable (adds the variable to d as "split")
-    if (!is.null(splitby))
-      splitby <- substitute(splitby)
-    if (inherits(substitute(splitby), "name")){
-      splitby_ <- eval(substitute(splitby), .data)
-    } else if (inherits(substitute(splitby), "call")){
-      splitby_ <- model.frame(splitby, .data, na.action = "na.pass")[[1]]
-    } else if (inherits(substitute(splitby), "character")){
-      splitby_ <- .data[[splitby]]
-    } else if(is.null(splitby)){
-      splitby_ <- factor(1)
-    }
-    d$split = factor(splitby_)
-    ## For print method
-    if (is.null(splitby)){
-      splitting <- NULL
-    } else {
-      splitting <- paste(splitby)[[length(paste(splitby))]]
-    }
-    ## Remove any redundant grouping vars
-    if (length(which(names(d) %in% splitby_)) != 0){
-      d <- d[, -which(names(d) %in% splitby_), drop = FALSE]
-    }
-    
-  } else {
-    
-    groups <- attr(.data, "groups") %>% names(.)
-    groups <- groups[-length(groups)]
-    
-    message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
-    
-    if (length(groups) == 1){
-      d$split <- factor(.data[[groups]])
-    } else {
-      interacts <- interaction(.data[groups], sep = "-")
-      d$split <- factor(interacts)
-    }
-    ## For print method
-    if (is.null(groups)){
-      splitting <- NULL
-    } else{
-      splitting <- paste(groups, collapse = ", ")
-    }
-    ## Remove any redundant grouping vars
-    if (length(which(names(d) %in% groups)) != 0){
-      d <- d[, -which(names(d) %in% groups), drop = FALSE]
-    }
+  # IMPORTANT: Process grouping BEFORE label extraction to properly remove grouping variables
+  # Handle splitby substitution before passing to .process_grouping
+  if (!is.null(splitby))
+    splitby <- substitute(splitby)
+  grouping_result <- .process_grouping(.data, data_selected, splitby, parent.frame())
+  data_selected <- grouping_result$data
+  splitting <- grouping_result$splitting_name
+
+  ### Naming of variables
+  # First, try to extract labels from variable attributes (e.g., Hmisc labels)
+  # Exclude the "split" column from label extraction
+  cols_without_split <- names(data_selected)[names(data_selected) != "split"]
+  auto_labels <- .extract_labels(data_selected[, cols_without_split, drop = FALSE])
+  names(data_selected)[names(data_selected) != "split"] <- auto_labels
+
+  # Then apply the default name transformation (. to space)
+  # Keep "split" column name unchanged
+  names(data_selected)[names(data_selected) != "split"] <-
+    gsub("\\.", " ", names(data_selected)[names(data_selected) != "split"])
+
+  # Finally, if var_names is explicitly provided, it overrides everything
+  if (!is.null(var_names)){
+    stopifnot(length(var_names)==length(names(data_selected)[names(data_selected) != "split"]))
+    names(data_selected)[names(data_selected) != "split"] <- var_names
   }
   
   
   ## Remove missing values?
   if (isTRUE(na.rm))
-    d <- d[complete.cases(d), , drop = FALSE]
-  if (nrow(d) == 0)
+    data_selected <- data_selected[complete.cases(data_selected), , drop = FALSE]
+  if (nrow(data_selected) == 0)
     stop("No non-missing values in data frame with `na.rm = TRUE`", call. = FALSE)
-  
-  
+
+
   ## Splitby variable needs to have more than one level when test = TRUE
-  if (test && length(levels(d$split))>1){
+  if (test && length(levels(data_selected$split))>1){
     test <- TRUE
   } else {
     test <- FALSE
   }
-  
+
   ## Does each variable have at least two levels?
-  if ((! .more_than_one_value(d)) && test){
+  if ((! .more_than_one_value(data_selected)) && test){
     test = FALSE
-    warning("Not all variables have at least 2 unique values. Cannot do tests...", 
+    warning("Not all variables have at least 2 unique values. Cannot do tests...",
             call. = FALSE)
   }
-  
+
   if (isTRUE(total & test)){
     message("The test is for the stratified data relationships.")
   }
-  
-  if (isTRUE(levels(d$split) == 1 & total)){
+
+  if (isTRUE(levels(data_selected$split) == 1 & total)){
     total = FALSE
   }
   
   ####################################
   ## Observations and Header Labels ##
   ####################################
-  N <- .obs_header(d, f1, format_output, test, output, header_labels, total)
-  
+  header_row <- .obs_header(data_selected, big_mark, format_output, test, output, header_labels, total)
+
   ######################
   ## Summarizing Data ##
   ######################
-  summed <- table1_summarizing(d, num_fun, num_fun2, second, row_wise, test, param, NAkeep, total)
-  tab    <- summed[[1]]
-  tab2   <- summed[[2]]
-  tests  <- summed[[3]]
-  nams   <- summed[[4]]
+  summed <- table1_summarizing(data_selected, num_fun, num_fun2, second, row_wise, test, param, NAkeep, total)
+  summary_counts      <- summed[[1]]
+  summary_proportions <- summed[[2]]
+  test_results        <- summed[[3]]
+  variable_names      <- summed[[4]]
   
   ######################
-  ## Formatting Table ## 
+  ## Formatting Table ##
   ######################
   ## Not Condensed or Condensed
   if (!condense){
-    tabZ <- table1_format_nocondense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                     format_output, second, nams, simple, output, f1, total, param)
+    formatted_table <- table1_format_nocondense(data_selected, summary_counts, summary_proportions, test_results,
+                                                test, NAkeep, rounding_perc, format_output, second,
+                                                variable_names, simple, output, big_mark, total, param)
   } else if (condense){
-    tabZ <- table1_format_condense(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                   format_output, second, nams, simple, output, f1, total)
+    formatted_table <- table1_format_condense(data_selected, summary_counts, summary_proportions, test_results,
+                                              test, NAkeep, rounding_perc, format_output, second,
+                                              variable_names, simple, output, big_mark, total)
   }
   ## Combine Aspects of the table
-  names(tabZ) <- names(N)
-  tabZ <- rbind(N, tabZ)
-  rem <- ifelse(is.na(tabZ[,2]), FALSE, TRUE)
-  final <- tabZ[rem,]
+  names(formatted_table) <- names(header_row)
+  formatted_table <- rbind(header_row, formatted_table)
+  rem <- ifelse(is.na(formatted_table[,2]), FALSE, TRUE)
+  final <- formatted_table[rem,]
   final$` ` <- as.character(final$` `)
   
   ##################
   ## FINAL OUTPUT ##
   ##################
-  if (length(levels(d$split)) == 1){
+  if (length(levels(data_selected$split)) == 1){
     names(final)[2] <- "Mean/Count (SD/%)"
   }
   final_l <- list("Table1" = final)
@@ -314,7 +321,7 @@ table1.data.frame = function(.data,
   attr(final_l, "output") <- output
   attr(final_l, "tested") <- test
   attr(final_l, "total") <- total
-  
+
   ## Export Option
   if (!is.null(export)){
     if (!dir.exists("Table1")){
@@ -322,20 +329,20 @@ table1.data.frame = function(.data,
     }
     write.csv(final, file = paste0(getwd(), "/Table1/", export, ".csv"), row.names = FALSE)
   }
-  
+
   ## regular text output
-  if (grepl("text", output)){ 
+  if (grepl("text", output)){
     class(final_l) <- c("table1")
     cat("\n", caption)
     return(final_l)
-    
+
     ## Custom Latex Output
   } else if (output %in% "latex2"){
     if (is.null(align)){
       l1 <- dim(final)[2]
       align <- c("l", rep("c", (l1-1)))
     }
-    tab <- to_latex(final, caption, align, len = length(levels(d$split)), 
+    tab <- to_latex(final, caption, align, len = length(levels(data_selected$split)),
                     splitting, float, booktabs, label, total)
     tab
     ## Output from kable  
