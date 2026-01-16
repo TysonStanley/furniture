@@ -23,12 +23,12 @@ Depends:
 Imports:
     knitr,
     dplyr (>= 0.8.0),
-    gt,
-    tibble
+    gt
 Suggests:
     magrittr,
     rmarkdown,
-    testthat
+    testthat,
+    tibble
 LazyData: true
 VignetteBuilder: knitr
 Encoding: UTF-8

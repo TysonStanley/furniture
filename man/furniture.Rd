@@ -61,6 +61,14 @@ x = washer(x, is.na, value=0)
 }
 
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/TysonStanley/furniture}
+  \item Report bugs at \url{https://github.com/TysonStanley/furniture/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Tyson S. Barrett \email{t.barrett88@gmail.com} (\href{https://orcid.org/0000-0002-2137-1391}{ORCID})
 

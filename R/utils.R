@@ -45,8 +45,28 @@
     all()
 }
 
+## Extract variable labels from attributes
+.extract_labels <- function(data){
+  # For each variable, check if it has a "label" attribute
+  # Common label attributes: "label", "labels", "var.labels"
+  labels <- sapply(names(data), function(var_name) {
+    # Check for various label attributes
+    label <- attr(data[[var_name]], "label")
+
+    # If no label found, return the variable name
+    if (is.null(label) || length(label) == 0 || label == "") {
+      return(var_name)
+    }
+
+    # Return the label as character
+    as.character(label)
+  })
+
+  return(labels)
+}
+
 ## Observations and Header Labels
-.obs_header = function(d, f1, format_output, test, output, header_labels, total){
+.obs_header = function(d, big_mark, format_output, test, output, header_labels, total){
   
   if (isTRUE(total)){
     tot <- NROW(d[[1]])
@@ -63,7 +83,7 @@
   
   N   <- c("Total" = tot, tapply(d[[1]], d$split, length))
   N[] <- sapply(N, function(x) as.character(paste("n =", x)))
-  N   <- suppressWarnings(formatC(N, big.mark = f1, digits = 0, format = "f")) %>%
+  N   <- suppressWarnings(formatC(N, big.mark = big_mark, digits = 0, format = "f")) %>%
     sapply(trimws, which = "left") %>%
     t(.)
   
@@ -115,16 +135,16 @@
 ## Formatting for default summaries
 .summary_functions1 = function(FUN, format_number, digits){
   if (format_number){
-    f1 <- ","
+    big_mark <- ","
   } else {
-    f1 <- ""
+    big_mark <- ""
   }
   ## Primary Function
   if(is.null(FUN)){
     num_fun <- function(x){
       gettextf("%s (%s)",
-               formatC(mean(x, na.rm=TRUE), big.mark = f1, digits = digits, format = "f"),
-               formatC(sd(x, na.rm=TRUE),   big.mark = f1, digits = digits, format = "f"))
+               formatC(mean(x, na.rm=TRUE), big.mark = big_mark, digits = digits, format = "f"),
+               formatC(sd(x, na.rm=TRUE),   big.mark = big_mark, digits = digits, format = "f"))
     }
   } else {
     num_fun <- FUN
@@ -133,21 +153,88 @@
 }
 .summary_functions2 = function(FUN2, format_number, digits){
   if (format_number){
-    f1 <- ","
+    big_mark <- ","
   } else {
-    f1 <- ""
+    big_mark <- ""
   }
   ## Secondary Function
   if(is.null(FUN2)){
     num_fun2 <- function(x){
       gettextf("%s [%s]",
-               formatC(median(x, na.rm=TRUE), big.mark = f1, digits = digits, format = "f"),
-               formatC(IQR(x, na.rm=TRUE),    big.mark = f1, digits = digits, format = "f"))
+               formatC(median(x, na.rm=TRUE), big.mark = big_mark, digits = digits, format = "f"),
+               formatC(IQR(x, na.rm=TRUE),    big.mark = big_mark, digits = digits, format = "f"))
     }
   } else {
     num_fun2 <- FUN2
   }
   return(num_fun2)
+}
+
+
+## Process grouping variables (splitby or dplyr::group_by)
+.process_grouping <- function(.data, data_selected, splitby, envir) {
+
+  # Check if data is grouped (from dplyr::group_by)
+  if (is.null(attr(.data, "groups"))) {
+
+    ## Handle splitby parameter
+    # splitby has already been substituted in the calling function
+    if (inherits(splitby, "name")) {
+      splitby_var <- eval(splitby, .data, envir)
+    } else if (inherits(splitby, "call")) {
+      splitby_var <- model.frame(splitby, .data, na.action = "na.pass")[[1]]
+    } else if (inherits(splitby, "character")) {
+      splitby_var <- .data[[splitby]]
+    } else if (is.null(splitby)) {
+      splitby_var <- factor(1)
+    }
+
+    data_selected$split <- factor(splitby_var)
+
+    # Set splitting name for print method
+    if (is.null(splitby)) {
+      splitting_name <- NULL
+    } else {
+      splitting_name <- paste(splitby)[[length(paste(splitby))]]
+    }
+
+    # Remove any redundant grouping vars
+    if (length(which(names(data_selected) %in% splitby_var)) != 0) {
+      data_selected <- data_selected[, -which(names(data_selected) %in% splitby_var), drop = FALSE]
+    }
+
+  } else {
+
+    ## Handle dplyr::group_by groups
+    groups <- attr(.data, "groups") %>% names(.)
+    groups <- groups[-length(groups)]
+
+    message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
+
+    if (length(groups) == 1) {
+      data_selected$split <- factor(.data[[groups]])
+    } else {
+      interacts <- interaction(.data[groups], sep = "-")
+      data_selected$split <- factor(interacts)
+    }
+
+    # Set splitting name for print method
+    if (is.null(groups)) {
+      splitting_name <- NULL
+    } else {
+      splitting_name <- paste(groups, collapse = ", ")
+    }
+
+    # Remove any redundant grouping vars
+    if (length(which(names(data_selected) %in% groups)) != 0) {
+      data_selected <- data_selected[, -which(names(data_selected) %in% groups), drop = FALSE]
+    }
+  }
+
+  list(
+    data = data_selected,
+    splitting_name = splitting_name
+  )
 }
 
 

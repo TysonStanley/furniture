@@ -208,8 +208,8 @@ nonparametric <- function(formula){
 
 
 ## Formatting of table1 with no condense
-table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                    format_output, second, nams, simple, output, f1, total, param){
+table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc,
+                                    format_output, second, nams, simple, output, big_mark, total, param){
   d <- as.data.frame(d, stringsAsFactors = TRUE)
   
   if (isTRUE(total)){
@@ -248,7 +248,7 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
       if (is.factor(d[,j])){
         if (!simple){
           tabX <- data.frame(tabX, 
-                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = big_mark)), " (", 
                                     round(tab2[[j]][[i]]*100, rounding_perc), "%)"), 
                              stringsAsFactors = TRUE)
         } else if (simple){
@@ -328,8 +328,8 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
 }
 
 ## Formatting of table1 with condense
-table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc, 
-                                  format_output, second, nams, simple, output, f1, total){
+table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_perc,
+                                  format_output, second, nams, simple, output, big_mark, total){
   d <- as.data.frame(d, stringsAsFactors = TRUE)
   
   if (isTRUE(total)){
@@ -385,11 +385,11 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
         } else {
           if (length(levels(d[,j])) == 2){
             tabX <- data.frame(tabX, 
-                               paste0(suppressWarnings(formatC(tab[[j]][[i]][2], big.mark = f1)), " (", 
+                               paste0(suppressWarnings(formatC(tab[[j]][[i]][2], big.mark = big_mark)), " (", 
                                       round(tab2[[j]][[i]][2]*100, 1), "%)"), stringsAsFactors = TRUE)
           } else {
             tabX <- data.frame(tabX, 
-                               paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = f1)), " (", 
+                               paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = big_mark)), " (", 
                                       round(tab2[[j]][[i]]*100, 1), "%)"), stringsAsFactors = TRUE)
           }
         }
