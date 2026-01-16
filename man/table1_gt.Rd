@@ -27,6 +27,3 @@ nhanes_2010 \%>\%
   table1_gt(spanner = "Asthma")
 
 }
-\author{
-Tyson S. Barrett
-}

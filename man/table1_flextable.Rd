@@ -27,6 +27,3 @@ nhanes_2010 \%>\%
   table1_flextable(spanner = "Asthma")
 
 }
-\author{
-Tyson S. Barrett
-}
