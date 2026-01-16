@@ -1,3 +1,39 @@
+# Version 1.11.0
+
+## New Features
+
+- Added automatic label extraction from variable attributes (e.g., `Hmisc::label()`). Variable labels are now automatically used in `table1()` output unless explicitly overridden with `var_names` parameter.
+- Added `table1_flextable()` function for enhanced table formatting using the flextable package, particularly useful for Word documents and other Office formats.
+- Added helpful error messages with installation instructions when gt or flextable packages are not installed.
+- Consolidated heteroskedasticity warning messages - now displays a single message listing all variables that fail the Breusch-Pagan test, instead of one message per variable.
+
+## Improvements
+
+- Initial refactoring of `table1()` internal code for better maintainability:
+  - Extracted complex grouping logic into `.process_grouping()` helper function
+  - Renamed internal variables for clarity (e.g., `d` → `data_selected`, `f1` → `big_mark`)
+  - Improved code documentation and comments
+
+## Dependencies
+
+- Replaced deprecated `dplyr::as.tbl()` with `tibble::as_tibble()` in tests
+- Added GitHub URL and BugReports URL to DESCRIPTION
+
+## Deprecations
+
+- Added formal deprecation warning for `NAkeep` parameter in `table1()`. Users should use `na.rm` instead (the parameter has been marked as deprecated in documentation since version 1.8.0, but now issues a warning when used).
+
+## Documentation
+
+- Added comprehensive examples for using variable labels
+- Added examples for gt and flextable output formatting
+- Updated function documentation to mention automatic label extraction
+- Added cross-references between `table1()`, `table1_gt()`, and `table1_flextable()`
+
+# Version 1.10.0
+
+- Added `table1_gt()` for output in `gt` table format
+
 # Version 1.9.14
 
 - Updated maintainer email address and update package site.

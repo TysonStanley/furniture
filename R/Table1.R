@@ -185,10 +185,17 @@ table1.data.frame = function(.data,
   ## Not yet deprecated
   #if (!is.null(splitby))
   #  warning("`splitby` is deprecated. Use dplyr::group_by() instead. It's use will continue until furniture 2.0.0")
-  
+
+  ## NAkeep deprecation warning
+  if (!is.null(NAkeep)) {
+    warning("The `NAkeep` parameter is deprecated and will be removed in a future version.\n",
+            "  Please use `na.rm` instead (na.rm = TRUE removes missing, na.rm = FALSE shows missing).",
+            call. = FALSE)
+  }
+
   ## Missing values in categorical variables
-  if (isTRUE(na.rm)){ 
-    NAkeep <- "no" 
+  if (isTRUE(na.rm)){
+    NAkeep <- "no"
   } else {
     NAkeep <- "always"
   }

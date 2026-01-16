@@ -224,6 +224,32 @@ test_that("table1 produces table1", {
 
 })
 
+test_that("NAkeep parameter shows deprecation warning", {
+  x  <- runif(100)
+  y  <- rnorm(100)
+  z  <- factor(sample(c(0,1), 100, replace=TRUE))
+  df <- data.frame(x, y, z)
+
+  # Using NAkeep should trigger a deprecation warning
+  expect_warning(
+    table1(df, x, y, z, NAkeep = TRUE),
+    "NAkeep.*deprecated",
+    ignore.case = TRUE
+  )
+
+  # The warning should mention na.rm as the replacement
+  expect_warning(
+    table1(df, x, y, z, NAkeep = FALSE),
+    "na.rm"
+  )
+
+  # Not using NAkeep should not trigger warning
+  expect_no_warning(
+    table1(df, x, y, z, na.rm = TRUE)
+  )
+
+})
+
 test_that("table1_gt produces gt_tbl", {
   skip_if_not_installed("gt")
 
