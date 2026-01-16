@@ -250,6 +250,39 @@ test_that("NAkeep parameter shows deprecation warning", {
 
 })
 
+test_that("table1 works with empty ... parameter", {
+  x  <- runif(100)
+  y  <- rnorm(100)
+  z  <- factor(sample(c(0,1), 100, replace=TRUE))
+  a  <- factor(sample(c(1,2), 100, replace=TRUE))
+  df <- data.frame(x, y, z, a)
+
+  # Empty ... with no grouping (should include all variables)
+  expect_s3_class(table1(df), "table1")
+
+  # Empty ... with splitby
+  expect_s3_class(table1(df, splitby = ~a), "table1")
+
+  # Empty ... with group_by (this was the bug we fixed)
+  expect_s3_class(df %>% group_by(a) %>% table1(), "table1")
+
+  # Empty ... with group_by and tests
+  expect_s3_class(df %>% group_by(a) %>% table1(test = TRUE), "table1")
+
+  # Empty ... with multiple grouping variables
+  expect_s3_class(df %>% group_by(a, z) %>% table1(), "table1")
+
+  # Verify that grouping variable is not duplicated in output
+  tab <- df %>% group_by(a) %>% table1()
+  tab_df <- as.data.frame(tab)
+  # The grouping variable 'a' should not appear as a row in the table
+  # (it should only be the stratifying variable)
+  expect_false(any(grepl("^a$", tab_df[[1]])))
+
+  # Empty ... with total column
+  expect_s3_class(df %>% group_by(a) %>% table1(total = TRUE), "table1")
+})
+
 test_that("table1_gt produces gt_tbl", {
   skip_if_not_installed("gt")
 

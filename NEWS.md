@@ -7,6 +7,7 @@
 - Replaced deprecated `dplyr::as.tbl()` with `tibble::as_tibble()` in tests
 - Added GitHub URL and BugReports URL to DESCRIPTION
 - Added formal deprecation warning for `NAkeep` parameter in `table1()`. Users should use `na.rm` instead (the parameter has been marked as deprecated in documentation since version 1.8.0, but now issues a warning when used).
+- Added comprehensive tests for empty `...` parameter with `group_by()` to prevent regression of the grouping variable duplication bug.
 
 # Version 1.10.0
 
