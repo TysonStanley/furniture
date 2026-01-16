@@ -8,6 +8,7 @@
 - Added GitHub URL and BugReports URL to DESCRIPTION
 - Added formal deprecation warning for `NAkeep` parameter in `table1()`. Users should use `na.rm` instead (the parameter has been marked as deprecated in documentation since version 1.8.0, but now issues a warning when used).
 - Added comprehensive tests for empty `...` parameter with `group_by()` to prevent regression of the grouping variable duplication bug.
+- Updated GitHub Actions workflows to use `actions/checkout@v4` for consistency and added artifact upload on check failures for easier debugging.
 
 # Version 1.10.0
 

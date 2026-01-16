@@ -7,6 +7,6 @@ bibentry(bibtype = "Article",
          volume = "9",
          number = "2",
          doi = "10.32614/RJ-2017-037",
-         url = "https://journal.r-project.org/archive/2017/RJ-2017-037/RJ-2017-037.pdf",
+         url = "https://journal.r-project.org/articles/RJ-2017-037/RJ-2017-037.pdf",
          key = "RJ-2017-037",
          pages = "142--148")
