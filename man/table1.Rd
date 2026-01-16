@@ -49,7 +49,7 @@ table1(
 
 \item{row_wise}{how to calculate percentages for factor variables when \code{splitby != NULL}: if \code{FALSE} calculates percentages by variable within groups; if \code{TRUE} calculates percentages across groups for one level of the factor variable.}
 
-\item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A message is printed when the variances of the continuous variables being tested do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity) and, therefore, the argument `var.equal = FALSE` is used in the test.}
+\item{test}{logical; if set to \code{TRUE} then the appropriate bivariate tests of significance are performed if splitby has more than 1 level. A consolidated message is printed listing all continuous variables that do not meet the assumption of Homogeneity of Variance (using Breusch-Pagan Test of Heteroskedasticity), and for those variables the argument `var.equal = FALSE` is used in the test.}
 
 \item{param}{logical; if set to \code{TRUE} then the appropriate parametric bivariate tests of significance are performed (if `test = TRUE`). For continuous variables, it is a t-test or ANOVA (depending on the number of levels of the group). If set to \code{FALSE}, the Kruskal-Wallis Rank Sum Test is performed for the continuous variables. Either way, the chi-square test of independence is performed for categorical variables.}
 
@@ -63,7 +63,7 @@ table1(
 
 \item{digits}{the number of significant digits for the numerical variables (if using default functions); default is 1.}
 
-\item{var_names}{custom variable names to be printed in the table. Variable names can be applied directly in the list of variables.}
+\item{var_names}{custom variable names to be printed in the table. Variable names can be applied directly in the list of variables. Note: if variables have a "label" attribute (e.g., from Hmisc::label()), these labels will be used automatically unless var_names is explicitly provided.}
 
 \item{format_number}{default is FALSE; if TRUE, then the numbers are formatted with commas (e.g., 20,000 instead of 20000)}
 
@@ -129,7 +129,20 @@ df \%>\%
   table1(x, y, z)
 
 ## Adjust variables within function and assign name
-table1(df, 
+table1(df,
        x2 = ifelse(x > 0, 1, 0), z = z)
+
+## Using variable labels (e.g., with Hmisc)
+\dontrun{
+library(Hmisc)
+df2 <- df
+label(df2$x) <- "Continuous Variable X"
+label(df2$y) <- "Continuous Variable Y"
+label(df2$z) <- "Binary Factor Z"
+label(df2$a) <- "Binary Factor A"
+
+# Labels are automatically used in the table
+table1(df2, x, y, z, splitby = ~a)
+}
 
 }

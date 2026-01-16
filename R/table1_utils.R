@@ -59,6 +59,9 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
   d <- data.frame(d, stringsAsFactors = TRUE)
   tab <- tab2 <- tests <- nams <- list()
   nam <- names(d)
+
+  ## Track heteroskedasticity warnings
+  hetero_vars <- character(0)
   
   for (i in 1:(dim(d)[2]-1)){
     nams[[i]] <- names(d)[i]
@@ -131,25 +134,38 @@ table1_summarizing <- function(d, num_fun, num_fun2, second, row_wise, test, par
       
       ## Parametric or Non-parametric
       if (param){
-        tests[[i]] <- parametric(d[[i]] ~ d$split, d$split, lt, test, nam, i)
+        param_result <- parametric(d[[i]] ~ d$split, d$split, lt, test, nam, i)
+        tests[[i]] <- param_result$test
+        if (param_result$hetero) {
+          hetero_vars <- c(hetero_vars, nam[i])
+        }
       } else {
         tests[[i]] <- nonparametric(d[[i]] ~ d$split)
       }
     }
   }
-  
+
+  ## Print consolidated heteroskedasticity message
+  if (length(hetero_vars) > 0) {
+    message("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` for: ",
+            paste(hetero_vars, collapse = ", "))
+  }
+
   invisible(list(tab, tab2, tests, nams))
 }
 
 
 parametric <- function(formula, split, lt, test, nam, i){
-  
+
+  hetero_detected <- FALSE
+  test_result <- NULL
+
   ## For splitby vars with more than 2 levels
   if (length(levels(split))>2 && test){
     if (lt<0.05){
-      message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in oneway.test() for: ", nam[i]))
+      hetero_detected <- TRUE
       ## Performs an approximate method of Welch (1951)
-      tryCatch(
+      test_result <- tryCatch(
         oneway.test(formula, var.equal=FALSE),
         error = function(cond){
           message(cond, "\n")
@@ -158,7 +174,7 @@ parametric <- function(formula, split, lt, test, nam, i){
       )
     } else {
       ## Performs a simple one-way ANOVA
-      tryCatch(
+      test_result <- tryCatch(
         oneway.test(formula, var.equal=TRUE),
         error = function(cond){
           message(cond, "\n")
@@ -167,12 +183,12 @@ parametric <- function(formula, split, lt, test, nam, i){
         }
       )
     }
-    
+
   } else if (test){
     if (lt<0.05){
-      message(paste0("Breusch-Pagan Test of Heteroskedasticity suggests `var.equal = FALSE` in t.test() for: ", nam[i]))
+      hetero_detected <- TRUE
       ## Performs an approximate method of Welch (1951)
-      tryCatch(
+      test_result <- tryCatch(
         t.test(formula, var.equal=FALSE),
         error = function(cond){
           message(cond, "\n")
@@ -181,8 +197,8 @@ parametric <- function(formula, split, lt, test, nam, i){
         }
       )
     } else {
-      ## Performs a simple one-way ANOVA
-      tryCatch(
+      ## Performs a simple t-test
+      test_result <- tryCatch(
         t.test(formula, var.equal=TRUE),
         error = function(cond){
           message(cond, "\n")
@@ -190,9 +206,11 @@ parametric <- function(formula, split, lt, test, nam, i){
                       p.value = NA))
         }
       )
-    }    
+    }
   }
-  
+
+  return(list(test = test_result, hetero = hetero_detected))
+
 }
 
 nonparametric <- function(formula){
