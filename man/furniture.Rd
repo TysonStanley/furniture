@@ -64,6 +64,7 @@ x = washer(x, is.na, value=0)
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://tysonbarrett.com/furniture/}
   \item \url{https://github.com/TysonStanley/furniture}
   \item Report bugs at \url{https://github.com/TysonStanley/furniture/issues}
 }
