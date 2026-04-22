@@ -228,6 +228,9 @@ table1.data.frame = function(.data,
   data_selected <- grouping_result$data
   splitting <- grouping_result$splitting_name
 
+  ## Coerce supported types (logical, haven_labelled) and drop date/time columns
+  data_selected <- .coerce_variable_classes(data_selected)
+
   ### Naming of variables
   # First, try to extract labels from variable attributes (e.g., Hmisc labels)
   # Exclude the "split" column from label extraction

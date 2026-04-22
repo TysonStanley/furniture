@@ -257,29 +257,29 @@ table1_format_nocondense = function(d, tab, tab2, tests, test, NAkeep, rounding_
     } else if (is.numeric(d[,j])){
       tabX <- data.frame(paste(" "), stringsAsFactors = TRUE)
     } else {
-      stop(paste("Problem with variable", names(d)[j]))
+      stop(.unsupported_class_msg(names(d)[j], d[,j]), call. = FALSE)
     }
-    
+
     ## Factor
     len <- length(levels(d$split)) + tot
     for (i in 1:len){
       if (is.factor(d[,j])){
         if (!simple){
-          tabX <- data.frame(tabX, 
-                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = big_mark)), " (", 
-                                    round(tab2[[j]][[i]]*100, rounding_perc), "%)"), 
+          tabX <- data.frame(tabX,
+                             paste0(suppressWarnings(formatC(tab[[j]][[i]], big.mark = big_mark)), " (",
+                                    round(tab2[[j]][[i]]*100, rounding_perc), "%)"),
                              stringsAsFactors = TRUE)
         } else if (simple){
-          tabX <- data.frame(tabX, 
-                             paste0(round(tab2[[j]][[i]]*100, rounding_perc), "%"), 
+          tabX <- data.frame(tabX,
+                             paste0(round(tab2[[j]][[i]]*100, rounding_perc), "%"),
                              stringsAsFactors = TRUE)
         }
-        
+
         ## Numeric
       } else if (is.numeric(d[,j])){
         tabX <- data.frame(tabX, tab[[j]][[i]], stringsAsFactors = TRUE)
       } else {
-        stop(paste("Problem with variable", names(d)[j]))
+        stop(.unsupported_class_msg(names(d)[j], d[,j]), call. = FALSE)
       }
     }
     
@@ -383,7 +383,7 @@ table1_format_condense = function(d, tab, tab2, tests, test, NAkeep, rounding_pe
     } else if (is.numeric(d[,j])){
       tabX <- data.frame(paste(names(d)[j]), stringsAsFactors = TRUE)
     } else {
-      stop(paste("Problem with variable", names(d)[j]))
+      stop(.unsupported_class_msg(names(d)[j], d[,j]), call. = FALSE)
     }
     
     ## Counts and Percentages or Just Percentages

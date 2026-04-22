@@ -45,6 +45,67 @@
     all()
 }
 
+## Informative message for columns whose class table1 cannot summarize.
+.unsupported_class_msg <- function(name, x){
+  sprintf(
+    paste0("Variable '%s' has unsupported class '%s'. ",
+           "table1() supports numeric, factor, character, logical, and haven_labelled variables; ",
+           "Date/time variables are skipped automatically. ",
+           "Convert '%s' to a supported class (e.g., factor or numeric) before calling table1()."),
+    name, paste(class(x), collapse = "/"), name
+  )
+}
+
+## Coerce variable classes to something table1 can summarize.
+## - logical        -> factor
+## - haven_labelled -> factor (use value labels when present; preserve the
+##                     variable "label" attribute so .extract_labels sees it)
+## - Date/time      -> dropped, with a single message listing the names
+.coerce_variable_classes <- function(data){
+  date_classes <- c("Date", "POSIXt", "POSIXct", "POSIXlt", "difftime", "hms", "yearmon", "yearqtr")
+  keep <- rep(TRUE, ncol(data))
+  dropped <- character(0)
+
+  for (i in seq_along(data)){
+    nm <- names(data)[i]
+    if (identical(nm, "split")) next
+
+    x <- data[[i]]
+
+    if (inherits(x, date_classes)){
+      keep[i] <- FALSE
+      dropped <- c(dropped, nm)
+      next
+    }
+
+    if (inherits(x, "haven_labelled")){
+      var_label  <- attr(x, "label")
+      val_labels <- attr(x, "labels")
+      if (!is.null(val_labels) && length(val_labels) > 0){
+        new_x <- factor(unclass(x),
+                        levels = unname(val_labels),
+                        labels = names(val_labels))
+      } else {
+        new_x <- factor(unclass(x))
+      }
+      if (!is.null(var_label)) attr(new_x, "label") <- var_label
+      data[[i]] <- new_x
+      next
+    }
+
+    if (is.logical(x)){
+      data[[i]] <- factor(x)
+    }
+  }
+
+  if (length(dropped) > 0){
+    message("Date/time variable(s) not included in table: ",
+            paste(dropped, collapse = ", "))
+  }
+
+  data[, keep, drop = FALSE]
+}
+
 ## Extract variable labels from attributes
 .extract_labels <- function(data){
   # For each variable, check if it has a "label" attribute
