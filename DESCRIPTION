@@ -1,7 +1,7 @@
 Package: furniture
 Type: Package
 Title: Furniture for Quantitative Scientists
-Version: 1.11.0
+Version: 1.12.0
 Authors@R: c(person("Tyson S.", "Barrett",  
                     role=c("aut","cre"), 
                     email = "t.barrett88@gmail.com", 
@@ -19,11 +19,11 @@ Description: Contains four main functions (i.e., four pieces of furniture):
 Depends:
     R (>= 2.10)
 Imports:
-    knitr,
-    dplyr (>= 0.8.0),
     gt,
     flextable
 Suggests:
+    dplyr (>= 0.8.0),
+    knitr,
     magrittr,
     rmarkdown,
     testthat,

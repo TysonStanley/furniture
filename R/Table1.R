@@ -105,10 +105,7 @@
 #' @export
 #' @importFrom stats IQR addmargins complete.cases dchisq lm median model.frame oneway.test pt resid sd setNames t.test kruskal.test chisq.test
 #' @importFrom utils write.csv
-#' @importFrom knitr kable
-#' @importFrom dplyr group_by
-#' @importFrom dplyr mutate
-table1 = function(.data, 
+table1 = function(.data,
                   ..., 
                   splitby = NULL, 
                   FUN = NULL,
@@ -139,8 +136,7 @@ table1 = function(.data,
 
 #' @export
 #' @importFrom utils write.csv
-#' @importFrom knitr kable
-table1.data.frame = function(.data, 
+table1.data.frame = function(.data,
                              ..., 
                              splitby = NULL, 
                              FUN = NULL,
@@ -350,7 +346,10 @@ table1.data.frame = function(.data,
     tab
     ## Output from kable  
   } else if (output %in% c("latex", "markdown", "html", "pandoc", "rst")){
-    kab <- knitr::kable(final, 
+    if (!requireNamespace("knitr", quietly = TRUE)) {
+      stop("Package 'knitr' is required for non-text output. Install it with install.packages('knitr').")
+    }
+    kab <- knitr::kable(final,
                         format=output,
                         booktabs = booktabs,
                         caption = caption,
@@ -456,7 +455,7 @@ as.data.frame.table1 <- function(x, row.names = NULL, optional = FALSE, ...,
                                  cut.names = FALSE, col.names = names(x), fix.empty.names = TRUE,
                                  stringsAsFactors = FALSE){
   
-  as.data.frame.list(x) %>%
-    setNames(., gsub("Table1\\.", "", names(.)))
+  out <- as.data.frame.list(x)
+  setNames(out, gsub("Table1\\.", "", names(out)))
   
 }

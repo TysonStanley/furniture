@@ -39,10 +39,8 @@
 
 ## More than one value per variable warning
 .more_than_one_value <- function(data){
-  subset(data, select=-split) %>%
-    lapply(function(x) length(unique(x)) > 1) %>%
-    unlist() %>%
-    all()
+  all(unlist(lapply(subset(data, select = -split),
+                    function(x) length(unique(x)) > 1)))
 }
 
 ## Informative message for columns whose class table1 cannot summarize.
@@ -144,9 +142,8 @@
   
   N   <- c("Total" = tot, tapply(d[[1]], d$split, length))
   N[] <- sapply(N, function(x) as.character(paste("n =", x)))
-  N   <- suppressWarnings(formatC(N, big.mark = big_mark, digits = 0, format = "f")) %>%
-    sapply(trimws, which = "left") %>%
-    t(.)
+  N   <- t(sapply(suppressWarnings(formatC(N, big.mark = big_mark, digits = 0, format = "f")),
+                  trimws, which = "left"))
   
   ## Formatting the N line
   if (grepl("f|F", format_output) & test){
@@ -267,7 +264,7 @@
   } else {
 
     ## Handle dplyr::group_by groups
-    groups <- attr(.data, "groups") %>% names(.)
+    groups <- names(attr(.data, "groups"))
     groups <- groups[-length(groups)]
 
     message(paste0("Using dplyr::group_by() groups: ", paste(groups, collapse = ", ")))
@@ -298,10 +295,4 @@
   )
 }
 
-
-## Pipe
-`%>%` <- magrittr::`%>%`
-
-## Group by
-group_by <- dplyr::group_by
 

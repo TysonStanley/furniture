@@ -57,7 +57,7 @@ tableF <- function(.data, x, n = 20, splitby = NULL){
     ## Developmental one (0.7.9.9000) uses "groups" but it produces a nested table
     groups <- attr(.data, "vars")
     if (is.null(groups))
-      groups <- attr(.data, "groups") %>% names(.)
+      groups <- names(attr(.data, "groups"))
     if (groups[length(groups)] == ".rows")
       groups <- groups[-length(groups)]
     

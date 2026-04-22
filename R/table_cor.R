@@ -16,8 +16,7 @@
 #' @seealso stats::cor
 #' 
 #' @importFrom stats cor
-#' @importFrom knitr kable
-#' 
+#'
 #' @export
 tableC <- function(.data, 
                    ..., 
@@ -104,7 +103,10 @@ tableC <- function(.data,
       return(tab)
       
     } else {
-      kab <- knitr::kable(final, 
+      if (!requireNamespace("knitr", quietly = TRUE)) {
+        stop("Package 'knitr' is required for non-text output. Install it with install.packages('knitr').")
+      }
+      kab <- knitr::kable(final,
                           format=output,
                           booktabs = booktabs,
                           caption = caption,
