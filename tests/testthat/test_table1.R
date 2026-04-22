@@ -162,11 +162,38 @@ test_that("table1 produces table1", {
   expect_s3_class(df %>%
                     group_by(b) %>%
                     table1(x,
-                           test=FALSE, 
+                           test=FALSE,
                            output = "text2",
                            header_labels = c(" ", "P-Val"),
                            second = c("a", "c"),
                            total = TRUE), "table1")
+
+  ## Logical columns are coerced to factors (previously errored)
+  df_logical <- data.frame(x = runif(50),
+                           delivery = sample(c(TRUE, FALSE), 50, replace = TRUE))
+  expect_s3_class(table1(df_logical), "table1")
+  expect_s3_class(table1(df_logical, delivery), "table1")
+
+  ## Date/time columns are dropped with a message and no error
+  df_dates <- data.frame(x = runif(50),
+                         y = rnorm(50),
+                         visit_date = Sys.Date() + 1:50,
+                         visit_time = Sys.time() + 1:50)
+  expect_message(out <- table1(df_dates), "Date/time variable")
+  expect_s3_class(out, "table1")
+
+  ## haven_labelled is coerced to factor using value labels, preserving the variable label
+  df_labelled <- data.frame(x = runif(50))
+  df_labelled$grp <- structure(sample(c(1, 2), 50, replace = TRUE),
+                               label = "Treatment Group",
+                               labels = c(Control = 1, Treated = 2),
+                               class = c("haven_labelled", "vctrs_vctr", "double"))
+  expect_s3_class(table1(df_labelled), "table1")
+
+  ## Unsupported classes produce an informative error (not "Problem with variable X")
+  df_bad <- data.frame(weird = complex(real = 1:50, imaginary = 1:50),
+                       x = runif(50))
+  expect_error(table1(df_bad, weird, x), "unsupported class")
   expect_s3_class(df %>%
                     group_by(b) %>%
                     table1(x,
