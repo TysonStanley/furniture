@@ -2,7 +2,6 @@
 ^doc$
 ^CRAN-RELEASE$
 .travis.yml
-README.md
 cran-comments.md
 .gitignore
 ^docs$
@@ -13,3 +12,5 @@ README.Rmd
 ^CRAN-SUBMISSION$
 ^CRAN-RELEASE$
 ^\.dev
+^\.claude$
+^\.claude/

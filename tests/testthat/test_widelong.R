@@ -1,4 +1,3 @@
-library(furniture)
 library(testthat)
 library(dplyr)
 

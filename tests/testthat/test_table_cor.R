@@ -1,5 +1,5 @@
-library(furniture)
 library(testthat)
+library(dplyr)
 
 test_that("table1 produces table1", {
   x  <- runif(1000)

@@ -89,8 +89,7 @@ A table with the number of observations, means/frequencies and standard deviatio
 \description{
 Produces a descriptive table, stratified by an optional categorical variable, 
 providing means/frequencies and standard deviations/percentages. 
-It is well-formatted for easy transition to academic article or report. 
-Can be used within the piping framework [see library(magrittr)].
+It is well-formatted for easy transition to academic article or report.
 }
 \details{
 In defining \code{type}, 1. options are "pvalues" that display the p-values of the tests, "full" which also shows the test statistics, or "stars" which only displays stars to highlight significance with *** < .001 ** .01 * .05; and

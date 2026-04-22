@@ -1,3 +1,8 @@
+# Version 1.12.0
+
+- Fix issue with `table1(data, ...)` where `...` was left empty. This now runs the table on all variables in `data`.
+
+
 # Version 1.11.0
 
 - Added automatic label extraction from variable attributes (e.g., `Hmisc::label()`). Variable labels are now automatically used in `table1()` output unless explicitly overridden with `var_names` parameter.

@@ -3,7 +3,6 @@
 #' Produces a descriptive table, stratified by an optional categorical variable, 
 #' providing means/frequencies and standard deviations/percentages. 
 #' It is well-formatted for easy transition to academic article or report. 
-#' Can be used within the piping framework [see library(magrittr)].
 #' 
 #' @param .data the data.frame that is to be summarized
 #' @param ... variables in the data set that are to be summarized; unquoted names separated by commas (e.g. age, gender, race) or indices. If indices, it needs to be a single vector (e.g. c(1:5, 8, 9:20) instead of 1:5, 8, 9:20). As it is currently, it CANNOT handle both indices and unquoted names simultaneously. Finally, any empty rows (where the row is NA for each variable selected) will be removed for an accurate n count.
